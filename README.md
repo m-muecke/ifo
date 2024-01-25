@@ -12,8 +12,8 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 
 ## Overview
 
-The goal of ifo is to provide a simple interface to the ifo institute
-survey data.
+The goal of ifo is to provide a simple interface to the [ifo
+institute](https://www.ifo.de/en/ifo-time-series) business survey data.
 
 ## Installation
 
