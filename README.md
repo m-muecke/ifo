@@ -13,7 +13,9 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 ## Overview
 
 The goal of ifo is to provide a simple interface to the ifo institute
-survey data. \## Installation
+survey data.
+
+## Installation
 
 You can install the development version of ifo from
 [GitHub](https://github.com/) with:
