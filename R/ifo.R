@@ -1,6 +1,6 @@
 # TODO: better name for function, make it english
 ifo_gsk <- function(links) {
-  links <- fetch_links()
+  links <- ifo_links()
   tf <- tempfile(fileext = ".xlsx")
   on.exit(unlink(tf))
   utils::download.file(links[["gsk"]], destfile = tf, quiet = TRUE)
@@ -16,15 +16,14 @@ ifo_gsk <- function(links) {
 #' @family ifo time series
 #' @export
 ifo_export <- function() {
-  links <- fetch_links()
-  tf <- tempfile(fileext = ".xlsx")
-  on.exit(unlink(tf))
-  utils::download.file(links[["export"]], destfile = tf, quiet = TRUE)
-  res <- readxl::read_xlsx(tf,
-    skip = 10L,
-    col_names = c("yearmonth", "value"),
-    col_types = c("date", "numeric")
-  )
+  links <- ifo_links()
+  res <- ifo_download(links[["export"]], \(tf) {
+    readxl::read_xlsx(tf,
+      skip = 10L,
+      col_names = c("yearmonth", "value"),
+      col_types = c("date", "numeric")
+    )
+  })
   res$yearmonth <- as.Date(res$yearmonth)
   res
 }
@@ -38,15 +37,14 @@ ifo_export <- function() {
 #' @family ifo time series
 #' @export
 ifo_empl <- function() {
-  links <- fetch_links()
-  tf <- tempfile(fileext = ".xlsx")
-  on.exit(unlink(tf))
-  utils::download.file(links[["empl"]], destfile = tf, quiet = TRUE)
-  res <- readxl::read_xlsx(tf,
-    skip = 9L,
-    col_names = c("yearmonth", "value", "manufacturing", "construction", "trade", "service_sector"),
-    col_types = c("date", "numeric", "numeric", "numeric", "numeric", "numeric")
-  )
+  links <- ifo_links()
+  res <- ifo_download(links[["empl"]], \(tf) {
+    readxl::read_xlsx(tf,
+      skip = 9L,
+      col_names = c("yearmonth", "value", "manufacturing", "construction", "trade", "service_sector"),
+      col_types = c("date", "numeric", "numeric", "numeric", "numeric", "numeric")
+    )
+  })
   res$yearmonth <- as.Date(res$yearmonth)
   res
 }
@@ -61,15 +59,14 @@ ifo_empl <- function() {
 #' @family ifo time series
 #' @export
 ifo_ostd <- function() {
-  links <- fetch_links()
-  tf <- tempfile(fileext = ".xlsx")
-  on.exit(unlink(tf))
-  utils::download.file(links[["ostd"]], destfile = tf, quiet = TRUE)
-  res <- readxl::read_xlsx(tf,
-    skip = 8L,
-    col_names = c("yearmonth", "business_climate", "business_situation", "business_expecation"),
-    col_types = c("text", "numeric", "numeric", "numeric")
-  )
+  links <- ifo_links()
+  res <- ifo_download(links[["ostd"]], \(tf) {
+    readxl::read_xlsx(tf,
+      skip = 8L,
+      col_names = c("yearmonth", "business_climate", "business_situation", "business_expecation"),
+      col_types = c("text", "numeric", "numeric", "numeric")
+    )
+  })
   res$yearmonth <- as.Date(paste0("01/", res$yearmonth), format = "%d/%m/%Y")
   res
 }
@@ -84,20 +81,26 @@ ifo_ostd <- function() {
 #' @family ifo time series
 #' @export
 ifo_ku_sachsen <- function() {
-  links <- fetch_links()
-  tf <- tempfile(fileext = ".xlsx")
-  on.exit(unlink(tf))
-  utils::download.file(links[["ku_sachsen"]], destfile = tf, quiet = TRUE)
-  res <- readxl::read_xlsx(tf,
-    skip = 8L,
-    col_names = c("yearmonth", "business_climate", "business_situation", "business_expecation"),
-    col_types = c("text", "numeric", "numeric", "numeric")
-  )
+  links <- ifo_links()
+  res <- ifo_download(links[["ku_sachsen"]], \(tf) {
+    readxl::read_xlsx(tf,
+      skip = 8L,
+      col_names = c("yearmonth", "business_climate", "business_situation", "business_expecation"),
+      col_types = c("text", "numeric", "numeric", "numeric")
+    )
+  })
   res$yearmonth <- as.Date(paste0("01/", res$yearmonth), format = "%d/%m/%Y")
   res
 }
 
-fetch_links <- function() {
+ifo_download <- function(url, fn) {
+  tf <- tempfile(fileext = ".xlsx")
+  on.exit(unlink(tf))
+  utils::download.file(url, destfile = tf, quiet = TRUE)
+  fn(tf)
+}
+
+ifo_links <- function() {
   # TODO: might be more robust to create names based on link
   url <- "https://www.ifo.de/en/ifo-time-series"
   links <- read_html(url) |>
