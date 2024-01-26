@@ -12,3 +12,10 @@ Long time-series of the ifo Employment Barometer for Germany
 \references{
 \url{https://www.ifo.de/en/ifo-time-series}
 }
+\seealso{
+Other ifo time series: 
+\code{\link{ifo_export}()},
+\code{\link{ifo_ku_sachsen}()},
+\code{\link{ifo_ostd}()}
+}
+\concept{ifo time series}

@@ -1,14 +1,3 @@
-fetch_links <- function() {
-  # TODO: might be more robust to create names based on link
-  url <- "https://www.ifo.de/en/ifo-time-series"
-  links <- read_html(url) |>
-    html_element(".link-list") |>
-    html_elements("a") |>
-    html_attr("href")
-  links <- paste0("https://www.ifo.de", links)
-  stats::setNames(links, c("gsk", "export", "empl", "ostd", "ku_sachsen"))
-}
-
 # TODO: better name for function, make it english
 ifo_gsk <- function(links) {
   links <- fetch_links()
@@ -24,6 +13,7 @@ ifo_gsk <- function(links) {
 #' Long time-series of the ifo Export Expectations for manufacturing
 #'
 #' @references <https://www.ifo.de/en/ifo-time-series>
+#' @family ifo time series
 #' @export
 ifo_export <- function() {
   links <- fetch_links()
@@ -45,6 +35,7 @@ ifo_export <- function() {
 #' Long time-series of the ifo Employment Barometer for Germany
 #'
 #' @inherit ifo_export references
+#' @family ifo time series
 #' @export
 ifo_empl <- function() {
   links <- fetch_links()
@@ -67,6 +58,7 @@ ifo_empl <- function() {
 #' components, the business situation and the expectations.
 #'
 #' @inherit ifo_export references
+#' @family ifo time series
 #' @export
 ifo_ostd <- function() {
   links <- fetch_links()
@@ -89,6 +81,7 @@ ifo_ostd <- function() {
 #' the business situation and the expectations.
 #'
 #' @inherit ifo_export references
+#' @family ifo time series
 #' @export
 ifo_ku_sachsen <- function() {
   links <- fetch_links()
@@ -102,4 +95,15 @@ ifo_ku_sachsen <- function() {
   )
   res$yearmonth <- as.Date(paste0("01/", res$yearmonth), format = "%d/%m/%Y")
   res
+}
+
+fetch_links <- function() {
+  # TODO: might be more robust to create names based on link
+  url <- "https://www.ifo.de/en/ifo-time-series"
+  links <- read_html(url) |>
+    html_element(".link-list") |>
+    html_elements("a") |>
+    html_attr("href")
+  links <- paste0("https://www.ifo.de", links)
+  stats::setNames(links, c("gsk", "export", "empl", "ostd", "ku_sachsen"))
 }

@@ -13,3 +13,10 @@ the business situation and the expectations.
 \references{
 \url{https://www.ifo.de/en/ifo-time-series}
 }
+\seealso{
+Other ifo time series: 
+\code{\link{ifo_empl}()},
+\code{\link{ifo_export}()},
+\code{\link{ifo_ostd}()}
+}
+\concept{ifo time series}
