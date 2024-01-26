@@ -15,7 +15,7 @@ Long time-series of the ifo Export Expectations for manufacturing
 \seealso{
 Other ifo time series: 
 \code{\link{ifo_empl}()},
-\code{\link{ifo_ku_sachsen}()},
-\code{\link{ifo_ostd}()}
+\code{\link{ifo_ostd}()},
+\code{\link{ifo_sachsen}()}
 }
 \concept{ifo time series}

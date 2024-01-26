@@ -17,6 +17,6 @@ components, the business situation and the expectations.
 Other ifo time series: 
 \code{\link{ifo_empl}()},
 \code{\link{ifo_export}()},
-\code{\link{ifo_ku_sachsen}()}
+\code{\link{ifo_sachsen}()}
 }
 \concept{ifo time series}

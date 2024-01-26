@@ -1,9 +1,8 @@
-# TODO: better name for function, make it english
-ifo_gsk <- function(links) {
+ifo_climate <- function() {
   links <- ifo_links()
   tf <- tempfile(fileext = ".xlsx")
   on.exit(unlink(tf))
-  utils::download.file(links[["gsk"]], destfile = tf, quiet = TRUE)
+  utils::download.file(links[["climate"]], destfile = tf, quiet = TRUE)
   df <- readxl::read_xlsx(tf, sheet = 1L, skip = 7L)
 }
 
@@ -80,9 +79,9 @@ ifo_ostd <- function() {
 #' @inherit ifo_export references
 #' @family ifo time series
 #' @export
-ifo_ku_sachsen <- function() {
+ifo_sachsen <- function() {
   links <- ifo_links()
-  res <- ifo_download(links[["ku_sachsen"]], \(tf) {
+  res <- ifo_download(links[["sachsen"]], \(tf) {
     readxl::read_xlsx(tf,
       skip = 8L,
       col_names = c("yearmonth", "business_climate", "business_situation", "business_expecation"),
@@ -108,5 +107,5 @@ ifo_links <- function() {
     html_elements("a") |>
     html_attr("href")
   links <- paste0("https://www.ifo.de", links)
-  stats::setNames(links, c("gsk", "export", "empl", "ostd", "ku_sachsen"))
+  stats::setNames(links, c("climate", "export", "empl", "ostd", "sachsen"))
 }
