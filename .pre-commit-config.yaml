@@ -15,8 +15,8 @@ repos:
     hooks:
       - id: roxygenize
         additional_dependencies:
-          - httr2
-          - xml2
+          - readxl
+          - rvest
       - id: deps-in-desc
       - id: no-browser-statement
       - id: no-debug-statement
