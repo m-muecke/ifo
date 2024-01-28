@@ -12,8 +12,8 @@ Long time-series of the ifo Employment Barometer for Germany
 \seealso{
 Other ifo time series: 
 \code{\link{ifo_climate}()},
+\code{\link{ifo_eastern}()},
 \code{\link{ifo_export}()},
-\code{\link{ifo_ostd}()},
-\code{\link{ifo_sachsen}()}
+\code{\link{ifo_saxony}()}
 }
 \concept{ifo time series}
