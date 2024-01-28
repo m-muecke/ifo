@@ -9,11 +9,9 @@ ifo_export()
 \description{
 Long time-series of the ifo Export Expectations for manufacturing
 }
-\references{
-\url{https://www.ifo.de/en/ifo-time-series}
-}
 \seealso{
 Other ifo time series: 
+\code{\link{ifo_climate}()},
 \code{\link{ifo_empl}()},
 \code{\link{ifo_ostd}()},
 \code{\link{ifo_sachsen}()}

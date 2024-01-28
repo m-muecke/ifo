@@ -10,11 +10,9 @@ ifo_ostd()
 Long time-series of the Business Climate for Eastern Germany and its two
 components, the business situation and the expectations.
 }
-\references{
-\url{https://www.ifo.de/en/ifo-time-series}
-}
 \seealso{
 Other ifo time series: 
+\code{\link{ifo_climate}()},
 \code{\link{ifo_empl}()},
 \code{\link{ifo_export}()},
 \code{\link{ifo_sachsen}()}

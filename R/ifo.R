@@ -1,10 +1,28 @@
+#' Return ifo business climate
+#' @description
+#'
+#' Long time-series of the ifo Business Climate for Germany and its two and
+#' its two components, the business situation, and the expectations for sectors.
+#'
+#' @references <https://www.ifo.de/en/ifo-time-series>
+#' @family ifo time series
+#' @export
 ifo_climate <- function() {
   links <- ifo_links()
-  tf <- tempfile(fileext = ".xlsx")
-  on.exit(unlink(tf), add = TRUE)
-  utils::download.file(links[["climate"]], destfile = tf, quiet = TRUE)
-  df <- readxl::read_xlsx(tf, sheet = 1L, skip = 7L)
-  df
+  res <- ifo_download(links[["climate"]], \(tf) {
+    nms <- c(
+      "yearmonth", "climate_index", "situation_index", "expecation_index",
+      "climate_balance", "situation_balance", "expectation_balance",
+      "uncertainty", "economic_expansion"
+    )
+    readxl::read_xlsx(tf,
+      skip = 8L,
+      col_names = nms,
+      col_types = c("text", rep("numeric", 8L))
+    )
+  })
+  res$yearmonth <- as.Date(paste0("01/", res$yearmonth), format = "%d/%m/%Y")
+  res
 }
 
 #' Return ifo export expectations
@@ -12,7 +30,7 @@ ifo_climate <- function() {
 #' @description
 #' Long time-series of the ifo Export Expectations for manufacturing
 #'
-#' @references <https://www.ifo.de/en/ifo-time-series>
+#' @inherit ifo_export references
 #' @family ifo time series
 #' @export
 ifo_export <- function() {
@@ -24,7 +42,7 @@ ifo_export <- function() {
       col_types = c("date", "numeric")
     )
   })
-  res$yearmonth <- as.Date(res$yearmonth)
+  res$yearmonth <- as.Date(format(res$yearmonth, "%Y-%m-01"))
   res
 }
 
@@ -45,7 +63,7 @@ ifo_empl <- function() {
       col_types = c("date", "numeric", "numeric", "numeric", "numeric", "numeric")
     )
   })
-  res$yearmonth <- as.Date(res$yearmonth)
+  res$yearmonth <- as.Date(format(res$yearmonth, "%Y-%m-01"))
   res
 }
 
