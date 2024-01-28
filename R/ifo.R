@@ -1,9 +1,10 @@
 ifo_climate <- function() {
   links <- ifo_links()
   tf <- tempfile(fileext = ".xlsx")
-  on.exit(unlink(tf))
+  on.exit(unlink(tf), add = TRUE)
   utils::download.file(links[["climate"]], destfile = tf, quiet = TRUE)
   df <- readxl::read_xlsx(tf, sheet = 1L, skip = 7L)
+  df
 }
 
 #' Return ifo export expectations
@@ -94,7 +95,7 @@ ifo_sachsen <- function() {
 
 ifo_download <- function(url, fn) {
   tf <- tempfile(fileext = ".xlsx")
-  on.exit(unlink(tf))
+  on.exit(unlink(tf), add = TRUE)
   utils::download.file(url, destfile = tf, quiet = TRUE)
   fn(tf)
 }
