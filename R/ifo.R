@@ -4,8 +4,8 @@
 #' Long time-series of the ifo Business Climate for Germany and its two and
 #' its two components, the business situation, and the expectations for sectors.
 #'
-#' @param type `character(1)` one of `"germany"`, `"eastern"`, `"saxony"`.
-#'   Default `"germany"`.
+#' @param type `character(1)` one of `"climate"`, `"sectors"`,`"eastern"`,
+#'   `"saxony"`. Default `"germany"`.
 #' @references <https://www.ifo.de/en/ifo-time-series>
 #' @family ifo time series
 #' @export
@@ -13,7 +13,6 @@
 #' ifo_climate()
 ifo_climate <- function(type = c("climate", "sectors", "eastern", "saxony")) {
   type <- match.arg(type, c("climate", "sectors", "eastern", "saxony"))
-  sheet <- 1L
   switch(type,
     climate = {
       col_names <- c(
