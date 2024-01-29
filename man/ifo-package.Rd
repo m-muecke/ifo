@@ -6,7 +6,7 @@
 \alias{ifo-package}
 \title{ifo: ifo institute data fetching}
 \description{
-Download survey data from ifo institute
+Download survey data from ifo institute.
 }
 \seealso{
 Useful links:

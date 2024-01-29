@@ -63,7 +63,7 @@ ifo_climate <- function(type = c("climate", "sectors", "eastern", "saxony")) {
 #' Return ifo export expectations
 #'
 #' @description
-#' Long time-series of the ifo Export Expectations for manufacturing
+#' Long time-series of the ifo Export Expectations for manufacturing.
 #'
 #' @inherit ifo_export references
 #' @family ifo time series
@@ -84,7 +84,7 @@ ifo_export <- function() {
 #' Return ifo employment expectations
 #'
 #' @description
-#' Long time-series of the ifo Employment Barometer for Germany
+#' Long time-series of the ifo Employment Barometer for Germany.
 #'
 #' @inherit ifo_export references
 #' @family ifo time series

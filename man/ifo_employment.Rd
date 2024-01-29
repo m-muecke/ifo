@@ -7,7 +7,7 @@
 ifo_employment()
 }
 \description{
-Long time-series of the ifo Employment Barometer for Germany
+Long time-series of the ifo Employment Barometer for Germany.
 }
 \examples{
 ifo_employment()

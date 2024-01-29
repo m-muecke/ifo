@@ -7,7 +7,7 @@
 ifo_export()
 }
 \description{
-Long time-series of the ifo Export Expectations for manufacturing
+Long time-series of the ifo Export Expectations for manufacturing.
 }
 \examples{
 ifo_export()
