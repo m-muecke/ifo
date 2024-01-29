@@ -8,7 +8,7 @@ ifo_climate(type = c("climate", "sectors", "eastern", "saxony"))
 }
 \arguments{
 \item{type}{\code{character(1)} one of \code{"climate"}, \code{"sectors"},\code{"eastern"},
-\code{"saxony"}. Default \code{"germany"}.}
+\code{"saxony"}. Default \code{"climate"}.}
 }
 \description{
 Long time-series of the ifo Business Climate for Germany and its two and

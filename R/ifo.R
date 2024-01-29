@@ -5,7 +5,7 @@
 #' its two components, the business situation, and the expectations for sectors.
 #'
 #' @param type `character(1)` one of `"climate"`, `"sectors"`,`"eastern"`,
-#'   `"saxony"`. Default `"germany"`.
+#'   `"saxony"`. Default `"climate"`.
 #' @references <https://www.ifo.de/en/ifo-time-series>
 #' @family ifo time series
 #' @export
