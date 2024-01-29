@@ -9,6 +9,9 @@ ifo_export()
 \description{
 Long time-series of the ifo Export Expectations for manufacturing
 }
+\examples{
+ifo_export()
+}
 \seealso{
 Other ifo time series: 
 \code{\link{ifo_climate}()},

@@ -4,7 +4,7 @@
 \alias{ifo_climate}
 \title{Return ifo business climate}
 \usage{
-ifo_climate(type = c("germany", "eastern", "saxony"))
+ifo_climate(type = c("climate", "sectors", "eastern", "saxony"))
 }
 \arguments{
 \item{type}{\code{character(1)} one of \code{"germany"}, \code{"eastern"}, \code{"saxony"}.
@@ -13,6 +13,9 @@ Default \code{"germany"}.}
 \description{
 Long time-series of the ifo Business Climate for Germany and its two and
 its two components, the business situation, and the expectations for sectors.
+}
+\examples{
+ifo_climate()
 }
 \references{
 \url{https://www.ifo.de/en/ifo-time-series}

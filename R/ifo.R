@@ -9,22 +9,52 @@
 #' @references <https://www.ifo.de/en/ifo-time-series>
 #' @family ifo time series
 #' @export
-ifo_climate <- function(type = c("germany", "eastern", "saxony")) {
-  type <- match.arg(type, c("germany", "eastern", "saxony"))
-  type <- if (type == "germany") "climate" else type
-  if (type == "climate") {
-    col_names <- c(
-      "yearmonth", "climate_index", "situation_index", "expecation_index",
-      "climate_balance", "situation_balance", "expectation_balance",
-      "uncertainty", "economic_expansion"
-    )
-    col_types <- c("text", rep("numeric", 8L))
-  } else {
-    col_names <- c("yearmonth", "climate", "situation", "expecation")
-    col_types <- c("text", "numeric", "numeric", "numeric")
-  }
+#' @examples
+#' ifo_climate()
+ifo_climate <- function(type = c("climate", "sectors", "eastern", "saxony")) {
+  type <- match.arg(type, c("climate", "sectors", "eastern", "saxony"))
+  sheet <- 1L
+  switch(type,
+    climate = {
+      col_names <- c(
+        "yearmonth",
+        "climate_index", "situation_index", "expecation_index",
+        "climate_balance", "situation_balance", "expectation_balance",
+        "uncertainty", "economic_expansion"
+      )
+      col_types <- c("text", rep("numeric", 8L))
+    },
+    sectors = {
+      sheet <- 2L
+      type <- "climate"
+      col_types <- c("text", rep("numeric", 24L))
+      col_names <- "yearmonth"
+      component <- c("climate", "situation", "expectation")
+      nms <- as.character(outer(
+        paste(component, "industry", sep = "_"), c("balance", "index"), paste,
+        sep = "_"
+      ))
+      col_names <- c(col_names, nms)
+      nms <- as.character(outer(
+        component,
+        c("manufacturing", "services", "trade", "wholesale", "retail", "construction"),
+        paste,
+        sep = "_"
+      ))
+      nms <- paste0(nms, "_balance")
+      col_names <- c(col_names, nms)
+    },
+    {
+      col_names <- c("yearmonth", "climate", "situation", "expecation")
+      col_types <- c("text", rep("numeric", 3L))
+    }
+  )
   res <- ifo_download(
-    type = type, skip = 8L, col_names = col_names, col_types = col_types
+    type = type,
+    sheet = sheet,
+    skip = 8L,
+    col_names = col_names,
+    col_types = col_types
   )
   res$yearmonth <- as.Date(paste0("01/", res$yearmonth), format = "%d/%m/%Y")
   res
@@ -38,6 +68,8 @@ ifo_climate <- function(type = c("germany", "eastern", "saxony")) {
 #' @inherit ifo_export references
 #' @family ifo time series
 #' @export
+#' @examples
+#' ifo_export()
 ifo_export <- function() {
   res <- ifo_download(
     type = "export",
@@ -57,13 +89,13 @@ ifo_export <- function() {
 #' @inherit ifo_export references
 #' @family ifo time series
 #' @export
+#' @examples
+#' ifo_employment()
 ifo_employment <- function() {
   col_names <- c(
     "yearmonth", "expecation", "manufacturing", "construction", "trade", "service_sector"
   )
-  col_types <- c(
-    "date", "numeric", "numeric", "numeric", "numeric", "numeric"
-  )
+  col_types <- c("date", rep("numeric", 5L))
   res <- ifo_download(
     type = "employment", skip = 9L, col_names = col_names, col_types = col_types
   )
