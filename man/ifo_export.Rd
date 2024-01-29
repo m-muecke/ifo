@@ -12,8 +12,6 @@ Long time-series of the ifo Export Expectations for manufacturing
 \seealso{
 Other ifo time series: 
 \code{\link{ifo_climate}()},
-\code{\link{ifo_eastern}()},
-\code{\link{ifo_empl}()},
-\code{\link{ifo_saxony}()}
+\code{\link{ifo_employment}()}
 }
 \concept{ifo time series}

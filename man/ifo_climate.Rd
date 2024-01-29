@@ -4,7 +4,7 @@
 \alias{ifo_climate}
 \title{Return ifo business climate}
 \usage{
-ifo_climate()
+ifo_climate(x = c("germany", "eastern", "saxony"))
 }
 \description{
 Long time-series of the ifo Business Climate for Germany and its two and
@@ -15,9 +15,7 @@ its two components, the business situation, and the expectations for sectors.
 }
 \seealso{
 Other ifo time series: 
-\code{\link{ifo_eastern}()},
-\code{\link{ifo_empl}()},
-\code{\link{ifo_export}()},
-\code{\link{ifo_saxony}()}
+\code{\link{ifo_employment}()},
+\code{\link{ifo_export}()}
 }
 \concept{ifo time series}
