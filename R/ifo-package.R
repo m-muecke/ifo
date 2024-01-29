@@ -6,6 +6,5 @@
 #' @importFrom rvest html_element
 #' @importFrom rvest html_elements
 #' @importFrom rvest read_html
-#' @importFrom stats setNames
 ## usethis namespace: end
 NULL
