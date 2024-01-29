@@ -13,6 +13,7 @@
 #' ifo_climate()
 ifo_climate <- function(type = c("climate", "sectors", "eastern", "saxony")) {
   type <- match.arg(type, c("climate", "sectors", "eastern", "saxony"))
+  sheet <- 1L
   switch(type,
     climate = {
       col_names <- c(
