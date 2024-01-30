@@ -62,7 +62,7 @@ climate |>
   geom_line() +
   labs(title = "ifo Business Climate Germany", subtitle = "Seasonally adjusted", y = "", x = "") +
   theme_minimal() +
-  theme(legend.title = element_blank()) +
+  theme(legend.title = element_blank(), legend.position = "top") +
   scale_color_manual(
     values = c("climate" = "red", "situation" = "grey", "expectation" = "blue"),
     labels = c("ifo Business Climate", "Business situation", "Business expectation")
