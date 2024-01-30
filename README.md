@@ -65,7 +65,7 @@ climate |>
   theme(legend.title = element_blank(), legend.position = "top") +
   scale_color_manual(
     values = c("climate" = "red", "situation" = "grey", "expectation" = "blue"),
-    labels = c("ifo Business Climate", "Business situation", "Business expectation")
+    labels = c("ifo Business Climate", "Business Situation", "Business Expectation")
   )
 ```
 
