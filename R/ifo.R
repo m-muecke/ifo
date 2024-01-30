@@ -18,7 +18,7 @@ ifo_climate <- function(type = c("climate", "sectors", "eastern", "saxony")) {
     climate = {
       col_names <- c(
         "yearmonth",
-        "climate_index", "situation_index", "expecation_index",
+        "climate_index", "situation_index", "expectation_index",
         "climate_balance", "situation_balance", "expectation_balance",
         "uncertainty", "economic_expansion"
       )
