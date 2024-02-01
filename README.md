@@ -35,19 +35,14 @@ library(ifo)
 climate <- ifo_climate()
 climate
 #> # A tibble: 229 × 9
-#>    yearmonth  climate_index situation_index expectation_index climate_balance
-#>    <date>             <dbl>           <dbl>             <dbl>           <dbl>
-#>  1 2005-01-01          92.2            87.4              97.2             1.5
-#>  2 2005-02-01          91.9            87.9              96.2             0.9
-#>  3 2005-03-01          90.1            85.9              94.5            -3.1
-#>  4 2005-04-01          90              86.3              93.7            -3.4
-#>  5 2005-05-01          89.4            86.1              92.7            -4.7
-#>  6 2005-06-01          89.4            85.7              93.2            -4.6
-#>  7 2005-07-01          91.1            85.8              96.8            -0.8
-#>  8 2005-08-01          92.1            86.8              97.6             1.2
-#>  9 2005-09-01          92.8            88.2              97.7             2.9
-#> 10 2005-10-01          94.4            88.7             100.              6.3
-#> # ℹ 219 more rows
+#>   yearmonth  climate_index situation_index expectation_index climate_balance
+#>   <date>             <dbl>           <dbl>             <dbl>           <dbl>
+#> 1 2005-01-01          92.2            87.4              97.2             1.5
+#> 2 2005-02-01          91.9            87.9              96.2             0.9
+#> 3 2005-03-01          90.1            85.9              94.5            -3.1
+#> 4 2005-04-01          90              86.3              93.7            -3.4
+#> 5 2005-05-01          89.4            86.1              92.7            -4.7
+#> # ℹ 224 more rows
 #> # ℹ 4 more variables: situation_balance <dbl>, expectation_balance <dbl>,
 #> #   uncertainty <dbl>, economic_expansion <dbl>
 
