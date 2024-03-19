@@ -10,7 +10,9 @@
 #' @family ifo time series
 #' @export
 #' @examples
+#' \donttest{
 #' ifo_climate()
+#' }
 ifo_climate <- function(type = c("climate", "sectors", "eastern", "saxony")) {
   type <- match.arg(type, c("climate", "sectors", "eastern", "saxony"))
   sheet <- 1L
@@ -69,7 +71,9 @@ ifo_climate <- function(type = c("climate", "sectors", "eastern", "saxony")) {
 #' @family ifo time series
 #' @export
 #' @examples
+#' \donttest{
 #' ifo_export()
+#' }
 ifo_export <- function() {
   res <- ifo_download(
     type = "export",
@@ -90,7 +94,9 @@ ifo_export <- function() {
 #' @family ifo time series
 #' @export
 #' @examples
+#' \donttest{
 #' ifo_employment()
+#' }
 ifo_employment <- function() {
   col_names <- c(
     "yearmonth", "expecation", "manufacturing", "construction", "trade",
