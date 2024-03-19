@@ -11,7 +11,7 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
-options(tibble.print_min = 5, tibble.print_max = 5)
+options(tibble.print_min = 5L, tibble.print_max = 5L)
 ```
 
 # ifo
@@ -37,12 +37,14 @@ pak::pak("m-muecke/ifo")
 
 ## Usage
 
-```{r demo, message = FALSE, dpi = 300}
+```{r demo, message = FALSE}
 library(ifo)
 
 climate <- ifo_climate()
 climate
+```
 
+```{r plotting, message = FALSE, dpi = 300}
 library(dplyr)
 library(ggplot2)
 
@@ -51,7 +53,7 @@ climate |>
   tidyr::pivot_longer(-yearmonth,
     names_to = "component", values_to = "value"
   ) |>
-  mutate(component = sub("_index", "", component)) |>
+  mutate(component = sub("_index", "", component, fixed = TRUE)) |>
   ggplot(aes(x = yearmonth, y = value, color = component)) +
   geom_line() +
   labs(
@@ -61,7 +63,7 @@ climate |>
   theme_minimal() +
   theme(legend.title = element_blank(), legend.position = "top") +
   scale_color_manual(
-    values = c("climate" = "red", "situation" = "grey", "expectation" = "blue"),
+    values = c(climate = "red", situation = "grey", expectation = "blue"),
     labels = c(
       "ifo Business Climate", "Business Situation", "Business Expectation"
     )

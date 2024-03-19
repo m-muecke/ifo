@@ -56,7 +56,7 @@ ifo_climate <- function(type = c("climate", "sectors", "eastern", "saxony")) {
     col_names = col_names,
     col_types = col_types
   )
-  res$yearmonth <- as.Date(paste0("01/", res$yearmonth), format = "%d/%m/%Y")
+  res$yearmonth <- as.Date(paste0("01/", res$yearmonth), format = "%d/%m/%Y") # nolint
   res
 }
 
@@ -93,7 +93,8 @@ ifo_export <- function() {
 #' ifo_employment()
 ifo_employment <- function() {
   col_names <- c(
-    "yearmonth", "expecation", "manufacturing", "construction", "trade", "service_sector"
+    "yearmonth", "expecation", "manufacturing", "construction", "trade",
+    "service_sector"
   )
   col_types <- c("date", rep("numeric", 5L))
   res <- ifo_download(
@@ -123,7 +124,7 @@ ifo_url <- function(type) {
     html_element(".link-list") |>
     html_elements("a") |>
     html_attr("href")
-  url <- grep(pattern, urls, value = TRUE)
+  url <- grep(pattern, urls, value = TRUE, fixed = TRUE)
   url <- paste0("https://www.ifo.de", url)
   url
 }
