@@ -4,7 +4,8 @@ Version: 0.0.1
 Authors@R:
     person("Maximilian", "Muecke", , "muecke.maximilian@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0009-0000-9432-9795"))
-Description: Download survey data from ifo institute.
+Description: Download survey data from ifo institute
+    <https://www.ifo.de/en/ifo-time-series>.
 License: MIT + file LICENSE
 URL: https://m-muecke.github.io/ifo/, https://github.com/m-muecke/ifo
 BugReports: https://github.com/m-muecke/ifo/issues
@@ -21,8 +22,9 @@ Suggests:
     rmarkdown,
     testthat (>= 3.0.0),
     tidyr
+VignetteBuilder: 
+    knitr
 Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
-VignetteBuilder: knitr

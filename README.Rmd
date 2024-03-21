@@ -56,12 +56,19 @@ climate |>
   mutate(component = sub("_index", "", component, fixed = TRUE)) |>
   ggplot(aes(x = yearmonth, y = value, color = component)) +
   geom_line() +
+  theme_minimal() +
+  theme(
+    legend.title = element_blank(),
+    legend.position = "top",
+    plot.caption = element_text(hjust = 0, vjust = 0, size = 10)
+  ) +
   labs(
     title = "ifo Business Climate Germany", subtitle = "Seasonally adjusted",
-    y = NULL, x = NULL
+    y = NULL, x = NULL,
+    caption = sprintf(
+      "Source: ifo Business Survey, %s.", format(max(climate$yearmonth), "%B %Y")
+    )
   ) +
-  theme_minimal() +
-  theme(legend.title = element_blank(), legend.position = "top") +
   scale_color_manual(
     values = c(climate = "red", situation = "grey", expectation = "blue"),
     labels = c(
