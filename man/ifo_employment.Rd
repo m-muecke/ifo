@@ -10,7 +10,9 @@ ifo_employment()
 Long time-series of the ifo Employment Barometer for Germany.
 }
 \examples{
+\donttest{
 ifo_employment()
+}
 }
 \seealso{
 Other ifo time series: 

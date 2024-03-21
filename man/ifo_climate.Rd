@@ -15,7 +15,9 @@ Long time-series of the ifo Business Climate for Germany and its two and
 its two components, the business situation, and the expectations for sectors.
 }
 \examples{
+\donttest{
 ifo_climate()
+}
 }
 \references{
 \url{https://www.ifo.de/en/ifo-time-series}

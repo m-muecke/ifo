@@ -10,7 +10,9 @@ ifo_export()
 Long time-series of the ifo Export Expectations for manufacturing.
 }
 \examples{
+\donttest{
 ifo_export()
+}
 }
 \seealso{
 Other ifo time series: 
