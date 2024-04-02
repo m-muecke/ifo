@@ -53,9 +53,7 @@ library(ggplot2)
 
 climate |>
   select(yearmonth, ends_with("index")) |>
-  tidyr::pivot_longer(-yearmonth,
-    names_to = "component", values_to = "value"
-  ) |>
+  tidyr::pivot_longer(-yearmonth, names_to = "component") |>
   mutate(component = sub("_index", "", component, fixed = TRUE)) |>
   ggplot(aes(x = yearmonth, y = value, color = component)) +
   geom_line() +
