@@ -75,7 +75,9 @@ climate |>
   scale_color_manual(
     values = c(climate = "darkred", situation = "darkgrey", expectation = "darkblue"),
     labels = c(
-      "ifo Business Climate", "Business Situation", "Business Expectation"
+      "ifo Business Climate",
+      "Assessment of business situtation",
+      "Business expectation"
     )
   )
 ```
