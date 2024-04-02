@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 ### ifo Business Climate Germany
 
-```{r setup, message = FALSE, dpi = 300}
+```{r climate, message = FALSE, dpi = 300}
 library(dplyr)
 library(ggplot2)
 library(ifo)
@@ -57,7 +57,7 @@ climate |>
 
 ### ifo Business Climate by Sector
 
-```{r}
+```{r sector, dpi = 300}
 sectors <- ifo_climate("sectors")
 
 sectors |>
