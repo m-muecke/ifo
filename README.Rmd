@@ -60,7 +60,10 @@ climate |>
   theme(
     legend.title = element_blank(),
     legend.position = "top",
-    plot.caption = element_text(hjust = 0, vjust = 0, size = 10)
+    plot.caption = element_text(hjust = 0, vjust = 0, size = 10),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.minor.y = element_blank()
   ) +
   labs(
     title = "ifo Business Climate Germany", subtitle = "Seasonally adjusted",
