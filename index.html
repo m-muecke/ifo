@@ -94,15 +94,15 @@
 <span></span>
 <span><span class="va">climate</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ifo_climate.html">ifo_climate</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">climate</span></span>
-<span><span class="co">#&gt; # A tibble: 230 × 9</span></span>
+<span><span class="co">#&gt; # A tibble: 231 × 9</span></span>
 <span><span class="co">#&gt;   yearmonth  climate_index situation_index expectation_index climate_balance</span></span>
 <span><span class="co">#&gt;   &lt;date&gt;             &lt;dbl&gt;           &lt;dbl&gt;             &lt;dbl&gt;           &lt;dbl&gt;</span></span>
 <span><span class="co">#&gt; 1 2005-01-01          92.2            87.4              97.2             1.5</span></span>
-<span><span class="co">#&gt; 2 2005-02-01          92              88                96.1             1  </span></span>
+<span><span class="co">#&gt; 2 2005-02-01          92              88                96.2             1  </span></span>
 <span><span class="co">#&gt; 3 2005-03-01          90.1            85.9              94.5            -3.1</span></span>
 <span><span class="co">#&gt; 4 2005-04-01          90              86.3              93.7            -3.4</span></span>
 <span><span class="co">#&gt; 5 2005-05-01          89.4            86.1              92.7            -4.7</span></span>
-<span><span class="co">#&gt; # ℹ 225 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 226 more rows</span></span>
 <span><span class="co">#&gt; # ℹ 4 more variables: situation_balance &lt;dbl&gt;, expectation_balance &lt;dbl&gt;,</span></span>
 <span><span class="co">#&gt; #   uncertainty &lt;dbl&gt;, economic_expansion &lt;dbl&gt;</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -131,7 +131,7 @@
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span></span>
-<span>    values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>climate <span class="op">=</span> <span class="st">"red"</span>, situation <span class="op">=</span> <span class="st">"grey"</span>, expectation <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span>,</span>
+<span>    values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>climate <span class="op">=</span> <span class="st">"darkred"</span>, situation <span class="op">=</span> <span class="st">"darkgrey"</span>, expectation <span class="op">=</span> <span class="st">"darkblue"</span><span class="op">)</span>,</span>
 <span>    labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>      <span class="st">"ifo Business Climate"</span>, <span class="st">"Business Situation"</span>, <span class="st">"Business Expectation"</span></span>
 <span>    <span class="op">)</span></span>
