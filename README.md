@@ -34,15 +34,15 @@ library(ifo)
 
 climate <- ifo_climate()
 climate
-#> # A tibble: 230 × 9
+#> # A tibble: 231 × 9
 #>   yearmonth  climate_index situation_index expectation_index climate_balance
 #>   <date>             <dbl>           <dbl>             <dbl>           <dbl>
 #> 1 2005-01-01          92.2            87.4              97.2             1.5
-#> 2 2005-02-01          92              88                96.1             1  
+#> 2 2005-02-01          92              88                96.2             1  
 #> 3 2005-03-01          90.1            85.9              94.5            -3.1
 #> 4 2005-04-01          90              86.3              93.7            -3.4
 #> 5 2005-05-01          89.4            86.1              92.7            -4.7
-#> # ℹ 225 more rows
+#> # ℹ 226 more rows
 #> # ℹ 4 more variables: situation_balance <dbl>, expectation_balance <dbl>,
 #> #   uncertainty <dbl>, economic_expansion <dbl>
 ```
@@ -73,7 +73,7 @@ climate |>
     )
   ) +
   scale_color_manual(
-    values = c(climate = "red", situation = "grey", expectation = "blue"),
+    values = c(climate = "darkred", situation = "darkgrey", expectation = "darkblue"),
     labels = c(
       "ifo Business Climate", "Business Situation", "Business Expectation"
     )
