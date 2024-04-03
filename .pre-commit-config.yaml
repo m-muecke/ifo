@@ -17,6 +17,7 @@ repos:
         additional_dependencies:
           - readxl
           - rvest
+          - tidyr
       - id: deps-in-desc
       - id: no-browser-statement
       - id: no-debug-statement

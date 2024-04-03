@@ -34,17 +34,15 @@ library(ifo)
 
 climate <- ifo_climate()
 climate
-#> # A tibble: 231 × 9
-#>   yearmonth  climate_index situation_index expectation_index climate_balance
-#>   <date>             <dbl>           <dbl>             <dbl>           <dbl>
-#> 1 2005-01-01          92.2            87.4              97.2             1.5
-#> 2 2005-02-01          92              88                96.2             1  
-#> 3 2005-03-01          90.1            85.9              94.5            -3.1
-#> 4 2005-04-01          90              86.3              93.7            -3.4
-#> 5 2005-05-01          89.4            86.1              92.7            -4.7
-#> # ℹ 226 more rows
-#> # ℹ 4 more variables: situation_balance <dbl>, expectation_balance <dbl>,
-#> #   uncertainty <dbl>, economic_expansion <dbl>
+#> # A tibble: 1,386 × 6
+#>   yearmonth  uncertainty economic_expansion indicator   series  value
+#>   <date>           <dbl>              <dbl> <chr>       <chr>   <dbl>
+#> 1 2005-01-01          NA               83.1 climate     index    92.2
+#> 2 2005-01-01          NA               83.1 situation   index    87.4
+#> 3 2005-01-01          NA               83.1 expectation index    97.2
+#> 4 2005-01-01          NA               83.1 climate     balance   1.5
+#> 5 2005-01-01          NA               83.1 situation   balance  -0.9
+#> # ℹ 1,381 more rows
 ```
 
 ``` r
@@ -52,12 +50,8 @@ library(dplyr)
 library(ggplot2)
 
 climate |>
-  select(yearmonth, ends_with("index")) |>
-  tidyr::pivot_longer(!yearmonth,
-    names_to = "component",
-    names_transform = list(component = \(x) sub("_index", "", x, fixed = TRUE))
-  ) |>
-  ggplot(aes(x = yearmonth, y = value, color = component)) +
+  filter(series == "index") |>
+  ggplot(aes(x = yearmonth, y = value, color = indicator)) +
   geom_line() +
   theme_minimal() +
   theme(

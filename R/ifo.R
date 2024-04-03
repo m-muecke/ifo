@@ -6,6 +6,8 @@
 #'
 #' @param type `character(1)` one of `"climate"`, `"sectors"`,`"eastern"`,
 #'   `"saxony"`. Default `"climate"`.
+#' @param long_format `logical(1)` if `TRUE` return the data in long format.
+#' Only applies to `type` `"climate"` and `"sectors"`. Default `TRUE`.
 #' @references <https://www.ifo.de/en/ifo-time-series>
 #' @family ifo time series
 #' @export
@@ -13,7 +15,8 @@
 #' \donttest{
 #' ifo_climate()
 #' }
-ifo_climate <- function(type = c("climate", "sectors", "eastern", "saxony")) {
+ifo_climate <- function(type = c("climate", "sectors", "eastern", "saxony"),
+                        long_format = TRUE) {
   type <- match.arg(type)
   sheet <- 1L
   switch(type,
@@ -28,17 +31,16 @@ ifo_climate <- function(type = c("climate", "sectors", "eastern", "saxony")) {
     },
     sectors = {
       sheet <- 2L
-      type <- "climate"
       col_types <- c("text", rep("numeric", 24L))
       col_names <- "yearmonth"
-      component <- c("climate", "situation", "expectation")
+      indicator <- c("climate", "situation", "expectation")
       nms <- as.character(outer(
-        paste(component, "industry", sep = "_"), c("balance", "index"), paste,
+        paste(indicator, "industry", sep = "_"), c("balance", "index"), paste,
         sep = "_"
       ))
       col_names <- c(col_names, nms)
       nms <- as.character(outer(
-        component,
+        indicator,
         c("manufacturing", "services", "trade", "wholesale", "retail", "construction"),
         paste,
         sep = "_"
@@ -47,10 +49,11 @@ ifo_climate <- function(type = c("climate", "sectors", "eastern", "saxony")) {
       col_names <- c(col_names, nms)
     },
     {
-      col_names <- c("yearmonth", "climate", "situation", "expecation")
+      col_names <- c("yearmonth", "climate", "situation", "expectation")
       col_types <- c("text", rep("numeric", 3L))
     }
   )
+
   res <- ifo_download(
     type = type,
     sheet = sheet,
@@ -59,7 +62,24 @@ ifo_climate <- function(type = c("climate", "sectors", "eastern", "saxony")) {
     col_types = col_types
   )
   res$yearmonth <- as.Date(paste0("01/", res$yearmonth), format = "%d/%m/%Y") # nolint
-  res
+
+  if (long_format && type %in% c("climate", "sectors")) {
+    if (type == "climate") {
+      res |> tidyr::pivot_longer(climate_index:expectation_balance,
+        names_to = c("indicator", "series"),
+        names_pattern = "(.*)_(.*)",
+        values_drop_na = TRUE
+      )
+    } else {
+      res |> tidyr::pivot_longer(!yearmonth,
+        names_to = c("indicator", "sector", "series"),
+        names_pattern = "(.*)_(.*)_(.*)",
+        values_drop_na = TRUE
+      )
+    }
+  } else {
+    res
+  }
 }
 
 #' Return ifo export expectations
@@ -121,6 +141,7 @@ ifo_download <- function(type, ...) {
 ifo_url <- function(type) {
   pattern <- switch(type,
     climate = "gsk",
+    sectors = "gsk",
     eastern = "ostd",
     saxony = "sachsen",
     export = "export",

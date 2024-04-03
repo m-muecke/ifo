@@ -4,11 +4,17 @@
 \alias{ifo_climate}
 \title{Return ifo business climate}
 \usage{
-ifo_climate(type = c("climate", "sectors", "eastern", "saxony"))
+ifo_climate(
+  type = c("climate", "sectors", "eastern", "saxony"),
+  long_format = TRUE
+)
 }
 \arguments{
 \item{type}{\code{character(1)} one of \code{"climate"}, \code{"sectors"},\code{"eastern"},
 \code{"saxony"}. Default \code{"climate"}.}
+
+\item{long_format}{\code{logical(1)} if \code{TRUE} return the data in long format.
+Only applies to \code{type} \code{"climate"} and \code{"sectors"}. Default \code{TRUE}.}
 }
 \description{
 Long time-series of the ifo Business Climate for Germany and its two and
