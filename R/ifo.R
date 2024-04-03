@@ -14,7 +14,7 @@
 #' ifo_climate()
 #' }
 ifo_climate <- function(type = c("climate", "sectors", "eastern", "saxony")) {
-  type <- match.arg(type, c("climate", "sectors", "eastern", "saxony"))
+  type <- match.arg(type)
   sheet <- 1L
   switch(type,
     climate = {
@@ -114,7 +114,7 @@ ifo_download <- function(type, ...) {
   url <- ifo_url(type)
   tf <- tempfile(fileext = ".xlsx")
   on.exit(unlink(tf), add = TRUE)
-  utils::download.file(url, destfile = tf, quiet = TRUE)
+  utils::download.file(url, destfile = tf, quiet = TRUE, mode = "wb")
   readxl::read_xlsx(tf, ...)
 }
 
