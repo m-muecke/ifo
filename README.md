@@ -67,7 +67,9 @@ climate |>
     ),
     panel.grid.major.y = element_line(color = "black", linewidth = 0.2),
     panel.grid.major.x = element_blank(),
-    panel.grid.minor = element_blank()
+    panel.grid.minor = element_blank(),
+    axis.text = element_text(color = "black"),
+    plot.margin = margin(10, 10, 10, 10)
   ) +
   labs(
     title = "ifo Business Climate Germany", subtitle = "Seasonally adjusted",
