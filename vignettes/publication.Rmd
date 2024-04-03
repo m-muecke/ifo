@@ -78,7 +78,7 @@ sectors <- ifo_climate("sectors")
 
 sectors |>
   select(yearmonth, ends_with("balance")) |>
-  tidyr::pivot_longer(-yearmonth,
+  tidyr::pivot_longer(!yearmonth,
     names_to = c("component", "sector"), names_pattern = "(.*)_(.*)_balance"
   ) |>
   filter(
