@@ -50,8 +50,10 @@ library(ggplot2)
 
 climate |>
   select(yearmonth, ends_with("index")) |>
-  tidyr::pivot_longer(-yearmonth, names_to = "component") |>
-  mutate(component = sub("_index", "", component, fixed = TRUE)) |>
+  tidyr::pivot_longer(!yearmonth,
+    names_to = "component",
+    names_transform = list(component = \(x) sub("_index", "", x, fixed = TRUE))
+  ) |>
   ggplot(aes(x = yearmonth, y = value, color = component)) +
   geom_line() +
   theme_minimal() +
