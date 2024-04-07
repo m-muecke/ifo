@@ -3,6 +3,8 @@
 export(ifo_climate)
 export(ifo_employment)
 export(ifo_export)
+export(ifo_export_climate)
+export(ifo_import_climate)
 importFrom(rvest,html_attr)
 importFrom(rvest,html_element)
 importFrom(rvest,html_elements)

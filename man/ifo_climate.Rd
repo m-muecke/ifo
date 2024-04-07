@@ -16,6 +16,9 @@ ifo_climate(
 \item{long_format}{\code{logical(1)} if \code{TRUE} return the data in long format.
 Only applies to \code{type} \code{"climate"} and \code{"sectors"}. Default \code{TRUE}.}
 }
+\value{
+A \code{data.frame()} containing the ifo business climate.
+}
 \description{
 Long time-series of the ifo Business Climate for Germany and its two and
 its two components, the business situation, and the expectations for sectors.
@@ -29,8 +32,8 @@ ifo_climate()
 \url{https://www.ifo.de/en/ifo-time-series}
 }
 \seealso{
-Other ifo time series: 
+Other ifo business survey: 
 \code{\link{ifo_employment}()},
 \code{\link{ifo_export}()}
 }
-\concept{ifo time series}
+\concept{ifo business survey}

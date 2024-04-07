@@ -6,6 +6,9 @@
 \usage{
 ifo_employment()
 }
+\value{
+A \code{data.frame()} containing the ifo employment expectations.
+}
 \description{
 Long time-series of the ifo Employment Barometer for Germany.
 }
@@ -14,9 +17,12 @@ Long time-series of the ifo Employment Barometer for Germany.
 ifo_employment()
 }
 }
+\references{
+\url{https://www.ifo.de/en/ifo-time-series}
+}
 \seealso{
-Other ifo time series: 
+Other ifo business survey: 
 \code{\link{ifo_climate}()},
 \code{\link{ifo_export}()}
 }
-\concept{ifo time series}
+\concept{ifo business survey}

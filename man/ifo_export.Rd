@@ -6,6 +6,9 @@
 \usage{
 ifo_export()
 }
+\value{
+A \code{data.frame()} containing the ifo export expectations.
+}
 \description{
 Long time-series of the ifo Export Expectations for manufacturing.
 }
@@ -14,9 +17,12 @@ Long time-series of the ifo Export Expectations for manufacturing.
 ifo_export()
 }
 }
+\references{
+\url{https://www.ifo.de/en/ifo-time-series}
+}
 \seealso{
-Other ifo time series: 
+Other ifo business survey: 
 \code{\link{ifo_climate}()},
 \code{\link{ifo_employment}()}
 }
-\concept{ifo time series}
+\concept{ifo business survey}

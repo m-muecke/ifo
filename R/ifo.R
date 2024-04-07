@@ -7,9 +7,10 @@
 #' @param type `character(1)` one of `"climate"`, `"sectors"`,`"eastern"`,
 #'   `"saxony"`. Default `"climate"`.
 #' @param long_format `logical(1)` if `TRUE` return the data in long format.
-#' Only applies to `type` `"climate"` and `"sectors"`. Default `TRUE`.
+#'   Only applies to `type` `"climate"` and `"sectors"`. Default `TRUE`.
+#' @returns A `data.frame()` containing the ifo business climate.
 #' @references <https://www.ifo.de/en/ifo-time-series>
-#' @family ifo time series
+#' @family ifo business survey
 #' @export
 #' @examples
 #' \donttest{
@@ -87,8 +88,9 @@ ifo_climate <- function(type = c("climate", "sectors", "eastern", "saxony"),
 #' @description
 #' Long time-series of the ifo Export Expectations for manufacturing.
 #'
-#' @inherit ifo_export references
-#' @family ifo time series
+#' @returns A `data.frame()` containing the ifo export expectations.
+#' @inherit ifo_climate references
+#' @family ifo business survey
 #' @export
 #' @examples
 #' \donttest{
@@ -110,8 +112,9 @@ ifo_export <- function() {
 #' @description
 #' Long time-series of the ifo Employment Barometer for Germany.
 #'
-#' @inherit ifo_export references
-#' @family ifo time series
+#' @returns A `data.frame()` containing the ifo employment expectations.
+#' @inherit ifo_climate references
+#' @family ifo business survey
 #' @export
 #' @examples
 #' \donttest{
@@ -125,6 +128,55 @@ ifo_employment <- function() {
   col_types <- c("date", rep("numeric", 5L))
   res <- ifo_download(
     type = "employment", skip = 9L, col_names = col_names, col_types = col_types
+  )
+  res$yearmonth <- as.Date(format(res$yearmonth, "%Y-%m-01"))
+  res
+}
+
+#' Return ifo export climate
+#'
+#' @description
+#' Long time series for the ifo Export Climate and the annual rate of change of real
+#' exports.
+#'
+#' @returns A `data.frame()` containing the ifo export climate.
+#' @inherit ifo_climate references
+#' @family ifo time series
+#' @export
+#' @examples
+#' \donttest{
+#' ifo_export_climate()
+#' }
+ifo_export_climate <- function() {
+  res <- ifo_download(
+    type = "export_climate",
+    skip = 10L,
+    col_names = c("yearmonth", "ifo_climate", "special_trade"),
+    col_types = c("date", "numeric", "numeric")
+  )
+  res$yearmonth <- as.Date(format(res$yearmonth, "%Y-%m-01"))
+  res
+}
+
+#' Return ifo import climate
+#'
+#' @description
+#' Long time-series of the ifo import climate.
+#'
+#' @returns A `data.frame()` containing the ifo import climate.
+#' @references `r format_bib("grimme2018ifo", "grimme2021forecasting")`
+#' @family ifo time series
+#' @export
+#' @examples
+#' \donttest{
+#' ifo_import_climate()
+#' }
+ifo_import_climate <- function() {
+  res <- ifo_download(
+    type = "import_climate",
+    skip = 10L,
+    col_names = c("yearmonth", "climate"),
+    col_types = c("date", "numeric")
   )
   res$yearmonth <- as.Date(format(res$yearmonth, "%Y-%m-01"))
   res
@@ -145,10 +197,12 @@ ifo_url <- function(type) {
     eastern = "ostd",
     saxony = "sachsen",
     export = "export",
-    employment = "empl"
+    employment = "empl",
+    export_climate = "exklima",
+    import_climate = "imklima"
   )
   urls <- read_html("https://www.ifo.de/en/ifo-time-series") |>
-    html_element(".link-list") |>
+    html_elements(".link-list") |>
     html_elements("a") |>
     html_attr("href")
   url <- grep(pattern, urls, value = TRUE, fixed = TRUE)
