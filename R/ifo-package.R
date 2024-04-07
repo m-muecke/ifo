@@ -8,3 +8,5 @@
 #' @importFrom rvest read_html
 ## usethis namespace: end
 NULL
+
+utils::globalVariables(c("climate_index", "expectation_balance", "yearmonth"))
