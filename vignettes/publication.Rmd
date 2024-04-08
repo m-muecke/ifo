@@ -43,7 +43,7 @@ ifo_theme <- theme_minimal() +
 library(dplyr)
 library(ifo)
 
-climate <- ifo_climate()
+climate <- ifo_business()
 
 climate |>
   filter(series == "index") |>
@@ -70,7 +70,7 @@ climate |>
 ### ifo Business Climate by Sector
 
 ```{r sector, dpi = 300}
-sectors <- ifo_climate("sectors")
+sectors <- ifo_business("sectors")
 
 sectors |>
   filter(

@@ -32,7 +32,7 @@ pak::pak("m-muecke/ifo")
 ``` r
 library(ifo)
 
-climate <- ifo_climate()
+climate <- ifo_business()
 climate
 #> # A tibble: 1,386 × 6
 #>   yearmonth  uncertainty economic_expansion indicator   series  value

@@ -2,38 +2,36 @@
 % Please edit documentation in R/ifo.R
 \name{ifo_climate}
 \alias{ifo_climate}
-\title{Return ifo business climate}
+\title{Return ifo climate}
 \usage{
-ifo_climate(
-  type = c("climate", "sectors", "eastern", "saxony"),
-  long_format = TRUE
-)
+ifo_climate(type = c("import", "export"))
 }
 \arguments{
-\item{type}{\code{character(1)} one of \code{"climate"}, \code{"sectors"},\code{"eastern"},
-\code{"saxony"}. Default \code{"climate"}.}
-
-\item{long_format}{\code{logical(1)} if \code{TRUE} return the data in long format.
-Only applies to \code{type} \code{"climate"} and \code{"sectors"}. Default \code{TRUE}.}
+\item{type}{\code{character(1)} Defaults to \code{"import"}. One of:
+\itemize{
+\item \code{"import"}: returns the ifo import climate.
+\item \code{"export"}: returns teh ifo export climate.
+}}
 }
 \value{
-A \code{data.frame()} containing the ifo business climate.
+A \code{data.frame()} containing the monthly ifo climate time series.
 }
 \description{
-Long time-series of the ifo Business Climate for Germany and its two and
-its two components, the business situation, and the expectations for sectors.
+Return ifo climate
 }
 \examples{
-\donttest{
-ifo_climate()
+\dontrun{
+import <- ifo_climate("import")
+export <- ifo_climate("export")
 }
 }
 \references{
-\url{https://www.ifo.de/en/ifo-time-series}
+Grimme C, Lehmann R, Nöller M (2018).
+\dQuote{Das ifo Importklima -- ein erster Frühindikator für die Prognose der deutschen Importe.}
+\emph{ifo Schnelldienst}, \bold{71}(12), 27--32.
+
+Grimme, Christian, Lehmann, Robert, Nöller, Marvin (2021).
+\dQuote{Forecasting imports with information from abroad.}
+\emph{Economic Modelling}, \bold{98}, 109--117.
 }
-\seealso{
-Other ifo business survey: 
-\code{\link{ifo_employment}()},
-\code{\link{ifo_export}()}
-}
-\concept{ifo business survey}
+\concept{ifo time series}

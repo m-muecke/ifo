@@ -40,7 +40,7 @@ pak::pak("m-muecke/ifo")
 ```{r demo, message = FALSE}
 library(ifo)
 
-climate <- ifo_climate()
+climate <- ifo_business()
 climate
 ```
 
