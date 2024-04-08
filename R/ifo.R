@@ -149,6 +149,18 @@ ifo_climate <- function(type = c("import", "export")) {
   }
 }
 
+ifo_history <- function(type = c("world", "euro")) {
+  type <- match.arg(type)
+  ifo_download(
+    type = type,
+    skip = 11L,
+    col_names = c(
+      "yearmonth", "economic_climate", "present_situation", "expectation"
+    ),
+    col_types = c("text", rep("numeric", 3L))
+  )
+}
+
 ifo_download <- function(type, ...) {
   url <- ifo_url(type)
   tf <- tempfile(fileext = ".xlsx")
@@ -156,7 +168,7 @@ ifo_download <- function(type, ...) {
   utils::download.file(url, destfile = tf, quiet = TRUE, mode = "wb")
   res <- readxl::read_xlsx(tf, ...)
   if (inherits(res$yearmonth, "POSIXct")) {
-    res$yearmonth <- format(res$yearmonth, "%Y-%m-01")
+    res$yearmonth <- as.Date(format(res$yearmonth, "%Y-%m-01"))
   } else {
     res$yearmonth <- as.Date(paste0("01/", res$yearmonth), "%d/%m/%Y") # nolint
   }
@@ -172,7 +184,8 @@ ifo_url <- function(type) {
     export = "export",
     employment = "empl",
     export_climate = "exklima",
-    import_climate = "imklima"
+    import_climate = "imklima",
+    type
   )
   urls <- read_html("https://www.ifo.de/en/ifo-time-series") |>
     html_elements(".link-list") |>
