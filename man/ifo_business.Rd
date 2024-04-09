@@ -2,16 +2,21 @@
 % Please edit documentation in R/ifo.R
 \name{ifo_business}
 \alias{ifo_business}
-\title{Return ifo business climate}
+\title{Return ifo business climate data}
 \usage{
 ifo_business(
-  type = c("climate", "sectors", "eastern", "saxony"),
+  type = c("germany", "sectors", "eastern", "saxony"),
   long_format = TRUE
 )
 }
 \arguments{
-\item{type}{\code{character(1)} one of \code{"climate"}, \code{"sectors"},\code{"eastern"},
-\code{"saxony"}. Default \code{"climate"}.}
+\item{type}{\code{character(1)} Defaults to \code{"germany"}. One of:
+\itemize{
+\item \code{"germany"}: returns the ifo business climate index for Germany.
+\item \code{"sectors"}: returns the ifo business climate index for different sectors.
+\item \code{"eastern"}: returns the ifo business climate index for eastern Germany.
+\item \code{"saxony"}: returns the ifo business climate index for Saxony.
+}}
 
 \item{long_format}{\code{logical(1)} if \code{TRUE} return the data in long format.
 Only applies to \code{type} \code{"climate"} and \code{"sectors"}. Default \code{TRUE}.}
@@ -20,15 +25,14 @@ Only applies to \code{type} \code{"climate"} and \code{"sectors"}. Default \code
 A \code{data.frame()} containing the monthly ifo business climate time series.
 }
 \description{
-Long time-series of the ifo Business Climate for Germany and its two and
-its two components, the business situation, and the expectations for sectors.
+Return ifo business climate data
 }
 \examples{
-\donttest{
-ifo_business()
+\dontrun{
+germany <- ifo_business()
+sectors <- ifo_business("sectors")
 }
 }
 \references{
 \url{https://www.ifo.de/en/ifo-time-series}
 }
-\concept{ifo business survey}

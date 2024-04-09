@@ -2,7 +2,7 @@
 % Please edit documentation in R/ifo.R
 \name{ifo_climate}
 \alias{ifo_climate}
-\title{Return ifo climate}
+\title{Return ifo climate data}
 \usage{
 ifo_climate(type = c("import", "export"))
 }
@@ -10,14 +10,14 @@ ifo_climate(type = c("import", "export"))
 \item{type}{\code{character(1)} Defaults to \code{"import"}. One of:
 \itemize{
 \item \code{"import"}: returns the ifo import climate.
-\item \code{"export"}: returns teh ifo export climate.
+\item \code{"export"}: returns the ifo export climate.
 }}
 }
 \value{
 A \code{data.frame()} containing the monthly ifo climate time series.
 }
 \description{
-Return ifo climate
+Return ifo climate data
 }
 \examples{
 \dontrun{
@@ -34,4 +34,3 @@ Grimme, Christian, Lehmann, Robert, Nöller, Marvin (2021).
 \dQuote{Forecasting imports with information from abroad.}
 \emph{Economic Modelling}, \bold{98}, 109--117.
 }
-\concept{ifo time series}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/ifo.R
 \name{ifo_expectation}
 \alias{ifo_expectation}
-\title{Return ifo expectation}
+\title{Return ifo expectation data}
 \usage{
 ifo_expectation(type = c("export", "employment"))
 }
@@ -17,7 +17,7 @@ ifo_expectation(type = c("export", "employment"))
 A \code{data.frame()} containing the monthly ifo expectation time series.
 }
 \description{
-Return ifo expectation
+Return ifo expectation data
 }
 \examples{
 \dontrun{
