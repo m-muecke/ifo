@@ -2,7 +2,7 @@
 title: "ifo Business Climate Index"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{ifo Publication}
+  %\VignetteIndexEntry{ifo Business Climate Index}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -15,26 +15,34 @@ knitr::opts_chunk$set(
 )
 ```
 
-The following will demonstrate how to use the `ifo` package to access the ifo Business Climate data
-and reproduce some of the plots from the ifo website.
+This vignette demonstrates how to access the ifo Business Climate data and reproduce some of the plots from the ifo [website](https://www.ifo.de/en/survey/ifo-business-climate-index-germany).
+
+### Creating a new theme
+
+We will start with creating a theme that is somewhat similar to the style of the ifo website.
+or see examples of themes in the [ggthemes](https://cran.r-project.org/package=ggthemes) package.
+For more information on how to create custom themes, see the [ggplot2 documentation](https://ggplot2.tidyverse.org/articles/ggplot2-in-packages.html#creating-a-new-theme).
 
 ```{r theme, message = FALSE}
 library(ggplot2)
 
-ifo_theme <- theme_minimal() +
-  theme(
-    legend.title = element_blank(),
-    legend.position = "top",
-    plot.title = element_text(face = "bold"),
-    plot.caption = element_text(
-      hjust = 0, vjust = 0, size = 8, margin = margin(10, 0, 0, 0)
-    ),
-    panel.grid.major.y = element_line(color = "black", linewidth = 0.2),
-    panel.grid.major.x = element_blank(),
-    panel.grid.minor = element_blank(),
-    axis.text = element_text(color = "black"),
-    plot.margin = margin(10, 10, 10, 10)
-  )
+theme_ifo <- function() {
+  theme_minimal() %+replace%
+    theme(
+      legend.title = element_blank(),
+      legend.position = "top",
+      plot.title = element_text(face = "bold"),
+      plot.caption = element_text(
+        hjust = 0, vjust = 0, size = 8, margin = margin(10, 0, 0, 0)
+      ),
+      panel.grid.major.y = element_line(color = "black", linewidth = 0.2),
+      panel.grid.major.x = element_blank(),
+      panel.grid.minor = element_blank(),
+      axis.text = element_text(color = "black"),
+      axis.title = element_blank(),
+      plot.margin = margin(10, 10, 10, 10)
+    )
+}
 ```
 
 ### ifo Business Climate Germany
@@ -51,7 +59,6 @@ climate |>
   geom_line() +
   labs(
     title = "ifo Business Climate Germany", subtitle = "Seasonally adjusted",
-    y = NULL, x = NULL,
     caption = sprintf(
       "Source: ifo Business Survey, %s.", format(max(climate$yearmonth), "%B %Y")
     )
@@ -64,7 +71,7 @@ climate |>
       "Business expectation"
     )
   ) +
-  ifo_theme
+  theme_ifo()
 ```
 
 ### ifo Business Climate by Sector
@@ -96,7 +103,6 @@ sectors |>
   labs(
     title = "ifo Business Climate, Business Situation, and Expectations by Sector",
     subtitle = "Balances, seasonally adjusted",
-    y = NULL, x = NULL,
     caption = sprintf(
       "Source: ifo Business Survey, %s.", format(max(sectors$yearmonth), "%B %Y")
     )
@@ -109,12 +115,10 @@ sectors |>
       "Business expectation"
     )
   ) +
-  ifo_theme
+  theme_ifo()
 ```
 
 ### ifo Business Uncertainty Germany
-
-"The ifo Business Uncertainty measures how difficult it is for managers to predict the development of their company's business situation over the next six months. The measure is calculated based on the weighted fractions of companies that fall into the answer ..."
 
 ```{r uncertainty, dpi = 300}
 climate |>
@@ -124,10 +128,9 @@ climate |>
   geom_line() +
   labs(
     title = "ifo Business Uncertainty Germany", subtitle = "Original values",
-    y = NULL, x = NULL,
     caption = sprintf(
       "Source: ifo Business Survey, %s.", format(max(climate$yearmonth), "%B %Y")
     )
   ) +
-  ifo_theme
+  theme_ifo()
 ```
