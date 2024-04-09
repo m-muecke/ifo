@@ -74,14 +74,14 @@
       <img src="" class="logo" alt=""><h1>ifo Business Climate Index</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/m-muecke/ifo/blob/HEAD/vignettes/publication.Rmd" class="external-link"><code>vignettes/publication.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/m-muecke/ifo/blob/HEAD/vignettes/articles/publication.Rmd" class="external-link"><code>vignettes/articles/publication.Rmd</code></a></small>
       <div class="d-none name"><code>publication.Rmd</code></div>
     </div>
 
     
     
-<p>This vignette demonstrates how to access the ifo Business Climate
-data and reproduce some of the plots from the ifo <a href="https://www.ifo.de/en/survey/ifo-business-climate-index-germany" class="external-link">website</a>.</p>
+<p>This article demonstrates how to access the ifo Business Climate data
+and reproduce some of the plots from the ifo <a href="https://www.ifo.de/en/survey/ifo-business-climate-index-germany" class="external-link">website</a>.</p>
 <div class="section level3">
 <h3 id="creating-a-new-theme">Creating a new theme<a class="anchor" aria-label="anchor" href="#creating-a-new-theme"></a>
 </h3>
@@ -168,7 +168,7 @@ documentation</a>.</p>
 <span>    <span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
-<span>    title <span class="op">=</span> <span class="st">"ifo Business Climate, Business Situation, and Expectations by Sector"</span>,</span>
+<span>    title <span class="op">=</span> <span class="st">"ifo Business Climate by Sector"</span>,</span>
 <span>    subtitle <span class="op">=</span> <span class="st">"Balances, seasonally adjusted"</span>,</span>
 <span>    caption <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span></span>
 <span>      <span class="st">"Source: ifo Business Survey, %s."</span>, <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">sectors</span><span class="op">$</span><span class="va">yearmonth</span><span class="op">)</span>, <span class="st">"%B %Y"</span><span class="op">)</span></span>
