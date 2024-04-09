@@ -18,7 +18,8 @@ repos:
           - readxl
           - rvest
           - tidyr
-      - id: deps-in-desc
+      # disable for now since it only supports imports and suggests
+      # - id: deps-in-desc
       - id: no-browser-statement
       - id: no-debug-statement
       - id: parsable-R
