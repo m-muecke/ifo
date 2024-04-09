@@ -22,8 +22,8 @@ For more information on how to create custom themes, see the [ggplot2 documentat
 ```{r theme, message = FALSE}
 library(ggplot2)
 
-theme_ifo <- function() {
-  theme_minimal() %+replace%
+theme_ifo <- function(...) {
+  theme_minimal(...) +
     theme(
       legend.title = element_blank(),
       legend.position = "top",
