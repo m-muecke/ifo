@@ -1,21 +1,17 @@
 ---
 title: "ifo Business Climate Index"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{ifo Business Climate Index}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  out.width = "100%"
+  out.width = "100%",
+  dpi = 300L
 )
 ```
 
-This vignette demonstrates how to access the ifo Business Climate data and reproduce some of the plots from the ifo [website](https://www.ifo.de/en/survey/ifo-business-climate-index-germany).
+This article demonstrates how to access the ifo Business Climate data and reproduce some of the plots from the ifo [website](https://www.ifo.de/en/survey/ifo-business-climate-index-germany).
 
 ### Creating a new theme
 
@@ -101,7 +97,7 @@ sectors |>
     ))
   ) +
   labs(
-    title = "ifo Business Climate, Business Situation, and Expectations by Sector",
+    title = "ifo Business Climate by Sector",
     subtitle = "Balances, seasonally adjusted",
     caption = sprintf(
       "Source: ifo Business Survey, %s.", format(max(sectors$yearmonth), "%B %Y")
