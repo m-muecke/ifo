@@ -13,9 +13,10 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 ## Overview
 
 The goal of ifo is to provide a simple interface to the [ifo
-institute](https://www.ifo.de/en/ifo-time-series) business survey data.
-The shape of the output data is still experimental and might change in
-the future. Feel free to open an issue if you have any suggestions.
+institute](https://www.ifo.de/en/ifo-time-series) time series data. The
+package is still in an early stage of development and the API might
+change in the future. Feel free to open an issue if you have any
+suggestions.
 
 ## Installation
 
