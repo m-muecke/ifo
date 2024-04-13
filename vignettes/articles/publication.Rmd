@@ -16,8 +16,8 @@ This article demonstrates how to access the ifo Business Climate data and reprod
 ### Creating a new theme
 
 We will start with creating a theme that is somewhat similar to the style of the ifo website.
+For more information on how to create custom themes, see the [ggplot2 documentation](https://ggplot2.tidyverse.org/articles/ggplot2-in-packages.html#creating-a-new-theme)
 or see examples of themes in the [ggthemes](https://cran.r-project.org/package=ggthemes) package.
-For more information on how to create custom themes, see the [ggplot2 documentation](https://ggplot2.tidyverse.org/articles/ggplot2-in-packages.html#creating-a-new-theme).
 
 ```{r theme, message = FALSE}
 library(ggplot2)

@@ -19,7 +19,7 @@ ifo_business(
 }}
 
 \item{long_format}{\code{logical(1)} if \code{TRUE} return the data in long format.
-Only applies to \code{type} \code{"climate"} and \code{"sectors"}. Default \code{TRUE}.}
+Only applies to \code{type} \code{"germany"} and \code{"sectors"}. Default \code{TRUE}.}
 }
 \value{
 A \code{data.frame()} containing the monthly ifo business climate time series.

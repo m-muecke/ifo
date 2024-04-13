@@ -6,7 +6,7 @@
 #'   * `"eastern"`: returns the ifo business climate index for eastern Germany.
 #'   * `"saxony"`: returns the ifo business climate index for Saxony.
 #' @param long_format `logical(1)` if `TRUE` return the data in long format.
-#'   Only applies to `type` `"climate"` and `"sectors"`. Default `TRUE`.
+#'   Only applies to `type` `"germany"` and `"sectors"`. Default `TRUE`.
 #' @returns A `data.frame()` containing the monthly ifo business climate time series.
 #' @references <https://www.ifo.de/en/ifo-time-series>
 #' @export
@@ -62,23 +62,22 @@ ifo_business <- function(type = c("germany", "sectors", "eastern", "saxony"),
     col_types = col_types
   )
 
-  if (long_format && type %in% c("germany", "sectors")) {
+  if (long_format) {
     if (type == "germany") {
-      res |> tidyr::pivot_longer(climate_index:expectation_balance,
+      res <- res |> tidyr::pivot_longer(climate_index:expectation_balance,
         names_to = c("indicator", "series"),
         names_pattern = "(.*)_(.*)",
         values_drop_na = TRUE
       )
-    } else {
-      res |> tidyr::pivot_longer(!yearmonth,
+    } else if (type == "sectors") {
+      res <- res |> tidyr::pivot_longer(!yearmonth,
         names_to = c("indicator", "sector", "series"),
         names_pattern = "(.*)_(.*)_(.*)",
         values_drop_na = TRUE
       )
     }
-  } else {
-    res
   }
+  res
 }
 
 #' Return ifo expectation data
