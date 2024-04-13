@@ -46,43 +46,4 @@ climate
 #> # ℹ 1,381 more rows
 ```
 
-``` r
-library(dplyr)
-library(ggplot2)
-
-climate |>
-  filter(series == "index") |>
-  ggplot(aes(x = yearmonth, y = value, color = indicator)) +
-  geom_line() +
-  theme_minimal() +
-  theme(
-    legend.title = element_blank(),
-    legend.position = "top",
-    plot.title = element_text(face = "bold"),
-    plot.caption = element_text(
-      hjust = 0, vjust = 0, size = 8, margin = margin(10, 0, 0, 0)
-    ),
-    panel.grid.major.y = element_line(color = "black", linewidth = 0.2),
-    panel.grid.major.x = element_blank(),
-    panel.grid.minor = element_blank(),
-    axis.text = element_text(color = "black"),
-    axis.title = element_blank(),
-    plot.margin = margin(10, 10, 10, 10)
-  ) +
-  labs(
-    title = "ifo Business Climate Germany", subtitle = "Seasonally adjusted",
-    caption = sprintf(
-      "Source: ifo Business Survey, %s.", format(max(climate$yearmonth), "%B %Y")
-    )
-  ) +
-  scale_color_manual(
-    values = c(climate = "darkred", situation = "darkgrey", expectation = "darkblue"),
-    labels = c(
-      "ifo Business Climate",
-      "Assessment of business situtation",
-      "Business expectation"
-    )
-  )
-```
-
 <img src="man/figures/README-plotting-1.png" width="100%" />

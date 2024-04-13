@@ -44,7 +44,7 @@ climate <- ifo_business()
 climate
 ```
 
-```{r plotting, message = FALSE, dpi = 300}
+```{r plotting, message = FALSE, echo = FALSE, dpi = 300}
 library(dplyr)
 library(ggplot2)
 
