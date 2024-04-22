@@ -9,6 +9,8 @@
 #'   Only applies to `type` `"germany"` and `"sectors"`. Default `TRUE`.
 #' @returns A `data.frame()` containing the monthly ifo business climate time series.
 #' @references <https://www.ifo.de/en/ifo-time-series>
+#' @seealso The [vignette](https://m-muecke.github.io/ifo/articles/publication.html) for
+#'   a reproducible example.
 #' @export
 #' @examples
 #' \dontrun{
@@ -155,10 +157,10 @@ ifo_climate <- function(type = c("import", "export")) {
 #' @inherit ifo_business references
 #' @examples
 #' \dontrun{
-#' world <- ifo_history("world")
-#' euro <- ifo_history("euro")
+#' world <- ifo_world_climate("world")
+#' euro <- ifo_world_climate("euro")
 #' }
-ifo_history <- function(type = c("world", "euro")) {
+ifo_world_climate <- function(type = c("world", "euro")) {
   type <- match.arg(type)
   ifo_download(
     type = type,

@@ -36,3 +36,7 @@ sectors <- ifo_business("sectors")
 \references{
 \url{https://www.ifo.de/en/ifo-time-series}
 }
+\seealso{
+The \href{https://m-muecke.github.io/ifo/articles/publication.html}{vignette} for
+a reproducible example.
+}

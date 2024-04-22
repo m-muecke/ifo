@@ -52,3 +52,7 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+# CRAN
+CRAN-RELEASE
+CRAN-SUBMISSION
