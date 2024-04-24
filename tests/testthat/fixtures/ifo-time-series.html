@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" prefix="og: https://ogp.me/ns#">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<link rel="canonical" href="https://www.ifo.de/en/ifo-time-series">
+<meta name="Generator" content="Drupal 10 (https://www.drupal.org)">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="ifo Time-series">
+<meta property="og:image" content="https://www.ifo.de/sites/default/files/social/logo-ifo-en.png?c=1689236459">
+<meta property="og:description" content="With its business surveys the ifo Institute collects data that are of great interest for empirical economic research both in Germany and abroad. Some long time-series are provided in Excel format for facilitating further processing by the user.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ifo Time-series">
+<meta name="twitter:image" content="https://www.ifo.de/sites/default/files/social/logo-ifo-en.png?c=1689236459">
+<meta name="twitter:description" content="With its business surveys the ifo Institute collects data that are of great interest for empirical economic research both in Germany and abroad. Some long time-series are provided in Excel format for facilitating further processing by the user.">
+<meta name="description" content="With its business surveys the ifo Institute collects data that are of great interest for empirical economic research both in Germany and abroad. Some long time-series are provided in Excel format for facilitating further processing by the user.">
+<meta name="google-site-verification" content="s5FmWx-NHwGIaOXIGn7MBFbCJYXnLpDwpdC8MpGNBRw">
+<link rel="alternate" hreflang="de" href="https://www.ifo.de/ifo-zeitreihen">
+<link rel="alternate" hreflang="en" href="https://www.ifo.de/en/ifo-time-series">
+<meta name="format-detection" content="telephone=no">
+<title>ifo Time-series | ifo Institute</title>
+<link rel="shortcut icon" href="/themes/ifo/assets/images/fav/favicon.ico">
+<link rel="icon" type="image/png" href="/themes/ifo/assets/images/fav/favicon-32x32.png" sizes="25x25">
+<link rel="apple-touch-icon" sizes="180x180" href="/themes/ifo/assets/images/fav/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/themes/ifo/assets/images/fav/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/themes/ifo/assets/images/fav/favicon-16x16.png">
+<meta name="msapplication-TileColor" content="#fff">
+<meta name="theme-color" content="#fff">
+<link rel="stylesheet" media="all" href="/sites/default/files/css/css_QEZQxDyqOR96HtmQLgimfebpGSODwFEuDZle8NWc6LQ.css?delta=0&amp;language=en&amp;theme=ifo&amp;include=eJx9keFyhCAMhF_Ik0dyAkQvVyA0gJ59-nKKV51p-4vdL5tFBxrZs1W0HV2kMFn2gxSvDm3YYpfWlNErDQm7mlWTYw3ulvLqauyCjFDMG_lwILypeaROO_hald2OZra6xiFXk4_BKTQTLpHlGD1PI9YJZUZp1jHYJiO7dSTnmjUOUnKUjpIo7Ol9t8DY1II6vmEm7iIITALxnpSVEsH1P6QvIRZdW-9oO8OCikJGCTX0-Cwo61Bo58eq8CSY0g4zaA3a4e5e3_5IlziEwCUYvEBf92HCrvZEDolmHMhXoOABz-v6CyQEMfcBIg1QMhv20WFG9Qc_5-t71qtkPfp-GfUjGMyDqb-0qaQWslN9xeba5u56KxwtL-H2X2jCgALuG43bAUY">
+<link rel="stylesheet" media="all" href="/themes/ifo/assets/css/klaro-ifo.css?sc5k51">
+<link rel="stylesheet" media="all" href="/themes/ifo/assets/css/videojs-vfi-ifo.css?sc5k51">
+<link rel="stylesheet" media="all" href="/themes/ifo/assets/css/quality-selector.css?sc5k51">
+<link rel="stylesheet" media="all" href="/sites/default/files/css/css_JLZ64_y3kW8_XDYUgN8jfsBlT7_JFu0KY7rTXINSxYY.css?delta=4&amp;language=en&amp;theme=ifo&amp;include=eJx9keFyhCAMhF_Ik0dyAkQvVyA0gJ59-nKKV51p-4vdL5tFBxrZs1W0HV2kMFn2gxSvDm3YYpfWlNErDQm7mlWTYw3ulvLqauyCjFDMG_lwILypeaROO_hald2OZra6xiFXk4_BKTQTLpHlGD1PI9YJZUZp1jHYJiO7dSTnmjUOUnKUjpIo7Ol9t8DY1II6vmEm7iIITALxnpSVEsH1P6QvIRZdW-9oO8OCikJGCTX0-Cwo61Bo58eq8CSY0g4zaA3a4e5e3_5IlziEwCUYvEBf92HCrvZEDolmHMhXoOABz-v6CyQEMfcBIg1QMhv20WFG9Qc_5-t71qtkPfp-GfUjGMyDqb-0qaQWslN9xeba5u56KxwtL-H2X2jCgALuG43bAUY">
+<script src="//rum-static.pingdom.net/pa-650ca63cdaab420012000112.js" async></script><script>var backload = []; window.whitelist = ['www.ifo.de','test1.ifo.de','test1.cesifo.org','ifo.de','cesifo.org','www.cesifo.org','prod.ifo.adesso-service.net','prod.cesifo.adesso-service.net','dev.ifo.adesso-service.net','dev.cesifo.adesso-service.net','test.cesifo.adesso-service.net','www.cesifo-group.de','cesifo-group.de','dice.ifo.de','*.ifo.de']; window.specialdisclaimerlist = ['cesifo.docker.localhost','cesifo-org-develop.netfed.de','cesifo.dev.local','test1.cesifo.org','www.cesifo.org','cesifo.org','cesifo.ddev.site','dev.cesifo.adesso-service.net','test.cesifo.adesso-service.net','prod.cesifo.adesso-service.net'];</script>
+</head>
+<body class="ifo node-type-artikel node-42475">
+        <a href="#main-content" class="visually-hidden focusable">
+      Skip to main content
+    </a>
+    
+      <div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas>
+    <div class="layout-container">
+
+  <header role="banner"><div>
+  <div class="container">
+    <div>
+      <a href="/en" rel="home" id="logo">
+                  <svg id="Ebene_1" data-name="Ebene 1" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 165.86 33.25"><defs><style>.cls-1{fill:#0d4080;}</style></defs><title>180_ifo_Institute_1z_den</title>
+<rect class="cls-1" x="0.06" y="2.78" width="6.72" height="5.28"></rect><path class="cls-1" d="M30.91,27a4.42,4.42,0,1,1,4.42-4.42A4.42,4.42,0,0,1,30.91,27m0-15.09H17.34a3.94,3.94,0,0,1,3.82-3.79c0-3,0-6.69,0-6.69A10.59,10.59,0,0,0,10.57,11.9H0V32.53H6.77V17.18h3.81V32.53h6.75V17.18H21.7a10.67,10.67,0,1,0,9.21-5.28"></path><path class="cls-1" d="M155.34,32.57h10.53V31h-8.67V22.54H165V21h-7.86V13.43h8.41V11.87H155.34Zm-10.73,0h1.86V13.43h5.34V11.87H139.27v1.57h5.33Zm-20.41-5.8c0,4.38,2.09,6.15,5.91,6.15S136,31.15,136,26.77V11.87h-1.86V26.74c0,3.07-1.36,4.61-4.06,4.61S126,29.82,126,26.74V11.87h-1.85Zm-10.44,5.8h1.86V13.43h5.34V11.87H108.42v1.57h5.33Zm-10.84,0h1.86V11.87h-1.86Zm-10.84,0h1.86V13.43h5.33V11.87H86.73v1.57h5.33Zm-8-15.4c0-3.71-1.77-5.65-5.62-5.65-3.6,0-5.71,2.23-5.71,5.48,0,7.51,10,4,10,10.15,0,2.9-1.83,4.21-4.46,4.21s-4.12-1.74-4.12-4.41v-.78H72.29v.61c0,4.09,2.12,6.15,6,6.15s6.26-2,6.26-6.06c0-7.25-10-3.92-10-10.06a3.6,3.6,0,0,1,3.91-3.71c2.55,0,3.71,1.54,3.71,4.09Zm-28,15.4h1.86v-18H58l7.92,18H68.4V11.87H66.55v18h-.06l-7.92-18H56.08Zm-7,0H51V11.87H49.12Z"></path></svg></a>
+            <a class="search-toggle" href="/suche"><div><svg viewbox="0 0 24 24" class="icon icon-search"><use xlink:href="/themes/ifo/assets/images/icons/sprite.svg?1710785118#search"></use></svg></div></a>
+      <button class="menu-toggle"><div><span><i></i><i></i><i></i><i></i></span></div></button>
+      <div class="header-section">
+        <nav role="navigation" aria-labelledby="block-hauptnavigation-menu" id="block-hauptnavigation" class="settings-tray-editable" data-drupal-settingstray="editable"><div class="h2 visually-hidden" id="block-hauptnavigation-menu">Hauptnavigation</div>
+  
+
+        
+              <ul>
+<li class="menu-item">
+                <a href="/en/topics" title="Topic Overview" data-drupal-link-system-path="node/37941">          Topics        </a>
+                                <ul>
+<li class="overview">
+                    <a href="/en/topics" title="Topic Overview" data-drupal-link-system-path="node/37941">            Topic Overview <i class="icon"><svg viewbox="0 0 24 24" class="icon icon-arrow-right-1"><use xlink:href="/themes/ifo/assets/images/icons/sprite.svg?1710785221#arrow-right-1"></use></svg></i>
+          </a>
+          <button type="button" data-action="hover-off"><i class="icon"><svg viewbox="0 0 24 24" class="icon icon-delete-2"><use xlink:href="/themes/ifo/assets/images/icons/sprite.svg?1710785221#delete-2"></use></svg></i></button>
+        </li>
+                            <li class="menu-item">
+                <a href="/en/topics/economic-growth-and-sustainability" data-drupal-link-system-path="node/192">          Economic Growth and Sustainability        </a>
+              </li>
+                  <li class="menu-item">
+                <a href="/en/topics/equal-opportunities-and-integration" data-drupal-link-system-path="node/208">          Equal Opportunities and Integration        </a>
+              </li>
+                  <li class="menu-item">
+                <a href="/en/topics/digitalization-of-the-economy" data-drupal-link-system-path="node/210">          Digitalization of the Economy        </a>
+              </li>
+                  <li class="menu-item">
+                <a href="/en/topics/public-sector-functions-and-taxation" data-drupal-link-system-path="node/209">          Public Sector Functions and Taxation        </a>
+              </li>
+                  <li class="menu-item">
+                <a href="/en/topics/globalization-and-inter-system-competition" data-drupal-link-system-path="node/211">          Globalization and “Inter-System Competition”        </a>
+              </li>
+                  <li class="menu-item">
+                <a href="/en/topics/future-of-europe" data-drupal-link-system-path="node/33814">          The Future of Europe        </a>
+              </li>
+                  <li class="menu-item">
+                <a href="/en/big-data-economics" data-drupal-link-system-path="node/66603">          Big Data Economics        </a>
+              </li>
+        </ul>
+</li>
+                  <li class="menu-item">
+                <a href="/en/research" title="Research Overview" data-drupal-link-system-path="node/40785">          Research        </a>
+                                <ul>
+<li class="overview">
+                    <a href="/en/research" title="Research Overview" data-drupal-link-system-path="node/40785">            Research Overview <i class="icon"><svg viewbox="0 0 24 24" class="icon icon-arrow-right-1"><use xlink:href="/themes/ifo/assets/images/icons/sprite.svg?1710785221#arrow-right-1"></use></svg></i>
+          </a>
+          <button type="button" data-action="hover-off"><i class="icon"><svg viewbox="0 0 24 24" class="icon icon-delete-2"><use xlink:href="/themes/ifo/assets/images/icons/sprite.svg?1710785221#delete-2"></use></svg></i></button>
+        </li>
+                            <li class="menu-item">
+                <a href="/en/research/ifo-centers" data-drupal-link-system-path="node/37819">          ifo Centers        </a>
+                                <ul>
+<li class="menu-item">
+                <a href="/en/research/ifo-center-for-macroeconomics-and-surveys" data-drupal-link-system-path="node/253">          Macroeconomics and Surveys <i class="icon"><svg viewbox="0 0 24 24" class="icon icon-arrow-right"><use xlink:href="/themes/ifo/assets/images/icons/sprite.svg?1710785221#arrow-right"></use></svg></i>        </a>
+              </li>
+                  <li class="menu-item">
+                <a href="/en/research/ifo-center-for-public-finance-and-political-economy" data-drupal-link-system-path="node/37810">          Public Finance and Political Economy <i class="icon"><svg viewbox="0 0 24 24" class="icon icon-arrow-right"><use xlink:href="/themes/ifo/assets/images/icons/sprite.svg?1710785221#arrow-right"></use></svg></i>        </a>
+              </li>
+                  <li class="menu-item">
+                <a href="/en/research/ifo-center-for-labor-and-demographic-economics" data-drupal-link-system-path="node/244">          Labor and Demographic Economics <i class="icon"><svg viewbox="0 0 24 24" class="icon icon-arrow-right"><use xlink:href="/themes/ifo/assets/images/icons/sprite.svg?1710785221#arrow-right"></use></svg></i>        </a>
+              </li>
+                  <li class="menu-item">
+                <a href="/en/research/ifo-center-for-the-economics-of-education" data-drupal-link-system-path="node/37811">          Economics of Education <i class="icon"><svg viewbox="0 0 24 24" class="icon icon-arrow-right"><use xlink:href="/themes/ifo/assets/images/icons/sprite.svg?1710785221#arrow-right"></use></svg></i>        </a>
+              </li>
+                  <li class="menu-item">
+                <a href="/en/research/ifo-center-for-industrial-organization-and-new-technologies" data-drupal-link-system-path="node/245">          Industrial Organization and New Technologies <i class="icon"><svg viewbox="0 0 24 24" class="icon icon-arrow-right"><use xlink:href="/themes/ifo/assets/images/icons/sprite.svg?1710785221#arrow-right"></use></svg></i>        </a>
+              </li>
+                  <li class="menu-item">
+                <a href="/en/research/ifo-center-for-energy-climate-and-resources" data-drupal-link-system-path="node/37812">          Energy, Climate, and Resources <i class="icon"><svg viewbox="0 0 24 24" class="icon icon-arrow-right"><use xlink:href="/themes/ifo/assets/images/icons/sprite.svg?1710785221#arrow-right"></use></svg></i>        </a>
+              </li>
+                  <li class="menu-item">
+                <a href="/en/research/ifo-center-for-international-economics" data-drupal-link-system-path="node/37813">          International Economics <i class="icon"><svg viewbox="0 0 24 24" class="icon icon-arrow-right"><use xlink:href="/themes/ifo/assets/images/icons/sprite.svg?1710785221#arrow-right"></use></svg></i>        </a>
+              </li>
+                  <li class="menu-item">
+                <a href="/en/research/ifo-center-for-international-institutional-comparisons-and-migration-research" data-drupal-link-system-path="node/37814">          International Institutional Comparisons and Migration Research <i class="icon"><svg viewbox="0 0 24 24" class="icon icon-arrow-right"><use xlink:href="/themes/ifo/assets/images/icons/sprite.svg?1710785221#arrow-right"></use></svg></i>        </a>
+              </li>
+                  <li class="menu-item">
+                <a href="/en/research/ifo-center-for-social-market-economy-and-institutional-economics" data-drupal-link-system-path="node/68790">          Social Market Economy and Institutional Economics <i class="icon"><svg viewbox="0 0 24 24" class="icon icon-arrow-right"><use xlink:href="/themes/ifo/assets/images/icons/sprite.svg?1710785221#arrow-right"></use></svg></i>        </a>
+              </li>
+        </ul>
+</li>
+                  <li class="menu-item">
+                <a href="/en/research/further-research-departments" title="Further Research Departments" data-drupal-link-system-path="node/37821">          Further Research Departments        </a>
+                                <ul>
+<li class="menu-item">
+                <a href="/en/research/research-group-taxation-and-fiscal-policy" title="Research Group Taxation and Fiscal Policy" data-drupal-link-system-path="node/37815">          Research Group Taxation and Fiscal Policy <i class="icon"><svg viewbox="0 0 24 24" class="icon icon-arrow-right"><use xlink:href="/themes/ifo/assets/images/icons/sprite.svg?1710785221#arrow-right"></use></svg></i>        </a>
+              </li>
+                  <li class="menu-item">
+                <a href="/en/lmu-ifo-economics-business-data-center" data-drupal-link-system-path="node/72670">          LMU-ifo Economics &amp; Business Data Center <i class="icon"><svg viewbox="0 0 24 24" class="icon icon-arrow-right"><use xlink:href="/themes/ifo/assets/images/icons/sprite.svg?1710785221#arrow-right"></use></svg></i>        </a>
+              </li>
+                  <li class="menu-item">
+                <a href="/en/research/ifo-dresden" title="ifo Dresden" data-drupal-link-system-path="node/37816">          ifo Dresden <i class="icon"><svg viewbox="0 0 24 24" class="icon icon-arrow-right"><use xlink:href="/themes/ifo/assets/images/icons/sprite.svg?1710785221#arrow-right"></use></svg></i>        </a>
+              </li>
+        </ul>
+</li>
+        </ul>
+</li>
+                  <li class="menu-item">
+                <a href="/en/publications" title="Overview Publications" data-drupal-link-system-path="node/37838">          Publications        </a>
+                                <ul>
+<li class="overview">
+                    <a href="/en/publications" title="Overview Publications" data-drupal-link-system-path="node/37838">            Overview Publications <i class="icon"><svg viewbox="0 0 24 24" class="icon icon-arrow-right-1"><use xlink:href="/themes/ifo/assets/images/icons/sprite.svg?1710785221#arrow-right-1"></use></svg></i>
+          </a>
+          <button type="button" data-action="hover-off"><i class="icon"><svg viewbox="0 0 24 24" class="icon icon-delete-2"><use xlink:href="/themes/ifo/assets/images/icons/sprite.svg?1710785221#delete-2"></use></svg></i></button>
+        </li>
+                            <li class="menu-item">
+                <a href="/en/publications/contributions-in-refereed-journals" data-drupal-link-system-path="node/42060">          Contributions in Refereed Journals        </a>
+              </li>
+                  <li class="menu-item">
+                <a href="/en/publications/journals" data-drupal-link-system-path="node/42059">          Our Journals        </a>
+                                <ul>
+<li class="menu-item">
+                <a href="/en/publications/ifo-schnelldienst" data-drupal-link-system-path="node/37951">          ifo Schnelldienst <i class="icon"><svg viewbox="0 0 24 24" class="icon icon-arrow-right"><use xlink:href="/themes/ifo/assets/images/icons/sprite.svg?1710785221#arrow-right"></use></svg></i>        </a>
+              </li>
+                  <li class="menu-item">
+                <a href="/en/publications/ifo-schnelldienst-digital" title="ifo Schnelldienst digital" data-drupal-link-system-path="node/54738">          ifo Schnelldienst digital  <i class="icon"><svg viewbox="0 0 24 24" class="icon icon-arrow-right"><use xlink:href="/themes/ifo/assets/images/icons/sprite.svg?1710785221#arrow-right"></use></svg></i>        </a>
+              </li>
+                  <li class="menu-item">
+                <a href="https://www.cesifo.org/en/publications/econpol-forum" data-drupal-link-system-path="node/37960">          EconPol Forum <i class="icon"><svg viewbox="0 0 24 24" class="icon icon-arrow-right"><use xlink:href="/themes/ifo/assets/images/icons/sprite.svg?1710785221#arrow-right"></use></svg></i>        </a>
+              </li>
+                  <li class="menu-item">
+                <a href="/en/publications/ifo-konjunkturperspektiven" data-drupal-link-system-path="node/37962">          ifo Konjunkturperspektiven <i class="icon"><svg viewbox="0 0 24 24" class="icon icon-arrow-right"><use xlink:href="/themes/ifo/assets/images/icons/sprite.svg?1710785221#arrow-right"></use></svg></i>        </a>
+              </li>
+                  <li class="menu-item">
+                <a href="/en/publications/ifo-dresden-berichtet" data-drupal-link-system-path="node/37963">          ifo Dresden berichtet <i class="icon"><svg viewbox="0 0 24 24" class="icon icon-arrow-right"><use xlink:href="/themes/ifo/assets/images/icons/sprite.svg?1710785221#arrow-right"></use></svg></i>        </a>
+              </li>
+        </ul>
+</li>
+                  <li class="menu-item">
+                <a href="/en/publications/book-series" data-drupal-link-system-path="node/42058">          Our Book Series        </a>
+                                <ul>
+<li class="menu-item">
+                <a href="/en/publications/ifo-beitraege-zur-wirtschaftsforschung" data-drupal-link-system-path="node/37952">          ifo Beiträge zur Wirtschaftsforschung <i class="icon"><svg viewbox="0 0 24 24" class="icon icon-arrow-right"><use xlink:href="/themes/ifo/assets/images/icons/sprite.svg?1710785221#arrow-right"></use></svg></i>        </a>
+              </li>
+                  <li class="menu-item">
+                <a href="/en/publications/ifo-dresden-studien" data-drupal-link-system-path="node/37957">          ifo Dresden Studien <i class="icon"><svg viewbox="0 0 24 24" class="icon icon-arrow-right"><use xlink:href="/themes/ifo/assets/images/icons/sprite.svg?1710785221#arrow-right"></use></svg></i>        </a>
+              </li>
+                  <li class="menu-item">
+                <a href="/en/publications/ifo-forschungsberichte" data-drupal-link-system-path="node/37956">          ifo Forschungsberichte <i class="icon"><svg viewbox="0 0 24 24" class="icon icon-arrow-right"><use xlink:href="/themes/ifo/assets/images/icons/sprite.svg?1710785221#arrow-right"></use></svg></i>        </a>
+              </li>
+        </ul>
+</li>
+                  <li class="menu-item">
+                <a href="/en/publications/ifo-working-papers" data-drupal-link-system-path="node/37940">          ifo Working Papers        </a>
+              </li>
+        </ul>
+</li>
+                  <li class="menu-item">
+                <a href="/en/about-ifo" data-drupal-link-system-path="node/37880">          About Us        </a>
+                                <ul>
+<li class="menu-item">
+                <a href="/en/about-ifo" data-drupal-link-system-path="node/37880">          About Us        </a>
+              </li>
+                  <li class="menu-item">
+                <a href="/en/about-us/team" data-drupal-link-system-path="node/37840">          Team        </a>
+              </li>
+                  <li class="menu-item">
+                <a href="/en/about-us/ifo-careers" data-drupal-link-system-path="node/37892">          Careers        </a>
+              </li>
+                  <li class="menu-item">
+                <a href="/en/ifo-alumni" data-drupal-link-system-path="node/40782">          ifo-Alumni        </a>
+              </li>
+        </ul>
+</li>
+                  <li class="menu-item">
+                <a href="/en/newsroom" data-drupal-link-system-path="node/233">          Newsroom        </a>
+                                <ul>
+<li class="menu-item">
+                <a href="/en/newsroom" title="Newsroom" data-drupal-link-system-path="node/233">          Newsroom        </a>
+              </li>
+                  <li class="menu-item">
+                <a href="/en/press" data-drupal-link-system-path="node/37849">          Press        </a>
+              </li>
+                  <li class="menu-item">
+                <a href="/en/media-center" data-drupal-link-system-path="node/37850">          Media Center        </a>
+              </li>
+                  <li class="menu-item">
+                <a href="/en/survey-results" data-drupal-link-system-path="node/37848">          Survey Results        </a>
+              </li>
+                  <li class="menu-item">
+                <a href="/en/economic-forecasts" data-drupal-link-system-path="node/43139">          Economic Forecasts        </a>
+              </li>
+                  <li class="menu-item">
+                <a href="/en/events" data-drupal-link-system-path="node/42062">          Events        </a>
+              </li>
+                  <li class="menu-item">
+                <a href="/en/subscribe-ifo-newsletters" data-drupal-link-system-path="node/40838">          Newsletter        </a>
+              </li>
+        </ul>
+</li>
+        </ul></nav><div class="language-switcher-language-url settings-tray-editable" id="block-sprachumschalter" role="navigation" data-drupal-settingstray="editable">
+  
+    
+      <ul class="links">
+<li hreflang="de" data-drupal-link-system-path="node/42475" class="de"><a href="/ifo-zeitreihen" class="language-link" hreflang="de" data-drupal-link-system-path="node/42475">DE</a></li>
+<li hreflang="en" data-drupal-link-system-path="node/42475" class="en is-active"><a href="/en/ifo-time-series" class="language-link is-active" hreflang="en" data-drupal-link-system-path="node/42475">EN</a></li>
+</ul>
+</div>
+<div class="views-exposed-form settings-tray-editable" data-drupal-selector="views-exposed-form-suche-page-1" id="block-hervorgehobenesformularsuchepage-1" data-drupal-settingstray="editable">
+  
+    
+      
+
+
+<form action="/en/suche" method="get" id="views-exposed-form-suche-page-1" accept-charset="UTF-8" class="ifo-suche-form">
+
+  <div class="jumbo square light">
+    <div class="suche-container">
+      <div class="h1"><div class="field-title" data-experten="Expertensuche" data-mitarbeiter="Mitarbeitersuche" data-publikationen="Publikationensuche" data-themen="Themensuche" data-veranstaltungen="Event Search" data-projekte="Projektsuche" data-mediathek="ifo Media Center Search" data-netzwerkmitglied="CESifo Research Network Member Search" data-cesifo-working-papers="Search CESifo Working Papers">
+        Search
+      </div></div>
+      <div class="suche-wrapper">
+        <div class="js-form-item form-item js-form-type-search-api-autocomplete form-item-search-api-fulltext js-form-item-search-api-fulltext form-no-label">
+          <input data-drupal-selector="edit-search-api-fulltext" data-search-api-autocomplete-search="suche" class="form-autocomplete form-text" data-autocomplete-path="/en/search_api_autocomplete/suche?display=page_1&amp;&amp;filter=search_api_fulltext" type="text" id="edit-search-api-fulltext" name="search_api_fulltext" value="" size="30" maxlength="128" placeholder="Search">
+</div>
+
+        <div class="suche-close"><i class="icon icon-close"><svg viewbox="0 0 24 24" class="icon icon-close"><use xlink:href="/themes/ifo/assets/images/icons/sprite.svg?1710785118#close"></use></svg></i></div>
+        <div class="suche-submit">
+<span>Search </span><i class="icon icon-search"><svg viewbox="0 0 24 24" class="icon icon-search"><use xlink:href="/themes/ifo/assets/images/icons/sprite.svg?1710785118#search"></use></svg></i>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="filter">
+    <div class="container">
+      <div class="label">
+        Filter
+      </div>
+      <div class="filter-wrapper">
+
+                <div class="facet-inactive hidden block-facet--dropdown settings-tray-editable" id="block-netzwerkmitgliedtyp" data-drupal-settingstray="editable">
+  
+    
+      <div data-drupal-facet-id="netzwerkmitgliedtyp" class="facet-empty facet-hidden">
+<div class="facets-widget-dropdown">
+      
+  <label id="facet_netzwerkmitgliedtyp_label">Facet Netzwerkmitglied Typ</label>
+</div>
+</div>
+
+  </div>
+
+        <div class="facet-inactive hidden block-facet--dropdown settings-tray-editable" id="block-thema" data-drupal-settingstray="editable">
+  
+    
+      <div data-drupal-facet-id="thema" class="facet-empty facet-hidden">
+<div class="facets-widget-dropdown">
+      
+  <label id="facet_thema_label">Facet Thema</label>
+</div>
+</div>
+
+  </div>
+
+        <div class="facet-inactive hidden block-facet--dropdown settings-tray-editable" id="block-bereich" data-drupal-settingstray="editable">
+  
+    
+      <div data-drupal-facet-id="bereich" class="facet-empty facet-hidden">
+<div class="facets-widget-dropdown">
+      
+  <label id="facet_bereich_label">Facet Bereich</label>
+</div>
+</div>
+
+  </div>
+
+        <div class="facet-inactive hidden block-facet--dropdown settings-tray-editable" id="block-autor" data-drupal-settingstray="editable">
+  
+    
+      <div data-drupal-facet-id="autor" class="facet-empty facet-hidden">
+<div class="facets-widget-dropdown">
+      
+  <label id="facet_autor_label">Facet Autor</label>
+</div>
+</div>
+
+  </div>
+
+        <div class="facet-inactive hidden block-facet--dropdown settings-tray-editable" id="block-veroffentlichungsjahr" data-drupal-settingstray="editable">
+  
+    
+      <div data-drupal-facet-id="veroeffentlichungsjahr" class="facet-empty facet-hidden">
+<div class="facets-widget-dropdown">
+      
+  <label id="facet_veroeffentlichungsjahr_label">Facet Veröffentlichungsjahr</label>
+</div>
+</div>
+
+  </div>
+
+        
+        <div class="facet-inactive hidden block-facet--dropdown settings-tray-editable" id="block-team" data-drupal-settingstray="editable">
+  
+    
+      <div data-drupal-facet-id="team" class="facet-empty facet-hidden">
+<div class="facets-widget-dropdown">
+      
+  <label id="facet_team_label">Facet Team</label>
+</div>
+</div>
+
+  </div>
+
+                 <div class="facet-inactive hidden block-facet--dropdown settings-tray-editable" id="block-abgeschlossen" data-drupal-settingstray="editable">
+  
+    
+      <div data-drupal-facet-id="abgeschlossen" class="facet-empty facet-hidden">
+<div class="facets-widget-dropdown">
+      
+  <label id="facet_abgeschlossen_label">Facet Abgeschlossen</label>
+</div>
+</div>
+
+  </div>
+
+        <div class="facet-inactive hidden block-facet--dropdown settings-tray-editable" id="block-veranstaltungen" data-drupal-settingstray="editable">
+  
+    
+      <div data-drupal-facet-id="veranstaltungen" class="facet-empty facet-hidden">
+<div class="facets-widget-dropdown">
+      
+  <label id="facet_veranstaltungen_label">Facet Veranstaltungen</label>
+</div>
+</div>
+
+  </div>
+
+        <div class="facet-inactive hidden block-facet--dropdown settings-tray-editable" id="block-typ" data-drupal-settingstray="editable">
+  
+    
+      <div data-drupal-facet-id="typ" class="facet-empty facet-hidden">
+<div class="facets-widget-dropdown">
+      
+  <label id="facet_typ_label">Facet Typ</label>
+</div>
+</div>
+
+  </div>
+
+        <div class="facet-inactive hidden block-facet--dropdown settings-tray-editable" id="block-inhaltstyp" data-drupal-settingstray="editable">
+  
+    
+      <div data-drupal-facet-id="inhaltstyp" class="facet-empty facet-hidden">
+<div class="facets-widget-dropdown">
+      
+  <label id="facet_inhaltstyp_label">Facet Inhaltstyp</label>
+</div>
+</div>
+
+  </div>
+
+        <div class="facet-inactive block-facet--glossaryaz settings-tray-editable" id="block-nachnameglossary" data-drupal-settingstray="editable">
+  
+    
+      <ul>
+<li class="facet-item glossaryaz is-active no-results">All</li>
+<li class="facet-item glossaryaz no-results">0-9</li>
+<li class="facet-item glossaryaz no-results">#</li>
+</ul>
+</div>
+
+
+      </div>
+
+      <div class="reset-filter">
+        <span><img src="/themes/ifo/assets/images/icons/trash__tuerkis-nacht.svg"> Reset filter</span>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+  <div class="results">
+    <div class="container">
+                  <div class="js-form-item form-item js-form-type-select form-item-sort-by js-form-item-sort-by">
+      <label for="edit-sort-by">Sorted by</label>
+        <select data-drupal-selector="edit-sort-by" id="edit-sort-by" name="sort_by" class="form-select"><option value="maxdate_agr" selected>Date</option>
+<option value="search_api_relevance">Relevance</option></select>
+</div>
+
+          </div>
+  </div>
+
+</form>
+
+  </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+  </header><main role="main"><a id="main-content" tabindex="-1"></a>
+    <div class="layout-content">
+        <div>
+    <div id="block-breadcrumb" class="settings-tray-editable" data-drupal-settingstray="editable">
+  
+    
+        <nav role="navigation" aria-labelledby="system-breadcrumb"><div id="system-breadcrumb" class="h2 visually-hidden">Breadcrumb</div>
+    <ol>
+<li>
+                  <a href="/en">Home</a>
+              </li>
+          <li>
+                  <a href="/en/ifo-time-series">ifo Time-series</a>
+              </li>
+        </ol></nav>
+</div>
+<div class="messages">
+  <div class="container">
+    <div data-drupal-messages-fallback class="hidden"></div>
+  </div>
+</div>
+<div id="block-mainpagecontent--2">
+  
+    
+      
+  
+<article class="node full artikel"><div class="node full artikel jumbo square-inside light no-img">
+    <div class="bg"></div>
+    <div class="jumbo-container">
+              <div class="subtitle"></div>
+                    <h1>
+          <span>ifo Time-series</span>
+
+        </h1>
+                        <div class="jumbo-text iconize">
+                  
+            <div class="field-kurztext paragraph--type--richtext iconize">
+        <div class="container">
+          <div class="row">
+            <div class="content">
+              <p>With its business surveys the ifo Institute collects data that are of great interest for empirical economic research both in Germany and abroad. Some long time-series are provided in Excel format for facilitating further processing by the user.</p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      
+              </div>
+    </div>
+      </div>
+
+
+  <section><div class="field--type-paragraph field-artikel-p">
+              <div class="item-scheduled-content item">  <div class="paragraph paragraph--type--scheduled-content paragraph--view-mode--default">
+      
+      <div class="field--type-paragraph field-scheduled-p">
+              <div class="item-linkliste item">        <div class="paragraph paragraph--type--linkliste paragraph--view-mode--default">
+                      <div class="linkliste iconize">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 content">
+        <h2 class="section-title-serif">
+          <div class="field-title">
+      ifo Business Survey
+  </div>
+        </h2>
+                  <ul class="link-list">
+<li>
+                <a href="/sites/default/files/secure/timeseries/gsk-e-202404.xlsx" class="type-intern">
+                  <div class="label">ifo Business Climate (April 2024)</div>
+                                  </a>
+              </li>
+                          <li>
+                <a href="/sites/default/files/secure/timeseries/export-e-202403.xlsx" class="type-intern">
+                  <div class="label">ifo Export Expectations (March 2024)</div>
+                                  </a>
+              </li>
+                          <li>
+                <a href="/sites/default/files/secure/timeseries/empl-e-202403.xlsx" class="type-intern">
+                  <div class="label">ifo Employment Barometer for Germany (March 2024)</div>
+                                  </a>
+              </li>
+                          <li>
+                <a href="/sites/default/files/secure/timeseries/ostd-e-202403.xlsx" class="type-intern">
+                  <div class="label">ifo Business Climate for Eastern Germany (March 2024)</div>
+                                  </a>
+              </li>
+                          <li>
+                <a href="/sites/default/files/secure/timeseries/ku-sachsen-202403-LR-en.xlsx" class="type-intern">
+                  <div class="label">ifo Business Climate Saxony (March 2024)</div>
+                                  </a>
+              </li>
+                      </ul>
+</div>
+    </div>
+  </div>
+</div>
+          </div>
+  </div>
+          </div>
+  
+    </div>
+</div>
+              <div class="item-linkliste item">        <div class="paragraph paragraph--type--linkliste paragraph--view-mode--default">
+                      <div class="linkliste iconize">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 content">
+        <h2 class="section-title-serif">
+          <div class="field-title">
+      Historical Time Series
+  </div>
+        </h2>
+                  <ul class="link-list">
+<li>
+                <a href="/sites/default/files/2020-01/ifo_Business_Survey_Historical_TimeSeries.xlsx" class="type-intern">
+                  <div class="label">ifo Business Survey: Historical Time Series for Western Germany (1960-1990)</div>
+                                  </a>
+              </li>
+                          <li>
+                <a href="/sites/default/files/2019-10/wes-world-e-2019q4.xlsx" class="type-intern">
+                  <div class="label">ifo World Economic Climate (1990-2019)</div>
+                                  </a>
+              </li>
+                          <li>
+                <a href="/sites/default/files/2019-10/wes-euro-e-2019q4.xlsx" class="type-intern">
+                  <div class="label">ifo Economic Climate for the Euro Area (1990-2019)</div>
+                                  </a>
+              </li>
+                      </ul>
+</div>
+    </div>
+  </div>
+</div>
+          </div>
+  </div>
+              <div class="item-scheduled-content item">  <div class="paragraph paragraph--type--scheduled-content paragraph--view-mode--default">
+      
+      <div class="field--type-paragraph field-scheduled-p">
+              <div class="item-linkliste item">        <div class="paragraph paragraph--type--linkliste paragraph--view-mode--default">
+                      <div class="linkliste iconize">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 content">
+        <h2 class="section-title-serif">
+          <div class="field-title">
+      More Time-series 
+  </div>
+        </h2>
+                  <ul class="link-list">
+<li>
+                <a href="/sites/default/files/secure/timeseries/exklima-e-202403.xlsx" class="type-intern">
+                  <div class="label">ifo Export Climate </div>
+                                  </a>
+              </li>
+                          <li>
+                <a href="/sites/default/files/secure/timeseries/imklima-e-202403.xlsx" class="type-intern">
+                  <div class="label">ifo Import Climate </div>
+                                  </a>
+              </li>
+                      </ul>
+</div>
+    </div>
+  </div>
+</div>
+          </div>
+  </div>
+          </div>
+  
+    </div>
+</div>
+              <div class="item-richtext item">        <div class="paragraph paragraph--type--richtext paragraph--view-mode--default iconize">
+      <div class="container">
+        <div class="row">
+          <div class="content">
+                          
+            <div class="field-text">
+<h3>Content</h3>
+
+<p><strong>ifo Business Climate </strong></p>
+
+<p>Germany:<br>
+Index (2015=100, seasonally adjusted): Business Climate, Business Situation, Business Expectations.<br>
+Balances (seasonally adjusted): Business Climate, Business Situation, Business Expectations.<br>
+ifo Dispersion (seasonally adjusted and three months moving average).</p>
+
+<p>Manufacturing, Services, Trade, Construction:<br>
+Balances (seasonally adjusted): Business Climate, Business Situation, Business Expectations.</p>
+
+<p><strong>ifo Business Climate for Eastern Germany</strong></p>
+
+<p>Index (2015=100, seasonally adjusted): Business Climate, Business Situation, Business Expectations.</p>
+
+<p><strong>ifo World Economic Climate<br>
+ifo Economic Climate for the Euro Area</strong></p>
+
+<p>Balances: Economic Climate Euro Area, Present Situation, Expectations next 6 months</p>
+
+<p><strong>ifo Export Climate</strong></p>
+
+<p>Ifo Export Climate (index values, seasonally-adjusted); Special trade exports (annual rate of change, real, seasonally-adjusted)</p>
+
+<p> </p>
+</div>
+      
+            
+                      </div>
+        </div>
+     </div>
+    </div>
+  </div>
+          </div>
+  
+  
+
+<div class="field-ansprechpartner">
+      <div class="paragraph paragraph--type--ansprechpartner paragraph--view-mode--default">
+      <div class="ansprechpartner">
+          <div class="container">
+                            <div class="section-title upper">Contact</div>
+              <div class="desc">
+                                </div>
+              <div class="field-personen">
+                  <div class="row">
+                                                                <div class="item col-lg-6 col-md-6">
+                          <div class="contextual-region teaser-kontakt">
+                              <div class="image">
+                                  <div class="field-image">
+                                      <div class="media-container">
+  
+  <div class="relative">
+          
+            <div class="blazy blazy--field blazy--field-media-image blazy--field-media-image--square-600 field-media-image" data-blazy="">    <div data-b-token="b-ab72c343607" class="media media--blazy media--image media--ratio media--ratio--11 is-b-loading">
+<div class="img-responsive ">
+  <img alt="Dr. Klaus Wohlrabe" decoding="async" class="media__element b-lazy" loading="lazy" data-src="https://www.ifo.de/sites/default/files/styles/1_to_1__600x600/public/2019-03/cvfoto-wohlrabe.jpg?h=43067cb4&amp;itok=Rzo6T2aC&amp;c=1689235846" src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%201%201'%2F%3E" width="600" height="600">
+</div>
+        </div>
+  </div>
+      
+      </div>
+</div>
+
+                                  </div>
+                              </div>
+                              <div class="content">
+                                  <h3 class="h3">
+                                    <span>
+                                      <a href="/en/wohlrabe-k">Dr. Klaus Wohlrabe</a>
+                                    </span>
+                                  </h3>
+                                  <div class="positionen">Deputy Director of the ifo Center for Macroeconomics and Surveys and Head of Surveys</div>
+                                  <div class="kontakt">
+                                      <dl>
+<dt>Tel</dt>
+                                          <dd>
+                                              <div class="field-telefonnummer">+49(0)89/9224-1229</div>
+                                          </dd>
+                                                                                                                          <dt>Fax</dt>
+                                          <dd>
+                                              <div class="field-fax">+49(0)89/9224-1463</div>
+                                          </dd>
+                                                                                                                          <dt>Mail</dt>
+                                          <dd>
+                                              <a href="mailto:"> </a>
+                                              <div class="field-email"><a href="mailto:wohlrabe@ifo.de">wohlrabe@ifo.de</a></div>
+                                          </dd>
+                                                                              </dl>
+</div>
+                              </div>
+                          </div>
+                      </div>
+                                                            </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+                                    
+<div class="field-anschluss-teaser">
+        <div class="paragraph paragraph--type--anschluss-teaser paragraph--view-mode--default iconize">
+      <div class="container">
+                <div class="section-title upper">You Might Also Be Interested In</div>
+        <div class="field-anschlussteaser row">
+                      <div class="col-lg-4 col-md-4">
+              <div class="contextual-region item-teaser">
+                <h4 class="h4">Artikel</h4>
+                <a href="/en/survey-results"><span>Survey Results</span></a>
+              </div>
+            </div>
+                      <div class="col-lg-4 col-md-4">
+              <div class="contextual-region item-teaser">
+                <h4 class="h4">Umfragereihe</h4>
+                <a href="/en/survey/ifo-business-climate-index-germany"><span>ifo Business Climate Index for Germany</span></a>
+              </div>
+            </div>
+                      <div class="col-lg-4 col-md-4">
+              <div class="contextual-region item-teaser">
+                <h4 class="h4">Artikel</h4>
+                <a href="/en/ordering-information-ifo-time-series"><span>Ordering information on ifo time series</span></a>
+              </div>
+            </div>
+                  </div>
+      </div>
+    </div>
+  </div>
+
+    
+  </section></article>
+</div>
+
+  <div id="block-seiteteilen" class="container">
+          
+            
+      <a class="btn btn-content btn-icon icon-share share-page" href="#">Share</a>
+      <ul class="share-list" data-short_url="" data-node_url="">
+<li><a class="icon icon-social--twitter twitter" href="#">Twitter/X</a></li>
+                  <li><a class="icon icon-social--linkedin linkedin" href="#">Linkedin</a></li>
+                  <li><a class="icon icon-social--xing xing" href="#">Xing</a></li>
+                  <li><a class="icon icon-copy-url copy-short-url" href="#">Copy short-URL</a></li>
+              </ul>
+<script>
+        backload.push(function(){
+          (function ($) {
+            var share_btn  = $('#block-seiteteilen').find('.share-page');
+            var share_list = $('#block-seiteteilen').find('.share-list');
+            share_btn.click(function(e) {
+              e.preventDefault();
+              if (!share_btn.hasClass('active')) {
+                share_btn.addClass('active');
+                share_list.addClass('active');
+              }
+              else {
+                share_btn.removeClass('active');
+                share_list.removeClass('active');
+              }
+
+              //schon beim öffnen short url laden
+              if ($(this).parent().find('.copy-short-url').length) {
+                var $csl = $(this).parent().find('.copy-short-url');
+                $csl.attr('data-short-url',window.location.href);
+                $.ajax({
+                	type: 'POST',
+                	url: '/ifomod/get-short-url',
+                	data: {'uri': window.location.pathname},
+                	dataType: 'json',
+                	async: true,
+                	success:function(res) {
+                    var link = window.location.href;
+
+                    if (res.node_url !== false) { // success
+                      // if (res.short_url != null) {
+                      //   link = window.location.protocol + '//' + window.location.host + res.short_url;
+                      // }
+                      // else if (res.node_url != null) {
+                      //   link = window.location.protocol + '//' + window.location.host + res.node_url;
+                      // }
+                      if (res.node_url != null) {
+                        link = window.location.protocol + '//' + window.location.host + res.node_url;
+                      }
+                		}
+
+                    $csl.attr('data-short-url',link);
+                    //console.log('set short url',link,$csl);
+                	}
+                });
+              }
+
+              share_list.find('a').click(function(e) {
+                e.preventDefault();
+                if ($(this).hasClass('copy-short-url')) {
+                  var tmp = $('<input>');
+                  $('body').append(tmp);
+
+                  var link = $(this).attr('data-short-url');
+                  tmp.val(link).select();
+                  document.execCommand('copy');
+                  tmp.remove();
+
+                  alert("Link " + link + " copied");
+                  // $.ajax({
+            			// 	type: 'POST',
+            			// 	url: '/ifomod/get-short-url',
+            			// 	data: {'uri': window.location.pathname},
+            			// 	dataType: 'json',
+            			// 	async: true,
+            			// 	success:function(res) {
+                  //     var link = window.location.href;
+                  //
+                  //     if (res.node_url !== false) { // success
+                  //       if (res.short_url != null) {
+                  //         link = window.location.protocol + '//' + window.location.host + res.short_url;
+                  //       }
+                  //       else if (res.node_url != null) {
+                  //         link = window.location.protocol + '//' + window.location.host + res.node_url;
+                  //       }
+            			// 		}
+                  //
+                  //     tmp.val(link).select();
+                  //     document.execCommand('copy');
+                  //     tmp.remove();
+                  //     alert("Link " + link + " copied");
+            			// 	}
+            			// });
+                }
+
+                var title = encodeURIComponent(document.title);
+                var url = window.location.href;
+                url = url.replace('http://ifo.dd:8083', 'https://www.ifo.de');
+                url = url.replace('http://cesifo.dd:8083', 'https://www.cesifo.org');
+                url = url.replace('http://ifo.dev.local', 'https://www.ifo.de');
+                url = url.replace('http://cesifo.dev.local', 'https://www.cesifo.org');
+                url = url.replace('test1.ifo.de:442', 'ifo.de');
+                url = url.replace('test1.cesifo.org:442', 'cesifo.org');
+                url = escape(url);
+
+                if ($(this).hasClass('twitter')) {
+                  window.open("https://twitter.com/share?url="+url+"&text="+title, '_blank');
+                  return false;
+                }
+                if ($(this).hasClass('linkedin')) {
+                  // window.open("https://www.linkedin.com/share?id="+escape(window.location.href)+"&title="+encodeURIComponent(document.title), '_blank');
+                  window.open("https://www.linkedin.com/shareArticle?mini=true&url="+url+"&title="+title, '_blank');
+                  return false;
+                }
+                if ($(this).hasClass('xing')) {
+                  window.open("https://www.xing.com/spi/shares/new?url="+url+"&title="+title, '_blank');
+                  return false;
+                }
+              });
+            });
+          })(jQuery);
+        });
+      </script>
+</div>
+
+  </div>
+
+    </div>
+  </main><footer role="contentinfo"><div class="footer-crosslinks">
+      <div class="container">
+          <div>
+    <nav role="navigation" aria-labelledby="block-schnellzugriff-menu" id="block-schnellzugriff"><div class="h2" id="block-schnellzugriff-menu">Quick Links</div>
+  
+
+        
+              <ul>
+<li>
+        <a href="/en/about-us/ifo-careers" title="Karriere" data-drupal-link-system-path="node/37892">Careers</a>
+              </li>
+          <li>
+        <a href="/en/experts" data-drupal-link-system-path="node/75289">Experts</a>
+              </li>
+          <li>
+        <a href="/en/events" title="Events" data-drupal-link-system-path="node/42062">Events</a>
+              </li>
+          <li>
+        <a href="/en/press" title="Presse" data-drupal-link-system-path="node/37849">Press</a>
+              </li>
+          <li>
+        <a href="/en/survey-results" title="Umfrageergebnisse" data-drupal-link-system-path="node/37848">Survey Results</a>
+              </li>
+          <li>
+        <a href="/en/economic-forecasts" data-drupal-link-system-path="node/43139">Economic Forecasts</a>
+              </li>
+          <li>
+        <a href="/en/project" title="Projekte des ifo Instituts" data-drupal-link-system-path="node/70577">Projects</a>
+              </li>
+        </ul></nav><nav role="navigation" aria-labelledby="block-folgensieuns-menu" id="block-folgensieuns"><div class="h2" id="block-folgensieuns-menu">Follow Us</div>
+  
+
+        
+              <ul>
+<li class="icon icon-social--twitter">
+        <a href="https://twitter.com/ifo_institut" target="_blank">Twitter/X</a>
+              </li>
+          <li class="icon icon-social--youtube">
+        <a href="https://www.youtube.com/user/ifoInstitut" target="_blank">Youtube</a>
+              </li>
+          <li class="icon icon-social--flickr">
+        <a href="https://www.flickr.com/photos/ifo_institut/" target="_blank">Flickr</a>
+              </li>
+          <li class="icon icon-social--linkedin">
+        <a href="https://www.linkedin.com/company/ifo-institute-for-economic-research" target="_blank">Linkedin</a>
+              </li>
+          <li class="icon icon-social--xing">
+        <a href="https://www.xing.com/companies/ifoinstitut-leibniz-institutf%C3%BCrwirtschaftsforschunganderunim%C3%BCnchene.v." target="_blank">Xing</a>
+              </li>
+        </ul></nav>
+</div>
+
+      </div>
+    </div>
+    
+        <div class="footer-partner">
+      <div class="container">
+          <div>
+    <div id="block-ifopartner" class="settings-tray-editable" data-drupal-settingstray="editable">
+  
+    
+      
+            <div class="body"><ul>
+<li><a href="https://www.cesifo.org/en/"><img alt="CESifo Network: Promoting Economic Research" src="/sites/default/files/examples/footer_cesifo.jpg" style="height:36px"></a></li>
+	<li><a href="https://www.en.ces.econ.uni-muenchen.de"><img alt="Center for Economic Studies (CES)" src="/sites/default/files/examples/footer_ces.jpg" style="height:36px"></a></li>
+	<li><a href="https://www.en.econ.uni-muenchen.de"><img alt="Department of Economics, Ludwig-Maximilians-University Munich" src="/sites/default/files/examples/footer_lmu.jpg" style="height:58px"></a></li>
+	<li><a href="https://www.leibniz-gemeinschaft.de/en.html"><img alt="Leibniz Association" src="/sites/default/files/examples/footer_leibniz_assoc.jpg" style="height:71px"></a></li>
+	<li><a href="https://www.econpol.eu/"><img alt="EconPol Europe – the European network for economic and fiscal policy research" src="/sites/default/files/examples/footer_econpol.jpg" style="height:66px"></a></li>
+</ul></div>
+      
+  </div>
+
+  </div>
+
+      </div>
+    </div>
+            <div class="footer">
+      <div class="container">
+          <div>
+    <nav role="navigation" aria-labelledby="block-fusszeile-menu" id="block-fusszeile" class="settings-tray-editable" data-drupal-settingstray="editable"><div class="h2 visually-hidden" id="block-fusszeile-menu">Fußzeile</div>
+  
+
+        
+              <ul>
+<li>
+        <a href="/en/imprint" data-drupal-link-system-path="node/37942">Imprint</a>
+              </li>
+          <li>
+        <a href="/en/privacy-policy" data-drupal-link-system-path="node/37944">Privacy Policy</a>
+              </li>
+          <li>
+        <span data-showconsentbanner="1" style="cursor:pointer">Cookies and Data</span>
+              </li>
+          <li>
+        <a href="/en/contact" data-drupal-link-system-path="node/37946">Contact</a>
+              </li>
+        </ul></nav><div id="block-copyright" class="settings-tray-editable" data-drupal-settingstray="editable">
+  
+    
+      
+            <div class="body">
+<p>© ifo Institute</p>
+</div>
+      
+  </div>
+
+  </div>
+
+      </div>
+    </div>
+      </footer>
+</div>
+  </div>
+
+    
+        <script type="application/json" data-drupal-selector="drupal-settings-json">{"path":{"baseUrl":"\/","scriptPath":null,"pathPrefix":"en\/","currentPath":"node\/42475","currentPathIsAdmin":false,"isFront":false,"currentLanguage":"en"},"pluralDelimiter":"\u0003","suppressDeprecationErrors":true,"ajaxPageState":{"libraries":"blazy\/blazy,blazy\/classlist,blazy\/load,blazy\/polyfill,blazy\/promise,blazy\/raf,blazy\/ratio,blazy\/webp,facets\/drupal.facets.dropdown-widget,facets\/drupal.facets.general,ifo\/global-script,ifo\/global-styling,ifo\/klaro,ifo\/vfi,ifomod\/ifomod,paragraphs\/drupal.paragraphs.unpublished,pingdom_rum\/pingdom_code,search_api_autocomplete\/search_api_autocomplete,search_api_glossary\/drupal.search_api_glossary.facet_css,system\/base","theme":"ifo","theme_token":null},"ajaxTrustedUrl":{"\/en\/suche":true},"blazy":{"loadInvisible":false,"offset":100,"saveViewportOffsetDelay":50,"validateDelay":25,"loader":true,"unblazy":false,"visibleClass":false},"blazyIo":{"disconnect":false,"rootMargin":"0px","threshold":[0,0.25,0.5,0.75,1]},"search_api_autocomplete":{"suche":{"delay":40,"auto_submit":true,"min_length":3}},"facets":{"dropdown_widget":{"inhaltstyp":{"facet-default-option-label":"Alle"},"typ":{"facet-default-option-label":"Alle"},"veranstaltungen":{"facet-default-option-label":"Alle"},"abgeschlossen":{"facet-default-option-label":"Alle"},"team":{"facet-default-option-label":"Alle"},"veroeffentlichungsjahr":{"facet-default-option-label":"Alle"},"autor":{"facet-default-option-label":"Alle"},"bereich":{"facet-default-option-label":"Alle"},"thema":{"facet-default-option-label":"Alle"},"netzwerkmitgliedtyp":{"facet-default-option-label":"Alle"}}},"user":{"uid":0,"permissionsHash":"d90b072f040f3c782cbac99dc97864e82912a3d8c3411bdb9936dbc58dc2c885"}}</script><script src="/sites/default/files/js/js_HJJdbMDJI1KHHHQyAZPBzIrLsLyUfwrdeR6vVk8K0dI.js?scope=footer&amp;delta=0&amp;language=en&amp;theme=ifo&amp;include=eJx9keFyhCAMhF_Ik0dyAkQvVyA0gJ59-nKKV51p-4vdL5tFBxrZs1W0HV2kMFn2gxSvDm3YYpfWlNErDQm7mlWTYw3ulvLqauyCjFDMG_lwILypeaROO_hald2OZra6xiFXk4_BKTQTLpHlGD1PI9YJZUZp1jHYJiO7dSTnmjUOUnKUjpIo7Ol9t8DY1II6vmEm7iIITALxnpSVEsH1P6QvIRZdW-9oO8OCikJGCTX0-Cwo61Bo58eq8CSY0g4zaA3a4e5e3_5IlziEwCUYvEBf92HCrvZEDolmHMhXoOABz-v6CyQEMfcBIg1QMhv20WFG9Qc_5-t71qtkPfp-GfUjGMyDqb-0qaQWslN9xeba5u56KxwtL-H2X2jCgALuG43bAUY"></script><script src="/themes/ifo/assets/js/config.js?v=1"></script><script src="/themes/ifo/assets/js/klaro-no-css.js?v=1"></script><script src="/themes/ifo/assets/js/video.min.js?v=1"></script><script src="/themes/ifo/assets/js/videojs-plugin-quality-selector.min.js?v=1"></script><script src="/themes/ifo/assets/js/videojs-markers-plugin.min.js?v=1"></script><script src="/themes/ifo/assets/js/vfi_ms.min.js?v=1"></script><script src="/sites/default/files/js/js_4lPAdAor2tgE0glrSYi7DTOGpDO9sCWtLv71HAYd_6Y.js?scope=footer&amp;delta=7&amp;language=en&amp;theme=ifo&amp;include=eJx9keFyhCAMhF_Ik0dyAkQvVyA0gJ59-nKKV51p-4vdL5tFBxrZs1W0HV2kMFn2gxSvDm3YYpfWlNErDQm7mlWTYw3ulvLqauyCjFDMG_lwILypeaROO_hald2OZra6xiFXk4_BKTQTLpHlGD1PI9YJZUZp1jHYJiO7dSTnmjUOUnKUjpIo7Ol9t8DY1II6vmEm7iIITALxnpSVEsH1P6QvIRZdW-9oO8OCikJGCTX0-Cwo61Bo58eq8CSY0g4zaA3a4e5e3_5IlziEwCUYvEBf92HCrvZEDolmHMhXoOABz-v6CyQEMfcBIg1QMhv20WFG9Qc_5-t71qtkPfp-GfUjGMyDqb-0qaQWslN9xeba5u56KxwtL-H2X2jCgALuG43bAUY"></script>
+</body>
+</html>
