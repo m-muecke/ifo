@@ -35,15 +35,15 @@ library(ifo)
 
 climate <- ifo_business()
 climate
-#> # A tibble: 1,386 × 6
-#>   yearmonth  uncertainty economic_expansion indicator   series  value
-#>   <date>           <dbl>              <dbl> <chr>       <chr>   <dbl>
-#> 1 2005-01-01          NA               83.1 climate     index    92.2
-#> 2 2005-01-01          NA               83.1 situation   index    87.4
-#> 3 2005-01-01          NA               83.1 expectation index    97.2
-#> 4 2005-01-01          NA               83.1 climate     balance   1.5
-#> 5 2005-01-01          NA               83.1 situation   balance  -0.9
-#> # ℹ 1,381 more rows
+#> # A tibble: 1,392 × 5
+#>   yearmonth  uncertainty indicator   series  value
+#>   <date>           <dbl> <chr>       <chr>   <dbl>
+#> 1 2005-01-01          NA climate     index    92.2
+#> 2 2005-01-01          NA situation   index    87.4
+#> 3 2005-01-01          NA expectation index    97.2
+#> 4 2005-01-01          NA climate     balance   1.5
+#> 5 2005-01-01          NA situation   balance  -0.8
+#> # ℹ 1,387 more rows
 ```
 
 <img src="man/figures/README-plotting-1.png" width="100%" />
