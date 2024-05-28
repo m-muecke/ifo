@@ -25,6 +25,6 @@ Return ifo expectation data
 \examples{
 \dontrun{
 export <- ifo_expectation("export")
-employment <- ifo_expectation("emplpoyment")
+employment <- ifo_expectation("employment")
 }
 }

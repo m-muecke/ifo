@@ -93,7 +93,7 @@ ifo_business <- function(type = c("germany", "sectors", "eastern", "saxony"),
 #' @examples
 #' \dontrun{
 #' export <- ifo_expectation("export")
-#' employment <- ifo_expectation("emplpoyment")
+#' employment <- ifo_expectation("employment")
 #' }
 ifo_expectation <- function(type = c("export", "employment")) {
   type <- match.arg(type)
