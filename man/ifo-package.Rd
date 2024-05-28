@@ -4,9 +4,9 @@
 \name{ifo-package}
 \alias{ifo}
 \alias{ifo-package}
-\title{ifo: ifo institute data fetching}
+\title{ifo: Client for the ifo Institute Time Series}
 \description{
-Download survey data from ifo institute \url{https://www.ifo.de/en/ifo-time-series}.
+Download ifo business survey data and more time series from ifo institute \url{https://www.ifo.de/en/ifo-time-series}.
 }
 \seealso{
 Useful links:
