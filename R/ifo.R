@@ -121,15 +121,18 @@ ifo_expectation <- function(type = c("export", "employment")) {
 #' @param type `character(1)` Defaults to `"import"`. One of:
 #'   * `"import"`: returns the ifo import climate.
 #'   * `"export"`: returns the ifo export climate.
+#'   * `"world"`: returns the ifo world economic climate.
+#'   * `"euro"`: returns the ifo world economic climate for the euro zone.
 #' @returns A `data.frame()` containing the monthly ifo climate time series.
-#' @references `r format_bib("grimme2018ifo", "grimme2021forecasting")`
+#' @references
+#' `r format_bib("grimme2018ifo", "grimme2021forecasting")`
 #' @export
 #' @examples
 #' \dontrun{
 #' import <- ifo_climate("import")
 #' export <- ifo_climate("export")
 #' }
-ifo_climate <- function(type = c("import", "export")) {
+ifo_climate <- function(type = c("import", "export", "world", "euro")) {
   type <- match.arg(type)
   if (type == "import") {
     ifo_download(
@@ -138,38 +141,23 @@ ifo_climate <- function(type = c("import", "export")) {
       col_names = c("yearmonth", "climate"),
       col_types = c("date", "numeric")
     )
-  } else {
+  } else if (type == "export") {
     ifo_download(
       type = "export_climate",
       skip = 10L,
       col_names = c("yearmonth", "ifo_climate", "special_trade"),
       col_types = c("date", "numeric", "numeric")
     )
+  } else {
+    ifo_download(
+      type = type,
+      skip = 11L,
+      col_names = c(
+        "yearmonth", "economic_climate", "present_situation", "expectation"
+      ),
+      col_types = c("text", rep("numeric", 3L))
+    )
   }
-}
-
-#' Return ifo World Economic Climate data
-#'
-#' @param type `character(1)` Defaults to `"world"`. One of:
-#'   * `"world"`: returns the ifo world economic climate.
-#'   * `"euro"`: returns the ifo world economic climate for the euro zone.
-#' @returns A `data.frame()` containing the quarterly ifo climate time series.
-#' @inherit ifo_business source
-#' @examples
-#' \dontrun{
-#' world <- ifo_world_climate("world")
-#' euro <- ifo_world_climate("euro")
-#' }
-ifo_world_climate <- function(type = c("world", "euro")) {
-  type <- match.arg(type)
-  ifo_download(
-    type = type,
-    skip = 11L,
-    col_names = c(
-      "yearmonth", "economic_climate", "present_situation", "expectation"
-    ),
-    col_types = c("text", rep("numeric", 3L))
-  )
 }
 
 ifo_download <- function(type, ...) {
