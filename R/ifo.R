@@ -27,9 +27,9 @@ ifo_business <- function(type = c("germany", "sectors", "eastern", "saxony"),
         "yearmonth",
         "climate_index", "situation_index", "expectation_index",
         "climate_balance", "situation_balance", "expectation_balance",
-        "uncertainty"
+        "uncertainty", "economic_expansion"
       )
-      col_types <- c("text", rep("numeric", 7L))
+      col_types <- c("text", rep("numeric", 8L))
     },
     sectors = {
       sheet <- 2L
