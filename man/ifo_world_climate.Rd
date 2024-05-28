@@ -3,6 +3,9 @@
 \name{ifo_world_climate}
 \alias{ifo_world_climate}
 \title{Return ifo World Economic Climate data}
+\source{
+\url{https://www.ifo.de/en/ifo-time-series}
+}
 \usage{
 ifo_world_climate(type = c("world", "euro"))
 }
@@ -24,7 +27,4 @@ Return ifo World Economic Climate data
 world <- ifo_world_climate("world")
 euro <- ifo_world_climate("euro")
 }
-}
-\references{
-\url{https://www.ifo.de/en/ifo-time-series}
 }

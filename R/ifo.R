@@ -8,7 +8,7 @@
 #' @param long_format `logical(1)` if `TRUE` return the data in long format.
 #'   Only applies to `type` `"germany"` and `"sectors"`. Default `TRUE`.
 #' @returns A `data.frame()` containing the monthly ifo business climate time series.
-#' @references <https://www.ifo.de/en/ifo-time-series>
+#' @source <https://www.ifo.de/en/ifo-time-series>
 #' @seealso The [vignette](https://m-muecke.github.io/ifo/articles/publication.html) for
 #'   a reproducible example.
 #' @export
@@ -88,7 +88,7 @@ ifo_business <- function(type = c("germany", "sectors", "eastern", "saxony"),
 #'   * `"export"`: returns the ifo export expectations for manufacturing.
 #'   * `"employment"`: returns the ifo employment barometer for Germany.
 #' @returns A `data.frame()` containing the monthly ifo expectation time series.
-#' @inherit ifo_business references
+#' @inherit ifo_business source
 #' @export
 #' @examples
 #' \dontrun{
@@ -154,7 +154,7 @@ ifo_climate <- function(type = c("import", "export")) {
 #'   * `"world"`: returns the ifo world economic climate.
 #'   * `"euro"`: returns the ifo world economic climate for the euro zone.
 #' @returns A `data.frame()` containing the quarterly ifo climate time series.
-#' @inherit ifo_business references
+#' @inherit ifo_business source
 #' @examples
 #' \dontrun{
 #' world <- ifo_world_climate("world")

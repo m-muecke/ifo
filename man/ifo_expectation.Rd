@@ -3,6 +3,9 @@
 \name{ifo_expectation}
 \alias{ifo_expectation}
 \title{Return ifo expectation data}
+\source{
+\url{https://www.ifo.de/en/ifo-time-series}
+}
 \usage{
 ifo_expectation(type = c("export", "employment"))
 }
@@ -24,7 +27,4 @@ Return ifo expectation data
 export <- ifo_expectation("export")
 employment <- ifo_expectation("emplpoyment")
 }
-}
-\references{
-\url{https://www.ifo.de/en/ifo-time-series}
 }

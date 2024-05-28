@@ -3,6 +3,9 @@
 \name{ifo_business}
 \alias{ifo_business}
 \title{Return ifo business climate data}
+\source{
+\url{https://www.ifo.de/en/ifo-time-series}
+}
 \usage{
 ifo_business(
   type = c("germany", "sectors", "eastern", "saxony"),
@@ -32,9 +35,6 @@ Return ifo business climate data
 germany <- ifo_business()
 sectors <- ifo_business("sectors")
 }
-}
-\references{
-\url{https://www.ifo.de/en/ifo-time-series}
 }
 \seealso{
 The \href{https://m-muecke.github.io/ifo/articles/publication.html}{vignette} for
