@@ -23,8 +23,7 @@ A \code{data.frame()} containing the monthly ifo expectation time series.
 Return ifo expectation data
 }
 \examples{
-\dontrun{
-export <- ifo_expectation("export")
-employment <- ifo_expectation("employment")
+\donttest{
+ifo_expectation("export")
 }
 }

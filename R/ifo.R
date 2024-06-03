@@ -13,9 +13,8 @@
 #'   a reproducible example.
 #' @export
 #' @examples
-#' \dontrun{
-#' germany <- ifo_business()
-#' sectors <- ifo_business("sectors")
+#' \donttest{
+#' ifo_business("germany")
 #' }
 ifo_business <- function(type = c("germany", "sectors", "eastern", "saxony"),
                          long_format = TRUE) {
@@ -92,9 +91,8 @@ ifo_business <- function(type = c("germany", "sectors", "eastern", "saxony"),
 #' @inherit ifo_business source
 #' @export
 #' @examples
-#' \dontrun{
-#' export <- ifo_expectation("export")
-#' employment <- ifo_expectation("employment")
+#' \donttest{
+#' ifo_expectation("export")
 #' }
 ifo_expectation <- function(type = c("export", "employment")) {
   type <- match.arg(type)
@@ -129,9 +127,8 @@ ifo_expectation <- function(type = c("export", "employment")) {
 #' `r format_bib("grimme2018ifo", "grimme2021forecasting")`
 #' @export
 #' @examples
-#' \dontrun{
-#' import <- ifo_climate("import")
-#' export <- ifo_climate("export")
+#' \donttest{
+#' ifo_climate("import")
 #' }
 ifo_climate <- function(type = c("import", "export", "world", "euro")) {
   type <- match.arg(type)

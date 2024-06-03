@@ -31,9 +31,8 @@ A \code{data.frame()} containing the monthly ifo business climate time series.
 Return ifo business climate data
 }
 \examples{
-\dontrun{
-germany <- ifo_business()
-sectors <- ifo_business("sectors")
+\donttest{
+ifo_business("germany")
 }
 }
 \seealso{

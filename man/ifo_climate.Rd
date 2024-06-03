@@ -22,9 +22,8 @@ A \code{data.frame()} containing the monthly ifo climate time series.
 Return ifo climate data
 }
 \examples{
-\dontrun{
-import <- ifo_climate("import")
-export <- ifo_climate("export")
+\donttest{
+ifo_climate("import")
 }
 }
 \references{
