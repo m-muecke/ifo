@@ -9,7 +9,7 @@
 #'   Only applies to `type` `"germany"` and `"sectors"`. Default `TRUE`.
 #' @returns A `data.frame()` containing the monthly ifo business climate time series.
 #' @source <https://www.ifo.de/en/ifo-time-series>
-#' @seealso The [vignette](https://m-muecke.github.io/ifo/articles/publication.html) for
+#' @seealso The [article](https://m-muecke.github.io/ifo/articles/publication.html) for
 #'   a reproducible example.
 #' @export
 #' @examples

@@ -36,6 +36,6 @@ ifo_business("germany")
 }
 }
 \seealso{
-The \href{https://m-muecke.github.io/ifo/articles/publication.html}{vignette} for
+The \href{https://m-muecke.github.io/ifo/articles/publication.html}{article} for
 a reproducible example.
 }
