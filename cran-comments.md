@@ -2,4 +2,5 @@
 
 0 errors | 0 warnings | 1 note
 
-* This is a new release.
+* Replaced dontrun with donttest in examples.
+* Removed quotes in DESCRIPTION title.
