@@ -4,7 +4,7 @@
 \name{ifo-package}
 \alias{ifo}
 \alias{ifo-package}
-\title{ifo: Client for the ifo Institute Time Series}
+\title{ifo: Client for the Ifo Institute Time Series}
 \description{
 Download ifo business survey data and more time series from ifo institute \url{https://www.ifo.de/en/ifo-time-series}.
 }
