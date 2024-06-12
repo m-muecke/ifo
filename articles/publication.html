@@ -82,6 +82,20 @@
     
 <p>This article demonstrates how to access the ifo Business Climate data
 and reproduce some of the plots from the ifo <a href="https://www.ifo.de/en/survey/ifo-business-climate-index-germany" class="external-link">website</a>.</p>
+<p>The ifo Business Climate is derived from approximately 9,000 monthly
+responses collected from businesses across manufacturing, services,
+trade, and construction sectors. Companies are asked to evaluate their
+current business conditions and forecast their expectations for the next
+six months. They can describe their current situation as either “good,”
+“satisfactory,” or “poor,” and their expectations for the coming six
+months as “more favorable,” “unchanged,” or “less favorable.”</p>
+<p>The balance value for the current business situation is calculated as
+the difference between the percentages of responses indicating “good”
+and “poor,” while the balance value for expectations is the difference
+between the percentages of “more favorable” and “less favorable”
+responses. The overall business climate index is a transformed average
+of these balance values. To calculate the index values, the transformed
+balances are normalized to the average of the year 2015.</p>
 <div class="section level3">
 <h3 id="creating-a-new-theme">Creating a new theme<a class="anchor" aria-label="anchor" href="#creating-a-new-theme"></a>
 </h3>
@@ -145,9 +159,7 @@ package.</p>
 <h3 id="ifo-business-climate-by-sector">ifo Business Climate by Sector<a class="anchor" aria-label="anchor" href="#ifo-business-climate-by-sector"></a>
 </h3>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">sectors</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ifo_business.html">ifo_business</a></span><span class="op">(</span><span class="st">"sectors"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">sectors</span> <span class="op">|&gt;</span></span>
+<code class="sourceCode R"><span><span class="va">sectors</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ifo_business.html">ifo_business</a></span><span class="op">(</span><span class="st">"sectors"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span></span>
 <span>    <span class="va">series</span> <span class="op">==</span> <span class="st">"balance"</span>,</span>
 <span>    <span class="va">sector</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"manufacturing"</span>, <span class="st">"services"</span>, <span class="st">"trade"</span>, <span class="st">"construction"</span><span class="op">)</span>,</span>
@@ -157,8 +169,9 @@ package.</p>
 <span>    sector <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">sector</span>,</span>
 <span>      levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"manufacturing"</span>, <span class="st">"services"</span>, <span class="st">"trade"</span>, <span class="st">"construction"</span><span class="op">)</span></span>
 <span>    <span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">yearmonth</span>, y <span class="op">=</span> <span class="va">value</span>, color <span class="op">=</span> <span class="va">indicator</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">sectors</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">yearmonth</span>, y <span class="op">=</span> <span class="va">value</span>, color <span class="op">=</span> <span class="va">indicator</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">sector</span>,</span>
 <span>    labeller <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labeller.html" class="external-link">labeller</a></span><span class="op">(</span>sector <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
