@@ -13,6 +13,22 @@ knitr::opts_chunk$set(
 
 This article demonstrates how to access the ifo Business Climate data and reproduce some of the plots from the ifo [website](https://www.ifo.de/en/survey/ifo-business-climate-index-germany).
 
+The ifo Business Climate is derived from approximately 9,000 monthly responses
+collected from businesses across manufacturing, services, trade, and construction
+sectors.
+Companies are asked to evaluate their current business conditions and forecast their
+expectations for the next six months.
+They can describe their current situation as either "good," "satisfactory," or "poor,"
+and their expectations for the coming six months as "more favorable," "unchanged," or
+"less favorable."
+
+The balance value for the current business situation is calculated as the difference
+between the percentages of responses indicating "good" and "poor," while the balance
+value for expectations is the difference between the percentages of "more favorable"
+and "less favorable" responses.
+The overall business climate index is a transformed average of these balance values.
+To calculate the index values, the transformed balances are normalized to the average of the year 2015.
+
 ### Creating a new theme
 
 We will start with creating a theme that is somewhat similar to the style of the ifo website.
@@ -73,9 +89,7 @@ climate |>
 ### ifo Business Climate by Sector
 
 ```{r sector, dpi = 300}
-sectors <- ifo_business("sectors")
-
-sectors |>
+sectors <- ifo_business("sectors") |>
   filter(
     series == "balance",
     sector %in% c("manufacturing", "services", "trade", "construction"),
@@ -85,8 +99,9 @@ sectors |>
     sector = factor(sector,
       levels = c("manufacturing", "services", "trade", "construction")
     )
-  ) |>
-  ggplot(aes(x = yearmonth, y = value, color = indicator)) +
+  )
+
+ggplot(sectors, aes(x = yearmonth, y = value, color = indicator)) +
   geom_line() +
   facet_wrap(~sector,
     labeller = labeller(sector = c(
