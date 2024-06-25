@@ -11,7 +11,8 @@ knitr::opts_chunk$set(
 )
 ```
 
-This article demonstrates how to access the ifo Business Climate data and reproduce some of the plots from the ifo [website](https://www.ifo.de/en/survey/ifo-business-climate-index-germany).
+This article demonstrates how to access the ifo Business Climate data and reproduce
+some of the plots from the ifo [website](https://www.ifo.de/en/survey/ifo-business-climate-index-germany).
 
 The ifo Business Climate is derived from approximately 9,000 monthly responses
 collected from businesses across manufacturing, services, trade, and construction
@@ -27,7 +28,8 @@ between the percentages of responses indicating "good" and "poor," while the bal
 value for expectations is the difference between the percentages of "more favorable"
 and "less favorable" responses.
 The overall business climate index is a transformed average of these balance values.
-To calculate the index values, the transformed balances are normalized to the average of the year 2015.
+To calculate the index values, the transformed balances are normalized to the average
+of the year 2015.
 
 ### Creating a new theme
 
