@@ -1,42 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://m-muecke.github.io/ifo/404.html</loc>
-  </url>
-  <url>
-    <loc>https://m-muecke.github.io/ifo/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://m-muecke.github.io/ifo/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://m-muecke.github.io/ifo/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://m-muecke.github.io/ifo/articles/publication.html</loc>
-  </url>
-  <url>
-    <loc>https://m-muecke.github.io/ifo/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://m-muecke.github.io/ifo/index.html</loc>
-  </url>
-  <url>
-    <loc>https://m-muecke.github.io/ifo/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://m-muecke.github.io/ifo/reference/ifo-package.html</loc>
-  </url>
-  <url>
-    <loc>https://m-muecke.github.io/ifo/reference/ifo_business.html</loc>
-  </url>
-  <url>
-    <loc>https://m-muecke.github.io/ifo/reference/ifo_climate.html</loc>
-  </url>
-  <url>
-    <loc>https://m-muecke.github.io/ifo/reference/ifo_expectation.html</loc>
-  </url>
-  <url>
-    <loc>https://m-muecke.github.io/ifo/reference/index.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://m-muecke.github.io/ifo/404.html</loc></url>
+<url><loc>https://m-muecke.github.io/ifo/LICENSE-text.html</loc></url>
+<url><loc>https://m-muecke.github.io/ifo/LICENSE.html</loc></url>
+<url><loc>https://m-muecke.github.io/ifo/articles/index.html</loc></url>
+<url><loc>https://m-muecke.github.io/ifo/articles/publication.html</loc></url>
+<url><loc>https://m-muecke.github.io/ifo/authors.html</loc></url>
+<url><loc>https://m-muecke.github.io/ifo/index.html</loc></url>
+<url><loc>https://m-muecke.github.io/ifo/news/index.html</loc></url>
+<url><loc>https://m-muecke.github.io/ifo/reference/ifo-package.html</loc></url>
+<url><loc>https://m-muecke.github.io/ifo/reference/ifo_business.html</loc></url>
+<url><loc>https://m-muecke.github.io/ifo/reference/ifo_climate.html</loc></url>
+<url><loc>https://m-muecke.github.io/ifo/reference/ifo_expectation.html</loc></url>
+<url><loc>https://m-muecke.github.io/ifo/reference/index.html</loc></url>
 </urlset>
+
