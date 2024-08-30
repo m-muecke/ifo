@@ -43,7 +43,7 @@ library(ifo)
 
 climate <- ifo_business()
 climate
-#> # A tibble: 1,404 × 6
+#> # A tibble: 1,416 × 6
 #>   yearmonth  uncertainty economic_expansion indicator   series  value
 #>   <date>           <dbl>              <dbl> <chr>       <chr>   <dbl>
 #> 1 2005-01-01          NA               83.1 climate     index    92.2
@@ -51,7 +51,7 @@ climate
 #> 3 2005-01-01          NA               83.1 expectation index    97.2
 #> 4 2005-01-01          NA               83.1 climate     balance   1.5
 #> 5 2005-01-01          NA               83.1 situation   balance  -0.8
-#> # ℹ 1,399 more rows
+#> # ℹ 1,411 more rows
 ```
 
 <img src="man/figures/README-plotting-1.png" width="100%" />
