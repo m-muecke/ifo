@@ -1,8 +1,6 @@
 test_that("ifo_url() returns expected result", {
   local_mocked_bindings(
-    read_html = function(x) {
-      xml2::read_html(test_path("fixtures", "ifo-time-series.html"))
-    }
+    read_html = \(x) rvest::read_html(test_path("fixtures", "ifo-time-series.html"))
   )
   expected <- "https://www.ifo.de/sites/default/files/secure/timeseries/gsk-e-202404.xlsx" # nolint
   expect_identical(ifo_url("germany"), expected)
