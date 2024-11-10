@@ -3,7 +3,7 @@ pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   articles/publication: publication.html
-last_built: 2024-11-04T23:51Z
+last_built: 2024-11-10T17:41Z
 urls:
   reference: https://m-muecke.github.io/ifo/reference
   article: https://m-muecke.github.io/ifo/articles
