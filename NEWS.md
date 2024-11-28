@@ -1,4 +1,4 @@
-# ifo (development version)
+# ifo 0.2.0
 
 * Move to curl package for HTTP requests.
 
