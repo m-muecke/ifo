@@ -162,7 +162,7 @@ ifo_download <- function(type, ...) {
   url <- ifo_url(type)
   tf <- tempfile(fileext = ".xlsx")
   on.exit(unlink(tf), add = TRUE)
-  utils::download.file(url, destfile = tf, quiet = TRUE, mode = "wb")
+  curl::curl_download(url, tf)
   res <- readxl::read_xlsx(tf, ...)
   if (inherits(res$yearmonth, "POSIXct")) {
     res$yearmonth <- as.Date(format(res$yearmonth, "%Y-%m-01"))

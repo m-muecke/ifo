@@ -12,6 +12,7 @@ BugReports: https://github.com/m-muecke/ifo/issues
 Depends:
     R (>= 4.1.0)
 Imports:
+    curl,
     readxl,
     rvest,
     tidyr,
