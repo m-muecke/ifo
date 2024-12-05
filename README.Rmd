@@ -30,7 +30,7 @@ Feel free to open an issue if you have any suggestions.
 
 ## Installation
 
-You can install the released version of **ifo** from [CRAN](https://CRAN.R-project.org) with:
+You can install the released version of ifo from [CRAN](https://CRAN.R-project.org) with:
 
 ```{r, eval = FALSE}
 install.packages("ifo")

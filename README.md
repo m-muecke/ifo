@@ -22,7 +22,7 @@ suggestions.
 
 ## Installation
 
-You can install the released version of **ifo** from
+You can install the released version of ifo from
 [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
