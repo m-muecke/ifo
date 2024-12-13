@@ -13,7 +13,7 @@ ifo_business(
 )
 }
 \arguments{
-\item{type}{\code{character(1)} Defaults to \code{"germany"}. One of:
+\item{type}{(\code{character(1)}) Defaults to \code{"germany"}. One of:
 \itemize{
 \item \code{"germany"}: returns the ifo business climate index for Germany.
 \item \code{"sectors"}: returns the ifo business climate index for different sectors.
@@ -21,7 +21,7 @@ ifo_business(
 \item \code{"saxony"}: returns the ifo business climate index for Saxony.
 }}
 
-\item{long_format}{\code{logical(1)} if \code{TRUE} return the data in long format.
+\item{long_format}{(\code{logical(1)}) If \code{TRUE} return the data in long format.
 Only applies to \code{type} \code{"germany"} and \code{"sectors"}. Default \code{TRUE}.}
 }
 \value{

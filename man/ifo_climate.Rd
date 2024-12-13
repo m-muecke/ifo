@@ -7,7 +7,7 @@
 ifo_climate(type = c("import", "export", "world", "euro"))
 }
 \arguments{
-\item{type}{\code{character(1)} Defaults to \code{"import"}. One of:
+\item{type}{(\code{character(1)}) Defaults to \code{"import"}. One of:
 \itemize{
 \item \code{"import"}: returns the ifo import climate.
 \item \code{"export"}: returns the ifo export climate.
