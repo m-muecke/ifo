@@ -18,8 +18,7 @@ repos:
           - data.table
           - readxl
           - rvest
-      # disable for now since it only supports imports and suggests
-      # - id: deps-in-desc
+      - id: deps-in-desc
       - id: no-browser-statement
       - id: no-debug-statement
       - id: parsable-R
