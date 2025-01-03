@@ -66,7 +66,7 @@
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A <code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame()</a></code> containing the monthly ifo climate time series.</p>
+    <p>A <code>data.table()</code> containing the monthly ifo climate time series.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
@@ -82,20 +82,19 @@
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="fu">ifo_climate</span><span class="op">(</span><span class="st">"import"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 358 × 2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    yearmonth   climate</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 1995-01-01  0.321  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 1995-02-01  0.508  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 1995-03-01  0.124  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 1995-04-01  0.277  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 1995-05-01  0.368  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 1995-06-01 -<span style="color: #BB0000;">0.040</span><span style="color: #BB0000; text-decoration: underline;">8</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 1995-07-01  0.007<span style="text-decoration: underline;">96</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 1995-08-01 -<span style="color: #BB0000;">0.060</span><span style="color: #BB0000; text-decoration: underline;">8</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 1995-09-01 -<span style="color: #BB0000;">0.246</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 1995-10-01 -<span style="color: #BB0000;">0.440</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 348 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       yearmonth    climate</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          &lt;Date&gt;      &lt;num&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1: 1995-01-01  0.3239583</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   2: 1995-02-01  0.5118007</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   3: 1995-03-01  0.1268307</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   4: 1995-04-01  0.2782668</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   5: 1995-05-01  0.3682599</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ---                      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 355: 2024-07-01 -0.5901895</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 356: 2024-08-01 -0.5453043</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 357: 2024-09-01 -0.4203205</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 358: 2024-10-01 -0.6329148</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 359: 2024-11-01 -0.4981284</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
