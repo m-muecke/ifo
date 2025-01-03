@@ -130,6 +130,7 @@ package.</p>
 <span><span class="va">climate</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ifo_business.html">ifo_business</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">climate</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/setDT.html" class="external-link">setDT</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="va">_</span><span class="op">[</span><span class="va">series</span> <span class="op">==</span> <span class="st">"index"</span><span class="op">]</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">yearmonth</span>, y <span class="op">=</span> <span class="va">value</span>, color <span class="op">=</span> <span class="va">indicator</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
@@ -155,6 +156,7 @@ package.</p>
 </h3>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sectors</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ifo_business.html">ifo_business</a></span><span class="op">(</span><span class="st">"sectors"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/setDT.html" class="external-link">setDT</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="va">_</span><span class="op">[</span></span>
 <span>    <span class="va">series</span> <span class="op">==</span> <span class="st">"balance"</span> <span class="op">&amp;</span></span>
 <span>      <span class="va">sector</span> <span class="op"><a href="https://rdrr.io/pkg/data.table/man/chmatch.html" class="external-link">%chin%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"manufacturing"</span>, <span class="st">"services"</span>, <span class="st">"trade"</span>, <span class="st">"construction"</span><span class="op">)</span> <span class="op">&amp;</span></span>
@@ -197,6 +199,7 @@ package.</p>
 </h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">climate</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/setDT.html" class="external-link">setDT</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="va">_</span><span class="op">[</span>, <span class="fu">.</span><span class="op">(</span><span class="va">yearmonth</span>, <span class="va">uncertainty</span><span class="op">)</span><span class="op">]</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html" class="external-link">na.omit</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">yearmonth</span>, y <span class="op">=</span> <span class="va">uncertainty</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
