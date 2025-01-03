@@ -42,20 +42,14 @@ pak::pak("m-muecke/ifo")
 library(ifo)
 
 climate <- ifo_business()
-climate
-#>        yearmonth uncertainty economic_expansion   indicator  series value
-#>           <Date>       <num>              <num>      <char>  <char> <num>
-#>    1: 2005-01-01          NA           83.10000     climate   index  92.2
-#>    2: 2005-02-01          NA           50.40000     climate   index  91.9
-#>    3: 2005-03-01          NA            4.90000     climate   index  90.1
-#>    4: 2005-04-01          NA           18.70000     climate   index  89.9
-#>    5: 2005-05-01          NA           11.70000     climate   index  89.4
-#>   ---                                                                    
-#> 1436: 2024-08-01        64.8           20.80000 expectation balance -18.1
-#> 1437: 2024-09-01        65.7            9.35941 expectation balance -18.7
-#> 1438: 2024-10-01        66.2           39.98913 expectation balance -16.7
-#> 1439: 2024-11-01        65.9           23.17931 expectation balance -17.5
-#> 1440: 2024-12-01        66.6           13.01194 expectation balance -23.0
+head(climate)
+#>    yearmonth uncertainty economic_expansion indicator series value
+#> 1 2005-01-01          NA               83.1   climate  index  92.2
+#> 2 2005-02-01          NA               50.4   climate  index  91.9
+#> 3 2005-03-01          NA                4.9   climate  index  90.1
+#> 4 2005-04-01          NA               18.7   climate  index  89.9
+#> 5 2005-05-01          NA               11.7   climate  index  89.4
+#> 6 2005-06-01          NA               32.1   climate  index  89.4
 ```
 
 <img src="man/figures/README-plotting-1.png" width="100%" />

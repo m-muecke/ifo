@@ -49,7 +49,7 @@ pak::pak("m-muecke/ifo")
 library(ifo)
 
 climate <- ifo_business()
-climate
+head(climate)
 ```
 
 ```{r plotting, message = FALSE, echo = FALSE, dpi = 300}

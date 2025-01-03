@@ -68,6 +68,7 @@ library(ifo)
 climate <- ifo_business()
 
 climate |>
+  setDT() |>
   _[series == "index"] |>
   ggplot(aes(x = yearmonth, y = value, color = indicator)) +
   geom_line() +
@@ -92,6 +93,7 @@ climate |>
 
 ```{r sector, dpi = 300}
 sectors <- ifo_business("sectors") |>
+  setDT() |>
   _[
     series == "balance" &
       sector %chin% c("manufacturing", "services", "trade", "construction") &
@@ -133,6 +135,7 @@ ggplot(sectors, aes(x = yearmonth, y = value, color = indicator)) +
 
 ```{r uncertainty, dpi = 300}
 climate |>
+  setDT() |>
   _[, .(yearmonth, uncertainty)] |>
   na.omit() |>
   ggplot(aes(x = yearmonth, y = uncertainty)) +
