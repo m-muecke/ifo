@@ -1,12 +1,6 @@
 #' @keywords internal
+#' @import data.table
+#' @importFrom rvest html_attr html_element html_elements read_html
 "_PACKAGE"
-
-## usethis namespace: start
-#' @importFrom rvest html_attr
-#' @importFrom rvest html_element
-#' @importFrom rvest html_elements
-#' @importFrom rvest read_html
-## usethis namespace: end
-NULL
 
 utils::globalVariables(c("climate_index", "expectation_balance", "yearmonth"))

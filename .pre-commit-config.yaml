@@ -15,9 +15,9 @@ repos:
     hooks:
       - id: roxygenize
         additional_dependencies:
+          - data.table
           - readxl
           - rvest
-          - tidyr
       # disable for now since it only supports imports and suggests
       # - id: deps-in-desc
       - id: no-browser-statement

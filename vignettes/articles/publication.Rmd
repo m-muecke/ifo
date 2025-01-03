@@ -62,13 +62,12 @@ theme_ifo <- function(...) {
 ### ifo Business Climate Germany
 
 ```{r climate, message = FALSE, dpi = 300}
-library(dplyr)
 library(ifo)
 
 climate <- ifo_business()
 
 climate |>
-  filter(series == "index") |>
+  _[series == "index"] |>
   ggplot(aes(x = yearmonth, y = value, color = indicator)) +
   geom_line() +
   labs(
@@ -92,16 +91,14 @@ climate |>
 
 ```{r sector, dpi = 300}
 sectors <- ifo_business("sectors") |>
-  filter(
-    series == "balance",
-    sector %in% c("manufacturing", "services", "trade", "construction"),
-    yearmonth >= "2020-01-01"
-  ) |>
-  mutate(
-    sector = factor(sector,
+  _[
+    series == "balance" &
+      sector %chin% c("manufacturing", "services", "trade", "construction") &
+      yearmonth >= "2020-01-01",
+    sector := factor(sector,
       levels = c("manufacturing", "services", "trade", "construction")
     )
-  )
+  ]
 
 ggplot(sectors, aes(x = yearmonth, y = value, color = indicator)) +
   geom_line() +
@@ -135,8 +132,8 @@ ggplot(sectors, aes(x = yearmonth, y = value, color = indicator)) +
 
 ```{r uncertainty, dpi = 300}
 climate |>
-  select(yearmonth, uncertainty) |>
-  tidyr::drop_na() |>
+  _[, .(yearmonth, uncertainty)] |>
+  na.omit() |>
   ggplot(aes(x = yearmonth, y = uncertainty)) +
   geom_line() +
   labs(
