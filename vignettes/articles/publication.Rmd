@@ -62,6 +62,7 @@ theme_ifo <- function(...) {
 ### ifo Business Climate Germany
 
 ```{r climate, message = FALSE, dpi = 300}
+library(data.table)
 library(ifo)
 
 climate <- ifo_business()
