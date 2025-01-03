@@ -7,7 +7,8 @@
 #'   * `"saxony"`: returns the ifo business climate index for Saxony.
 #' @param long_format (`logical(1)`) If `TRUE` return the data in long format.
 #'   Only applies to `type` `"germany"` and `"sectors"`. Default `TRUE`.
-#' @returns A [data.table()] containing the monthly ifo business climate time series.
+#' @returns A [data.table::data.table()] containing the monthly ifo business climate
+#'   time series.
 #' @source <https://www.ifo.de/en/ifo-time-series>
 #' @seealso The [article](https://m-muecke.github.io/ifo/articles/publication.html) for
 #'   a reproducible example.
@@ -87,7 +88,8 @@ ifo_business <- function(type = c("germany", "sectors", "eastern", "saxony"),
 #' @param type (`character(1)`) Defaults to `"employment"`. One of:
 #'   * `"export"`: returns the ifo export expectations for manufacturing.
 #'   * `"employment"`: returns the ifo employment barometer for Germany.
-#' @returns A [data.table()] containing the monthly ifo expectation time series.
+#' @returns A [data.table::data.table()] containing the monthly ifo expectation
+#'   time series.
 #' @inherit ifo_business source
 #' @export
 #' @examples
@@ -122,7 +124,7 @@ ifo_expectation <- function(type = c("export", "employment")) {
 #'   * `"export"`: returns the ifo export climate.
 #'   * `"world"`: returns the ifo world economic climate.
 #'   * `"euro"`: returns the ifo world economic climate for the euro zone.
-#' @returns A [data.table()] containing the monthly ifo climate time series.
+#' @returns A [data.table::data.table()] containing the monthly ifo climate time series.
 #' @references
 #' `r format_bib("grimme2018ifo", "grimme2021forecasting")`
 #' @export

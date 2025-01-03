@@ -25,7 +25,8 @@ ifo_business(
 Only applies to \code{type} \code{"germany"} and \code{"sectors"}. Default \code{TRUE}.}
 }
 \value{
-A \code{\link[=data.table]{data.table()}} containing the monthly ifo business climate time series.
+A \code{\link[data.table:data.table]{data.table::data.table()}} containing the monthly ifo business climate
+time series.
 }
 \description{
 Return ifo business climate data

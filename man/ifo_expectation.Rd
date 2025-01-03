@@ -17,7 +17,8 @@ ifo_expectation(type = c("export", "employment"))
 }}
 }
 \value{
-A \code{\link[=data.table]{data.table()}} containing the monthly ifo expectation time series.
+A \code{\link[data.table:data.table]{data.table::data.table()}} containing the monthly ifo expectation
+time series.
 }
 \description{
 Return ifo expectation data
