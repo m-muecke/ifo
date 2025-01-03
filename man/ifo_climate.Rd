@@ -16,7 +16,7 @@ ifo_climate(type = c("import", "export", "world", "euro"))
 }}
 }
 \value{
-A \code{\link[data.table:data.table]{data.table::data.table()}} containing the monthly ifo climate time series.
+A \code{data.frame()} containing the monthly ifo climate time series.
 }
 \description{
 Return ifo climate data
