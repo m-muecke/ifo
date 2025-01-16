@@ -13,7 +13,7 @@ Depends:
     R (>= 4.1.0)
 Imports:
     curl,
-    data.table (>= 1.16.0),
+    data.table,
     readxl,
     rvest,
     utils
