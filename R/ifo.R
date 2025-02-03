@@ -65,7 +65,8 @@ ifo_business <- function(type = c("germany", "sectors", "eastern", "saxony"),
   )
 
   if (!long_format) {
-    return(setDF(tab)[])
+    tab <- setDF(tab)
+    return(tab)
   }
 
   if (type == "germany") {
@@ -79,7 +80,8 @@ ifo_business <- function(type = c("germany", "sectors", "eastern", "saxony"),
       na.rm = TRUE
     )
   }
-  setDF(tab)[]
+  tab <- setDF(tab)
+  tab
 }
 
 #' Return ifo expectation data
@@ -113,7 +115,8 @@ ifo_expectation <- function(type = c("export", "employment")) {
       col_types = c("date", rep("numeric", 5L))
     )
   }
-  setDF(tab)[]
+  tab <- setDF(tab)
+  tab
 }
 
 #' Return ifo climate data
@@ -157,7 +160,8 @@ ifo_climate <- function(type = c("import", "export", "world", "euro")) {
       col_types = c("text", rep("numeric", 3L))
     )
   }
-  setDF(tab)[]
+  tab <- setDF(tab)
+  tab
 }
 
 ifo_download <- function(type, ...) {
@@ -171,7 +175,7 @@ ifo_download <- function(type, ...) {
   } else {
     tab[, yearmonth := as.Date(paste0("01/", yearmonth), "%d/%m/%Y")] # nolint
   }
-  tab[]
+  tab
 }
 
 ifo_url <- function(type) {
