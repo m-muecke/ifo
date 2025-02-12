@@ -6,5 +6,5 @@ format_bib <- function(..., bibentries = NULL, envir = parent.frame()) {
   }
   stopifnot(anyDuplicated(names(bibentries)) == 0L)
   str <- vapply(list(...), \(entry) tools::toRd(bibentries[[entry]]), NA_character_)
-  paste0(str, collapse = "\n\n")
+  paste(str, collapse = "\n\n")
 }
