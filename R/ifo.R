@@ -16,8 +16,10 @@
 #' \donttest{
 #' ifo_business("germany")
 #' }
-ifo_business <- function(type = c("germany", "sectors", "eastern", "saxony"),
-                         long_format = TRUE) {
+ifo_business <- function(
+  type = c("germany", "sectors", "eastern", "saxony"),
+  long_format = TRUE
+) {
   type <- match.arg(type)
   stopifnot(is.logical(long_format), length(long_format) == 1L)
   sheet <- 1L
