@@ -23,13 +23,19 @@ ifo_business <- function(
   type <- match.arg(type)
   stopifnot(is.logical(long_format), length(long_format) == 1L)
   sheet <- 1L
-  switch(type,
+  switch(
+    type,
     germany = {
       col_names <- c(
         "yearmonth",
-        "climate_index", "situation_index", "expectation_index",
-        "climate_balance", "situation_balance", "expectation_balance",
-        "uncertainty", "economic_expansion"
+        "climate_index",
+        "situation_index",
+        "expectation_index",
+        "climate_balance",
+        "situation_balance",
+        "expectation_balance",
+        "uncertainty",
+        "economic_expansion"
       )
       col_types <- c("text", rep("numeric", 8L))
     },
@@ -39,7 +45,9 @@ ifo_business <- function(
       col_names <- "yearmonth"
       indicator <- c("climate", "situation", "expectation")
       nms <- as.character(outer(
-        paste(indicator, "industry", sep = "_"), c("balance", "index"), paste,
+        paste(indicator, "industry", sep = "_"),
+        c("balance", "index"),
+        paste,
         sep = "_"
       ))
       col_names <- c(col_names, nms)
@@ -72,12 +80,14 @@ ifo_business <- function(
   }
 
   if (type == "germany") {
-    tab <- melt(tab,
+    tab <- melt(
+      tab,
       measure.vars = measure(indicator, series, pattern = "(.*)_(index|balance)"),
       na.rm = TRUE
     )
   } else if (type == "sectors") {
-    tab <- melt(tab,
+    tab <- melt(
+      tab,
       measure.vars = measure(indicator, sector, series, pattern = "(.*)_(.*)_(.*)"),
       na.rm = TRUE
     )
@@ -112,7 +122,12 @@ ifo_expectation <- function(type = c("export", "employment")) {
       type = "employment",
       skip = 9L,
       col_names = c(
-        "yearmonth", "expecation", "manufacturing", "construction", "trade", "service_sector" # nolint
+        "yearmonth",
+        "expecation",
+        "manufacturing",
+        "construction",
+        "trade",
+        "service_sector" # nolint
       ),
       col_types = c("date", rep("numeric", 5L))
     )
@@ -157,7 +172,10 @@ ifo_climate <- function(type = c("import", "export", "world", "euro")) {
       type = type,
       skip = 11L,
       col_names = c(
-        "yearmonth", "economic_climate", "present_situation", "expectation"
+        "yearmonth",
+        "economic_climate",
+        "present_situation",
+        "expectation"
       ),
       col_types = c("text", rep("numeric", 3L))
     )
@@ -181,7 +199,8 @@ ifo_download <- function(type, ...) {
 }
 
 ifo_url <- function(type) {
-  pattern <- switch(type,
+  pattern <- switch(
+    type,
     germany = "gsk",
     sectors = "gsk",
     eastern = "ostd",
