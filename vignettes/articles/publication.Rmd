@@ -2,7 +2,8 @@
 title: "ifo Business Climate Index"
 ---
 
-```{r, include = FALSE}
+```{r}
+#| include: false
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -37,7 +38,9 @@ We will start with creating a theme that is somewhat similar to the style of the
 For more information on how to create custom themes, see the [ggplot2 documentation](https://ggplot2.tidyverse.org/articles/ggplot2-in-packages.html#creating-a-new-theme)
 or see examples of themes in the [ggthemes](https://cran.r-project.org/package=ggthemes) package.
 
-```{r theme, message = FALSE}
+```{r}
+#| lable: theme
+#| message: false
 library(ggplot2)
 
 theme_ifo <- function(...) {
@@ -61,7 +64,10 @@ theme_ifo <- function(...) {
 
 ### ifo Business Climate Germany
 
-```{r climate, message = FALSE, dpi = 300}
+```{r}
+#| label: climate
+#| message: false
+#| dpi: 300
 library(ifo)
 
 climate <- ifo_business()
@@ -89,7 +95,9 @@ climate |>
 
 ### ifo Business Climate by Sector
 
-```{r sector, dpi = 300}
+```{r}
+#| label: sector
+#| dpi: 300
 sectors <- ifo_business("sectors") |>
   subset(
     series == "balance" &
@@ -130,7 +138,9 @@ ggplot(sectors, aes(x = yearmonth, y = value, color = indicator)) +
 
 ### ifo Business Uncertainty Germany
 
-```{r uncertainty, dpi = 300}
+```{r}
+#| label: uncertainty
+#| dpi: 300
 climate |>
   subset(select = c(yearmonth, uncertainty)) |>
   na.omit() |>

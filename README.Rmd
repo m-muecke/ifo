@@ -4,14 +4,14 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, include = FALSE}
+```{r}
+#| include: false
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
-options(tibble.print_min = 5L, tibble.print_max = 5L)
 ```
 
 # ifo
@@ -32,27 +32,35 @@ Feel free to open an issue if you have any suggestions.
 
 You can install the released version of ifo from [CRAN](https://CRAN.R-project.org) with:
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 install.packages("ifo")
 ```
 
 And the development version from [GitHub](https://github.com/) with:
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 # install.packages("pak")
 pak::pak("m-muecke/ifo")
 ```
 
 ## Usage
 
-```{r demo, message = FALSE}
+```{r}
+#| label: demo
+#| message: false
 library(ifo)
 
 climate <- ifo_business()
 head(climate)
 ```
 
-```{r plotting, message = FALSE, echo = FALSE, dpi = 300}
+```{r}
+#| label: plotting
+#| message: false
+#| echo: false
+#| dpi: 300
 library(ggplot2)
 
 climate |>
