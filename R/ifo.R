@@ -21,7 +21,7 @@ ifo_business <- function(
   long_format = TRUE
 ) {
   type <- match.arg(type)
-  stopifnot(is.logical(long_format), length(long_format) == 1L)
+  stopifnot(is_bool(long_format))
   sheet <- 1L
   switch(
     type,
@@ -212,10 +212,16 @@ ifo_url <- function(type) {
     type
   )
   urls <- read_html("https://www.ifo.de/en/ifo-time-series") |>
-    html_elements(".link-list") |>
     html_elements("a") |>
     html_attr("href")
+  if (length(urls) == 0L) {
+    stop("Found no timeseries urls.", call. = FALSE)
+  }
+  urls <- urls[startsWith(urls, "/sites/default/files/secure/timeseries")] # nolint
   url <- grep(pattern, urls, value = TRUE, fixed = TRUE)
+  if (length(url) == 0L) {
+    stop("No ifo data found for type: ", type, call. = FALSE)
+  }
   url <- paste0("https://www.ifo.de", url)
   url
 }
