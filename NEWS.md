@@ -1,5 +1,7 @@
 # ifo (development version)
 
+* Adjust to new ifo website urls.
+
 # ifo 0.2.0
 
 * Move to curl package for HTTP requests.
