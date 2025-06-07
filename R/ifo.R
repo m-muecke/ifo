@@ -212,12 +212,12 @@ ifo_url <- function(type) {
     type
   )
   urls <- read_html("https://www.ifo.de/en/ifo-time-series") |>
+    html_elements(".paragraph--linkliste") |>
     html_elements("a") |>
     html_attr("href")
   if (length(urls) == 0L) {
     stop("Found no timeseries urls.", call. = FALSE)
   }
-  urls <- urls[startsWith(urls, "/sites/default/files/secure/timeseries")] # nolint
   url <- grep(pattern, urls, value = TRUE, fixed = TRUE)
   if (length(url) == 0L) {
     stop("No ifo data found for type: ", type, call. = FALSE)
