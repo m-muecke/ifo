@@ -211,10 +211,10 @@ ifo_url <- function(type) {
     import_climate = "imklima",
     type
   )
-  urls <- read_html("https://www.ifo.de/en/ifo-time-series") |>
-    html_elements(".paragraph--linkliste") |>
-    html_elements("a") |>
-    html_attr("href")
+  urls <- rvest::read_html("https://www.ifo.de/en/ifo-time-series") |>
+    rvest::html_elements(".paragraph--linkliste") |>
+    rvest::html_elements("a") |>
+    rvest::html_attr("href")
   if (length(urls) == 0L) {
     stop("Found no timeseries urls.", call. = FALSE)
   }
