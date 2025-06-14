@@ -106,9 +106,7 @@ package.</p>
 <span>      legend.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>      legend.position <span class="op">=</span> <span class="st">"top"</span>,</span>
 <span>      plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>face <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span>,</span>
-<span>      plot.caption <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span></span>
-<span>        hjust <span class="op">=</span> <span class="fl">0</span>, vjust <span class="op">=</span> <span class="fl">0</span>, size <span class="op">=</span> <span class="fl">8</span>, margin <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">margin</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span></span>
-<span>      <span class="op">)</span>,</span>
+<span>      plot.caption <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">0</span>, vjust <span class="op">=</span> <span class="fl">0</span>, size <span class="op">=</span> <span class="fl">8</span>, margin <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">margin</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>      panel.grid.major.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_line</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"black"</span>, linewidth <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span>,</span>
 <span>      panel.grid.major.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>      panel.grid.minor <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -131,18 +129,13 @@ package.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">yearmonth</span>, y <span class="op">=</span> <span class="va">value</span>, color <span class="op">=</span> <span class="va">indicator</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
-<span>    title <span class="op">=</span> <span class="st">"ifo Business Climate Germany"</span>, subtitle <span class="op">=</span> <span class="st">"Seasonally adjusted"</span>,</span>
-<span>    caption <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span></span>
-<span>      <span class="st">"Source: ifo Business Survey, %s."</span>, <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">climate</span><span class="op">$</span><span class="va">yearmonth</span><span class="op">)</span>, <span class="st">"%B %Y"</span><span class="op">)</span></span>
-<span>    <span class="op">)</span></span>
+<span>    title <span class="op">=</span> <span class="st">"ifo Business Climate Germany"</span>,</span>
+<span>    subtitle <span class="op">=</span> <span class="st">"Seasonally adjusted"</span>,</span>
+<span>    caption <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Source: ifo Business Survey, %s."</span>, <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">climate</span><span class="op">$</span><span class="va">yearmonth</span><span class="op">)</span>, <span class="st">"%B %Y"</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span></span>
 <span>    values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>climate <span class="op">=</span> <span class="st">"darkred"</span>, situation <span class="op">=</span> <span class="st">"darkgrey"</span>, expectation <span class="op">=</span> <span class="st">"darkblue"</span><span class="op">)</span>,</span>
-<span>    labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span>      <span class="st">"ifo Business Climate"</span>,</span>
-<span>      <span class="st">"Assessment of business situtation"</span>,</span>
-<span>      <span class="st">"Business expectation"</span></span>
-<span>    <span class="op">)</span></span>
+<span>    labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ifo Business Climate"</span>, <span class="st">"Assessment of business situtation"</span>, <span class="st">"Business expectation"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_ifo</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="publication_files/figure-html/climate-1.png" width="100%"></p>
@@ -157,34 +150,31 @@ package.</p>
 <span>      <span class="va">sector</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"manufacturing"</span>, <span class="st">"services"</span>, <span class="st">"trade"</span>, <span class="st">"construction"</span><span class="op">)</span> <span class="op">&amp;</span></span>
 <span>      <span class="va">yearmonth</span> <span class="op">&gt;=</span> <span class="st">"2020-01-01"</span></span>
 <span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/transform.html" class="external-link">transform</a></span><span class="op">(</span>sector <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">sector</span>,</span>
-<span>    levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"manufacturing"</span>, <span class="st">"services"</span>, <span class="st">"trade"</span>, <span class="st">"construction"</span><span class="op">)</span></span>
-<span>  <span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/transform.html" class="external-link">transform</a></span><span class="op">(</span></span>
+<span>    sector <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">sector</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"manufacturing"</span>, <span class="st">"services"</span>, <span class="st">"trade"</span>, <span class="st">"construction"</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">sectors</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">yearmonth</span>, y <span class="op">=</span> <span class="va">value</span>, color <span class="op">=</span> <span class="va">indicator</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">sector</span>,</span>
-<span>    labeller <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labeller.html" class="external-link">labeller</a></span><span class="op">(</span>sector <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span>      manufacturing <span class="op">=</span> <span class="st">"Manufacturing"</span>,</span>
-<span>      services <span class="op">=</span> <span class="st">"Service Sector"</span>,</span>
-<span>      trade <span class="op">=</span> <span class="st">"Trade"</span>,</span>
-<span>      construction <span class="op">=</span> <span class="st">"Construction"</span></span>
-<span>    <span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span></span>
+<span>    <span class="op">~</span><span class="va">sector</span>,</span>
+<span>    labeller <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labeller.html" class="external-link">labeller</a></span><span class="op">(</span></span>
+<span>      sector <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>        manufacturing <span class="op">=</span> <span class="st">"Manufacturing"</span>,</span>
+<span>        services <span class="op">=</span> <span class="st">"Service Sector"</span>,</span>
+<span>        trade <span class="op">=</span> <span class="st">"Trade"</span>,</span>
+<span>        construction <span class="op">=</span> <span class="st">"Construction"</span></span>
+<span>      <span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
 <span>    title <span class="op">=</span> <span class="st">"ifo Business Climate by Sector"</span>,</span>
 <span>    subtitle <span class="op">=</span> <span class="st">"Balances, seasonally adjusted"</span>,</span>
-<span>    caption <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span></span>
-<span>      <span class="st">"Source: ifo Business Survey, %s."</span>, <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">sectors</span><span class="op">$</span><span class="va">yearmonth</span><span class="op">)</span>, <span class="st">"%B %Y"</span><span class="op">)</span></span>
-<span>    <span class="op">)</span></span>
+<span>    caption <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Source: ifo Business Survey, %s."</span>, <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">sectors</span><span class="op">$</span><span class="va">yearmonth</span><span class="op">)</span>, <span class="st">"%B %Y"</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span></span>
 <span>    values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>climate <span class="op">=</span> <span class="st">"darkred"</span>, situation <span class="op">=</span> <span class="st">"darkgrey"</span>, expectation <span class="op">=</span> <span class="st">"darkblue"</span><span class="op">)</span>,</span>
-<span>    labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span>      <span class="st">"ifo Business Climate"</span>,</span>
-<span>      <span class="st">"Assessment of business situtation"</span>,</span>
-<span>      <span class="st">"Business expectation"</span></span>
-<span>    <span class="op">)</span></span>
+<span>    labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ifo Business Climate"</span>, <span class="st">"Assessment of Business Situtation"</span>, <span class="st">"Business Expectation"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_ifo</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="publication_files/figure-html/sector-1.png" width="100%"></p>
@@ -199,10 +189,9 @@ package.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">yearmonth</span>, y <span class="op">=</span> <span class="va">uncertainty</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
-<span>    title <span class="op">=</span> <span class="st">"ifo Business Uncertainty Germany"</span>, subtitle <span class="op">=</span> <span class="st">"Original values"</span>,</span>
-<span>    caption <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span></span>
-<span>      <span class="st">"Source: ifo Business Survey, %s."</span>, <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">climate</span><span class="op">$</span><span class="va">yearmonth</span><span class="op">)</span>, <span class="st">"%B %Y"</span><span class="op">)</span></span>
-<span>    <span class="op">)</span></span>
+<span>    title <span class="op">=</span> <span class="st">"ifo Business Uncertainty Germany"</span>,</span>
+<span>    subtitle <span class="op">=</span> <span class="st">"Original values"</span>,</span>
+<span>    caption <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Source: ifo Business Survey, %s."</span>, <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">climate</span><span class="op">$</span><span class="va">yearmonth</span><span class="op">)</span>, <span class="st">"%B %Y"</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_ifo</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="publication_files/figure-html/uncertainty-1.png" width="100%"></p>
