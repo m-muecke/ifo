@@ -127,7 +127,7 @@ ifo_expectation <- function(type = c("export", "employment")) {
         "manufacturing",
         "construction",
         "trade",
-        "service_sector" # nolint
+        "service_sector"
       ),
       col_types = c("date", rep("numeric", 5L))
     )
@@ -171,12 +171,7 @@ ifo_climate <- function(type = c("import", "export", "world", "euro")) {
     tab <- ifo_download(
       type = type,
       skip = 11L,
-      col_names = c(
-        "yearmonth",
-        "economic_climate",
-        "present_situation",
-        "expectation"
-      ),
+      col_names = c("yearmonth", "economic_climate", "present_situation", "expectation"),
       col_types = c("text", rep("numeric", 3L))
     )
   }
@@ -222,6 +217,5 @@ ifo_url <- function(type) {
   if (length(url) == 0L) {
     stop("No ifo data found for type: ", type, call. = FALSE)
   }
-  url <- paste0("https://www.ifo.de", url)
-  url
+  paste0("https://www.ifo.de", url)
 }
