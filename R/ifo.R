@@ -79,6 +79,7 @@ ifo_business <- function(
     return(tab)
   }
 
+  series <- sector <- NULL
   if (type == "germany") {
     tab <- melt(
       tab,
@@ -185,6 +186,7 @@ ifo_download <- function(type, ...) {
   on.exit(unlink(tf), add = TRUE)
   curl::curl_download(url, tf)
   tab <- setDT(readxl::read_xlsx(tf, ...))
+  yearmonth <- NULL
   if (inherits(tab$yearmonth, "POSIXct")) {
     tab[, yearmonth := as.Date(format(yearmonth, "%Y-%m-01"))]
   } else {
