@@ -21,7 +21,7 @@ ifo_business <- function(
   long_format = TRUE
 ) {
   type <- match.arg(type)
-  stopifnot(is_bool(long_format))
+  stopifnot(is_flag(long_format))
   sheet <- 1L
   switch(
     type,
