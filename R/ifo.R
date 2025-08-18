@@ -1,12 +1,14 @@
 #' Return ifo business climate data
 #'
-#' @param type (`character(1)`) Defaults to `"germany"`. One of:
+#' @param type (`character(1)`)\cr
+#'   Defaults to `"germany"`. One of:
 #'   * `"germany"`: returns the ifo business climate index for Germany.
 #'   * `"sectors"`: returns the ifo business climate index for different sectors.
 #'   * `"eastern"`: returns the ifo business climate index for eastern Germany.
 #'   * `"saxony"`: returns the ifo business climate index for Saxony.
-#' @param long_format (`logical(1)`) If `TRUE` return the data in long format.
-#'   Only applies to `type` `"germany"` and `"sectors"`. Default `TRUE`.
+#' @param long_format (`logical(1)`)\cr
+#'   If `TRUE` return the data in long format. Only applies to `type` `"germany"` and `"sectors"`.
+#'   Default `TRUE`.
 #' @returns A `data.frame()` containing the monthly ifo business climate time series.
 #' @source <https://www.ifo.de/en/ifo-time-series>
 #' @seealso The [article](https://m-muecke.github.io/ifo/articles/publication.html) for
@@ -99,7 +101,8 @@ ifo_business <- function(
 
 #' Return ifo expectation data
 #'
-#' @param type (`character(1)`) Defaults to `"employment"`. One of:
+#' @param type (`character(1)`)\cr
+#'   Defaults to `"employment"`. One of:
 #'   * `"export"`: returns the ifo export expectations for manufacturing.
 #'   * `"employment"`: returns the ifo employment barometer for Germany.
 #' @returns A `data.frame()` containing the monthly ifo expectation time series.
@@ -139,7 +142,8 @@ ifo_expectation <- function(type = c("export", "employment")) {
 
 #' Return ifo climate data
 #'
-#' @param type (`character(1)`) Defaults to `"import"`. One of:
+#' @param type (`character(1)`)\cr
+#'   Defaults to `"import"`. One of:
 #'   * `"import"`: returns the ifo import climate.
 #'   * `"export"`: returns the ifo export climate.
 #'   * `"world"`: returns the ifo world economic climate.
