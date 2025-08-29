@@ -24,7 +24,9 @@ A \code{data.frame()} containing the monthly ifo expectation time series.
 Return ifo expectation data
 }
 \examples{
+\dontshow{if (curl::has_internet()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \donttest{
 ifo_expectation("export")
 }
+\dontshow{\}) # examplesIf}
 }

@@ -14,7 +14,7 @@
 #' @seealso The [article](https://m-muecke.github.io/ifo/articles/publication.html) for
 #'   a reproducible example.
 #' @export
-#' @examples
+#' @examplesIf curl::has_internet()
 #' \donttest{
 #' ifo_business("germany")
 #' }
@@ -108,7 +108,7 @@ ifo_business <- function(
 #' @returns A `data.frame()` containing the monthly ifo expectation time series.
 #' @inherit ifo_business source
 #' @export
-#' @examples
+#' @examplesIf curl::has_internet()
 #' \donttest{
 #' ifo_expectation("export")
 #' }
@@ -152,7 +152,7 @@ ifo_expectation <- function(type = c("export", "employment")) {
 #' @references
 #' `r format_bib("grimme2018ifo", "grimme2021forecasting")`
 #' @export
-#' @examples
+#' @examplesIf curl::has_internet()
 #' \donttest{
 #' ifo_climate("import")
 #' }
