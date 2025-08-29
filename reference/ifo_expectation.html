@@ -76,422 +76,837 @@ Defaults to <code>"employment"</code>. One of:</p><ul><li><p><code>"export"</cod
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="fu">ifo_expectation</span><span class="op">(</span><span class="st">"export"</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A11 / R11C1: got '02/1991'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A12 / R12C1: got '03/1991'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A13 / R13C1: got '04/1991'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A14 / R14C1: got '05/1991'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A15 / R15C1: got '06/1991'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A16 / R16C1: got '07/1991'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A17 / R17C1: got '08/1991'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A18 / R18C1: got '09/1991'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A19 / R19C1: got '10/1991'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A20 / R20C1: got '11/1991'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A21 / R21C1: got '12/1991'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A22 / R22C1: got '01/1992'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A23 / R23C1: got '02/1992'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A24 / R24C1: got '03/1992'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A25 / R25C1: got '04/1992'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A26 / R26C1: got '05/1992'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A27 / R27C1: got '06/1992'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A28 / R28C1: got '07/1992'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A29 / R29C1: got '08/1992'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A30 / R30C1: got '09/1992'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A31 / R31C1: got '10/1992'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A32 / R32C1: got '11/1992'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A33 / R33C1: got '12/1992'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A34 / R34C1: got '01/1993'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A35 / R35C1: got '02/1993'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A36 / R36C1: got '03/1993'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A37 / R37C1: got '04/1993'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A38 / R38C1: got '05/1993'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A39 / R39C1: got '06/1993'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A40 / R40C1: got '07/1993'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A41 / R41C1: got '08/1993'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A42 / R42C1: got '09/1993'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A43 / R43C1: got '10/1993'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A44 / R44C1: got '11/1993'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A45 / R45C1: got '12/1993'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A46 / R46C1: got '01/1994'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A47 / R47C1: got '02/1994'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A48 / R48C1: got '03/1994'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A49 / R49C1: got '04/1994'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A50 / R50C1: got '05/1994'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A51 / R51C1: got '06/1994'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A52 / R52C1: got '07/1994'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A53 / R53C1: got '08/1994'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A54 / R54C1: got '09/1994'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A55 / R55C1: got '10/1994'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A56 / R56C1: got '11/1994'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A57 / R57C1: got '12/1994'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A58 / R58C1: got '01/1995'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A59 / R59C1: got '02/1995'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A60 / R60C1: got '03/1995'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A61 / R61C1: got '04/1995'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A62 / R62C1: got '05/1995'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A63 / R63C1: got '06/1995'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A64 / R64C1: got '07/1995'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A65 / R65C1: got '08/1995'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A66 / R66C1: got '09/1995'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A67 / R67C1: got '10/1995'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A68 / R68C1: got '11/1995'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A69 / R69C1: got '12/1995'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A70 / R70C1: got '01/1996'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A71 / R71C1: got '02/1996'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A72 / R72C1: got '03/1996'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A73 / R73C1: got '04/1996'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A74 / R74C1: got '05/1996'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A75 / R75C1: got '06/1996'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A76 / R76C1: got '07/1996'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A77 / R77C1: got '08/1996'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A78 / R78C1: got '09/1996'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A79 / R79C1: got '10/1996'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A80 / R80C1: got '11/1996'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A81 / R81C1: got '12/1996'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A82 / R82C1: got '01/1997'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A83 / R83C1: got '02/1997'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A84 / R84C1: got '03/1997'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A85 / R85C1: got '04/1997'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A86 / R86C1: got '05/1997'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A87 / R87C1: got '06/1997'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A88 / R88C1: got '07/1997'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A89 / R89C1: got '08/1997'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A90 / R90C1: got '09/1997'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A91 / R91C1: got '10/1997'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A92 / R92C1: got '11/1997'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A93 / R93C1: got '12/1997'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A94 / R94C1: got '01/1998'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A95 / R95C1: got '02/1998'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A96 / R96C1: got '03/1998'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A97 / R97C1: got '04/1998'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A98 / R98C1: got '05/1998'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A99 / R99C1: got '06/1998'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A100 / R100C1: got '07/1998'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A101 / R101C1: got '08/1998'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A102 / R102C1: got '09/1998'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A103 / R103C1: got '10/1998'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A104 / R104C1: got '11/1998'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A105 / R105C1: got '12/1998'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A106 / R106C1: got '01/1999'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A107 / R107C1: got '02/1999'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A108 / R108C1: got '03/1999'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A109 / R109C1: got '04/1999'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A110 / R110C1: got '05/1999'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A111 / R111C1: got '06/1999'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A112 / R112C1: got '07/1999'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A113 / R113C1: got '08/1999'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A114 / R114C1: got '09/1999'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A115 / R115C1: got '10/1999'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A116 / R116C1: got '11/1999'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A117 / R117C1: got '12/1999'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A118 / R118C1: got '01/2000'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A119 / R119C1: got '02/2000'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A120 / R120C1: got '03/2000'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A121 / R121C1: got '04/2000'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A122 / R122C1: got '05/2000'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A123 / R123C1: got '06/2000'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A124 / R124C1: got '07/2000'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A125 / R125C1: got '08/2000'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A126 / R126C1: got '09/2000'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A127 / R127C1: got '10/2000'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A128 / R128C1: got '11/2000'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A129 / R129C1: got '12/2000'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A130 / R130C1: got '01/2001'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A131 / R131C1: got '02/2001'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A132 / R132C1: got '03/2001'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A133 / R133C1: got '04/2001'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A134 / R134C1: got '05/2001'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A135 / R135C1: got '06/2001'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A136 / R136C1: got '07/2001'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A137 / R137C1: got '08/2001'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A138 / R138C1: got '09/2001'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A139 / R139C1: got '10/2001'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A140 / R140C1: got '11/2001'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A141 / R141C1: got '12/2001'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A142 / R142C1: got '01/2002'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A143 / R143C1: got '02/2002'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A144 / R144C1: got '03/2002'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A145 / R145C1: got '04/2002'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A146 / R146C1: got '05/2002'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A147 / R147C1: got '06/2002'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A148 / R148C1: got '07/2002'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A149 / R149C1: got '08/2002'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A150 / R150C1: got '09/2002'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A151 / R151C1: got '10/2002'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A152 / R152C1: got '11/2002'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A153 / R153C1: got '12/2002'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A154 / R154C1: got '01/2003'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A155 / R155C1: got '02/2003'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A156 / R156C1: got '03/2003'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A157 / R157C1: got '04/2003'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A158 / R158C1: got '05/2003'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A159 / R159C1: got '06/2003'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A160 / R160C1: got '07/2003'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A161 / R161C1: got '08/2003'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A162 / R162C1: got '09/2003'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A163 / R163C1: got '10/2003'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A164 / R164C1: got '11/2003'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A165 / R165C1: got '12/2003'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A166 / R166C1: got '01/2004'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A167 / R167C1: got '02/2004'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A168 / R168C1: got '03/2004'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A169 / R169C1: got '04/2004'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A170 / R170C1: got '05/2004'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A171 / R171C1: got '06/2004'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A172 / R172C1: got '07/2004'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A173 / R173C1: got '08/2004'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A174 / R174C1: got '09/2004'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A175 / R175C1: got '10/2004'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A176 / R176C1: got '11/2004'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A177 / R177C1: got '12/2004'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A178 / R178C1: got '01/2005'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A179 / R179C1: got '02/2005'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A180 / R180C1: got '03/2005'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A181 / R181C1: got '04/2005'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A182 / R182C1: got '05/2005'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A183 / R183C1: got '06/2005'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A184 / R184C1: got '07/2005'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A185 / R185C1: got '08/2005'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A186 / R186C1: got '09/2005'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A187 / R187C1: got '10/2005'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A188 / R188C1: got '11/2005'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A189 / R189C1: got '12/2005'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A190 / R190C1: got '01/2006'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A191 / R191C1: got '02/2006'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A192 / R192C1: got '03/2006'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A193 / R193C1: got '04/2006'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A194 / R194C1: got '05/2006'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A195 / R195C1: got '06/2006'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A196 / R196C1: got '07/2006'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A197 / R197C1: got '08/2006'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A198 / R198C1: got '09/2006'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A199 / R199C1: got '10/2006'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A200 / R200C1: got '11/2006'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A201 / R201C1: got '12/2006'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A202 / R202C1: got '01/2007'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A203 / R203C1: got '02/2007'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A204 / R204C1: got '03/2007'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A205 / R205C1: got '04/2007'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A206 / R206C1: got '05/2007'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A207 / R207C1: got '06/2007'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A208 / R208C1: got '07/2007'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A209 / R209C1: got '08/2007'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A210 / R210C1: got '09/2007'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A211 / R211C1: got '10/2007'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A212 / R212C1: got '11/2007'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A213 / R213C1: got '12/2007'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A214 / R214C1: got '01/2008'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A215 / R215C1: got '02/2008'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A216 / R216C1: got '03/2008'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A217 / R217C1: got '04/2008'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A218 / R218C1: got '05/2008'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A219 / R219C1: got '06/2008'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A220 / R220C1: got '07/2008'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A221 / R221C1: got '08/2008'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A222 / R222C1: got '09/2008'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A223 / R223C1: got '10/2008'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A224 / R224C1: got '11/2008'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A225 / R225C1: got '12/2008'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A226 / R226C1: got '01/2009'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A227 / R227C1: got '02/2009'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A228 / R228C1: got '03/2009'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A229 / R229C1: got '04/2009'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A230 / R230C1: got '05/2009'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A231 / R231C1: got '06/2009'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A232 / R232C1: got '07/2009'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A233 / R233C1: got '08/2009'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A234 / R234C1: got '09/2009'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A235 / R235C1: got '10/2009'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A236 / R236C1: got '11/2009'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A237 / R237C1: got '12/2009'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A238 / R238C1: got '01/2010'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A239 / R239C1: got '02/2010'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A240 / R240C1: got '03/2010'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A241 / R241C1: got '04/2010'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A242 / R242C1: got '05/2010'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A243 / R243C1: got '06/2010'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A244 / R244C1: got '07/2010'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A245 / R245C1: got '08/2010'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A246 / R246C1: got '09/2010'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A247 / R247C1: got '10/2010'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A248 / R248C1: got '11/2010'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A249 / R249C1: got '12/2010'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A250 / R250C1: got '01/2011'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A251 / R251C1: got '02/2011'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A252 / R252C1: got '03/2011'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A253 / R253C1: got '04/2011'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A254 / R254C1: got '05/2011'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A255 / R255C1: got '06/2011'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A256 / R256C1: got '07/2011'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A257 / R257C1: got '08/2011'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A258 / R258C1: got '09/2011'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A259 / R259C1: got '10/2011'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A260 / R260C1: got '11/2011'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A261 / R261C1: got '12/2011'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A262 / R262C1: got '01/2012'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A263 / R263C1: got '02/2012'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A264 / R264C1: got '03/2012'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A265 / R265C1: got '04/2012'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A266 / R266C1: got '05/2012'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A267 / R267C1: got '06/2012'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A268 / R268C1: got '07/2012'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A269 / R269C1: got '08/2012'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A270 / R270C1: got '09/2012'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A271 / R271C1: got '10/2012'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A272 / R272C1: got '11/2012'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A273 / R273C1: got '12/2012'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A274 / R274C1: got '01/2013'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A275 / R275C1: got '02/2013'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A276 / R276C1: got '03/2013'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A277 / R277C1: got '04/2013'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A278 / R278C1: got '05/2013'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A279 / R279C1: got '06/2013'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A280 / R280C1: got '07/2013'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A281 / R281C1: got '08/2013'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A282 / R282C1: got '09/2013'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A283 / R283C1: got '10/2013'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A284 / R284C1: got '11/2013'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A285 / R285C1: got '12/2013'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A286 / R286C1: got '01/2014'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A287 / R287C1: got '02/2014'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A288 / R288C1: got '03/2014'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A289 / R289C1: got '04/2014'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A290 / R290C1: got '05/2014'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A291 / R291C1: got '06/2014'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A292 / R292C1: got '07/2014'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A293 / R293C1: got '08/2014'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A294 / R294C1: got '09/2014'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A295 / R295C1: got '10/2014'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A296 / R296C1: got '11/2014'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A297 / R297C1: got '12/2014'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A298 / R298C1: got '01/2015'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A299 / R299C1: got '02/2015'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A300 / R300C1: got '03/2015'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A301 / R301C1: got '04/2015'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A302 / R302C1: got '05/2015'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A303 / R303C1: got '06/2015'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A304 / R304C1: got '07/2015'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A305 / R305C1: got '08/2015'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A306 / R306C1: got '09/2015'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A307 / R307C1: got '10/2015'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A308 / R308C1: got '11/2015'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A309 / R309C1: got '12/2015'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A310 / R310C1: got '01/2016'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A311 / R311C1: got '02/2016'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A312 / R312C1: got '03/2016'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A313 / R313C1: got '04/2016'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A314 / R314C1: got '05/2016'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A315 / R315C1: got '06/2016'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A316 / R316C1: got '07/2016'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A317 / R317C1: got '08/2016'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A318 / R318C1: got '09/2016'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A319 / R319C1: got '10/2016'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A320 / R320C1: got '11/2016'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A321 / R321C1: got '12/2016'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A322 / R322C1: got '01/2017'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A323 / R323C1: got '02/2017'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A324 / R324C1: got '03/2017'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A325 / R325C1: got '04/2017'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A326 / R326C1: got '05/2017'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A327 / R327C1: got '06/2017'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A328 / R328C1: got '07/2017'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A329 / R329C1: got '08/2017'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A330 / R330C1: got '09/2017'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A331 / R331C1: got '10/2017'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A332 / R332C1: got '11/2017'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A333 / R333C1: got '12/2017'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A334 / R334C1: got '01/2018'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A335 / R335C1: got '02/2018'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A336 / R336C1: got '03/2018'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A337 / R337C1: got '04/2018'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A338 / R338C1: got '05/2018'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A339 / R339C1: got '06/2018'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A340 / R340C1: got '07/2018'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A341 / R341C1: got '08/2018'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A342 / R342C1: got '09/2018'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A343 / R343C1: got '10/2018'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A344 / R344C1: got '11/2018'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A345 / R345C1: got '12/2018'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A346 / R346C1: got '01/2019'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A347 / R347C1: got '02/2019'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A348 / R348C1: got '03/2019'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A349 / R349C1: got '04/2019'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A350 / R350C1: got '05/2019'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A351 / R351C1: got '06/2019'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A352 / R352C1: got '07/2019'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A353 / R353C1: got '08/2019'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A354 / R354C1: got '09/2019'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A355 / R355C1: got '10/2019'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A356 / R356C1: got '11/2019'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A357 / R357C1: got '12/2019'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A358 / R358C1: got '01/2020'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A359 / R359C1: got '02/2020'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A360 / R360C1: got '03/2020'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A361 / R361C1: got '04/2020'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A362 / R362C1: got '05/2020'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A363 / R363C1: got '06/2020'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A364 / R364C1: got '07/2020'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A365 / R365C1: got '08/2020'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A366 / R366C1: got '09/2020'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A367 / R367C1: got '10/2020'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A368 / R368C1: got '11/2020'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A369 / R369C1: got '12/2020'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A370 / R370C1: got '01/2021'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A371 / R371C1: got '02/2021'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A372 / R372C1: got '03/2021'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A373 / R373C1: got '04/2021'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A374 / R374C1: got '05/2021'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A375 / R375C1: got '06/2021'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A376 / R376C1: got '07/2021'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A377 / R377C1: got '08/2021'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A378 / R378C1: got '09/2021'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A379 / R379C1: got '10/2021'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A380 / R380C1: got '11/2021'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A381 / R381C1: got '12/2021'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A382 / R382C1: got '01/2022'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A383 / R383C1: got '02/2022'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A384 / R384C1: got '03/2022'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A385 / R385C1: got '04/2022'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A386 / R386C1: got '05/2022'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A387 / R387C1: got '06/2022'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A388 / R388C1: got '07/2022'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A389 / R389C1: got '08/2022'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A390 / R390C1: got '09/2022'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A391 / R391C1: got '10/2022'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A392 / R392C1: got '11/2022'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A393 / R393C1: got '12/2022'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A394 / R394C1: got '01/2023'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A395 / R395C1: got '02/2023'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A396 / R396C1: got '03/2023'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A397 / R397C1: got '04/2023'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A398 / R398C1: got '05/2023'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A399 / R399C1: got '06/2023'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A400 / R400C1: got '07/2023'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A401 / R401C1: got '08/2023'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A402 / R402C1: got '09/2023'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A403 / R403C1: got '10/2023'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A404 / R404C1: got '11/2023'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A405 / R405C1: got '12/2023'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A406 / R406C1: got '01/2024'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A407 / R407C1: got '02/2024'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A408 / R408C1: got '03/2024'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A409 / R409C1: got '04/2024'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A410 / R410C1: got '05/2024'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A411 / R411C1: got '06/2024'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A412 / R412C1: got '07/2024'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A413 / R413C1: got '08/2024'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A414 / R414C1: got '09/2024'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A415 / R415C1: got '10/2024'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A416 / R416C1: got '11/2024'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A417 / R417C1: got '12/2024'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A418 / R418C1: got '01/2025'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A419 / R419C1: got '02/2025'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A420 / R420C1: got '03/2025'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A421 / R421C1: got '04/2025'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A422 / R422C1: got '05/2025'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A423 / R423C1: got '06/2025'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A424 / R424C1: got '07/2025'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Expecting date in A425 / R425C1: got '08/2025'</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      yearmonth expecation</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1   1991-02-01   -5.94689</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2   1991-03-01   -8.09049</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3   1991-04-01   -4.92426</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4   1991-05-01   -4.78301</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5   1991-06-01   -3.19577</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6   1991-07-01   -0.43986</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7   1991-08-01   -0.88639</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8   1991-09-01    1.54076</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9   1991-10-01    3.05830</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10  1991-11-01    3.83214</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11  1991-12-01    1.78352</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12  1992-01-01   -0.12437</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13  1992-02-01   -2.20477</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14  1992-03-01    0.06346</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15  1992-04-01   -0.84009</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16  1992-05-01    0.34954</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17  1992-06-01    3.11261</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18  1992-07-01    0.77512</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19  1992-08-01   -5.81419</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20  1992-09-01  -10.56294</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21  1992-10-01  -16.96137</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22  1992-11-01  -17.38542</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23  1992-12-01  -14.55438</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 24  1993-01-01  -10.74838</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25  1993-02-01  -15.33948</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 26  1993-03-01  -11.71238</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 27  1993-04-01  -13.46498</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 28  1993-05-01  -13.46440</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 29  1993-06-01   -9.36767</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 30  1993-07-01   -9.86777</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 31  1993-08-01   -5.78211</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 32  1993-09-01   -4.79978</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 33  1993-10-01   -2.89587</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 34  1993-11-01   -1.72306</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 35  1993-12-01    1.02660</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 36  1994-01-01    5.37814</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 37  1994-02-01    9.41427</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 38  1994-03-01    9.52677</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 39  1994-04-01   15.11484</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 40  1994-05-01   14.01226</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 41  1994-06-01   12.26284</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 42  1994-07-01   13.49145</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 43  1994-08-01   12.09982</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 44  1994-09-01   15.80979</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 45  1994-10-01   16.07925</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 46  1994-11-01   17.94347</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 47  1994-12-01   21.67205</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 48  1995-01-01   13.68000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 49  1995-02-01   12.18126</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 50  1995-03-01    8.76437</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 51  1995-04-01    3.67024</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 52  1995-05-01    6.34087</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 53  1995-06-01    6.87584</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 54  1995-07-01    6.61241</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 55  1995-08-01    8.11573</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 56  1995-09-01    6.51450</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 57  1995-10-01    6.14878</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 58  1995-11-01    4.43243</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 59  1995-12-01    7.35823</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 60  1996-01-01    3.31558</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 61  1996-02-01    2.96598</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 62  1996-03-01    2.91326</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 63  1996-04-01    3.26714</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 64  1996-05-01    5.82813</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 65  1996-06-01    5.20857</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 66  1996-07-01    6.43534</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 67  1996-08-01    6.91078</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 68  1996-09-01    9.33612</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 69  1996-10-01    9.13067</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 70  1996-11-01   12.20557</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 71  1996-12-01   11.14877</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 72  1997-01-01   15.29426</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 73  1997-02-01   14.03853</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 74  1997-03-01   14.00562</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 75  1997-04-01   13.66890</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 76  1997-05-01   10.01291</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 77  1997-06-01   13.15395</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 78  1997-07-01   14.08800</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 79  1997-08-01   14.75447</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 80  1997-09-01   18.25226</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 81  1997-10-01   15.32423</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 82  1997-11-01   13.28041</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 83  1997-12-01   13.20662</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 84  1998-01-01   13.14821</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 85  1998-02-01   13.05757</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 86  1998-03-01   13.94405</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 87  1998-04-01   15.93771</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 88  1998-05-01   10.27225</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 89  1998-06-01    8.94596</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 90  1998-07-01    6.75516</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 91  1998-08-01    3.49497</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 92  1998-09-01    0.13055</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 93  1998-10-01   -3.58448</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 94  1998-11-01   -0.11362</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 95  1998-12-01   -1.64062</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 96  1999-01-01   -3.87083</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 97  1999-02-01   -7.02258</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 98  1999-03-01   -1.04679</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 99  1999-04-01   -2.21722</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 100 1999-05-01    0.18549</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 101 1999-06-01    5.75296</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 102 1999-07-01    4.57539</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 103 1999-08-01    6.59240</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 104 1999-09-01    6.99070</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 105 1999-10-01    9.53943</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 106 1999-11-01   10.47317</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 107 1999-12-01   11.41298</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 108 2000-01-01   12.03031</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 109 2000-02-01   11.76634</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 110 2000-03-01   10.09181</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 111 2000-04-01   13.57325</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 112 2000-05-01   13.05910</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 113 2000-06-01   14.74954</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 114 2000-07-01   13.68527</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 115 2000-08-01   14.71672</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 116 2000-09-01   15.63585</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 117 2000-10-01   13.41870</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 118 2000-11-01   13.01802</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 119 2000-12-01   11.35093</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 120 2001-01-01   12.16108</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 121 2001-02-01    9.70602</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 122 2001-03-01    6.29700</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 123 2001-04-01    3.15985</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 124 2001-05-01    0.71398</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 125 2001-06-01   -1.07507</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 126 2001-07-01   -0.92818</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 127 2001-08-01    1.88088</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 128 2001-09-01   -4.92673</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 129 2001-10-01   -9.75972</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 130 2001-11-01   -5.63731</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 131 2001-12-01   -2.54639</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 132 2002-01-01   -5.56424</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 133 2002-02-01    0.56642</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 134 2002-03-01    3.33821</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 135 2002-04-01    8.68010</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 136 2002-05-01    8.41299</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 137 2002-06-01    8.37630</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 138 2002-07-01    8.57192</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 139 2002-08-01    6.98142</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 140 2002-09-01    6.41118</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 141 2002-10-01    6.91718</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 142 2002-11-01    5.56959</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 143 2002-12-01    6.68043</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 144 2003-01-01    7.03179</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 145 2003-02-01    4.61891</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 146 2003-03-01    2.09723</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 147 2003-04-01    2.07236</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 148 2003-05-01    2.11374</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 149 2003-06-01    2.64182</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 150 2003-07-01    2.10013</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 151 2003-08-01    4.02057</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 152 2003-09-01    7.97426</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 153 2003-10-01   12.67250</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 154 2003-11-01   12.53673</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 155 2003-12-01   10.93488</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 156 2004-01-01   10.64653</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 157 2004-02-01   11.87815</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 158 2004-03-01   13.86352</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 159 2004-04-01   14.71470</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 160 2004-05-01   15.79266</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 161 2004-06-01   15.58723</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 162 2004-07-01   17.46919</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 163 2004-08-01   19.00812</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 164 2004-09-01   17.50354</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 165 2004-10-01   17.50843</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 166 2004-11-01   15.36665</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 167 2004-12-01   15.34545</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 168 2005-01-01   13.27925</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 169 2005-02-01   16.56676</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 170 2005-03-01   15.72250</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 171 2005-04-01   16.61648</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 172 2005-05-01   11.41935</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 173 2005-06-01   13.07438</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 174 2005-07-01   14.29203</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 175 2005-08-01   14.81229</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 176 2005-09-01   16.10561</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 177 2005-10-01   16.26583</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 178 2005-11-01   17.51476</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 179 2005-12-01   18.96561</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 180 2006-01-01   23.94674</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 181 2006-02-01   22.43556</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 182 2006-03-01   22.78928</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 183 2006-04-01   21.77881</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 184 2006-05-01   18.84649</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 185 2006-06-01   20.34404</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 186 2006-07-01   17.49124</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 187 2006-08-01   14.68733</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 188 2006-09-01   18.71964</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 189 2006-10-01   20.11251</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 190 2006-11-01   22.94396</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 191 2006-12-01   22.79046</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 192 2007-01-01   22.53879</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 193 2007-02-01   20.22739</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 194 2007-03-01   19.90390</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 195 2007-04-01   19.92158</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 196 2007-05-01   21.13614</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 197 2007-06-01   20.37413</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 198 2007-07-01   18.53241</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 199 2007-08-01   18.70764</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 200 2007-09-01   19.66964</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 201 2007-10-01   18.04926</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 202 2007-11-01   19.71781</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 203 2007-12-01   19.56453</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 204 2008-01-01   19.75296</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 205 2008-02-01   17.64913</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 206 2008-03-01   18.08464</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 207 2008-04-01   14.89765</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 208 2008-05-01   13.25846</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 209 2008-06-01   10.48499</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 210 2008-07-01    7.92041</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 211 2008-08-01    5.03856</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 212 2008-09-01   -1.11838</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 213 2008-10-01  -10.68684</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 214 2008-11-01  -20.44454</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 215 2008-12-01  -31.87897</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 216 2009-01-01  -32.31740</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 217 2009-02-01  -31.50374</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 218 2009-03-01  -34.09127</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 219 2009-04-01  -27.53963</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 220 2009-05-01  -21.52867</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 221 2009-06-01  -17.03440</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 222 2009-07-01   -8.22254</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 223 2009-08-01    0.57055</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 224 2009-09-01    2.63939</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 225 2009-10-01    6.76964</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 226 2009-11-01   11.40626</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 227 2009-12-01   12.28567</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 228 2010-01-01   15.32120</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 229 2010-02-01   18.80689</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 230 2010-03-01   18.37004</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 231 2010-04-01   20.59552</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 232 2010-05-01   20.96442</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 233 2010-06-01   21.97270</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 234 2010-07-01   21.22095</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 235 2010-08-01   22.31915</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 236 2010-09-01   23.61307</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 237 2010-10-01   23.65863</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 238 2010-11-01   22.73788</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 239 2010-12-01   24.15673</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 240 2011-01-01   26.57624</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 241 2011-02-01   24.71653</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 242 2011-03-01   22.66531</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 243 2011-04-01   20.59719</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 244 2011-05-01   18.82050</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 245 2011-06-01   17.15985</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 246 2011-07-01   13.15893</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 247 2011-08-01   12.03440</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 248 2011-09-01    7.78709</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 249 2011-10-01    9.64374</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 250 2011-11-01    6.68764</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 251 2011-12-01    9.74148</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 252 2012-01-01    7.59818</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 253 2012-02-01    8.73825</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 254 2012-03-01    8.97376</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 255 2012-04-01    8.86147</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 256 2012-05-01    8.95729</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 257 2012-06-01    5.43299</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 258 2012-07-01    5.20241</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 259 2012-08-01    3.45222</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 260 2012-09-01    1.66779</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 261 2012-10-01   -1.40725</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 262 2012-11-01    5.27214</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 263 2012-12-01    6.13790</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 264 2013-01-01    6.87168</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 265 2013-02-01   11.16700</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 266 2013-03-01    8.53345</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 267 2013-04-01    9.61408</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 268 2013-05-01    7.19730</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 269 2013-06-01    9.61243</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 270 2013-07-01   11.83294</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 271 2013-08-01   13.57031</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 272 2013-09-01   16.16119</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 273 2013-10-01   15.07741</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 274 2013-11-01   18.80182</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 275 2013-12-01   15.62757</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 276 2014-01-01   16.55544</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 277 2014-02-01   15.07178</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 278 2014-03-01   12.35663</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 279 2014-04-01   11.83555</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 280 2014-05-01   11.54565</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 281 2014-06-01   10.79738</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 282 2014-07-01    8.99401</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 283 2014-08-01    8.50534</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 284 2014-09-01    6.15247</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 285 2014-10-01    7.15263</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 286 2014-11-01    6.11833</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 287 2014-12-01    7.16684</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 288 2015-01-01    8.52264</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 289 2015-02-01   10.22092</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 290 2015-03-01   11.70369</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 291 2015-04-01   11.42307</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 292 2015-05-01   10.90231</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 293 2015-06-01   10.95826</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 294 2015-07-01    9.94199</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 295 2015-08-01   11.32210</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 296 2015-09-01    9.81111</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 297 2015-10-01    7.77651</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 298 2015-11-01    7.56180</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 299 2015-12-01    9.72936</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 300 2016-01-01    6.64078</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 301 2016-02-01    5.31633</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 302 2016-03-01    6.33498</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 303 2016-04-01    6.20919</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 304 2016-05-01    7.23663</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 305 2016-06-01    9.17281</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 306 2016-07-01    8.98295</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 307 2016-08-01    9.11322</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 308 2016-09-01   10.53082</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 309 2016-10-01   13.15394</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 310 2016-11-01    6.98368</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 311 2016-12-01    9.79892</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 312 2017-01-01   12.36914</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 313 2017-02-01   14.29449</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 314 2017-03-01   17.70054</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 315 2017-04-01   18.34795</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 316 2017-05-01   21.02790</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 317 2017-06-01   20.16842</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 318 2017-07-01   24.11583</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 319 2017-08-01   19.53538</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 320 2017-09-01   19.75361</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 321 2017-10-01   21.28185</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 322 2017-11-01   20.90568</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 323 2017-12-01   20.19876</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 324 2018-01-01   19.23869</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 325 2018-02-01   18.24384</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 326 2018-03-01   18.70666</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 327 2018-04-01   18.21688</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 328 2018-05-01   15.99836</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 329 2018-06-01   13.04273</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 330 2018-07-01   14.21835</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 331 2018-08-01   13.19977</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 332 2018-09-01   12.79897</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 333 2018-10-01   10.78209</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 334 2018-11-01   11.02612</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 335 2018-12-01    7.91281</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 336 2019-01-01    4.68043</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 337 2019-02-01    6.80691</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 338 2019-03-01    4.53066</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 339 2019-04-01    4.27184</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 340 2019-05-01    5.14684</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 341 2019-06-01   -0.54818</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 342 2019-07-01   -2.70517</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 343 2019-08-01   -3.23054</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 344 2019-09-01   -7.17729</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 345 2019-10-01   -2.20740</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 346 2019-11-01   -0.41002</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 347 2019-12-01    1.25275</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 348 2020-01-01   -0.61328</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 349 2020-02-01   -1.74052</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 350 2020-03-01  -18.56581</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 351 2020-04-01  -48.51900</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 352 2020-05-01  -24.33606</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 353 2020-06-01   -4.06056</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 354 2020-07-01    7.41426</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 355 2020-08-01    5.79200</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 356 2020-09-01    8.74316</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 357 2020-10-01    8.42236</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 358 2020-11-01    0.92333</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 359 2020-12-01    4.66470</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 360 2021-01-01    5.89907</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 361 2021-02-01   10.65327</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 362 2021-03-01   21.92264</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 363 2021-04-01   23.49881</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 364 2021-05-01   21.87226</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 365 2021-06-01   22.23178</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 366 2021-07-01   23.45859</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 367 2021-08-01   17.89076</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 368 2021-09-01   23.05843</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 369 2021-10-01   16.33456</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 370 2021-11-01   16.33627</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 371 2021-12-01   13.48395</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 372 2022-01-01   15.09779</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 373 2022-02-01   14.29561</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 374 2022-03-01   -6.77533</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 375 2022-04-01    0.02419</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 376 2022-05-01    2.21232</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 377 2022-06-01    4.03362</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 378 2022-07-01    0.21289</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 379 2022-08-01   -0.32184</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 380 2022-09-01   -2.01375</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 381 2022-10-01   -1.57500</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 382 2022-11-01    1.27193</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 383 2022-12-01    3.15134</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 384 2023-01-01    4.21089</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 385 2023-02-01    1.78540</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 386 2023-03-01   -0.40042</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 387 2023-04-01    4.98767</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 388 2023-05-01   -1.59988</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 389 2023-06-01   -6.08300</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 390 2023-07-01   -6.04336</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 391 2023-08-01   -4.63899</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 392 2023-09-01   -8.03687</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 393 2023-10-01   -4.64602</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 394 2023-11-01   -3.93218</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 395 2023-12-01   -6.44752</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 396 2024-01-01   -7.51009</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 397 2024-02-01   -6.53914</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 398 2024-03-01   -2.71208</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 399 2024-04-01   -1.16227</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 400 2024-05-01   -1.52511</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 401 2024-06-01   -1.78595</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 402 2024-07-01   -3.17915</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 403 2024-08-01   -5.11138</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 404 2024-09-01   -6.07269</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 405 2024-10-01   -6.09946</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 406 2024-11-01   -5.30974</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 407 2024-12-01   -5.53675</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 408 2025-01-01   -6.64123</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 409 2025-02-01   -4.70256</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 410 2025-03-01   -1.91090</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 411 2025-04-01   -9.23972</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 412 2025-05-01   -2.81967</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 413 2025-06-01   -3.59626</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 414 2025-07-01   -0.07468</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 415 2025-08-01         NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1         &lt;NA&gt;       -5.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2         &lt;NA&gt;       -8.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3         &lt;NA&gt;       -4.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4         &lt;NA&gt;       -4.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5         &lt;NA&gt;       -3.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6         &lt;NA&gt;       -0.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7         &lt;NA&gt;       -0.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8         &lt;NA&gt;        1.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9         &lt;NA&gt;        3.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10        &lt;NA&gt;        3.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11        &lt;NA&gt;        1.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12        &lt;NA&gt;       -0.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13        &lt;NA&gt;       -2.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14        &lt;NA&gt;        0.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15        &lt;NA&gt;       -0.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16        &lt;NA&gt;        0.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17        &lt;NA&gt;        3.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18        &lt;NA&gt;        0.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19        &lt;NA&gt;       -5.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20        &lt;NA&gt;      -10.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21        &lt;NA&gt;      -17.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22        &lt;NA&gt;      -17.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23        &lt;NA&gt;      -14.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24        &lt;NA&gt;      -10.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25        &lt;NA&gt;      -15.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26        &lt;NA&gt;      -11.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27        &lt;NA&gt;      -13.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28        &lt;NA&gt;      -13.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29        &lt;NA&gt;       -9.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30        &lt;NA&gt;       -9.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31        &lt;NA&gt;       -5.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32        &lt;NA&gt;       -4.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33        &lt;NA&gt;       -2.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34        &lt;NA&gt;       -1.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35        &lt;NA&gt;        1.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36        &lt;NA&gt;        5.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37        &lt;NA&gt;        9.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38        &lt;NA&gt;        9.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39        &lt;NA&gt;       15.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40        &lt;NA&gt;       14.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41        &lt;NA&gt;       12.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42        &lt;NA&gt;       13.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43        &lt;NA&gt;       12.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44        &lt;NA&gt;       15.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45        &lt;NA&gt;       16.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46        &lt;NA&gt;       17.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47        &lt;NA&gt;       21.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48        &lt;NA&gt;       13.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 49        &lt;NA&gt;       12.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50        &lt;NA&gt;        8.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 51        &lt;NA&gt;        3.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 52        &lt;NA&gt;        6.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 53        &lt;NA&gt;        6.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 54        &lt;NA&gt;        6.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 55        &lt;NA&gt;        8.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 56        &lt;NA&gt;        6.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 57        &lt;NA&gt;        6.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 58        &lt;NA&gt;        4.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 59        &lt;NA&gt;        7.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 60        &lt;NA&gt;        3.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 61        &lt;NA&gt;        3.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 62        &lt;NA&gt;        2.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 63        &lt;NA&gt;        3.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 64        &lt;NA&gt;        5.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 65        &lt;NA&gt;        5.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 66        &lt;NA&gt;        6.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 67        &lt;NA&gt;        6.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 68        &lt;NA&gt;        9.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 69        &lt;NA&gt;        9.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 70        &lt;NA&gt;       12.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 71        &lt;NA&gt;       11.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 72        &lt;NA&gt;       15.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 73        &lt;NA&gt;       14.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 74        &lt;NA&gt;       14.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 75        &lt;NA&gt;       13.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 76        &lt;NA&gt;       10.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 77        &lt;NA&gt;       13.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 78        &lt;NA&gt;       14.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 79        &lt;NA&gt;       14.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 80        &lt;NA&gt;       18.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 81        &lt;NA&gt;       15.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 82        &lt;NA&gt;       13.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 83        &lt;NA&gt;       13.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 84        &lt;NA&gt;       13.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 85        &lt;NA&gt;       13.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 86        &lt;NA&gt;       13.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 87        &lt;NA&gt;       15.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 88        &lt;NA&gt;       10.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 89        &lt;NA&gt;        8.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 90        &lt;NA&gt;        6.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 91        &lt;NA&gt;        3.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 92        &lt;NA&gt;        0.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 93        &lt;NA&gt;       -3.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 94        &lt;NA&gt;       -0.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 95        &lt;NA&gt;       -1.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 96        &lt;NA&gt;       -3.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 97        &lt;NA&gt;       -7.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 98        &lt;NA&gt;       -1.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 99        &lt;NA&gt;       -2.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 100       &lt;NA&gt;        0.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 101       &lt;NA&gt;        5.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 102       &lt;NA&gt;        4.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 103       &lt;NA&gt;        6.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 104       &lt;NA&gt;        7.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 105       &lt;NA&gt;        9.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 106       &lt;NA&gt;       10.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 107       &lt;NA&gt;       11.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 108       &lt;NA&gt;       12.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 109       &lt;NA&gt;       11.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 110       &lt;NA&gt;       10.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 111       &lt;NA&gt;       13.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 112       &lt;NA&gt;       13.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 113       &lt;NA&gt;       14.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 114       &lt;NA&gt;       13.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 115       &lt;NA&gt;       14.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 116       &lt;NA&gt;       15.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 117       &lt;NA&gt;       13.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 118       &lt;NA&gt;       13.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 119       &lt;NA&gt;       11.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 120       &lt;NA&gt;       12.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 121       &lt;NA&gt;        9.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 122       &lt;NA&gt;        6.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 123       &lt;NA&gt;        3.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 124       &lt;NA&gt;        0.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 125       &lt;NA&gt;       -1.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 126       &lt;NA&gt;       -0.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 127       &lt;NA&gt;        1.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 128       &lt;NA&gt;       -4.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 129       &lt;NA&gt;       -9.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 130       &lt;NA&gt;       -5.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 131       &lt;NA&gt;       -2.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 132       &lt;NA&gt;       -5.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 133       &lt;NA&gt;        0.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 134       &lt;NA&gt;        3.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 135       &lt;NA&gt;        8.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 136       &lt;NA&gt;        8.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 137       &lt;NA&gt;        8.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 138       &lt;NA&gt;        8.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 139       &lt;NA&gt;        7.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 140       &lt;NA&gt;        6.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 141       &lt;NA&gt;        6.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 142       &lt;NA&gt;        5.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 143       &lt;NA&gt;        6.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 144       &lt;NA&gt;        7.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 145       &lt;NA&gt;        4.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 146       &lt;NA&gt;        2.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 147       &lt;NA&gt;        2.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 148       &lt;NA&gt;        2.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 149       &lt;NA&gt;        2.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 150       &lt;NA&gt;        2.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 151       &lt;NA&gt;        4.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 152       &lt;NA&gt;        8.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 153       &lt;NA&gt;       12.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 154       &lt;NA&gt;       12.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 155       &lt;NA&gt;       10.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 156       &lt;NA&gt;       10.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 157       &lt;NA&gt;       11.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 158       &lt;NA&gt;       13.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 159       &lt;NA&gt;       14.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 160       &lt;NA&gt;       15.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 161       &lt;NA&gt;       15.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 162       &lt;NA&gt;       17.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 163       &lt;NA&gt;       19.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 164       &lt;NA&gt;       17.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 165       &lt;NA&gt;       17.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 166       &lt;NA&gt;       15.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 167       &lt;NA&gt;       15.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 168       &lt;NA&gt;       13.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 169       &lt;NA&gt;       16.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 170       &lt;NA&gt;       15.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 171       &lt;NA&gt;       16.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 172       &lt;NA&gt;       11.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 173       &lt;NA&gt;       13.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 174       &lt;NA&gt;       14.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 175       &lt;NA&gt;       14.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 176       &lt;NA&gt;       16.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 177       &lt;NA&gt;       16.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 178       &lt;NA&gt;       17.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 179       &lt;NA&gt;       19.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 180       &lt;NA&gt;       23.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 181       &lt;NA&gt;       22.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 182       &lt;NA&gt;       22.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 183       &lt;NA&gt;       21.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 184       &lt;NA&gt;       18.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 185       &lt;NA&gt;       20.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 186       &lt;NA&gt;       17.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 187       &lt;NA&gt;       14.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 188       &lt;NA&gt;       18.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 189       &lt;NA&gt;       20.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 190       &lt;NA&gt;       22.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 191       &lt;NA&gt;       22.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 192       &lt;NA&gt;       22.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 193       &lt;NA&gt;       20.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 194       &lt;NA&gt;       19.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 195       &lt;NA&gt;       19.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 196       &lt;NA&gt;       21.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 197       &lt;NA&gt;       20.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 198       &lt;NA&gt;       18.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 199       &lt;NA&gt;       18.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 200       &lt;NA&gt;       19.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 201       &lt;NA&gt;       18.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 202       &lt;NA&gt;       19.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 203       &lt;NA&gt;       19.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 204       &lt;NA&gt;       19.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 205       &lt;NA&gt;       17.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 206       &lt;NA&gt;       18.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 207       &lt;NA&gt;       14.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 208       &lt;NA&gt;       13.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 209       &lt;NA&gt;       10.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 210       &lt;NA&gt;        7.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 211       &lt;NA&gt;        5.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 212       &lt;NA&gt;       -1.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 213       &lt;NA&gt;      -10.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 214       &lt;NA&gt;      -20.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 215       &lt;NA&gt;      -31.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 216       &lt;NA&gt;      -32.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 217       &lt;NA&gt;      -31.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 218       &lt;NA&gt;      -34.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 219       &lt;NA&gt;      -27.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 220       &lt;NA&gt;      -21.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 221       &lt;NA&gt;      -17.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 222       &lt;NA&gt;       -8.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 223       &lt;NA&gt;        0.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 224       &lt;NA&gt;        2.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 225       &lt;NA&gt;        6.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 226       &lt;NA&gt;       11.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 227       &lt;NA&gt;       12.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 228       &lt;NA&gt;       15.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 229       &lt;NA&gt;       18.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 230       &lt;NA&gt;       18.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 231       &lt;NA&gt;       20.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 232       &lt;NA&gt;       21.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 233       &lt;NA&gt;       22.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 234       &lt;NA&gt;       21.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 235       &lt;NA&gt;       22.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 236       &lt;NA&gt;       23.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 237       &lt;NA&gt;       23.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 238       &lt;NA&gt;       22.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 239       &lt;NA&gt;       24.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 240       &lt;NA&gt;       26.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 241       &lt;NA&gt;       24.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 242       &lt;NA&gt;       22.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 243       &lt;NA&gt;       20.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 244       &lt;NA&gt;       18.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 245       &lt;NA&gt;       17.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 246       &lt;NA&gt;       13.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 247       &lt;NA&gt;       12.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 248       &lt;NA&gt;        7.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 249       &lt;NA&gt;        9.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 250       &lt;NA&gt;        6.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 251       &lt;NA&gt;        9.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 252       &lt;NA&gt;        7.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 253       &lt;NA&gt;        8.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 254       &lt;NA&gt;        9.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 255       &lt;NA&gt;        8.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 256       &lt;NA&gt;        9.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 257       &lt;NA&gt;        5.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 258       &lt;NA&gt;        5.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 259       &lt;NA&gt;        3.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 260       &lt;NA&gt;        1.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 261       &lt;NA&gt;       -1.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 262       &lt;NA&gt;        5.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 263       &lt;NA&gt;        6.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 264       &lt;NA&gt;        6.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 265       &lt;NA&gt;       11.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 266       &lt;NA&gt;        8.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 267       &lt;NA&gt;        9.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 268       &lt;NA&gt;        7.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 269       &lt;NA&gt;        9.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 270       &lt;NA&gt;       11.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 271       &lt;NA&gt;       13.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 272       &lt;NA&gt;       16.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 273       &lt;NA&gt;       15.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 274       &lt;NA&gt;       18.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 275       &lt;NA&gt;       15.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 276       &lt;NA&gt;       16.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 277       &lt;NA&gt;       15.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 278       &lt;NA&gt;       12.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 279       &lt;NA&gt;       11.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 280       &lt;NA&gt;       11.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 281       &lt;NA&gt;       10.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 282       &lt;NA&gt;        9.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 283       &lt;NA&gt;        8.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 284       &lt;NA&gt;        6.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 285       &lt;NA&gt;        7.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 286       &lt;NA&gt;        6.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 287       &lt;NA&gt;        7.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 288       &lt;NA&gt;        8.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 289       &lt;NA&gt;       10.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 290       &lt;NA&gt;       11.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 291       &lt;NA&gt;       11.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 292       &lt;NA&gt;       10.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 293       &lt;NA&gt;       11.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 294       &lt;NA&gt;        9.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 295       &lt;NA&gt;       11.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 296       &lt;NA&gt;        9.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 297       &lt;NA&gt;        7.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 298       &lt;NA&gt;        7.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 299       &lt;NA&gt;        9.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 300       &lt;NA&gt;        6.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 301       &lt;NA&gt;        5.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 302       &lt;NA&gt;        6.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 303       &lt;NA&gt;        6.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 304       &lt;NA&gt;        7.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 305       &lt;NA&gt;        9.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 306       &lt;NA&gt;        9.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 307       &lt;NA&gt;        9.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 308       &lt;NA&gt;       10.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 309       &lt;NA&gt;       13.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 310       &lt;NA&gt;        7.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 311       &lt;NA&gt;        9.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 312       &lt;NA&gt;       12.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 313       &lt;NA&gt;       14.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 314       &lt;NA&gt;       17.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 315       &lt;NA&gt;       18.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 316       &lt;NA&gt;       21.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 317       &lt;NA&gt;       20.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 318       &lt;NA&gt;       24.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 319       &lt;NA&gt;       19.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 320       &lt;NA&gt;       19.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 321       &lt;NA&gt;       21.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 322       &lt;NA&gt;       20.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 323       &lt;NA&gt;       20.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 324       &lt;NA&gt;       19.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 325       &lt;NA&gt;       18.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 326       &lt;NA&gt;       18.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 327       &lt;NA&gt;       18.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 328       &lt;NA&gt;       16.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 329       &lt;NA&gt;       13.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 330       &lt;NA&gt;       14.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 331       &lt;NA&gt;       13.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 332       &lt;NA&gt;       12.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 333       &lt;NA&gt;       10.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 334       &lt;NA&gt;       11.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 335       &lt;NA&gt;        7.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 336       &lt;NA&gt;        4.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 337       &lt;NA&gt;        6.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 338       &lt;NA&gt;        4.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 339       &lt;NA&gt;        4.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 340       &lt;NA&gt;        5.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 341       &lt;NA&gt;       -0.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 342       &lt;NA&gt;       -2.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 343       &lt;NA&gt;       -3.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 344       &lt;NA&gt;       -7.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 345       &lt;NA&gt;       -2.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 346       &lt;NA&gt;       -0.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 347       &lt;NA&gt;        1.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 348       &lt;NA&gt;       -0.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 349       &lt;NA&gt;       -1.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 350       &lt;NA&gt;      -18.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 351       &lt;NA&gt;      -48.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 352       &lt;NA&gt;      -24.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 353       &lt;NA&gt;       -4.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 354       &lt;NA&gt;        7.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 355       &lt;NA&gt;        5.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 356       &lt;NA&gt;        8.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 357       &lt;NA&gt;        8.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 358       &lt;NA&gt;        0.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 359       &lt;NA&gt;        4.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 360       &lt;NA&gt;        5.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 361       &lt;NA&gt;       10.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 362       &lt;NA&gt;       21.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 363       &lt;NA&gt;       23.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 364       &lt;NA&gt;       21.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 365       &lt;NA&gt;       22.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 366       &lt;NA&gt;       23.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 367       &lt;NA&gt;       17.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 368       &lt;NA&gt;       23.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 369       &lt;NA&gt;       16.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 370       &lt;NA&gt;       16.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 371       &lt;NA&gt;       13.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 372       &lt;NA&gt;       15.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 373       &lt;NA&gt;       14.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 374       &lt;NA&gt;       -6.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 375       &lt;NA&gt;        0.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 376       &lt;NA&gt;        2.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 377       &lt;NA&gt;        4.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 378       &lt;NA&gt;        0.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 379       &lt;NA&gt;       -0.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 380       &lt;NA&gt;       -2.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 381       &lt;NA&gt;       -1.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 382       &lt;NA&gt;        1.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 383       &lt;NA&gt;        3.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 384       &lt;NA&gt;        4.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 385       &lt;NA&gt;        1.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 386       &lt;NA&gt;       -0.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 387       &lt;NA&gt;        5.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 388       &lt;NA&gt;       -1.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 389       &lt;NA&gt;       -6.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 390       &lt;NA&gt;       -6.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 391       &lt;NA&gt;       -4.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 392       &lt;NA&gt;       -8.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 393       &lt;NA&gt;       -4.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 394       &lt;NA&gt;       -4.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 395       &lt;NA&gt;       -6.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 396       &lt;NA&gt;       -7.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 397       &lt;NA&gt;       -6.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 398       &lt;NA&gt;       -2.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 399       &lt;NA&gt;       -1.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 400       &lt;NA&gt;       -1.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 401       &lt;NA&gt;       -1.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 402       &lt;NA&gt;       -3.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 403       &lt;NA&gt;       -4.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 404       &lt;NA&gt;       -6.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 405       &lt;NA&gt;       -6.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 406       &lt;NA&gt;       -5.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 407       &lt;NA&gt;       -5.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 408       &lt;NA&gt;       -6.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 409       &lt;NA&gt;       -4.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 410       &lt;NA&gt;       -1.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 411       &lt;NA&gt;       -9.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 412       &lt;NA&gt;       -2.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 413       &lt;NA&gt;       -3.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 414       &lt;NA&gt;       -0.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 415       &lt;NA&gt;       -3.6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 416 2025-09-01         NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 417 2025-10-01         NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 418 2025-11-01         NA</span>
