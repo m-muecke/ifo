@@ -23,7 +23,7 @@ A \code{data.frame()} containing the monthly ifo climate time series.
 Return ifo climate data
 }
 \examples{
-\dontshow{if (curl::has_internet()) withAutoprint(\{ # examplesIf}
+\dontshow{if (curl::has_internet()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \donttest{
 ifo_climate("import")
 }
