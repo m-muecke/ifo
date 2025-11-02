@@ -51,7 +51,7 @@ head(climate)
 #> 3 2005-03-01          NA                4.9   climate  index  90.1
 #> 4 2005-04-01          NA               18.7   climate  index  89.9
 #> 5 2005-05-01          NA               11.7   climate  index  89.3
-#> 6 2005-06-01          NA               32.1   climate  index  89.4
+#> 6 2005-06-01          NA               32.1   climate  index  89.3
 ```
 
 <img src="man/figures/README-plotting-1.png" width="100%" />
