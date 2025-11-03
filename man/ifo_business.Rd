@@ -33,7 +33,7 @@ A \code{data.frame()} containing the monthly ifo business climate time series.
 Return ifo business climate data
 }
 \examples{
-\dontshow{if (curl::has_internet()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (curl::has_internet()) withAutoprint(\{ # examplesIf}
 \donttest{
 ifo_business("germany")
 }
