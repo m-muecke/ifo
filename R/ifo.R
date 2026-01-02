@@ -114,15 +114,15 @@ ifo_business <- function(
 #' }
 ifo_expectation <- function(type = c("export", "employment")) {
   type <- match.arg(type)
-  if (type == "export") {
-    tab <- ifo_download(
+  tab <- switch(
+    type,
+    export = ifo_download(
       type = "export",
       skip = 10L,
       col_names = c("yearmonth", "expecation"),
       col_types = c("date", "numeric")
-    )
-  } else {
-    tab <- ifo_download(
+    ),
+    employment = ifo_download(
       type = "employment",
       skip = 9L,
       col_names = c(
@@ -135,7 +135,7 @@ ifo_expectation <- function(type = c("export", "employment")) {
       ),
       col_types = c("date", rep("numeric", 5L))
     )
-  }
+  )
   tab <- setDF(tab)
   tab
 }
@@ -158,28 +158,27 @@ ifo_expectation <- function(type = c("export", "employment")) {
 #' }
 ifo_climate <- function(type = c("import", "export", "world", "euro")) {
   type <- match.arg(type)
-  if (type == "import") {
-    tab <- ifo_download(
+  tab <- switch(
+    type,
+    import = ifo_download(
       type = "import_climate",
       skip = 10L,
       col_names = c("yearmonth", "climate"),
       col_types = c("date", "numeric")
-    )
-  } else if (type == "export") {
-    tab <- ifo_download(
+    ),
+    export = ifo_download(
       type = "export_climate",
       skip = 10L,
       col_names = c("yearmonth", "ifo_climate", "special_trade"),
       col_types = c("date", "numeric", "numeric")
-    )
-  } else {
-    tab <- ifo_download(
+    ),
+    ifo_download(
       type = type,
       skip = 11L,
       col_names = c("yearmonth", "economic_climate", "present_situation", "expectation"),
       col_types = c("text", rep("numeric", 3L))
     )
-  }
+  )
   tab <- setDF(tab)
   tab
 }
