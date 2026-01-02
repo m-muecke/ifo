@@ -10,13 +10,13 @@
 Source:
 [`DESCRIPTION`](https://github.com/m-muecke/ifo/blob/main/DESCRIPTION)
 
-Mücke M (2025). *ifo: Client for the Ifo Institute Time Series*. R
+Mücke M (2026). *ifo: Client for the Ifo Institute Time Series*. R
 package version 0.2.2.9000, <https://m-muecke.github.io/ifo/>.
 
     @Manual{,
       title = {ifo: Client for the Ifo Institute Time Series},
       author = {Maximilian Mücke},
-      year = {2025},
+      year = {2026},
       note = {R package version 0.2.2.9000},
       url = {https://m-muecke.github.io/ifo/},
     }
