@@ -119,7 +119,7 @@ ifo_expectation <- function(type = c("export", "employment")) {
     export = ifo_download(
       type = "export",
       skip = 10L,
-      col_names = c("yearmonth", "expecation"),
+      col_names = c("yearmonth", "expectation"),
       col_types = c("date", "numeric")
     ),
     employment = ifo_download(
@@ -127,7 +127,7 @@ ifo_expectation <- function(type = c("export", "employment")) {
       skip = 9L,
       col_names = c(
         "yearmonth",
-        "expecation",
+        "expectation",
         "manufacturing",
         "construction",
         "trade",
@@ -191,7 +191,7 @@ ifo_download <- function(type, ...) {
   tab <- setDT(readxl::read_xlsx(tf, ...))
   yearmonth <- NULL
   if (inherits(tab$yearmonth, "POSIXct")) {
-    tab[, yearmonth := as.Date(format(yearmonth, "%Y-%m-01"))]
+    tab[, yearmonth := as.Date(trunc(yearmonth, "months"))]
   } else {
     tab[, yearmonth := as.Date(paste0("01/", yearmonth), "%d/%m/%Y")] # nolint
   }
