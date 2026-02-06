@@ -1,4 +1,4 @@
-# ifo (development version)
+# ifo 0.2.3
 
 * `ifo_expectation()` now returns column `expectation` instead of the
   misspelled `expecation`.
