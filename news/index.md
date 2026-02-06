@@ -2,6 +2,10 @@
 
 ## ifo (development version)
 
+- [`ifo_expectation()`](https://m-muecke.github.io/ifo/reference/ifo_expectation.md)
+  now returns column `expectation` instead of the misspelled
+  `expecation`.
+
 ## ifo 0.2.2
 
 CRAN release: 2025-08-31

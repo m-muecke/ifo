@@ -17,7 +17,7 @@ ifo_expectation(type = c("export", "employment"))
 - type:
 
   (`character(1)`)  
-  Defaults to `"employment"`. One of:
+  Defaults to `"export"`. One of:
 
   - `"export"`: returns the ifo export expectations for manufacturing.
 
