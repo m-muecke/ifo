@@ -11,7 +11,7 @@ ifo_expectation(type = c("export", "employment"))
 }
 \arguments{
 \item{type}{(\code{character(1)})\cr
-Defaults to \code{"employment"}. One of:
+Defaults to \code{"export"}. One of:
 \itemize{
 \item \code{"export"}: returns the ifo export expectations for manufacturing.
 \item \code{"employment"}: returns the ifo employment barometer for Germany.

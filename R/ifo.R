@@ -102,7 +102,7 @@ ifo_business <- function(
 #' Return ifo expectation data
 #'
 #' @param type (`character(1)`)\cr
-#'   Defaults to `"employment"`. One of:
+#'   Defaults to `"export"`. One of:
 #'   * `"export"`: returns the ifo export expectations for manufacturing.
 #'   * `"employment"`: returns the ifo employment barometer for Germany.
 #' @returns A `data.frame()` containing the monthly ifo expectation time series.
