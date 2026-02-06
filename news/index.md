@@ -1,5 +1,7 @@
 # Changelog
 
+## ifo (development version)
+
 ## ifo 0.2.3
 
 - [`ifo_expectation()`](https://m-muecke.github.io/ifo/reference/ifo_expectation.md)
