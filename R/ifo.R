@@ -149,6 +149,7 @@ ifo_expectation <- function(type = c("export", "employment")) {
 #'   * `"world"`: returns the ifo world economic climate.
 #'   * `"euro"`: returns the ifo world economic climate for the euro zone.
 #' @returns A `data.frame()` containing the monthly ifo climate time series.
+#' @inherit ifo_business source
 #' @references
 #' `r format_bib("grimme2018ifo", "grimme2021forecasting")`
 #' @export

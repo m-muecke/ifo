@@ -3,6 +3,9 @@
 \name{ifo_climate}
 \alias{ifo_climate}
 \title{Return ifo climate data}
+\source{
+\url{https://www.ifo.de/en/ifo-time-series}
+}
 \usage{
 ifo_climate(type = c("import", "export", "world", "euro"))
 }
