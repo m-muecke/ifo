@@ -8,6 +8,10 @@ Return ifo climate data
 ifo_climate(type = c("import", "export", "world", "euro"))
 ```
 
+## Source
+
+<https://www.ifo.de/en/ifo-time-series>
+
 ## Arguments
 
 - type:

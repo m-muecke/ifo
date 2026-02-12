@@ -67,7 +67,7 @@ climate |>
   ) +
   scale_color_manual(
     values = c(climate = "darkred", situation = "darkgrey", expectation = "darkblue"),
-    labels = c("ifo Business Climate", "Assessment of Business Situtation", "Business Expectation")
+    labels = c("ifo Business Climate", "Assessment of Business Situation", "Business Expectation")
   ) +
   theme_ifo()
 ```
@@ -107,7 +107,7 @@ ggplot(sectors, aes(x = yearmonth, y = value, color = indicator)) +
   ) +
   scale_color_manual(
     values = c(climate = "darkred", situation = "darkgrey", expectation = "darkblue"),
-    labels = c("ifo Business Climate", "Assessment of Business Situtation", "Business Expectation")
+    labels = c("ifo Business Climate", "Assessment of Business Situation", "Business Expectation")
   ) +
   theme_ifo()
 ```

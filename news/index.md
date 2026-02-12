@@ -4,6 +4,8 @@
 
 ## ifo 0.2.3
 
+CRAN release: 2026-02-06
+
 - [`ifo_expectation()`](https://m-muecke.github.io/ifo/reference/ifo_expectation.md)
   now returns column `expectation` instead of the misspelled
   `expecation`.
