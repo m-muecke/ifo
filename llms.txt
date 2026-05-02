@@ -14,12 +14,14 @@ You can install the released version of ifo from
 [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
+
 install.packages("ifo")
 ```
 
 And the development version from [GitHub](https://github.com/) with:
 
 ``` r
+
 # install.packages("pak")
 pak::pak("m-muecke/ifo")
 ```
@@ -27,6 +29,7 @@ pak::pak("m-muecke/ifo")
 ## Usage
 
 ``` r
+
 library(ifo)
 
 climate <- ifo_business()

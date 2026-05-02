@@ -30,6 +30,7 @@ or see examples of themes in the
 [ggthemes](https://cran.r-project.org/package=ggthemes) package.
 
 ``` r
+
 library(ggplot2)
 
 theme_ifo <- function(...) {
@@ -52,6 +53,7 @@ theme_ifo <- function(...) {
 ### ifo Business Climate Germany
 
 ``` r
+
 library(ifo)
 
 climate <- ifo_business()
@@ -77,6 +79,7 @@ climate |>
 ### ifo Business Climate by Sector
 
 ``` r
+
 sectors <- ifo_business("sectors") |>
   subset(
     series == "balance" &
@@ -117,6 +120,7 @@ ggplot(sectors, aes(x = yearmonth, y = value, color = indicator)) +
 ### ifo Business Uncertainty Germany
 
 ``` r
+
 climate |>
   subset(select = c(yearmonth, uncertainty)) |>
   na.omit() |>
