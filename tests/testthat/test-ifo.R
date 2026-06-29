@@ -13,7 +13,9 @@ test_that("ifo_url() returns expected result", {
     "export",
     "employment",
     "export_climate",
-    "import_climate"
+    "import_climate",
+    "world",
+    "euro"
   )
   lapply(types, \(type) expect_length(ifo_url(type), 1L))
 })

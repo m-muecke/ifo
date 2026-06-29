@@ -223,5 +223,8 @@ ifo_url <- function(type) {
   if (length(url) == 0L) {
     stop("No ifo data found for type: ", type, call. = FALSE)
   }
+  if (length(url) > 1L) {
+    stop("Found multiple ifo data urls for type: ", type, call. = FALSE)
+  }
   paste0("https://www.ifo.de", url)
 }
