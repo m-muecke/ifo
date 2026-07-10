@@ -1,5 +1,7 @@
 # ifo (development version)
 
+* New article showing how to use the ifo Business Climate Index as a leading indicator for German industrial production, with cross-correlation, Granger causality, and a simple forecast comparison.
+
 # ifo 0.2.5
 
 * Trailing undated rows used for workbook footnotes are no longer returned.
