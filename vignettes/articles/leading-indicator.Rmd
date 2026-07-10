@@ -1,0 +1,232 @@
+---
+title: "The ifo index as a leading indicator"
+---
+
+```{r}
+#| include: false
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  out.width = "100%",
+  dpi = 300L
+)
+```
+
+The ifo Business Climate Index is widely used as a *leading indicator* for the German
+economy: because firms are surveyed about their current situation and their expectations
+before the official statistics are compiled, the index is meant to signal turning points in
+economic activity ahead of the hard data.
+This article puts that claim to the test by (loosely) replicating
+[Schröder and Hüfner (2002)](https://ftp.zew.de/pub/zew-docs/dp/dp0256.pdf), who study how
+useful sentiment indicators are for forecasting German economic activity.
+
+Following [Fritsche and Stephan (2002)](https://www.diw.de/documents/publikationen/73/diw_01.c.38193.de/dp241.pdf),
+we ask whether the ifo index satisfies three criteria of a good leading indicator:
+
+1. **Co-movement** with the reference series (industrial production).
+2. A statistically significant, one-directional relationship — the indicator should help
+   predict activity, not merely react to it.
+3. **Forecast value** — it should improve a forecast beyond what the activity series predicts
+   about itself.
+
+We use the ifo Business Climate together with the German industrial production index, which is
+monthly (like the ifo survey) and therefore needs no mixed-frequency modelling.
+Industrial production is downloaded from the Deutsche Bundesbank with the
+[bbk](https://m-muecke.github.io/bbk/) package.
+
+```{r}
+#| label: setup
+#| message: false
+library(ifo)
+library(bbk)
+library(data.table)
+library(ggplot2)
+
+theme_ifo <- function(...) {
+  theme_minimal(...) +
+    theme(
+      legend.title = element_blank(),
+      legend.position = "top",
+      plot.title = element_text(face = "bold"),
+      plot.caption = element_text(hjust = 0, vjust = 0, size = 8, margin = margin(10, 0, 0, 0)),
+      panel.grid.major.y = element_line(color = "black", linewidth = 0.2),
+      panel.grid.major.x = element_blank(),
+      panel.grid.minor = element_blank(),
+      axis.text = element_text(color = "black"),
+      plot.margin = margin(10, 10, 10, 10)
+    )
+}
+```
+
+### Assembling the data
+
+The ifo Business Climate for Germany comes in long format; we keep the headline *index* values
+and reshape the three indicators (climate, situation, expectation) into columns.
+
+```{r}
+#| label: ifo-data
+ifo <- setDT(ifo_business("germany"))
+ifo <- ifo[series == "index"]
+ifo <- dcast(ifo, yearmonth ~ indicator, value.var = "value")
+head(ifo)
+```
+
+German industrial production (producing sector excluding construction, calendar and
+seasonally adjusted, 2021 = 100) is a single Bundesbank series.
+We convert the level index into a **year-on-year growth rate**, the transformation used by
+Schröder and Hüfner as their measure of economic activity.
+
+```{r}
+#| label: ip-data
+ip <- bbk_data("BBDE1", key = "M.DE.Y.BAA1.A2P100000.G.C.I21.A")
+ip <- ip[order(date), .(yearmonth = date, ip = value)]
+ip[, ip_growth := 100 * (ip / shift(ip, 12L) - 1)]
+
+activity <- merge(ifo, ip, by = "yearmonth")[!is.na(ip_growth)]
+```
+
+### Criterion 1: co-movement
+
+Plotting the ifo climate index against industrial-production growth shows how tightly the two
+series move together (both standardised to make them comparable on one axis).
+
+```{r}
+#| label: comovement
+#| dpi: 300
+z <- function(x) (x - mean(x)) / sd(x)
+activity[, .(yearmonth, ifo = z(climate), ip = z(ip_growth))] |>
+  melt(id.vars = "yearmonth") |>
+  ggplot(aes(x = yearmonth, y = value, color = variable)) +
+  geom_line() +
+  labs(
+    title = "ifo Business Climate and industrial production",
+    subtitle = "Standardised (z-scores), monthly",
+    caption = sprintf(
+      "Sources: ifo Business Survey and Deutsche Bundesbank, %s.",
+      format(max(activity$yearmonth), "%B %Y")
+    )
+  ) +
+  scale_color_manual(
+    values = c(ifo = "darkred", ip = "darkblue"),
+    labels = c("ifo Business Climate", "Industrial production (YoY growth)")
+  ) +
+  theme_ifo()
+```
+
+The contemporaneous correlation is high:
+
+```{r}
+#| label: correlation
+cor(activity$climate, activity$ip_growth)
+```
+
+To see the lead/lag structure we look at the cross-correlation function.
+Negative lags describe the ifo index *leading* production growth.
+Here it pays to separate the headline climate index into its two ingredients: the assessment
+of the **current situation** and the forward-looking **expectations**.
+Schröder and Hüfner stress the expectations component, since a genuinely leading signal should
+come from what firms anticipate rather than from what they already observe.
+
+```{r}
+#| label: crosscorrelation
+#| dpi: 300
+xcorr <- function(x) {
+  cc <- ccf(activity[[x]], activity$ip_growth, lag.max = 12L, plot = FALSE)
+  data.table(component = x, lag = as.integer(cc$lag), correlation = as.numeric(cc$acf))
+}
+
+rbindlist(lapply(c("situation", "expectation", "climate"), xcorr)) |>
+  ggplot(aes(x = lag, y = correlation, color = component)) +
+  geom_line() +
+  geom_vline(xintercept = 0, linewidth = 0.3) +
+  labs(
+    title = "Cross-correlation with industrial-production growth",
+    subtitle = "Negative lags: the ifo component leads production growth"
+  ) +
+  scale_color_manual(
+    values = c(situation = "darkgrey", expectation = "darkblue", climate = "darkred"),
+    labels = c("Business Climate", "Business Expectations", "Business Situation")
+  ) +
+  theme_ifo() +
+  theme(panel.grid.major.x = element_line(color = "grey85", linewidth = 0.2))
+```
+
+The three curves peak at different lags: expectations peak at a *negative* lag (leading
+production growth), the current-situation assessment peaks at a *positive* lag (lagging it), and
+the headline climate index sits between the two.
+So co-movement on its own is broadly coincident, but it already hints that the forward-looking
+component leads.
+To confirm the direction we need a formal test.
+
+### Criterion 2: Granger causality
+
+A leading indicator should carry information about the *future* of the reference series.
+The [Granger causality](https://en.wikipedia.org/wiki/Granger_causality) test asks whether past
+values of the ifo index improve a forecast of production growth beyond production growth's own
+past — and, crucially, whether the reverse also holds.
+
+```{r}
+#| label: granger
+lmtest::grangertest(ip_growth ~ climate, order = 3L, data = activity)
+lmtest::grangertest(climate ~ ip_growth, order = 3L, data = activity)
+```
+
+The result is clean and one-directional: the ifo climate index Granger-causes
+industrial-production growth (p < 0.001), while production growth does *not* Granger-cause the
+ifo index.
+The survey leads the hard data, not the other way around — exactly what a leading indicator
+should do.
+
+Consistent with the cross-correlation, the forward-looking expectations component gives an even
+stronger signal than the headline climate index.
+
+```{r}
+#| label: granger-expectation
+lmtest::grangertest(ip_growth ~ expectation, order = 3L, data = activity)
+```
+
+### Criterion 3: forecast value
+
+Finally, does the ifo index actually improve a forecast?
+We compare an autoregressive benchmark that predicts production growth from its own three lags
+against the same model augmented with three lags of the ifo climate index (the specification
+underlying the Granger test above).
+
+```{r}
+#| label: forecast
+dt <- activity[, .(
+  ip_growth,
+  g1 = shift(ip_growth, 1L), g2 = shift(ip_growth, 2L), g3 = shift(ip_growth, 3L),
+  c1 = shift(climate, 1L), c2 = shift(climate, 2L), c3 = shift(climate, 3L)
+)]
+dt <- dt[complete.cases(dt)]
+
+ar <- lm(ip_growth ~ g1 + g2 + g3, data = dt)
+ar_ifo <- lm(ip_growth ~ g1 + g2 + g3 + c1 + c2 + c3, data = dt)
+
+rmse <- function(m) sqrt(mean(residuals(m)^2))
+data.table(
+  model = c("AR(3)", "AR(3) + ifo"),
+  adj_r2 = c(summary(ar)$adj.r.squared, summary(ar_ifo)$adj.r.squared),
+  rmse = c(rmse(ar), rmse(ar_ifo))
+)
+```
+
+Adding the ifo index lowers the in-sample forecast error and raises the adjusted R², and the
+improvement is statistically significant:
+
+```{r}
+#| label: forecast-test
+anova(ar, ar_ifo)
+```
+
+### Caveat: real-time versus final data
+
+These results use the *final vintage* of industrial production. In real time the ifo index is
+even more valuable, because the official production figures for a given month are published with
+a delay of several weeks and are subsequently revised — precisely the gap a timely survey fills.
+Conversely, an out-of-sample, real-time evaluation would show smaller gains than the in-sample
+fit here; see
+[Lehmann and Reif (2021)](https://link.springer.com/article/10.1007/s41549-021-00055-5) for a
+rigorous real-time horse-race. The exercise above is meant to illustrate the mechanics of
+assessing a leading indicator, not to settle its forecasting record.
