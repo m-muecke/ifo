@@ -4,6 +4,8 @@ export(ifo_business)
 export(ifo_climate)
 export(ifo_expectation)
 import(data.table)
-importFrom(rvest,html_attr)
-importFrom(rvest,html_elements)
-importFrom(rvest,read_html)
+importFrom(rvest,
+  html_attr,
+  html_elements,
+  read_html
+)
