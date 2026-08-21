@@ -33,12 +33,12 @@ A \code{data.frame()} containing the monthly ifo business climate time series.
 Return ifo business climate data
 }
 \details{
-With \code{long_format = TRUE}, \code{type} \code{"germany"} and \code{"sectors"} gather their series into \code{value},
-described by \code{indicator} (climate, situation or expectation) and \code{series} (index or balance),
-plus \code{sector} for \code{"sectors"}. Sector \code{"industry"} is what the source calls "Industry and
-Trade", and is the only one reported as both an index and a balance; the rest are balances.
-\code{"germany"} also carries \code{uncertainty} and \code{economic_expansion}, which are repeated across the
-six \code{indicator}/\code{series} rows of each month.
+With \code{long_format = TRUE}, \code{type} \code{"germany"} and \code{"sectors"} put every observation in \code{value}.
+\code{indicator} names it climate, situation or expectation, and \code{series} marks it an index or a
+balance. \code{"sectors"} adds a \code{sector} column. Its \code{"industry"} level is what the source calls
+"Industry and Trade", and the only level with both an index and a balance. The rest are
+balances only. \code{"germany"} also returns \code{uncertainty} and \code{economic_expansion}. Both repeat
+across the six \code{indicator}/\code{series} rows of each month.
 }
 \examples{
 \dontshow{if (curl::has_internet()) withAutoprint(\{ # examplesIf}

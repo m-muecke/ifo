@@ -24,8 +24,8 @@ A \code{data.frame()} containing the monthly ifo expectation time series.
 Return ifo expectation data
 }
 \details{
-For \code{type} \code{"employment"}, \code{expectation} is the employment barometer itself, an index with
-2015 = 100, while \code{manufacturing}, \code{construction}, \code{trade} and \code{service_sector} are balances.
+For \code{type} \code{"employment"}, \code{expectation} is the barometer, an index with 2015 = 100. The four
+sector columns are balances.
 }
 \examples{
 \dontshow{if (curl::has_internet()) withAutoprint(\{ # examplesIf}
