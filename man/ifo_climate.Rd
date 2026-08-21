@@ -20,7 +20,8 @@ Defaults to \code{"import"}. One of:
 }}
 }
 \value{
-A \code{data.frame()} containing the monthly ifo climate time series.
+A \code{data.frame()} containing the ifo climate time series. Monthly for \code{"import"} and
+\code{"export"}, quarterly for \code{"world"} and \code{"euro"}.
 }
 \description{
 Return ifo climate data

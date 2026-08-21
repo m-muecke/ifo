@@ -3,6 +3,7 @@
 * Trailing rows without a date, which the ifo workbooks use for footnotes, are no longer returned.
 * `ifo_business()` no longer emits hundreds of coercion warnings for `type = "eastern"` and `type = "saxony"`, whose workbooks store their numbers as text.
 * `ifo_business("sectors")` now correctly labels the industry columns, which previously had the index and balance values swapped.
+* `ifo_climate("world")` and `ifo_climate("euro")` now return quarter start dates. Their rows are labelled by quarter, but were read as months, which placed 30 years of data in January to April of each year.
 * `ifo_expectation("export")` no longer drops the first observation.
 
 # ifo 0.2.4

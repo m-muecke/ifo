@@ -151,7 +151,8 @@ ifo_expectation <- function(type = c("export", "employment")) {
 #'   * `"export"`: returns the ifo export climate.
 #'   * `"world"`: returns the ifo world economic climate.
 #'   * `"euro"`: returns the ifo world economic climate for the euro zone.
-#' @returns A `data.frame()` containing the monthly ifo climate time series.
+#' @returns A `data.frame()` containing the ifo climate time series. Monthly for `"import"` and
+#'   `"export"`, quarterly for `"world"` and `"euro"`.
 #' @inherit ifo_business source
 #' @references
 #' `r format_bib("grimme2018ifo", "grimme2021forecasting")`
@@ -179,6 +180,7 @@ ifo_climate <- function(type = c("import", "export", "world", "euro")) {
     ),
     ifo_download(
       type = type,
+      quarterly = TRUE,
       skip = 11L,
       col_names = c("yearmonth", "economic_climate", "present_situation", "expectation"),
       col_types = c("text", rep("numeric", 3L))
@@ -188,7 +190,7 @@ ifo_climate <- function(type = c("import", "export", "world", "euro")) {
   tab
 }
 
-ifo_download <- function(type, ...) {
+ifo_download <- function(type, ..., quarterly = FALSE) {
   url <- ifo_url(type)
   tf <- tempfile(fileext = ".xlsx")
   on.exit(unlink(tf), add = TRUE)
@@ -197,6 +199,10 @@ ifo_download <- function(type, ...) {
   yearmonth <- NULL
   if (inherits(tab$yearmonth, "POSIXct")) {
     tab[, yearmonth := as.Date(trunc(yearmonth, "months"))]
+  } else if (quarterly) {
+    quarter <- as.integer(sub("/.*$", "", tab$yearmonth))
+    year <- sub("^.*/", "", tab$yearmonth)
+    tab[, yearmonth := as.Date(sprintf("%s-%02d-01", year, quarter * 3L - 2L))]
   } else {
     tab[, yearmonth := as.Date(paste0("01/", yearmonth), "%d/%m/%Y")] # nolint
   }
