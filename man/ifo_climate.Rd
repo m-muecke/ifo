@@ -26,6 +26,11 @@ A \code{data.frame()} containing the ifo climate time series. Monthly for \code{
 \description{
 Return ifo climate data
 }
+\details{
+\code{"import"} and \code{"export"} return seasonally adjusted indices, except \code{special_trade}, which is
+the annual rate of change of special-trade exports in percent. \code{"world"} and \code{"euro"} return
+balances.
+}
 \examples{
 \dontshow{if (curl::has_internet()) withAutoprint(\{ # examplesIf}
 \donttest{

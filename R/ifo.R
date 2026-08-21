@@ -10,6 +10,13 @@
 #'   If `TRUE` return the data in long format. Only applies to `type` `"germany"` and `"sectors"`.
 #'   Default `TRUE`.
 #' @returns A `data.frame()` containing the monthly ifo business climate time series.
+#' @details
+#' With `long_format = TRUE`, `type` `"germany"` and `"sectors"` gather their series into `value`,
+#' described by `indicator` (climate, situation or expectation) and `series` (index or balance),
+#' plus `sector` for `"sectors"`. Sector `"industry"` is what the source calls "Industry and
+#' Trade", and is the only one reported as both an index and a balance; the rest are balances.
+#' `"germany"` also carries `uncertainty` and `economic_expansion`, which are repeated across the
+#' six `indicator`/`series` rows of each month.
 #' @source <https://www.ifo.de/en/ifo-time-series>
 #' @seealso The [article](https://m-muecke.github.io/ifo/articles/publication.html) for
 #'   a reproducible example.
@@ -108,6 +115,9 @@ ifo_business <- function(
 #'   * `"export"`: returns the ifo export expectations for manufacturing.
 #'   * `"employment"`: returns the ifo employment barometer for Germany.
 #' @returns A `data.frame()` containing the monthly ifo expectation time series.
+#' @details
+#' For `type` `"employment"`, `expectation` is the employment barometer itself, an index with
+#' 2015 = 100, while `manufacturing`, `construction`, `trade` and `service_sector` are balances.
 #' @inherit ifo_business source
 #' @export
 #' @examplesIf curl::has_internet()
@@ -153,6 +163,10 @@ ifo_expectation <- function(type = c("export", "employment")) {
 #'   * `"euro"`: returns the ifo world economic climate for the euro zone.
 #' @returns A `data.frame()` containing the ifo climate time series. Monthly for `"import"` and
 #'   `"export"`, quarterly for `"world"` and `"euro"`.
+#' @details
+#' `"import"` and `"export"` return seasonally adjusted indices, except `special_trade`, which is
+#' the annual rate of change of special-trade exports in percent. `"world"` and `"euro"` return
+#' balances.
 #' @inherit ifo_business source
 #' @references
 #' `r format_bib("grimme2018ifo", "grimme2021forecasting")`

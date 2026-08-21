@@ -32,6 +32,14 @@ A \code{data.frame()} containing the monthly ifo business climate time series.
 \description{
 Return ifo business climate data
 }
+\details{
+With \code{long_format = TRUE}, \code{type} \code{"germany"} and \code{"sectors"} gather their series into \code{value},
+described by \code{indicator} (climate, situation or expectation) and \code{series} (index or balance),
+plus \code{sector} for \code{"sectors"}. Sector \code{"industry"} is what the source calls "Industry and
+Trade", and is the only one reported as both an index and a balance; the rest are balances.
+\code{"germany"} also carries \code{uncertainty} and \code{economic_expansion}, which are repeated across the
+six \code{indicator}/\code{series} rows of each month.
+}
 \examples{
 \dontshow{if (curl::has_internet()) withAutoprint(\{ # examplesIf}
 \donttest{
