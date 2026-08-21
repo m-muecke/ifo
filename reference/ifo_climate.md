@@ -35,9 +35,10 @@ quarterly for `"world"` and `"euro"`.
 
 ## Details
 
-`"import"` and `"export"` return seasonally adjusted indices. The one
-exception is `special_trade`, the annual rate of change of special-trade
-exports in percent. `"world"` and `"euro"` return balances.
+`type = "import"` and `type = "export"` return seasonally adjusted
+indices. In the export data, `special_trade` instead gives the annual
+percentage change in special-trade exports. `type = "world"` and
+`type = "euro"` return balances.
 
 ## References
 

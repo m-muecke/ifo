@@ -45,14 +45,22 @@ the monthly ifo business climate time series.
 
 ## Details
 
-With `long_format = TRUE`, `type` `"germany"` and `"sectors"` put every
-observation in `value`. `indicator` names it climate, situation or
-expectation, and `series` marks it an index or a balance. `"sectors"`
-adds a `sector` column. Its `"industry"` level is what the source calls
-"Industry and Trade", and the only level with both an index and a
-balance. The rest are balances only. `"germany"` also returns
-`uncertainty` and `economic_expansion`. Both repeat across the six
-`indicator`/`series` rows of each month.
+With `long_format = TRUE`, `type = "germany"` and `type = "sectors"`
+return one observation per row in `value`. The other columns describe
+each observation:
+
+- `indicator`: climate, situation, or expectation.
+
+- `series`: index or balance.
+
+- `sector`: the sector, returned only for `type = "sectors"`.
+
+For `type = "sectors"`, `sector = "industry"` corresponds to "Industry
+and Trade" in the source. It is the only sector available as both an
+index and a balance; all other sectors are balances.
+
+For `type = "germany"`, `uncertainty` and `economic_expansion` repeat
+across the six `indicator` and `series` combinations for each month.
 
 ## See also
 

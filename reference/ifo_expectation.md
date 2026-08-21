@@ -30,8 +30,9 @@ the monthly ifo expectation time series.
 
 ## Details
 
-For `type` `"employment"`, `expectation` is the barometer, an index with
-2015 = 100. The four sector columns are balances.
+For `type = "employment"`, `expectation` contains the employment
+barometer, an index with 2015 = 100. `manufacturing`, `construction`,
+`trade`, and `service_sector` contain balances.
 
 ## Examples
 
