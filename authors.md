@@ -8,7 +8,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/m-muecke/ifo/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/m-muecke/ifo/blob/v0.2.5/DESCRIPTION)
 
 Mücke M (2026). *ifo: Client for the Ifo Institute Time Series*. R
 package version 0.2.5, <https://m-muecke.github.io/ifo/>.
