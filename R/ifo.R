@@ -65,7 +65,8 @@ ifo_business <- function(
     },
     {
       col_names <- c("yearmonth", "climate", "situation", "expectation")
-      col_types <- c("text", rep("numeric", 3L))
+      # these sheets store their numbers as text, which ifo_download() converts
+      col_types <- rep("text", 4L)
     }
   )
 
@@ -199,6 +200,7 @@ ifo_download <- function(type, ...) {
   } else {
     tab[, yearmonth := as.Date(paste0("01/", yearmonth), "%d/%m/%Y")] # nolint
   }
+  tab[, names(.SD) := lapply(.SD, as.numeric), .SDcols = is.character]
   tab[!is.na(yearmonth)]
 }
 
