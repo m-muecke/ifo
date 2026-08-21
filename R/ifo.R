@@ -219,17 +219,21 @@ ifo_download <- function(type, ..., quarterly = FALSE) {
   curl::curl_download(url, tf)
   tab <- setDT(readxl::read_xlsx(tf, ...))
   yearmonth <- NULL
-  if (inherits(tab$yearmonth, "POSIXct")) {
-    tab[, yearmonth := as.Date(trunc(yearmonth, "months"))]
-  } else if (quarterly) {
-    quarter <- as.integer(sub("/.*$", "", tab$yearmonth))
-    year <- sub("^.*/", "", tab$yearmonth)
-    tab[, yearmonth := as.Date(sprintf("%s-%02d-01", year, quarter * 3L - 2L))]
-  } else {
-    tab[, yearmonth := as.Date(paste0("01/", yearmonth), "%d/%m/%Y")] # nolint
-  }
+  tab[, yearmonth := parse_yearmonth(yearmonth, quarterly)]
   tab[, names(.SD) := lapply(.SD, as.numeric), .SDcols = is.character]
   tab[!is.na(yearmonth)]
+}
+
+parse_yearmonth <- function(x, quarterly = FALSE) {
+  if (inherits(x, "POSIXct")) {
+    return(as.Date(trunc(x, "months")))
+  }
+  if (!quarterly) {
+    return(as.Date(paste0("01/", x), "%d/%m/%Y")) # nolint
+  }
+  quarter <- suppressWarnings(as.integer(sub("/.*$", "", x)))
+  year <- suppressWarnings(as.integer(sub("^.*/", "", x)))
+  as.Date(sprintf("%04d-%02d-01", year, quarter * 3L - 2L), "%Y-%m-%d")
 }
 
 ifo_url <- function(type) {
