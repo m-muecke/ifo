@@ -28,6 +28,11 @@ ifo_expectation(type = c("export", "employment"))
 A [`data.frame()`](https://rdrr.io/r/base/data.frame.html) containing
 the monthly ifo expectation time series.
 
+## Details
+
+For `type` `"employment"`, `expectation` is the barometer, an index with
+2015 = 100. The four sector columns are balances.
+
 ## Examples
 
 ``` r

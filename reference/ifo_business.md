@@ -43,6 +43,17 @@ ifo_business(
 A [`data.frame()`](https://rdrr.io/r/base/data.frame.html) containing
 the monthly ifo business climate time series.
 
+## Details
+
+With `long_format = TRUE`, `type` `"germany"` and `"sectors"` put every
+observation in `value`. `indicator` names it climate, situation or
+expectation, and `series` marks it an index or a balance. `"sectors"`
+adds a `sector` column. Its `"industry"` level is what the source calls
+"Industry and Trade", and the only level with both an index and a
+balance. The rest are balances only. `"germany"` also returns
+`uncertainty` and `economic_expansion`. Both repeat across the six
+`indicator`/`series` rows of each month.
+
 ## See also
 
 The [article](https://m-muecke.github.io/ifo/articles/publication.html)

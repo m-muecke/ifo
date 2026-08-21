@@ -71,7 +71,14 @@ Defaults to <code>"import"</code>. One of:</p><ul><li><p><code>"import"</code>: 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A <code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame()</a></code> containing the monthly ifo climate time series.</p>
+    <p>A <code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame()</a></code> containing the ifo climate time series. Monthly for <code>"import"</code> and
+<code>"export"</code>, quarterly for <code>"world"</code> and <code>"euro"</code>.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p><code>"import"</code> and <code>"export"</code> return seasonally adjusted indices. The one exception is
+<code>special_trade</code>, the annual rate of change of special-trade exports in percent. <code>"world"</code> and
+<code>"euro"</code> return balances.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>

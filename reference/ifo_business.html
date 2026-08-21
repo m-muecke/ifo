@@ -83,6 +83,15 @@ Default <code>TRUE</code>.</p></dd>
     <p>A <code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame()</a></code> containing the monthly ifo business climate time series.</p>
     </div>
     <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>With <code>long_format = TRUE</code>, <code>type</code> <code>"germany"</code> and <code>"sectors"</code> put every observation in <code>value</code>.
+<code>indicator</code> names it climate, situation or expectation, and <code>series</code> marks it an index or a
+balance. <code>"sectors"</code> adds a <code>sector</code> column. Its <code>"industry"</code> level is what the source calls
+"Industry and Trade", and the only level with both an index and a balance. The rest are
+balances only. <code>"germany"</code> also returns <code>uncertainty</code> and <code>economic_expansion</code>. Both repeat
+across the six <code>indicator</code>/<code>series</code> rows of each month.</p>
+    </div>
+    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>The <a href="https://m-muecke.github.io/ifo/articles/publication.html">article</a> for
 a reproducible example.</p></div>

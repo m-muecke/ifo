@@ -30,7 +30,14 @@ ifo_climate(type = c("import", "export", "world", "euro"))
 ## Value
 
 A [`data.frame()`](https://rdrr.io/r/base/data.frame.html) containing
-the monthly ifo climate time series.
+the ifo climate time series. Monthly for `"import"` and `"export"`,
+quarterly for `"world"` and `"euro"`.
+
+## Details
+
+`"import"` and `"export"` return seasonally adjusted indices. The one
+exception is `special_trade`, the annual rate of change of special-trade
+exports in percent. `"world"` and `"euro"` return balances.
 
 ## References
 

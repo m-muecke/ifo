@@ -50,6 +50,8 @@
 <li>
 <code>ifo_business("sectors")</code> now correctly labels the industry columns, which previously had the index and balance values swapped.</li>
 <li>
+<code>ifo_climate("world")</code> and <code>ifo_climate("euro")</code> now return quarter start dates. Their rows are labelled by quarter, but were read as months, which placed 30 years of data in January to April of each year.</li>
+<li>
 <code>ifo_expectation("export")</code> no longer drops the first observation.</li>
 </ul></div>
     <div class="section level2">
