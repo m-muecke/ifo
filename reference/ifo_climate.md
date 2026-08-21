@@ -38,7 +38,8 @@ quarterly for `"world"` and `"euro"`.
 `type = "import"` and `type = "export"` return seasonally adjusted
 indices. In the export data, `special_trade` instead gives the annual
 percentage change in special-trade exports. `type = "world"` and
-`type = "euro"` return balances.
+`type = "euro"` return balances. The source provides these two series
+only through the fourth quarter of 2019.
 
 ## References
 

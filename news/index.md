@@ -4,6 +4,8 @@
 
 ## ifo 0.2.5
 
+CRAN release: 2026-08-21
+
 - Trailing undated rows used for workbook footnotes are no longer
   returned.
 - [`ifo_business()`](https://m-muecke.github.io/ifo/reference/ifo_business.md)
