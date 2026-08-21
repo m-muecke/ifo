@@ -16,7 +16,8 @@
 #' @export
 #' @examplesIf curl::has_internet()
 #' \donttest{
-#' ifo_business("germany")
+#' business <- ifo_business("germany")
+#' head(business)
 #' }
 ifo_business <- function(
   type = c("germany", "sectors", "eastern", "saxony"),
@@ -110,7 +111,8 @@ ifo_business <- function(
 #' @export
 #' @examplesIf curl::has_internet()
 #' \donttest{
-#' ifo_expectation("export")
+#' expectation <- ifo_expectation("export")
+#' head(expectation)
 #' }
 ifo_expectation <- function(type = c("export", "employment")) {
   type <- match.arg(type)
@@ -155,7 +157,8 @@ ifo_expectation <- function(type = c("export", "employment")) {
 #' @export
 #' @examplesIf curl::has_internet()
 #' \donttest{
-#' ifo_climate("import")
+#' climate <- ifo_climate("import")
+#' head(climate)
 #' }
 ifo_climate <- function(type = c("import", "export", "world", "euro")) {
   type <- match.arg(type)

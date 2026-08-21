@@ -28,7 +28,8 @@ Return ifo climate data
 \examples{
 \dontshow{if (curl::has_internet()) withAutoprint(\{ # examplesIf}
 \donttest{
-ifo_climate("import")
+climate <- ifo_climate("import")
+head(climate)
 }
 \dontshow{\}) # examplesIf}
 }

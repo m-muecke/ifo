@@ -35,7 +35,8 @@ Return ifo business climate data
 \examples{
 \dontshow{if (curl::has_internet()) withAutoprint(\{ # examplesIf}
 \donttest{
-ifo_business("germany")
+business <- ifo_business("germany")
+head(business)
 }
 \dontshow{\}) # examplesIf}
 }

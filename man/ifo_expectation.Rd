@@ -26,7 +26,8 @@ Return ifo expectation data
 \examples{
 \dontshow{if (curl::has_internet()) withAutoprint(\{ # examplesIf}
 \donttest{
-ifo_expectation("export")
+expectation <- ifo_expectation("export")
+head(expectation)
 }
 \dontshow{\}) # examplesIf}
 }
