@@ -46,6 +46,8 @@
 <h2 class="pkg-version" data-toc-text="development version" id="ifo-development-version">ifo (development version)<a class="anchor" aria-label="anchor" href="#ifo-development-version"></a></h2>
 <ul><li>Trailing rows without a date, which the ifo workbooks use for footnotes, are no longer returned.</li>
 <li>
+<code><a href="../reference/ifo_business.html">ifo_business()</a></code> no longer emits hundreds of coercion warnings for <code>type = "eastern"</code> and <code>type = "saxony"</code>, whose workbooks store their numbers as text.</li>
+<li>
 <code>ifo_business("sectors")</code> now correctly labels the industry columns, which previously had the index and balance values swapped.</li>
 <li>
 <code>ifo_expectation("export")</code> no longer drops the first observation.</li>
