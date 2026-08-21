@@ -2,17 +2,15 @@
 
 ## ifo (development version)
 
-- Trailing rows without a date, which the ifo workbooks use for
-  footnotes, are no longer returned.
+- Trailing undated rows used for workbook footnotes are no longer
+  returned.
 - [`ifo_business()`](https://m-muecke.github.io/ifo/reference/ifo_business.md)
-  no longer emits hundreds of coercion warnings for `type = "eastern"`
-  and `type = "saxony"`, whose workbooks store their numbers as text.
-- `ifo_business("sectors")` now correctly labels the industry columns,
-  which previously had the index and balance values swapped.
-- `ifo_climate("world")` and `ifo_climate("euro")` now return quarter
-  start dates. Their rows are labelled by quarter, but were read as
-  months, which placed 30 years of data in January to April of each
-  year.
+  no longer emits coercion warnings for `type = "eastern"` and
+  `type = "saxony"`.
+- `ifo_business("sectors")` now labels the industry index and balance
+  columns correctly.
+- `ifo_climate("world")` and `ifo_climate("euro")` now return
+  quarter-start dates instead of treating quarter labels as months.
 - `ifo_expectation("export")` no longer drops the first observation.
 
 ## ifo 0.2.4
