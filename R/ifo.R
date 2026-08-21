@@ -221,6 +221,7 @@ ifo_url <- function(type) {
     html_elements(".paragraph--linkliste") |>
     html_elements("a") |>
     html_attr("href")
+
   if (length(urls) == 0L) {
     stop("Found no timeseries urls.", call. = FALSE)
   }
