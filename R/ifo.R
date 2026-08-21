@@ -49,7 +49,7 @@ ifo_business <- function(
       indicator <- c("climate", "situation", "expectation")
       nms <- as.character(outer(
         paste(indicator, "industry", sep = "_"),
-        c("balance", "index"),
+        c("index", "balance"),
         paste,
         sep = "_"
       ))
@@ -120,7 +120,7 @@ ifo_expectation <- function(type = c("export", "employment")) {
     type,
     export = ifo_download(
       type = "export",
-      skip = 10L,
+      skip = 9L,
       col_names = c("yearmonth", "expectation"),
       col_types = c("date", "numeric")
     ),
@@ -199,7 +199,7 @@ ifo_download <- function(type, ...) {
   } else {
     tab[, yearmonth := as.Date(paste0("01/", yearmonth), "%d/%m/%Y")] # nolint
   }
-  tab
+  tab[!is.na(yearmonth)]
 }
 
 ifo_url <- function(type) {

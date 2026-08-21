@@ -1,5 +1,9 @@
 # ifo (development version)
 
+* Trailing rows without a date, which the ifo workbooks use for footnotes, are no longer returned.
+* `ifo_business("sectors")` now correctly labels the industry columns, which previously had the index and balance values swapped.
+* `ifo_expectation("export")` no longer drops the first observation.
+
 # ifo 0.2.4
 
 * Clearer error when the ifo website returns multiple urls for a single type.
