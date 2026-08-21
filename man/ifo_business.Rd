@@ -33,12 +33,19 @@ A \code{data.frame()} containing the monthly ifo business climate time series.
 Return ifo business climate data
 }
 \details{
-With \code{long_format = TRUE}, \code{type} \code{"germany"} and \code{"sectors"} put every observation in \code{value}.
-\code{indicator} names it climate, situation or expectation, and \code{series} marks it an index or a
-balance. \code{"sectors"} adds a \code{sector} column. Its \code{"industry"} level is what the source calls
-"Industry and Trade", and the only level with both an index and a balance. The rest are
-balances only. \code{"germany"} also returns \code{uncertainty} and \code{economic_expansion}. Both repeat
-across the six \code{indicator}/\code{series} rows of each month.
+With \code{long_format = TRUE}, \code{type = "germany"} and \code{type = "sectors"} return one observation per
+row in \code{value}. The other columns describe each observation:
+\itemize{
+\item \code{indicator}: climate, situation, or expectation.
+\item \code{series}: index or balance.
+\item \code{sector}: the sector, returned only for \code{type = "sectors"}.
+}
+
+For \code{type = "sectors"}, \code{sector = "industry"} corresponds to "Industry and Trade" in the source.
+It is the only sector available as both an index and a balance; all other sectors are balances.
+
+For \code{type = "germany"}, \code{uncertainty} and \code{economic_expansion} repeat across the six
+\code{indicator} and \code{series} combinations for each month.
 }
 \examples{
 \dontshow{if (curl::has_internet()) withAutoprint(\{ # examplesIf}
