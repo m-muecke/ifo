@@ -221,8 +221,9 @@ ifo_download <- function(type, ..., quarterly = FALSE) {
   tab <- setDT(readxl::read_xlsx(tf, ...))
   yearmonth <- NULL
   tab[, yearmonth := parse_yearmonth(yearmonth, quarterly)]
+  tab <- tab[!is.na(yearmonth)]
   tab[, names(.SD) := lapply(.SD, as.numeric), .SDcols = is.character]
-  tab[!is.na(yearmonth)]
+  tab[]
 }
 
 parse_yearmonth <- function(x, quarterly = FALSE) {
