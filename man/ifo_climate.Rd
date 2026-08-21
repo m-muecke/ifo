@@ -29,7 +29,8 @@ Return ifo climate data
 \details{
 \code{type = "import"} and \code{type = "export"} return seasonally adjusted indices. In the export data,
 \code{special_trade} instead gives the annual percentage change in special-trade exports.
-\code{type = "world"} and \code{type = "euro"} return balances.
+\code{type = "world"} and \code{type = "euro"} return balances. The source provides these two series only
+through the fourth quarter of 2019.
 }
 \examples{
 \dontshow{if (curl::has_internet()) withAutoprint(\{ # examplesIf}
