@@ -136,11 +136,23 @@ come from what firms anticipate rather than from what they already observe.
 
 ```{r}
 #| label: crosscorrelation
-xcorr <- function(x) {
-  cc <- ccf(activity[[x]], activity$ip_growth, lag.max = 12L, plot = FALSE)
-  data.table(component = x, lag = as.integer(cc$lag), correlation = as.numeric(cc$acf))
-}
-xc <- rbindlist(lapply(c("situation", "expectation", "climate"), xcorr))
+xc <- melt(
+  activity,
+  id.vars = "ip_growth",
+  measure.vars = c("situation", "expectation", "climate"),
+  variable.name = "component",
+  value.name = "ifo_value",
+  variable.factor = FALSE
+)[,
+  {
+    cc <- ccf(ifo_value, ip_growth, lag.max = 12L, plot = FALSE)
+    .(
+      lag = as.integer(cc$lag),
+      correlation = as.numeric(cc$acf)
+    )
+  },
+  by = component
+]
 
 ggplot(xc, aes(x = lag, y = correlation, color = component)) +
   geom_line() +
