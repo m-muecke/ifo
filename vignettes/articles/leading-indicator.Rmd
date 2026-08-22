@@ -81,10 +81,7 @@ Schröder and Hüfner as their measure of economic activity.
 #| label: ip-data
 ip <- bbk_data("BBDE1", key = "M.DE.Y.BAA1.A2P100000.G.C.I21.A") |>
   setorder(date) |>
-  _[, .(
-    yearmonth = date,
-    ip_growth = 100 * (value / shift(value, 12L) - 1)
-  )]
+  _[, .(yearmonth = date, ip_growth = 100 * (value / shift(value, 12L) - 1))]
 
 activity <- survey[ip, on = "yearmonth", nomatch = 0L][!is.na(ip_growth)]
 ```
@@ -149,10 +146,7 @@ xc <- activity |>
   _[,
     {
       cc <- ccf(ifo_value, ip_growth, lag.max = 12L, plot = FALSE)
-      .(
-        lag = as.integer(cc$lag),
-        correlation = as.numeric(cc$acf)
-      )
+      .(lag = as.integer(cc$lag), correlation = as.numeric(cc$acf))
     },
     by = component
   ]
@@ -306,14 +300,8 @@ forecast_data[, (lag_columns) := shift(.SD, lags), .SDcols = lag_variables]
 
 models <- list(
   "AR(3)" = paste0("ip_growth", lags),
-  "Germany expectations" = c(
-    paste0("ip_growth", lags),
-    paste0("de_expectation", lags)
-  ),
-  "Manufacturing expectations" = c(
-    paste0("ip_growth", lags),
-    paste0("mfg_expectation", lags)
-  )
+  "Germany expectations" = c(paste0("ip_growth", lags), paste0("de_expectation", lags)),
+  "Manufacturing expectations" = c(paste0("ip_growth", lags), paste0("mfg_expectation", lags))
 )
 
 required <- c("ip_growth", unique(unlist(models)))
@@ -344,18 +332,9 @@ predictions <- rbindlist(Map(
 ))
 
 forecast_scores <- predictions |>
-  _[,
-    .(
-      months = .N,
-      rmse = sqrt(mean((actual - predicted)^2))
-    ),
-    by = model
-  ] |>
+  _[, .(months = .N, rmse = sqrt(mean((actual - predicted)^2))), by = model] |>
   _[, improvement_over_ar := 100 * (rmse[model == "AR(3)"] - rmse) / rmse[model == "AR(3)"]] |>
-  _[, let(
-    rmse = round(rmse, 2L),
-    improvement_over_ar = round(improvement_over_ar, 1L)
-  )]
+  _[, let(rmse = round(rmse, 2L), improvement_over_ar = round(improvement_over_ar, 1L))]
 forecast_scores[]
 ```
 
@@ -367,12 +346,57 @@ The closer sectoral match appears to matter, although industrial production is b
 manufacturing alone. This remains a pseudo-out-of-sample exercise because it uses the latest
 data vintage.
 
+### When do the survey indicators help?
+
+The average RMSE hides when the forecast gains occur. We accumulate the monthly difference in
+squared errors between the AR benchmark and each model with expectations. The line rises when
+the survey model produces the smaller error and falls when the benchmark does.
+
+```{r}
+#| label: forecast-stability
+forecast_gain <- predictions |>
+  _[model == "AR(3)", .(yearmonth, benchmark_error = (actual - predicted)^2)] |>
+  _[
+    predictions[model != "AR(3)", .(yearmonth, model, model_error = (actual - predicted)^2)],
+    on = "yearmonth"
+  ] |>
+  setorder(model, yearmonth) |>
+  _[, .(yearmonth, cumulative_gain = cumsum(benchmark_error - model_error)), by = model]
+
+ggplot(forecast_gain, aes(x = yearmonth, y = cumulative_gain, color = model)) +
+  annotate(
+    "rect",
+    xmin = as.Date("2020-01-01"),
+    xmax = as.Date("2021-12-31"),
+    ymin = -Inf,
+    ymax = Inf,
+    fill = "grey90",
+    color = NA
+  ) +
+  geom_hline(yintercept = 0, linewidth = 0.3) +
+  geom_line() +
+  labs(
+    title = "Forecast gains are concentrated in the pandemic",
+    subtitle = "Cumulative reduction in squared error relative to AR(3)",
+    y = "Cumulative squared-error reduction",
+    caption = "Shaded area: January 2020 to December 2021."
+  ) +
+  scale_color_manual(
+    values = c(
+      "Germany expectations" = "darkred",
+      "Manufacturing expectations" = "darkblue"
+    )
+  ) +
+  theme_ifo() +
+  theme(axis.title.y = element_text())
+```
+
 ### Caveats
 
-**The pandemic has an outsized influence on the sample.** The co-movement chart shows production
-growth moving by more than five standard deviations in 2020 and 2021. Those 24 observations
-affect every statistic on this page. Before drawing strong conclusions, we should repeat the
-exercise on a pre-2020 sample or add pandemic indicators to test whether the ordering survives.
+**The pandemic has an outsized influence on the sample.** Most of the cumulative forecast gain
+appears in 2020 and 2021, and both models lose some of that advantage after 2022. The full-sample
+RMSE therefore does not show a stable forecasting advantage. A pre-2020 estimation or pandemic
+indicators would provide a stricter sensitivity check.
 
 **These results use the *final vintage* of industrial production.** The ifo index may be more
 useful in real time because official production figures appear several weeks after the reference
