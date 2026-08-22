@@ -396,10 +396,7 @@ ggplot(forecast_gain, aes(x = yearmonth, y = cumulative_gain, color = model)) +
     )
   ) +
   scale_color_manual(
-    values = c(
-      "Germany expectations" = "darkred",
-      "Manufacturing expectations" = "darkblue"
-    )
+    values = c("Germany expectations" = "darkred", "Manufacturing expectations" = "darkblue")
   ) +
   theme_ifo() +
   theme(axis.title.y = element_text())
