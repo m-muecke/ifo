@@ -355,13 +355,11 @@ the survey model produces the smaller error and falls when the benchmark does.
 ```{r}
 #| label: forecast-stability
 forecast_gain <- predictions |>
-  _[model == "AR(3)", .(yearmonth, benchmark_error = (actual - predicted)^2)] |>
-  _[
-    predictions[model != "AR(3)", .(yearmonth, model, model_error = (actual - predicted)^2)],
-    on = "yearmonth"
-  ] |>
+  _[, .(yearmonth, model, error = (actual - predicted)^2)] |>
+  _[, benchmark_error := error[model == "AR(3)"], by = yearmonth] |>
+  _[model != "AR(3)"] |>
   setorder(model, yearmonth) |>
-  _[, .(yearmonth, cumulative_gain = cumsum(benchmark_error - model_error)), by = model]
+  _[, .(yearmonth, cumulative_gain = cumsum(benchmark_error - error)), by = model]
 
 ggplot(forecast_gain, aes(x = yearmonth, y = cumulative_gain, color = model)) +
   annotate(
