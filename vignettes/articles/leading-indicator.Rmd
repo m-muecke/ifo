@@ -359,6 +359,35 @@ between the Germany-wide components are small. The closer sectoral match appears
 industrial production is broader than manufacturing alone. This remains a pseudo-out-of-sample
 exercise because it uses the latest data vintage.
 
+Are these gains statistically distinguishable from the benchmark? The
+[Diebold and Mariano (1995)](https://doi.org/10.1080/07350015.1995.10524599) test asks whether
+the mean difference in squared forecast errors between the benchmark and a competing model
+differs from zero. For one-step forecasts the loss differential should be serially
+uncorrelated, so the plain version of the test applies.
+
+```{r}
+#| label: dm-test
+dm_scores <- predictions |>
+  _[, .(yearmonth, model, error = (actual - predicted)^2)] |>
+  _[, benchmark_error := error[model == "AR(3)"], by = yearmonth] |>
+  _[
+    model != "AR(3)",
+    {
+      d <- benchmark_error - error
+      dm <- mean(d) / sqrt(var(d) / .N)
+      .(dm_statistic = round(dm, 2L), p_value = round(2 * pnorm(-abs(dm)), 2L))
+    },
+    by = model
+  ]
+dm_scores[]
+```
+
+None of the differences comes close to conventional significance levels. Even manufacturing
+expectations, with the largest RMSE gain, yield
+p = `r dm_scores[model == "Manufacturing expectations", p_value]`. A few extreme pandemic
+months dominate the loss differentials, so this sample carries little evidence either way and
+the RMSE ranking above is suggestive rather than conclusive.
+
 ### When do the survey indicators help?
 
 The average RMSE hides when the forecast gains occur. We accumulate the monthly difference in
