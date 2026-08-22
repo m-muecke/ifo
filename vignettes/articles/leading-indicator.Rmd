@@ -235,7 +235,7 @@ dt <- dt[complete.cases(dt)]
 fit_ar <- lm(ip_growth ~ g1 + g2 + g3, data = dt)
 fit_ar_ifo <- lm(ip_growth ~ g1 + g2 + g3 + c1 + c2 + c3, data = dt)
 
-rmse <- function(m) sqrt(mean(residuals(m)^2))
+rmse <- function(x) sqrt(mean(residuals(x)^2))
 data.table(
   model = c("AR(3)", "AR(3) + ifo"),
   adj_r2 = c(summary(fit_ar)$adj.r.squared, summary(fit_ar_ifo)$adj.r.squared),
