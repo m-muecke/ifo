@@ -16,7 +16,7 @@ The ifo Business Climate Index is widely used as a *leading indicator* for the G
 economy: because firms are surveyed about their current situation and their expectations
 before the official statistics are compiled, the index is meant to signal turning points in
 economic activity ahead of the hard data.
-This article puts that claim to the test by (loosely) replicating
+This article puts that claim to the test by adapting the evaluation framework of
 [Schröder and Hüfner (2002)](https://ftp.zew.de/pub/zew-docs/dp/dp0256.pdf), who study how
 useful sentiment indicators are for forecasting German economic activity.
 
