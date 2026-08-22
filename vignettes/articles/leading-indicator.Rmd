@@ -223,8 +223,12 @@ The comparison is in-sample: it measures fit, not out-of-sample forecast accurac
 #| label: forecast
 dt <- activity[, .(
   ip_growth,
-  g1 = shift(ip_growth, 1L), g2 = shift(ip_growth, 2L), g3 = shift(ip_growth, 3L),
-  c1 = shift(climate, 1L), c2 = shift(climate, 2L), c3 = shift(climate, 3L)
+  g1 = shift(ip_growth, 1L),
+  g2 = shift(ip_growth, 2L),
+  g3 = shift(ip_growth, 3L),
+  c1 = shift(climate, 1L),
+  c2 = shift(climate, 2L),
+  c3 = shift(climate, 3L)
 )]
 dt <- dt[complete.cases(dt)]
 
@@ -293,10 +297,14 @@ forecast_months <- (initial_window + 1L):nrow(forecast_data)
 
 predictions <- rbindlist(lapply(names(models), function(model) {
   formula <- reformulate(models[[model]], response = "ip_growth")
-  predicted <- vapply(forecast_months, function(month) {
-    fit <- lm(formula, data = forecast_data[1:(month - 1L)])
-    predict(fit, newdata = forecast_data[month])
-  }, numeric(1L))
+  predicted <- vapply(
+    forecast_months,
+    function(month) {
+      fit <- lm(formula, data = forecast_data[1:(month - 1L)])
+      predict(fit, newdata = forecast_data[month])
+    },
+    numeric(1L)
+  )
   data.table(
     model,
     yearmonth = forecast_data$yearmonth[forecast_months],
@@ -305,12 +313,16 @@ predictions <- rbindlist(lapply(names(models), function(model) {
   )
 }))
 
-forecast_scores <- predictions[, .(
-  months = .N,
-  rmse = sqrt(mean((actual - predicted)^2))
-), by = model]
-forecast_scores[, improvement_over_ar :=
-  100 * (rmse[model == "AR(3)"] - rmse) / rmse[model == "AR(3)"]]
+forecast_scores <- predictions[,
+  .(
+    months = .N,
+    rmse = sqrt(mean((actual - predicted)^2))
+  ),
+  by = model
+]
+forecast_scores[,
+  improvement_over_ar := 100 * (rmse[model == "AR(3)"] - rmse) / rmse[model == "AR(3)"]
+]
 forecast_scores[, let(
   rmse = round(rmse, 2L),
   improvement_over_ar = round(improvement_over_ar, 1L)
