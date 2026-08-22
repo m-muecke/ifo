@@ -19,6 +19,8 @@ economic activity ahead of the hard data.
 This article puts that claim to the test by adapting the evaluation framework of
 [Schröder and Hüfner (2002)](https://ftp.zew.de/pub/zew-docs/dp/dp0256.pdf), who study how
 useful sentiment indicators are for forecasting German economic activity.
+[Lehmann (2023)](https://link.springer.com/article/10.1007/s41549-022-00079-5) provides a
+broader review of the forecasting evidence from the ifo Business Survey.
 
 Following [Fritsche and Stephan (2002)](https://www.diw.de/documents/publikationen/73/diw_01.c.38193.de/dp241.pdf),
 we ask whether the ifo index satisfies three criteria of a good leading indicator:
