@@ -359,34 +359,38 @@ between the Germany-wide components are small. The closer sectoral match appears
 industrial production is broader than manufacturing alone. This remains a pseudo-out-of-sample
 exercise because it uses the latest data vintage.
 
-Are these gains statistically distinguishable from the benchmark? The
-[Diebold and Mariano (1995)](https://doi.org/10.1080/07350015.1995.10524599) test asks whether
-the mean difference in squared forecast errors between the benchmark and a competing model
-differs from zero. For one-step forecasts the loss differential should be serially
-uncorrelated, so the plain version of the test applies.
+Are these gains statistically distinguishable from the benchmark? A
+[Diebold and Mariano (1995)](https://doi.org/10.1080/07350015.1995.10524599) test on the
+squared-error differentials would be conservative here because the models are nested: each
+survey model contains the AR(3) benchmark, so its extra coefficients add estimation noise to
+its forecasts. [Clark and West (2007)](https://doi.org/10.1016/j.jeconom.2006.05.023) correct
+for this by adding the squared difference between the two forecasts back to the loss
+differential. The adjusted statistic is approximately standard normal, and the test is
+one-sided: does the survey model improve on the benchmark?
 
 ```{r}
-#| label: dm-test
-dm_scores <- predictions |>
-  _[, .(yearmonth, model, error = (actual - predicted)^2)] |>
-  _[, benchmark_error := error[model == "AR(3)"], by = yearmonth] |>
+#| label: cw-test
+cw_scores <- predictions |>
+  _[, .(yearmonth, model, actual, predicted)] |>
+  _[, benchmark := predicted[model == "AR(3)"], by = yearmonth] |>
   _[
     model != "AR(3)",
     {
-      d <- benchmark_error - error
-      dm <- mean(d) / sqrt(var(d) / .N)
-      .(dm_statistic = round(dm, 2L), p_value = round(2 * pnorm(-abs(dm)), 2L))
+      f <- (actual - benchmark)^2 - (actual - predicted)^2 + (benchmark - predicted)^2
+      cw <- mean(f) / sqrt(var(f) / .N)
+      .(cw_statistic = round(cw, 2L), p_value = round(pnorm(-cw), 2L))
     },
     by = model
   ]
-dm_scores[]
+cw_scores[]
 ```
 
-None of the differences comes close to conventional significance levels. Even manufacturing
-expectations, with the largest RMSE gain, yield
-p = `r dm_scores[model == "Manufacturing expectations", p_value]`. A few extreme pandemic
-months dominate the loss differentials, so this sample carries little evidence either way and
-the RMSE ranking above is suggestive rather than conclusive.
+Only manufacturing expectations clear the 5% level
+(p = `r cw_scores[model == "Manufacturing expectations", p_value]`). Germany-wide expectations
+are borderline (p = `r cw_scores[model == "Germany expectations", p_value]`), and the climate
+and situation balances are clearly insignificant. The evidence for added predictive content is
+therefore concentrated in the survey series that matches the reference variable most closely.
+Whether that evidence rests on a few extreme months is the next question.
 
 ### When do the survey indicators help?
 
