@@ -275,19 +275,14 @@ forecast_data <- Reduce(
 )
 
 lag_variables <- setdiff(names(forecast_data), "yearmonth")
-for (variable in lag_variables) {
-  for (lag in 1:3) {
-    forecast_data[, (paste0(variable, lag)) := shift(get(variable), lag)]
-  }
-}
+lags <- 1:3
+lag_columns <- paste0(rep(lag_variables, each = length(lags)), lags)
+forecast_data[, (lag_columns) := shift(.SD, lags), .SDcols = lag_variables]
 
 models <- list(
   "AR(3)" = paste0("ip_growth", 1:3),
   "Germany expectations" = c(paste0("ip_growth", 1:3), paste0("de_expectation", 1:3)),
-  "Manufacturing expectations" = c(
-    paste0("ip_growth", 1:3),
-    paste0("mfg_expectation", 1:3)
-  )
+  "Manufacturing expectations" = c(paste0("ip_growth", 1:3), paste0("mfg_expectation", 1:3))
 )
 
 required <- c("ip_growth", unique(unlist(models)))
@@ -314,10 +309,7 @@ predictions <- rbindlist(lapply(names(models), function(model) {
 }))
 
 forecast_scores <- predictions[,
-  .(
-    months = .N,
-    rmse = sqrt(mean((actual - predicted)^2))
-  ),
+  .(months = .N, rmse = sqrt(mean((actual - predicted)^2))),
   by = model
 ]
 forecast_scores[,
