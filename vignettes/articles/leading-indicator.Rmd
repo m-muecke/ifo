@@ -267,18 +267,21 @@ anova(fit_ar, fit_ar_ifo)
 
 ### An out-of-sample check
 
-In-sample fit does not guarantee a better forecast. For this exercise, we replace the headline
-climate index with expectations balances for Germany and manufacturing. This extension tests
-whether a forward-looking and more closely matched survey series improves the forecast, as
-suggested by Lehmann's review. Starting with ten years of data, we re-estimate each model monthly
-and predict the next observation.
+In-sample fit does not guarantee a better forecast. We compare the Germany-wide climate,
+situation, and expectations balances under the same expanding-window design. We also include
+manufacturing expectations to test whether a more closely matched survey series improves the
+forecast, as suggested by Lehmann's review. Starting with ten years of data, we re-estimate each
+model monthly and predict the next observation.
 
 ```{r}
 #| label: rolling-forecast
-germany_expectation <- survey_long[
-  series == "balance" & indicator == "expectation",
-  .(yearmonth, de_expectation = value)
-]
+germany_components <- survey_long |>
+  _[series == "balance"] |>
+  dcast(yearmonth ~ indicator, value.var = "value") |>
+  setnames(
+    c("climate", "situation", "expectation"),
+    c("de_climate", "de_situation", "de_expectation")
+  )
 manufacturing_expectation <- setDT(ifo_business("sectors"))[
   sector == "manufacturing" & series == "balance" & indicator == "expectation",
   .(yearmonth, mfg_expectation = value)
@@ -286,7 +289,7 @@ manufacturing_expectation <- setDT(ifo_business("sectors"))[
 forecast_data <- mergelist(
   list(
     activity[, .(yearmonth, ip_growth)],
-    germany_expectation,
+    germany_components,
     manufacturing_expectation
   ),
   on = "yearmonth",
@@ -300,6 +303,8 @@ forecast_data[, (lag_columns) := shift(.SD, lags), .SDcols = lag_variables]
 
 models <- list(
   "AR(3)" = paste0("ip_growth", lags),
+  "Germany climate" = c(paste0("ip_growth", lags), paste0("de_climate", lags)),
+  "Germany situation" = c(paste0("ip_growth", lags), paste0("de_situation", lags)),
   "Germany expectations" = c(paste0("ip_growth", lags), paste0("de_expectation", lags)),
   "Manufacturing expectations" = c(paste0("ip_growth", lags), paste0("mfg_expectation", lags))
 )
@@ -340,11 +345,15 @@ forecast_scores[]
 
 Across `r forecast_scores[model == "AR(3)", months]` forecasts, Germany-wide expectations lower
 RMSE by `r forecast_scores[model == "Germany expectations", improvement_over_ar]`% relative to
-the AR benchmark. Manufacturing expectations lower it by
+the AR benchmark, slightly more than the climate balance at
+`r forecast_scores[model == "Germany climate", improvement_over_ar]`%. The situation balance
+raises RMSE by `r abs(forecast_scores[model == "Germany situation", improvement_over_ar])`%.
+Manufacturing expectations lower it by
 `r forecast_scores[model == "Manufacturing expectations", improvement_over_ar]`%.
-The closer sectoral match appears to matter, although industrial production is broader than
-manufacturing alone. This remains a pseudo-out-of-sample exercise because it uses the latest
-data vintage.
+The forecast ranking therefore agrees with the lead-lag analysis, although the differences
+between the Germany-wide components are small. The closer sectoral match appears to matter, but
+industrial production is broader than manufacturing alone. This remains a pseudo-out-of-sample
+exercise because it uses the latest data vintage.
 
 ### When do the survey indicators help?
 
@@ -357,7 +366,7 @@ the survey model produces the smaller error and falls when the benchmark does.
 forecast_gain <- predictions |>
   _[, .(yearmonth, model, error = (actual - predicted)^2)] |>
   _[, benchmark_error := error[model == "AR(3)"], by = yearmonth] |>
-  _[model != "AR(3)"] |>
+  _[model %in% c("Germany expectations", "Manufacturing expectations")] |>
   setorder(model, yearmonth) |>
   _[, .(yearmonth, cumulative_gain = cumsum(benchmark_error - error)), by = model]
 
