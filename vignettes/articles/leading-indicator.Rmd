@@ -1,5 +1,5 @@
 ---
-title: "The ifo index as a leading indicator"
+title: "The ifo Business Climate as a leading indicator"
 ---
 
 ```{r}
@@ -12,28 +12,25 @@ knitr::opts_chunk$set(
 )
 ```
 
-The ifo Business Climate Index is widely used as a *leading indicator* for the German
-economy: because firms are surveyed about their current situation and their expectations
-before the official statistics are compiled, the index is meant to signal turning points in
-economic activity ahead of the hard data.
-This article puts that claim to the test by adapting the evaluation framework of
-[Schröder and Hüfner (2002)](https://ftp.zew.de/pub/zew-docs/dp/dp0256.pdf), who study how
-useful sentiment indicators are for forecasting German economic activity.
+Firms report their current situation and expectations before official statistics become
+available, so the ifo Business Climate may reveal changes in economic activity earlier.
+We test this claim by adapting the evaluation framework of
+[Schröder and Hüfner (2002)](https://ftp.zew.de/pub/zew-docs/dp/dp0256.pdf).
 [Lehmann (2023)](https://link.springer.com/article/10.1007/s41549-022-00079-5) provides a
 broader review of the forecasting evidence from the ifo Business Survey.
 
 Following [Fritsche and Stephan (2002)](https://www.diw.de/documents/publikationen/73/diw_01.c.38193.de/dp241.pdf),
 we ask whether the ifo index satisfies three criteria of a good leading indicator:
 
-1. **Co-movement** with the reference series (industrial production).
-2. **One-directional causality** — the indicator should help predict activity, not merely
-   react to it.
-3. **Forecast value** — it should improve a forecast beyond what the activity series predicts
-   about itself.
+1. **Co-movement.** The indicator should move with industrial production.
+2. **Predictive direction.** Past values of the indicator should help predict activity, while
+   past values of activity should not predict the indicator.
+3. **Forecast value.** The indicator should improve a forecast beyond what the activity series
+   predicts about itself.
 
-We use the ifo Business Climate together with the German industrial production index, which is
-monthly (like the ifo survey) and therefore needs no mixed-frequency modeling.
-Industrial production is downloaded from the Deutsche Bundesbank with the
+We use the ifo Business Climate together with the German industrial production index.
+Both series are monthly, so no mixed-frequency modeling is needed.
+We download industrial production from the Deutsche Bundesbank with the
 [bbk](https://m-muecke.github.io/bbk/) package.
 
 ```{r}
@@ -63,8 +60,8 @@ theme_ifo <- function(...) {
 
 ### Assembling the data
 
-The ifo Business Climate for Germany comes in long format; we keep the headline *index* values
-and reshape the three indicators (climate, situation, expectation) into columns.
+The ifo Business Climate for Germany comes in long format. We keep the headline *index* values
+and reshape climate, situation, and expectations into columns.
 
 ```{r}
 #| label: ifo-data
@@ -130,11 +127,11 @@ contemporaneous correlation is moderate rather than tight:
 cor(activity$climate, activity$ip_growth)
 ```
 
-To see the lead/lag structure we look at the cross-correlation function.
+To examine the lead-lag structure, we use the cross-correlation function.
 Negative lags describe the ifo index *leading* production growth.
-Here it pays to separate the headline climate index into its two ingredients: the assessment
-of the **current situation** and the forward-looking **expectations**.
-Schröder and Hüfner stress the expectations component, since a genuinely leading signal should
+We separate the headline climate index into the assessment of the **current situation** and the
+forward-looking **expectations**.
+Schröder and Hüfner stress the expectations component, since a leading signal should
 come from what firms anticipate rather than from what they already observe.
 
 ```{r}
@@ -189,19 +186,21 @@ The lag at which each curve peaks orders the three components as the theory sugg
 xc[, .SD[which.max(correlation)], by = component]
 ```
 
-Expectations peak at or before lag zero, the current-situation assessment clearly after it, and
-the headline climate index in between.
-The leads are short — a month or two, not a quarter — so co-movement on its own is close to
-coincident, but the ordering already hints that the forward-looking component is the one doing
-the leading.
-To confirm the direction we need a formal test.
+The peak correlation occurs at lag
+`r xc[component == "expectation", lag[which.max(correlation)]]` for expectations,
+`r xc[component == "climate", lag[which.max(correlation)]]` for the climate index, and
+`r xc[component == "situation", lag[which.max(correlation)]]` for the situation assessment.
+Because negative lags indicate a lead over production, only expectations provide a clear,
+though short, lead. A formal test can determine whether this predictive direction holds after
+accounting for the history of production itself.
 
 ### Criterion 2: Granger causality
 
 A leading indicator should carry information about the *future* of the reference series.
 The [Granger causality](https://en.wikipedia.org/wiki/Granger_causality) test asks whether past
 values of the ifo index improve a forecast of production growth beyond production growth's own
-past — and, crucially, whether the reverse also holds.
+past, and whether the reverse also holds. This tests predictive information, not an economic
+causal mechanism.
 
 ```{r}
 #| label: granger
@@ -213,10 +212,9 @@ forward
 reverse
 ```
 
-The result is one-directional: the ifo climate index Granger-causes industrial-production
-growth (p = `r pval(forward)`), while production growth does *not* Granger-cause the ifo index
+The predictive relationship is one-directional. Lags of the ifo climate improve the production
+model (p = `r pval(forward)`), while lags of production do not improve the climate model
 (p = `r pval(reverse)`).
-The survey leads the hard data, not the other way around — what a leading indicator should do.
 
 Consistent with the cross-correlation, the forward-looking expectations component gives a
 slightly stronger signal than the headline climate index.
@@ -228,8 +226,7 @@ lmtest::grangertest(ip_growth ~ expectation, order = 3L, data = activity)
 
 ### Criterion 3: forecast value
 
-Finally, does the ifo index add anything beyond what production growth already says about
-itself?
+Does the ifo index add anything beyond what production growth already says about itself?
 We compare an autoregressive benchmark that predicts production growth from its own three lags
 against the same model augmented with three lags of the ifo climate index (the specification
 underlying the Granger test above).
@@ -260,9 +257,12 @@ data.table(
 )
 ```
 
-Adding the ifo index raises the adjusted R² and lowers the in-sample residual error, and the
-improvement is statistically significant — the same F test the Granger procedure ran above,
-here in its regression form:
+Adding the climate index raises adjusted R² from
+`r sprintf("%.3f", summary(fit_ar)$adj.r.squared)` to
+`r sprintf("%.3f", summary(fit_ar_ifo)$adj.r.squared)` and lowers in-sample RMSE from
+`r sprintf("%.2f", rmse(fit_ar))` to `r sprintf("%.2f", rmse(fit_ar_ifo))`.
+The nested-model F test rejects the three climate coefficients being jointly zero
+(p = `r pval(forward)`). This is the same test used in the forward Granger comparison above:
 
 ```{r}
 #| label: forecast-test
@@ -271,10 +271,11 @@ anova(fit_ar, fit_ar_ifo)
 
 ### An out-of-sample check
 
-In-sample fit does not guarantee a better forecast. Lehmann's review also suggests that
-manufacturing expectations should be a closer match for industrial production than an
-economy-wide indicator. We test that directly with an expanding window: after an initial ten
-years of data, each model is re-estimated monthly before predicting the next observation.
+In-sample fit does not guarantee a better forecast. For this exercise, we replace the headline
+climate index with expectations balances for Germany and manufacturing. This extension tests
+whether a forward-looking and more closely matched survey series improves the forecast, as
+suggested by Lehmann's review. Starting with ten years of data, we re-estimate each model monthly
+and predict the next observation.
 
 ```{r}
 #| label: rolling-forecast
@@ -356,24 +357,25 @@ forecast_scores <- predictions |>
 forecast_scores[]
 ```
 
-The Germany-wide expectations balance barely improves on the benchmark. Manufacturing
-expectations reduce the forecast error more clearly, consistent with Lehmann's finding that
-sector-specific indicators are better suited to sector-specific targets. This remains a
-pseudo-out-of-sample exercise because it uses the latest data vintage.
+Across `r forecast_scores[model == "AR(3)", months]` forecasts, Germany-wide expectations lower
+RMSE by `r forecast_scores[model == "Germany expectations", improvement_over_ar]`% relative to
+the AR benchmark. Manufacturing expectations lower it by
+`r forecast_scores[model == "Manufacturing expectations", improvement_over_ar]`%.
+The closer sectoral match appears to matter, although industrial production is broader than
+manufacturing alone. This remains a pseudo-out-of-sample exercise because it uses the latest
+data vintage.
 
 ### Caveats
 
-**The pandemic dominates the sample.** The co-movement chart shows production growth swinging by
-more than five standard deviations in 2020 and 2021, and those two dozen observations carry a lot
-of weight in every statistic on this page. Before drawing strong conclusions it is worth re-running
-the exercise on a pre-2020 sample, or adding pandemic dummies, to check that the ordering
-survives.
+**The pandemic has an outsized influence on the sample.** The co-movement chart shows production
+growth moving by more than five standard deviations in 2020 and 2021. Those 24 observations
+affect every statistic on this page. Before drawing strong conclusions, we should repeat the
+exercise on a pre-2020 sample or add pandemic indicators to test whether the ordering survives.
 
-**These results use the *final vintage* of industrial production.** In real time the ifo index
-is even more valuable, because the official production figures for a given month are published
-with a delay of several weeks and are subsequently revised — precisely the gap a timely survey
-fills. A real-time evaluation may therefore differ from the pseudo-out-of-sample results above;
-see
+**These results use the *final vintage* of industrial production.** The ifo index may be more
+useful in real time because official production figures appear several weeks after the reference
+month and are revised later. A real-time evaluation may therefore differ from the
+pseudo-out-of-sample results above. See
 [Lehmann and Reif (2021)](https://link.springer.com/article/10.1007/s41549-021-00055-5) for a
-rigorous real-time horse-race. The exercise above is meant to illustrate the mechanics of
-assessing a leading indicator, not to settle its forecasting record.
+real-time comparison. This exercise demonstrates how to assess a leading indicator. It does not
+settle the ifo survey's forecasting record.
