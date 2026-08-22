@@ -81,13 +81,11 @@ Schröder and Hüfner as their measure of economic activity.
 ```{r}
 #| label: ip-data
 ip <- bbk_data("BBDE1", key = "M.DE.Y.BAA1.A2P100000.G.C.I21.A") |>
-  _[
-    order(date),
-    .(
-      yearmonth = date,
-      ip_growth = 100 * (value / shift(value, 12L) - 1)
-    )
-  ]
+  setorder(date) |>
+  _[, .(
+    yearmonth = date,
+    ip_growth = 100 * (value / shift(value, 12L) - 1)
+  )]
 
 activity <- survey[ip, on = "yearmonth", nomatch = 0L][!is.na(ip_growth)]
 ```
