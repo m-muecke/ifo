@@ -69,9 +69,8 @@ and reshape the three indicators (climate, situation, expectation) into columns.
 
 ```{r}
 #| label: ifo-data
-survey <- setDT(ifo_business("germany"))
-survey <- survey[series == "index"]
-survey <- dcast(survey, yearmonth ~ indicator, value.var = "value")
+survey_long <- setDT(ifo_business("germany"))
+survey <- dcast(survey_long[series == "index"], yearmonth ~ indicator, value.var = "value")
 head(survey)
 ```
 
@@ -249,6 +248,81 @@ here in its regression form:
 anova(fit_ar, fit_ar_ifo)
 ```
 
+### An out-of-sample check
+
+In-sample fit does not guarantee a better forecast. Lehmann's review also suggests that
+manufacturing expectations should be a closer match for industrial production than an
+economy-wide indicator. We test that directly with an expanding window: after an initial ten
+years of data, each model is re-estimated monthly before predicting the next observation.
+
+```{r}
+#| label: rolling-forecast
+germany_expectation <- survey_long[
+  series == "balance" & indicator == "expectation",
+  .(yearmonth, de_expectation = value)
+]
+manufacturing_expectation <- setDT(ifo_business("sectors"))[
+  sector == "manufacturing" & series == "balance" & indicator == "expectation",
+  .(yearmonth, mfg_expectation = value)
+]
+forecast_data <- Reduce(
+  function(x, y) merge(x, y, by = "yearmonth"),
+  list(activity[, .(yearmonth, ip_growth)], germany_expectation, manufacturing_expectation)
+)
+
+lag_variables <- setdiff(names(forecast_data), "yearmonth")
+for (variable in lag_variables) {
+  for (lag in 1:3) {
+    forecast_data[, (paste0(variable, lag)) := shift(get(variable), lag)]
+  }
+}
+
+models <- list(
+  "AR(3)" = paste0("ip_growth", 1:3),
+  "Germany expectations" = c(paste0("ip_growth", 1:3), paste0("de_expectation", 1:3)),
+  "Manufacturing expectations" = c(
+    paste0("ip_growth", 1:3),
+    paste0("mfg_expectation", 1:3)
+  )
+)
+
+required <- c("ip_growth", unique(unlist(models)))
+forecast_data <- forecast_data[complete.cases(forecast_data[, ..required])]
+initial_window <- 120L
+forecast_months <- (initial_window + 1L):nrow(forecast_data)
+
+predictions <- rbindlist(lapply(names(models), function(model) {
+  formula <- reformulate(models[[model]], response = "ip_growth")
+  predicted <- vapply(forecast_months, function(month) {
+    fit <- lm(formula, data = forecast_data[1:(month - 1L)])
+    predict(fit, newdata = forecast_data[month])
+  }, numeric(1L))
+  data.table(
+    model,
+    yearmonth = forecast_data$yearmonth[forecast_months],
+    actual = forecast_data$ip_growth[forecast_months],
+    predicted
+  )
+}))
+
+forecast_scores <- predictions[, .(
+  months = .N,
+  rmse = sqrt(mean((actual - predicted)^2))
+), by = model]
+forecast_scores[, improvement_over_ar :=
+  100 * (rmse[model == "AR(3)"] - rmse) / rmse[model == "AR(3)"]]
+forecast_scores[, let(
+  rmse = round(rmse, 2L),
+  improvement_over_ar = round(improvement_over_ar, 1L)
+)]
+forecast_scores[]
+```
+
+The Germany-wide expectations balance barely improves on the benchmark. Manufacturing
+expectations reduce the forecast error more clearly, consistent with Lehmann's finding that
+sector-specific indicators are better suited to sector-specific targets. This remains a
+pseudo-out-of-sample exercise because it uses the latest data vintage.
+
 ### Caveats
 
 **The pandemic dominates the sample.** The co-movement chart shows production growth swinging by
@@ -260,8 +334,8 @@ survives.
 **These results use the *final vintage* of industrial production.** In real time the ifo index
 is even more valuable, because the official production figures for a given month are published
 with a delay of several weeks and are subsequently revised — precisely the gap a timely survey
-fills. Conversely, an out-of-sample, real-time evaluation would show smaller gains than the
-in-sample fit here; see
+fills. A real-time evaluation may therefore differ from the pseudo-out-of-sample results above;
+see
 [Lehmann and Reif (2021)](https://link.springer.com/article/10.1007/s41549-021-00055-5) for a
 rigorous real-time horse-race. The exercise above is meant to illustrate the mechanics of
 assessing a leading indicator, not to settle its forecasting record.
