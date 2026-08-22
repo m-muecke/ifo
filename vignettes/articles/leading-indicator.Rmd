@@ -80,8 +80,14 @@ Schröder and Hüfner as their measure of economic activity.
 
 ```{r}
 #| label: ip-data
-ip <- bbk_data("BBDE1", key = "M.DE.Y.BAA1.A2P100000.G.C.I21.A")
-ip <- ip[order(date), .(yearmonth = date, ip_growth = 100 * (value / shift(value, 12L) - 1))]
+ip <- bbk_data("BBDE1", key = "M.DE.Y.BAA1.A2P100000.G.C.I21.A") |>
+  _[
+    order(date),
+    .(
+      yearmonth = date,
+      ip_growth = 100 * (value / shift(value, 12L) - 1)
+    )
+  ]
 
 activity <- survey[ip, on = "yearmonth", nomatch = 0L][!is.na(ip_growth)]
 ```
@@ -135,23 +141,24 @@ come from what firms anticipate rather than from what they already observe.
 
 ```{r}
 #| label: crosscorrelation
-xc <- melt(
-  activity,
-  id.vars = "ip_growth",
-  measure.vars = c("situation", "expectation", "climate"),
-  variable.name = "component",
-  value.name = "ifo_value",
-  variable.factor = FALSE
-)[,
-  {
-    cc <- ccf(ifo_value, ip_growth, lag.max = 12L, plot = FALSE)
-    .(
-      lag = as.integer(cc$lag),
-      correlation = as.numeric(cc$acf)
-    )
-  },
-  by = component
-]
+xc <- activity |>
+  melt(
+    id.vars = "ip_growth",
+    measure.vars = c("situation", "expectation", "climate"),
+    variable.name = "component",
+    value.name = "ifo_value",
+    variable.factor = FALSE
+  ) |>
+  _[,
+    {
+      cc <- ccf(ifo_value, ip_growth, lag.max = 12L, plot = FALSE)
+      .(
+        lag = as.integer(cc$lag),
+        correlation = as.numeric(cc$acf)
+      )
+    },
+    by = component
+  ]
 
 ggplot(xc, aes(x = lag, y = correlation, color = component)) +
   geom_line() +
@@ -232,16 +239,17 @@ The comparison is in-sample: it measures fit, not out-of-sample forecast accurac
 
 ```{r}
 #| label: forecast
-dt <- activity[, .(
-  ip_growth,
-  g1 = shift(ip_growth, 1L),
-  g2 = shift(ip_growth, 2L),
-  g3 = shift(ip_growth, 3L),
-  c1 = shift(climate, 1L),
-  c2 = shift(climate, 2L),
-  c3 = shift(climate, 3L)
-)]
-dt <- na.omit(dt)
+dt <- activity |>
+  _[, .(
+    ip_growth,
+    g1 = shift(ip_growth, 1L),
+    g2 = shift(ip_growth, 2L),
+    g3 = shift(ip_growth, 3L),
+    c1 = shift(climate, 1L),
+    c2 = shift(climate, 2L),
+    c3 = shift(climate, 3L)
+  )] |>
+  na.omit()
 
 fit_ar <- lm(ip_growth ~ g1 + g2 + g3, data = dt)
 fit_ar_ifo <- lm(ip_growth ~ g1 + g2 + g3 + c1 + c2 + c3, data = dt)
@@ -296,9 +304,15 @@ lag_columns <- paste0(rep(lag_variables, each = length(lags)), lags)
 forecast_data[, (lag_columns) := shift(.SD, lags), .SDcols = lag_variables]
 
 models <- list(
-  "AR(3)" = paste0("ip_growth", 1:3),
-  "Germany expectations" = c(paste0("ip_growth", 1:3), paste0("de_expectation", 1:3)),
-  "Manufacturing expectations" = c(paste0("ip_growth", 1:3), paste0("mfg_expectation", 1:3))
+  "AR(3)" = paste0("ip_growth", lags),
+  "Germany expectations" = c(
+    paste0("ip_growth", lags),
+    paste0("de_expectation", lags)
+  ),
+  "Manufacturing expectations" = c(
+    paste0("ip_growth", lags),
+    paste0("mfg_expectation", lags)
+  )
 )
 
 required <- c("ip_growth", unique(unlist(models)))
@@ -328,17 +342,19 @@ predictions <- rbindlist(Map(
   model = names(models)
 ))
 
-forecast_scores <- predictions[,
-  .(months = .N, rmse = sqrt(mean((actual - predicted)^2))),
-  by = model
-]
-forecast_scores[,
-  improvement_over_ar := 100 * (rmse[model == "AR(3)"] - rmse) / rmse[model == "AR(3)"]
-]
-forecast_scores[, let(
-  rmse = round(rmse, 2L),
-  improvement_over_ar = round(improvement_over_ar, 1L)
-)]
+forecast_scores <- predictions |>
+  _[,
+    .(
+      months = .N,
+      rmse = sqrt(mean((actual - predicted)^2))
+    ),
+    by = model
+  ] |>
+  _[, improvement_over_ar := 100 * (rmse[model == "AR(3)"] - rmse) / rmse[model == "AR(3)"]] |>
+  _[, let(
+    rmse = round(rmse, 2L),
+    improvement_over_ar = round(improvement_over_ar, 1L)
+  )]
 forecast_scores[]
 ```
 
