@@ -230,7 +230,7 @@ dt <- activity[, .(
   c2 = shift(climate, 2L),
   c3 = shift(climate, 3L)
 )]
-dt <- dt[complete.cases(dt)]
+dt <- na.omit(dt)
 
 fit_ar <- lm(ip_growth ~ g1 + g2 + g3, data = dt)
 fit_ar_ifo <- lm(ip_growth ~ g1 + g2 + g3 + c1 + c2 + c3, data = dt)
@@ -291,7 +291,7 @@ models <- list(
 )
 
 required <- c("ip_growth", unique(unlist(models)))
-forecast_data <- forecast_data[complete.cases(forecast_data[, ..required])]
+forecast_data <- na.omit(forecast_data, cols = required)
 initial_window <- 120L
 forecast_months <- (initial_window + 1L):nrow(forecast_data)
 
