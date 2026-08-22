@@ -293,14 +293,14 @@ models <- list(
 required <- c("ip_growth", unique(unlist(models)))
 forecast_data <- na.omit(forecast_data, cols = required)
 initial_window <- 120L
-forecast_months <- (initial_window + 1L):nrow(forecast_data)
+forecast_months <- initial_window + seq_len(nrow(forecast_data) - initial_window)
 
 predictions <- rbindlist(lapply(names(models), function(model) {
   formula <- reformulate(models[[model]], response = "ip_growth")
   predicted <- vapply(
     forecast_months,
     function(month) {
-      fit <- lm(formula, data = forecast_data[1:(month - 1L)])
+      fit <- lm(formula, data = forecast_data[seq_len(month - 1L)])
       predict(fit, newdata = forecast_data[month])
     },
     numeric(1L)
