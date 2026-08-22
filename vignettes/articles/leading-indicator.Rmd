@@ -84,7 +84,7 @@ Schröder and Hüfner as their measure of economic activity.
 ip <- bbk_data("BBDE1", key = "M.DE.Y.BAA1.A2P100000.G.C.I21.A")
 ip <- ip[order(date), .(yearmonth = date, ip_growth = 100 * (value / shift(value, 12L) - 1))]
 
-activity <- merge(survey, ip, by = "yearmonth")[!is.na(ip_growth)]
+activity <- survey[ip, on = "yearmonth", nomatch = 0L][!is.na(ip_growth)]
 ```
 
 The production series reaches back to 1991, but the ifo index for Germany as a whole starts in
@@ -269,9 +269,14 @@ manufacturing_expectation <- setDT(ifo_business("sectors"))[
   sector == "manufacturing" & series == "balance" & indicator == "expectation",
   .(yearmonth, mfg_expectation = value)
 ]
-forecast_data <- Reduce(
-  function(x, y) merge(x, y, by = "yearmonth"),
-  list(activity[, .(yearmonth, ip_growth)], germany_expectation, manufacturing_expectation)
+forecast_data <- mergelist(
+  list(
+    activity[, .(yearmonth, ip_growth)],
+    germany_expectation,
+    manufacturing_expectation
+  ),
+  on = "yearmonth",
+  how = "inner"
 )
 
 lag_variables <- setdiff(names(forecast_data), "yearmonth")
