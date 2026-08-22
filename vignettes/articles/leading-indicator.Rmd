@@ -83,7 +83,7 @@ ip <- bbk_data("BBDE1", key = "M.DE.Y.BAA1.A2P100000.G.C.I21.A") |>
   setorder(date) |>
   _[, .(yearmonth = date, ip_growth = 100 * (value / shift(value, 12L) - 1))]
 
-activity <- survey[ip, on = "yearmonth", nomatch = 0L][!is.na(ip_growth)]
+activity <- survey[ip, on = "yearmonth", nomatch = 0L]
 ```
 
 The production series reaches back to 1991, but the ifo index for Germany as a whole starts in
@@ -158,7 +158,11 @@ ggplot(xc, aes(x = lag, y = correlation, color = component)) +
     title = "Cross-correlation with industrial-production growth",
     subtitle = "Negative lags: the ifo component leads production growth",
     x = "Lag (months)",
-    y = "Correlation"
+    y = "Correlation",
+    caption = sprintf(
+      "Sources: ifo Business Survey and Deutsche Bundesbank, %s.",
+      format(max(activity$yearmonth), "%B %Y")
+    )
   ) +
   scale_color_manual(
     values = c(climate = "darkred", expectation = "darkblue", situation = "darkgrey"),
@@ -386,7 +390,10 @@ ggplot(forecast_gain, aes(x = yearmonth, y = cumulative_gain, color = model)) +
     title = "Forecast gains are concentrated in the pandemic",
     subtitle = "Cumulative reduction in squared error relative to AR(3)",
     y = "Cumulative squared-error reduction",
-    caption = "Shaded area: January 2020 to December 2021."
+    caption = sprintf(
+      "Shaded area: January 2020 to December 2021.\nSources: ifo Business Survey and Deutsche Bundesbank, %s.",
+      format(max(activity$yearmonth), "%B %Y")
+    )
   ) +
   scale_color_manual(
     values = c(
