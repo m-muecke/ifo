@@ -43,7 +43,6 @@ library(ifo)
 library(bbk)
 library(data.table)
 library(ggplot2)
-library(lmtest)
 
 theme_ifo <- function(...) {
   theme_minimal(...) +
@@ -203,8 +202,8 @@ past — and, crucially, whether the reverse also holds.
 #| label: granger
 pval <- function(x) format(signif(x[["Pr(>F)"]][2L], 2L), scientific = FALSE)
 
-forward <- grangertest(ip_growth ~ climate, order = 3L, data = activity)
-reverse <- grangertest(climate ~ ip_growth, order = 3L, data = activity)
+forward <- lmtest::grangertest(ip_growth ~ climate, order = 3L, data = activity)
+reverse <- lmtest::grangertest(climate ~ ip_growth, order = 3L, data = activity)
 forward
 reverse
 ```
@@ -219,7 +218,7 @@ slightly stronger signal than the headline climate index.
 
 ```{r}
 #| label: granger-expectation
-grangertest(ip_growth ~ expectation, order = 3L, data = activity)
+lmtest::grangertest(ip_growth ~ expectation, order = 3L, data = activity)
 ```
 
 ### Criterion 3: forecast value
