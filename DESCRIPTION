@@ -15,7 +15,7 @@ Imports:
     curl,
     data.table (>= 1.16.0),
     readxl,
-    rvest
+    rvest (>= 1.0.0)
 Suggests:
     ggplot2,
     knitr,
