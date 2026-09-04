@@ -2,6 +2,9 @@
 
 ## ifo (development version)
 
+- `ifo_expectation("employment")` finds the current employment workbook
+  after ifo changed its filename.
+
 ## ifo 0.2.5
 
 CRAN release: 2026-08-21
