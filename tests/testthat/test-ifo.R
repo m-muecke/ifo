@@ -36,6 +36,17 @@ test_that("ifo_url() finds the renamed employment workbook", {
   expect_identical(ifo_url("employment"), expected)
 })
 
+test_that("ifo_expectation() drops rows without observations", {
+  tab <- data.table(
+    yearmonth = as.Date(c("2025-01-01", "2025-02-01", "2025-03-01")),
+    x = c(1, 2, NA),
+    y = c(1, NA, NA)
+  )
+  local_mocked_bindings(ifo_download = \(...) copy(tab))
+
+  expect_identical(ifo_expectation("export"), setDF(tab[1:2]))
+})
+
 test_that("parse_yearmonth() parses monthly labels", {
   expect_identical(
     parse_yearmonth(c("01/2005", "07/2005", "12/2005")),

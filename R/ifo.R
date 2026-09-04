@@ -156,6 +156,8 @@ ifo_expectation <- function(type = c("export", "employment")) {
       col_types = c("date", rep("numeric", 5L))
     )
   )
+  has_value <- tab[, rowSums(!is.na(.SD)) > 0L, .SDcols = !"yearmonth"]
+  tab <- tab[has_value]
   tab <- setDF(tab)
   tab
 }

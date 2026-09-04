@@ -1,6 +1,7 @@
 # ifo (development version)
 
 * `ifo_expectation("employment")` finds the current employment workbook after ifo changed its filename.
+* `ifo_expectation("export")` no longer returns rows without observations.
 
 # ifo 0.2.5
 
