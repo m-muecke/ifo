@@ -36,6 +36,19 @@ test_that("ifo_url() finds the renamed employment workbook", {
   expect_identical(ifo_url("employment"), expected)
 })
 
+test_that("ifo_file() downloads the workbook for a type", {
+  local_mocked_bindings(ifo_url = \(type) paste0("https://example.org/", type, ".xlsx"))
+  local_mocked_bindings(
+    curl_download = \(url, destfile, ...) writeLines(url, destfile),
+    .package = "curl"
+  )
+
+  path <- ifo_file("export")
+  on.exit(unlink(path))
+  expect_match(path, "\\.xlsx$")
+  expect_identical(readLines(path), "https://example.org/export.xlsx")
+})
+
 test_that("ifo_expectation() drops rows without observations", {
   tab <- data.table(
     yearmonth = as.Date(c("2025-01-01", "2025-02-01", "2025-03-01")),

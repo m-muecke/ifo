@@ -216,16 +216,20 @@ ifo_climate <- function(type = c("import", "export", "world", "euro")) {
 }
 
 ifo_download <- function(type, ..., quarterly = FALSE) {
-  url <- ifo_url(type)
-  tf <- tempfile(fileext = ".xlsx")
-  on.exit(unlink(tf), add = TRUE)
-  curl::curl_download(url, tf)
-  tab <- setDT(readxl::read_xlsx(tf, ...))
+  path <- ifo_file(type)
+  on.exit(unlink(path), add = TRUE)
+  tab <- setDT(readxl::read_xlsx(path, ...))
   yearmonth <- NULL
   tab[, yearmonth := parse_yearmonth(yearmonth, quarterly)]
   tab <- tab[!is.na(yearmonth)]
   tab[, names(.SD) := lapply(.SD, as.numeric), .SDcols = is.character]
   tab[]
+}
+
+ifo_file <- function(type) {
+  path <- tempfile(fileext = ".xlsx")
+  curl::curl_download(ifo_url(type), path)
+  path
 }
 
 parse_yearmonth <- function(x, quarterly = FALSE) {
