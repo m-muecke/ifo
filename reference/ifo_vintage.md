@@ -67,10 +67,10 @@ vintage <- ifo_vintage("germany")
 head(vintage)
 #>    yearmonth    vintage   indicator series value
 #> 1 2005-01-01 2018-04-01     climate  index  91.9
-#> 2 2005-01-01 2018-04-01 expectation  index  97.2
-#> 3 2005-01-01 2018-04-01   situation  index  87.0
+#> 2 2005-01-01 2018-04-01   situation  index  87.0
+#> 3 2005-01-01 2018-04-01 expectation  index  97.2
 #> 4 2005-01-01 2018-05-01     climate  index  92.0
-#> 5 2005-01-01 2018-05-01 expectation  index  97.1
-#> 6 2005-01-01 2018-05-01   situation  index  87.2
+#> 5 2005-01-01 2018-05-01   situation  index  87.2
+#> 6 2005-01-01 2018-05-01 expectation  index  97.1
 # }
 ```

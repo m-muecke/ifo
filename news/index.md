@@ -10,6 +10,8 @@
   after ifo changed its filename.
 - `ifo_expectation("export")` no longer returns rows without
   observations.
+- [`ifo_business()`](https://m-muecke.github.io/ifo/reference/ifo_business.md)
+  sorts the long format output by `yearmonth`.
 
 ## ifo 0.2.5
 
