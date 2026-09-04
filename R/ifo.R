@@ -201,7 +201,7 @@ ifo_climate <- function(type = c("import", "export", "world", "euro")) {
     export = ifo_download(
       type = "export_climate",
       skip = 10L,
-      col_names = c("yearmonth", "ifo_climate", "special_trade"),
+      col_names = c("yearmonth", "climate", "special_trade"),
       col_types = c("date", "numeric", "numeric")
     ),
     ifo_download(
