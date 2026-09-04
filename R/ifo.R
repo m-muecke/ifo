@@ -215,6 +215,75 @@ ifo_climate <- function(type = c("import", "export", "world", "euro")) {
   tab
 }
 
+#' Return ifo business climate vintage data
+#'
+#' @details
+#' A vintage is the time series as published in a given month. Each vintage runs from the start
+#' of the series to its own release month, so later vintages contain more months and may revise
+#' earlier values, for example through seasonal adjustment. The output contains one observation
+#' per row in `value`. The other columns describe each observation:
+#' * `yearmonth`: the observed month.
+#' * `vintage`: the first day of the month in which the series was published.
+#' * `indicator`: climate, situation, or expectation.
+#' * `series`: index or balance.
+#'
+#' `type = "germany"` and `type = "industry"` return an index with 2015 = 100. All other sectors
+#' return balances. `type = "industry"` corresponds to "Industry and Trade" in the source.
+#' ifo updates the vintage workbooks less often than the monthly releases, so the latest vintage
+#' can lag the current [ifo_business()] release by several months.
+#'
+#' @param type (`character(1)`)\cr
+#'   Defaults to `"germany"`. One of:
+#'   * `"germany"`: returns the vintages of the ifo business climate index for Germany.
+#'   * `"industry"`, `"manufacturing"`, `"services"`, `"trade"`, `"wholesale"`, `"retail"`,
+#'     `"construction"`: returns the vintages of the ifo business climate for the sector.
+#' @returns A `data.frame()` containing the monthly ifo business climate vintages in long format.
+#' @inherit ifo_business source
+#' @export
+#' @examplesIf curl::has_internet()
+#' \donttest{
+#' vintage <- ifo_vintage("germany")
+#' head(vintage)
+#' }
+ifo_vintage <- function(
+  type = c(
+    "germany",
+    "industry",
+    "manufacturing",
+    "services",
+    "trade",
+    "wholesale",
+    "retail",
+    "construction"
+  )
+) {
+  type <- match.arg(type)
+  path <- ifo_file(paste0("vintage_", type))
+  on.exit(unlink(path), add = TRUE)
+  sheets <- c(climate = "Climate", situation = "Situation", expectation = "Expectations")
+  tab <- rbindlist(
+    lapply(sheets, \(sheet) setDT(readxl::read_xlsx(path, sheet = sheet))),
+    idcol = "indicator"
+  )
+  setnames(tab, "Date", "yearmonth")
+  tab <- melt(
+    tab,
+    id.vars = c("indicator", "yearmonth"),
+    variable.name = "vintage",
+    variable.factor = FALSE,
+    na.rm = TRUE
+  )
+  yearmonth <- vintage <- indicator <- value <- series <- NULL
+  tab[, yearmonth := parse_monthname(yearmonth)]
+  tab[, vintage := as.Date(sub("^v(\\d{4})m(\\d{2})$", "\\1-\\2-01", vintage))]
+  tab[, value := as.numeric(value)]
+  tab[, series := if (type %in% c("germany", "industry")) "index" else "balance"]
+  setcolorder(tab, c("yearmonth", "vintage", "indicator", "series", "value"))
+  setorder(tab, yearmonth, vintage, indicator)
+  tab <- setDF(tab)
+  tab
+}
+
 ifo_download <- function(type, ..., quarterly = FALSE) {
   path <- ifo_file(type)
   on.exit(unlink(path), add = TRUE)
@@ -244,6 +313,12 @@ parse_yearmonth <- function(x, quarterly = FALSE) {
   as.Date(sprintf("%04d-%02d-01", year, quarter * 3L - 2L), "%Y-%m-%d")
 }
 
+parse_monthname <- function(x) {
+  month <- match(sub(" .*$", "", x), month.name)
+  year <- as.integer(sub("^.* ", "", x))
+  as.Date(sprintf("%04d-%02d-01", year, month), "%Y-%m-%d")
+}
+
 ifo_url <- function(type) {
   pattern <- switch(
     type,
@@ -255,6 +330,14 @@ ifo_url <- function(type) {
     employment = "ifo Employment Barometer for Germany",
     export_climate = "exklima",
     import_climate = "imklima",
+    vintage_germany = "vintage/Germany-",
+    vintage_industry = "vintage/Industry_and_Trade-",
+    vintage_manufacturing = "vintage/Manufacturing-",
+    vintage_services = "vintage/Services-",
+    vintage_trade = "vintage/Trade-",
+    vintage_wholesale = "vintage/Wholesale_Trade-",
+    vintage_retail = "vintage/Retail_Trade-",
+    vintage_construction = "vintage/Construction-",
     type
   )
   links <- read_html("https://www.ifo.de/en/ifo-time-series") |>

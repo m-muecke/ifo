@@ -3,6 +3,7 @@
 export(ifo_business)
 export(ifo_climate)
 export(ifo_expectation)
+export(ifo_vintage)
 import(data.table)
 importFrom(rvest,
   html_attr,

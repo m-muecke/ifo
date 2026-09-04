@@ -36,6 +36,34 @@ test_that("ifo_url() finds the renamed employment workbook", {
   expect_identical(ifo_url("employment"), expected)
 })
 
+test_that("ifo_url() finds the vintage workbooks", {
+  files <- c(
+    germany = "Germany",
+    industry = "Industry_and_Trade",
+    manufacturing = "Manufacturing",
+    services = "Services",
+    trade = "Trade",
+    wholesale = "Wholesale_Trade",
+    retail = "Retail_Trade",
+    construction = "Construction"
+  )
+  links <- sprintf(
+    '<a href="/sites/default/files/facts/vintage/%s-ifo-vintage.xlsx" title="%s"></a>',
+    files,
+    gsub("_", " ", files)
+  )
+  html <- sprintf('<div class="paragraph--linkliste">%s</div>', paste(links, collapse = ""))
+  local_mocked_bindings(read_html = \(x) rvest::read_html(charToRaw(html)))
+
+  for (type in names(files)) {
+    expected <- sprintf(
+      "https://www.ifo.de/sites/default/files/facts/vintage/%s-ifo-vintage.xlsx",
+      files[[type]]
+    )
+    expect_identical(ifo_url(paste0("vintage_", type)), expected)
+  }
+})
+
 test_that("ifo_file() downloads the workbook for a type", {
   local_mocked_bindings(ifo_url = \(type) paste0("https://example.org/", type, ".xlsx"))
   local_mocked_bindings(
@@ -58,6 +86,46 @@ test_that("ifo_expectation() drops rows without observations", {
   local_mocked_bindings(ifo_download = \(...) copy(tab))
 
   expect_identical(ifo_expectation("export"), setDF(tab[1:2]))
+})
+
+test_that("ifo_vintage() returns one observation per month and vintage", {
+  sheet <- \(scale) {
+    data.frame(
+      Date = c("January 2005", "February 2005", "March 2005"),
+      v2005m02 = scale * c(1, 2, NA),
+      v2005m03 = scale * c(1.5, 2, 3)
+    )
+  }
+  sheets <- list(Climate = sheet(1), Situation = sheet(10), Expectations = sheet(100))
+  local_mocked_bindings(ifo_file = \(type) tempfile())
+  local_mocked_bindings(read_xlsx = \(path, sheet, ...) sheets[[sheet]], .package = "readxl")
+
+  tab <- ifo_vintage("germany")
+  expect_named(tab, c("yearmonth", "vintage", "indicator", "series", "value"))
+  expect_identical(nrow(tab), 15L)
+  expect_identical(unique(tab$series), "index")
+  expect_identical(unique(tab$indicator), c("climate", "expectation", "situation"))
+  expect_identical(
+    tab[tab$indicator == "climate", ],
+    data.frame(
+      yearmonth = as.Date(c("2005-01-01", "2005-01-01", "2005-02-01", "2005-02-01", "2005-03-01")),
+      vintage = as.Date(c("2005-02-01", "2005-03-01", "2005-02-01", "2005-03-01", "2005-03-01")),
+      indicator = "climate",
+      series = "index",
+      value = c(1, 1.5, 2, 2, 3),
+      row.names = c(1L, 4L, 7L, 10L, 13L)
+    )
+  )
+
+  expect_identical(unique(ifo_vintage("manufacturing")$series), "balance")
+})
+
+test_that("parse_monthname() parses month names", {
+  expect_identical(
+    parse_monthname(c("January 2005", "December 2025")),
+    as.Date(c("2005-01-01", "2025-12-01"))
+  )
+  expect_identical(parse_monthname("Januar 2005"), as.Date(NA))
 })
 
 test_that("parse_yearmonth() parses monthly labels", {
