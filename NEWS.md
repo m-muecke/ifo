@@ -1,5 +1,7 @@
 # ifo (development version)
 
+* `ifo_expectation("employment")` finds the current employment workbook after ifo changed its filename.
+
 # ifo 0.2.5
 
 * Trailing undated rows used for workbook footnotes are no longer returned.

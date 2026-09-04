@@ -20,6 +20,22 @@ test_that("ifo_url() returns expected result", {
   lapply(types, \(type) expect_length(ifo_url(type), 1L))
 })
 
+test_that("ifo_url() finds the renamed employment workbook", {
+  html <- paste0(
+    '<div class="paragraph--linkliste">',
+    '<a href="/sites/default/files/secure/timeseries/ifo-beschbaro-e-202608.xlsx" ',
+    'title="ifo Employment Barometer for Germany (August 2026)"></a>',
+    "</div>"
+  )
+  local_mocked_bindings(read_html = \(x) rvest::read_html(charToRaw(html)))
+
+  expected <- paste0(
+    "https://www.ifo.de/sites/default/files/secure/timeseries/",
+    "ifo-beschbaro-e-202608.xlsx"
+  )
+  expect_identical(ifo_url("employment"), expected)
+})
+
 test_that("parse_yearmonth() parses monthly labels", {
   expect_identical(
     parse_yearmonth(c("01/2005", "07/2005", "12/2005")),

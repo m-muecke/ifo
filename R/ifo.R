@@ -246,20 +246,21 @@ ifo_url <- function(type) {
     eastern = "ostd",
     saxony = "sachsen",
     export = "export",
-    employment = "empl",
+    employment = "ifo Employment Barometer for Germany",
     export_climate = "exklima",
     import_climate = "imklima",
     type
   )
-  urls <- read_html("https://www.ifo.de/en/ifo-time-series") |>
+  links <- read_html("https://www.ifo.de/en/ifo-time-series") |>
     html_elements(".paragraph--linkliste") |>
-    html_elements("a") |>
-    html_attr("href")
+    html_elements("a")
+  urls <- html_attr(links, "href")
+  labels <- html_attr(links, "title")
 
   if (length(urls) == 0L) {
     stop("Found no timeseries urls.", call. = FALSE)
   }
-  url <- grep(pattern, urls, value = TRUE, fixed = TRUE)
+  url <- urls[grepl(pattern, paste(urls, labels), fixed = TRUE)]
   if (length(url) == 0L) {
     stop("No ifo data found for type: ", type, call. = FALSE)
   }
