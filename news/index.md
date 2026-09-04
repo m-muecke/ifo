@@ -2,6 +2,13 @@
 
 ## ifo (development version)
 
+### Breaking changes
+
+- `ifo_climate("export")` names the climate column `climate` instead of
+  `ifo_climate`, matching `ifo_climate("import")`.
+
+### New features and bug fixes
+
 - New
   [`ifo_vintage()`](https://m-muecke.github.io/ifo/reference/ifo_vintage.md)
   returns the real-time vintages of the ifo business climate for Germany
