@@ -2,8 +2,14 @@
 
 ## ifo (development version)
 
+- New
+  [`ifo_vintage()`](https://m-muecke.github.io/ifo/reference/ifo_vintage.md)
+  returns the real-time vintages of the ifo business climate for Germany
+  and its sectors.
 - `ifo_expectation("employment")` finds the current employment workbook
   after ifo changed its filename.
+- `ifo_expectation("export")` no longer returns rows without
+  observations.
 
 ## ifo 0.2.5
 
