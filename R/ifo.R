@@ -273,13 +273,13 @@ ifo_vintage <- function(
     variable.factor = FALSE,
     na.rm = TRUE
   )
-  yearmonth <- vintage <- indicator <- value <- series <- NULL
+  yearmonth <- vintage <- value <- series <- NULL
   tab[, yearmonth := parse_monthname(yearmonth)]
   tab[, vintage := as.Date(sub("^v(\\d{4})m(\\d{2})$", "\\1-\\2-01", vintage))]
   tab[, value := as.numeric(value)]
   tab[, series := if (type %in% c("germany", "industry")) "index" else "balance"]
   setcolorder(tab, c("yearmonth", "vintage", "indicator", "series", "value"))
-  setorder(tab, yearmonth, vintage, indicator)
+  setorderv(tab, c("yearmonth", "vintage", "indicator"))
   tab <- setDF(tab)
   tab
 }
