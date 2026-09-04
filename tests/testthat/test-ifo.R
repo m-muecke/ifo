@@ -104,7 +104,7 @@ test_that("ifo_vintage() returns one observation per month and vintage", {
   expect_named(tab, c("yearmonth", "vintage", "indicator", "series", "value"))
   expect_identical(nrow(tab), 15L)
   expect_identical(unique(tab$series), "index")
-  expect_identical(unique(tab$indicator), c("climate", "expectation", "situation"))
+  expect_identical(unique(tab$indicator), c("climate", "situation", "expectation"))
   expect_identical(
     tab[tab$indicator == "climate", ],
     data.frame(

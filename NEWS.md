@@ -4,6 +4,7 @@
   its sectors.
 * `ifo_expectation("employment")` finds the current employment workbook after ifo changed its filename.
 * `ifo_expectation("export")` no longer returns rows without observations.
+* `ifo_business()` sorts the long format output by `yearmonth`.
 
 # ifo 0.2.5
 

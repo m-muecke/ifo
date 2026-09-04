@@ -110,6 +110,7 @@ ifo_business <- function(
       na.rm = TRUE
     )
   }
+  setorderv(tab, "yearmonth")
   tab <- setDF(tab)
   tab
 }
@@ -279,7 +280,7 @@ ifo_vintage <- function(
   tab[, value := as.numeric(value)]
   tab[, series := if (type %in% c("germany", "industry")) "index" else "balance"]
   setcolorder(tab, c("yearmonth", "vintage", "indicator", "series", "value"))
-  setorderv(tab, c("yearmonth", "vintage", "indicator"))
+  setorderv(tab, c("yearmonth", "vintage"))
   tab <- setDF(tab)
   tab
 }
