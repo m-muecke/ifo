@@ -274,8 +274,10 @@ anova(fit_ar, fit_ar_ifo)
 In-sample fit does not guarantee a better forecast. We compare the Germany-wide climate,
 situation, and expectations balances under the same expanding-window design. We also include
 manufacturing expectations to test whether a more closely matched survey series improves the
-forecast, as suggested by Lehmann's review. Starting with ten years of data, we re-estimate each
-model monthly and predict the next observation.
+forecast, as suggested by Lehmann's review. For manufacturing expectations, we use the value
+first published for each month. This prevents later survey revisions from entering earlier
+forecasts. Starting with ten years of data, we re-estimate each model monthly and predict the
+next observation.
 
 ```{r}
 #| label: rolling-forecast
@@ -286,8 +288,8 @@ germany_components <- survey_long |>
     c("climate", "situation", "expectation"),
     c("de_climate", "de_situation", "de_expectation")
   )
-manufacturing_expectation <- setDT(ifo_business("sectors"))[
-  sector == "manufacturing" & series == "balance" & indicator == "expectation",
+manufacturing_expectation <- setDT(ifo_vintage("manufacturing"))[
+  vintage == yearmonth & series == "balance" & indicator == "expectation",
   .(yearmonth, mfg_expectation = value)
 ]
 forecast_data <- mergelist(
@@ -355,7 +357,8 @@ Manufacturing expectations lower it by
 The forecast ranking therefore agrees with the lead-lag analysis, although the differences
 between the Germany-wide components are small. The closer sectoral match appears to matter, but
 industrial production is broader than manufacturing alone. This remains a pseudo-out-of-sample
-exercise because it uses the latest data vintage.
+exercise because industrial production and the Germany-wide balances use their latest vintages.
+The manufacturing series uses first-release values.
 
 Are these gains statistically distinguishable from the benchmark? A
 [Diebold and Mariano (1995)](https://doi.org/10.1080/07350015.1995.10524599) test on the
@@ -433,63 +436,6 @@ ggplot(forecast_gain, aes(x = yearmonth, y = cumulative_gain, color = model)) +
   theme(axis.title.y = element_text())
 ```
 
-### The publication lead: a nowcast
-
-Every test so far uses *lagged* survey values, following the replicated design. This
-understates the survey in one practical dimension: timing. A series has a *reference* month
-(the month it describes) and a *publication* date (when it becomes available), and the two
-must not be confused. The ifo institute publishes the Business Climate for a month around the
-25th of that same month
-([release dates](https://www.ifo.de/en/survey/ifo-business-climate-index-germany)), while
-Destatis [releases](https://www.destatis.de/EN/Press/press_node.html) industrial production
-for a month about six weeks later. Schröder and Hüfner document this schedule but keep only
-lagged indicator values in their models — a smaller sacrifice at the time, since until 2002
-the ifo results for a month were released only in the following month.
-
-Predicting a month's production with the survey published *in* that month is therefore not
-cheating but a **nowcast**: the regressor is contemporaneous in reference time yet available
-about six weeks before the target in publication time. We add the current manufacturing
-expectations balance to the lagged model and repeat the expanding-window comparison.
-
-```{r}
-#| label: nowcast
-nowcast <- roll_forecast(
-  c(paste0("ip_growth", lags), "mfg_expectation", paste0("mfg_expectation", lags)),
-  "Manufacturing nowcast"
-)
-ar_rmse <- predictions[model == "AR(3)", sqrt(mean((actual - predicted)^2))]
-nowcast_scores <- rbind(predictions, nowcast) |>
-  _[, .(yearmonth, model, actual, predicted)] |>
-  _[, benchmark := predicted[model == "AR(3)"], by = yearmonth] |>
-  _[
-    model %in% c("Manufacturing expectations", "Manufacturing nowcast"),
-    {
-      f <- (actual - benchmark)^2 - (actual - predicted)^2 + (benchmark - predicted)^2
-      cw <- mean(f) / sqrt(var(f) / .N)
-      rmse <- sqrt(mean((actual - predicted)^2))
-      .(
-        rmse = round(rmse, 2L),
-        improvement_over_ar = round(100 * (ar_rmse - rmse) / ar_rmse, 1L),
-        cw_statistic = round(cw, 2L),
-        p_value = round(pnorm(-cw), 2L)
-      )
-    },
-    by = model
-  ]
-nowcast_scores[]
-```
-
-The contemporaneous term raises the improvement over the benchmark from
-`r nowcast_scores[model == "Manufacturing expectations", improvement_over_ar]`% to
-`r nowcast_scores[model == "Manufacturing nowcast", improvement_over_ar]`% and strengthens the
-Clark and West evidence (p =
-`r nowcast_scores[model == "Manufacturing nowcast", p_value]`). The gains remain concentrated
-in the pandemic period, and the design still flatters the production side: at the end of a
-month the two most recent production figures are also unpublished, so a fully real-time
-nowcast would have to work with older production lags. The comparison nevertheless makes the
-practical point: part of the survey's value comes from leading the *statistics*, not the
-economy.
-
 ### Caveats
 
 **The pandemic has an outsized influence on the sample.** Most of the cumulative forecast gain
@@ -497,10 +443,11 @@ appears in 2020 and 2021, and both models lose some of that advantage after 2022
 RMSE therefore does not show a stable forecasting advantage. A pre-2020 estimation or pandemic
 indicators would provide a stricter sensitivity check.
 
-**These results use the *final vintage* of industrial production.** The ifo index may be more
-useful in real time because official production figures appear several weeks after the reference
-month and are revised later. A real-time evaluation may therefore differ from the
-pseudo-out-of-sample results above. See
+**Industrial production and the Germany-wide ifo series use their latest vintages.** Manufacturing
+expectations use first-release values. The ifo survey appears during its reference month, while
+official production figures appear several weeks later and are revised. A fully real-time nowcast
+would need release-date-aligned production vintages and could not use unpublished production lags.
+See
 [Lehmann and Reif (2021)](https://link.springer.com/article/10.1007/s41549-021-00055-5) for a
 real-time comparison. This exercise demonstrates how to assess a leading indicator. It does not
 settle the ifo survey's forecasting record.
