@@ -56,6 +56,6 @@ head(business)
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-The \href{https://m-muecke.github.io/ifo/articles/publication.html}{article} for
+The \href{https://m-muecke.github.io/ifo/articles/getting-started.html}{article} for
 a reproducible example.
 }

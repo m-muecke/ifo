@@ -1,5 +1,5 @@
 ---
-title: "The ifo Business Climate as a leading indicator"
+title: "Evaluating the ifo Business Climate as a leading indicator"
 ---
 
 ```{r}

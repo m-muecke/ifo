@@ -24,7 +24,7 @@
 #'   Default `TRUE`.
 #' @returns A `data.frame()` containing the monthly ifo business climate time series.
 #' @source <https://www.ifo.de/en/ifo-time-series>
-#' @seealso The [article](https://m-muecke.github.io/ifo/articles/publication.html) for
+#' @seealso The [article](https://m-muecke.github.io/ifo/articles/getting-started.html) for
 #'   a reproducible example.
 #' @export
 #' @examplesIf curl::has_internet()
