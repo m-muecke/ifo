@@ -1,4 +1,4 @@
-# The ifo Business Climate as a leading indicator
+# Evaluating the ifo Business Climate as a leading indicator
 
 Firms report their current situation and expectations before official
 statistics become available, so the ifo Business Climate may reveal

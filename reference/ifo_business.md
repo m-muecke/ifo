@@ -64,7 +64,8 @@ across the six `indicator` and `series` combinations for each month.
 
 ## See also
 
-The [article](https://m-muecke.github.io/ifo/articles/publication.html)
+The
+[article](https://m-muecke.github.io/ifo/articles/getting-started.html)
 for a reproducible example.
 
 ## Examples

@@ -2,7 +2,7 @@
 
 ### All vignettes
 
-- [The ifo Business Climate as a leading
+- [Getting started with ifo Business Survey
+  data](https://m-muecke.github.io/ifo/articles/getting-started.md):
+- [Evaluating the ifo Business Climate as a leading
   indicator](https://m-muecke.github.io/ifo/articles/leading-indicator.md):
-- [ifo Business Climate
-  Index](https://m-muecke.github.io/ifo/articles/publication.md):
