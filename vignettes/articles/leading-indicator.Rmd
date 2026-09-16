@@ -379,19 +379,24 @@ cw_scores <- predictions |>
     {
       f <- (actual - benchmark)^2 - (actual - predicted)^2 + (benchmark - predicted)^2
       cw <- mean(f) / sqrt(var(f) / .N)
-      .(cw_statistic = round(cw, 2L), p_value = round(pnorm(-cw), 2L))
+      .(cw_statistic = cw, p_value = pnorm(-cw))
     },
     by = model
   ]
-cw_scores[]
+cw_scores[, .(
+  model,
+  cw_statistic = round(cw_statistic, 2L),
+  p_value = round(p_value, 2L)
+)]
 ```
 
 Only manufacturing expectations clear the 5% level
-(p = `r cw_scores[model == "Manufacturing expectations", p_value]`). Germany-wide expectations
-are borderline (p = `r cw_scores[model == "Germany expectations", p_value]`), and the climate
-and situation balances are clearly insignificant. The evidence for added predictive content is
-therefore concentrated in the survey series that matches the reference variable most closely.
-Whether that evidence rests on a few extreme months is the next question.
+(p = `r cw_scores[model == "Manufacturing expectations", sprintf("%.2f", p_value)]`).
+Germany-wide expectations are borderline
+(p = `r cw_scores[model == "Germany expectations", sprintf("%.2f", p_value)]`), and the climate and
+situation balances are clearly insignificant. The evidence for added predictive content is therefore
+concentrated in the survey series that matches the reference variable most closely. Whether that
+evidence rests on a few extreme months is the next question.
 
 ### When do the survey indicators help?
 
