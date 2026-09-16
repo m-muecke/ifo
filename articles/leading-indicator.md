@@ -443,11 +443,15 @@ cw_scores <- predictions |>
     {
       f <- (actual - benchmark)^2 - (actual - predicted)^2 + (benchmark - predicted)^2
       cw <- mean(f) / sqrt(var(f) / .N)
-      .(cw_statistic = round(cw, 2L), p_value = round(pnorm(-cw), 2L))
+      .(cw_statistic = cw, p_value = pnorm(-cw))
     },
     by = model
   ]
-cw_scores[]
+cw_scores[, .(
+  model,
+  cw_statistic = round(cw_statistic, 2L),
+  p_value = round(p_value, 2L)
+)]
 #>                         model cw_statistic p_value
 #>                        <char>        <num>   <num>
 #> 1:            Germany climate         1.00    0.16
@@ -457,7 +461,7 @@ cw_scores[]
 ```
 
 Only manufacturing expectations clear the 5% level (p = 0.02).
-Germany-wide expectations are borderline (p = 0.1), and the climate and
+Germany-wide expectations are borderline (p = 0.10), and the climate and
 situation balances are clearly insignificant. The evidence for added
 predictive content is therefore concentrated in the survey series that
 matches the reference variable most closely. Whether that evidence rests

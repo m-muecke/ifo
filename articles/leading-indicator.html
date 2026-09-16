@@ -472,11 +472,15 @@ survey model improve on the benchmark?</p>
 <span>    <span class="op">{</span></span>
 <span>      <span class="va">f</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">actual</span> <span class="op">-</span> <span class="va">benchmark</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span> <span class="op">-</span> <span class="op">(</span><span class="va">actual</span> <span class="op">-</span> <span class="va">predicted</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="op">(</span><span class="va">benchmark</span> <span class="op">-</span> <span class="va">predicted</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span></span>
 <span>      <span class="va">cw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">f</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">var</a></span><span class="op">(</span><span class="va">f</span><span class="op">)</span> <span class="op">/</span> <span class="va">.N</span><span class="op">)</span></span>
-<span>      <span class="fu">.</span><span class="op">(</span>cw_statistic <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">cw</span>, <span class="fl">2L</span><span class="op">)</span>, p_value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">pnorm</a></span><span class="op">(</span><span class="op">-</span><span class="va">cw</span><span class="op">)</span>, <span class="fl">2L</span><span class="op">)</span><span class="op">)</span></span>
+<span>      <span class="fu">.</span><span class="op">(</span>cw_statistic <span class="op">=</span> <span class="va">cw</span>, p_value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">pnorm</a></span><span class="op">(</span><span class="op">-</span><span class="va">cw</span><span class="op">)</span><span class="op">)</span></span>
 <span>    <span class="op">}</span>,</span>
 <span>    by <span class="op">=</span> <span class="va">model</span></span>
 <span>  <span class="op">]</span></span>
-<span><span class="va">cw_scores</span><span class="op">[</span><span class="op">]</span></span>
+<span><span class="va">cw_scores</span><span class="op">[</span>, <span class="fu">.</span><span class="op">(</span></span>
+<span>  <span class="va">model</span>,</span>
+<span>  cw_statistic <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">cw_statistic</span>, <span class="fl">2L</span><span class="op">)</span>,</span>
+<span>  p_value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">p_value</span>, <span class="fl">2L</span><span class="op">)</span></span>
+<span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">#&gt;                         model cw_statistic p_value</span></span>
 <span><span class="co">#&gt;                        &lt;char&gt;        &lt;num&gt;   &lt;num&gt;</span></span>
 <span><span class="co">#&gt; 1:            Germany climate         1.00    0.16</span></span>
@@ -484,7 +488,7 @@ survey model improve on the benchmark?</p>
 <span><span class="co">#&gt; 3:       Germany expectations         1.28    0.10</span></span>
 <span><span class="co">#&gt; 4: Manufacturing expectations         1.97    0.02</span></span></code></pre></div>
 <p>Only manufacturing expectations clear the 5% level (p = 0.02).
-Germany-wide expectations are borderline (p = 0.1), and the climate and
+Germany-wide expectations are borderline (p = 0.10), and the climate and
 situation balances are clearly insignificant. The evidence for added
 predictive content is therefore concentrated in the survey series that
 matches the reference variable most closely. Whether that evidence rests
