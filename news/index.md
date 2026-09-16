@@ -9,16 +9,16 @@
 
 ### New features and bug fixes
 
-- New
-  [`ifo_vintage()`](https://m-muecke.github.io/ifo/reference/ifo_vintage.md)
-  returns the real-time vintages of the ifo business climate for Germany
-  and its sectors.
+- [`ifo_business()`](https://m-muecke.github.io/ifo/reference/ifo_business.md)
+  sorts the long format output by `yearmonth`.
 - `ifo_expectation("employment")` finds the current employment workbook
   after ifo changed its filename.
 - `ifo_expectation("export")` no longer returns rows without
   observations.
-- [`ifo_business()`](https://m-muecke.github.io/ifo/reference/ifo_business.md)
-  sorts the long format output by `yearmonth`.
+- New
+  [`ifo_vintage()`](https://m-muecke.github.io/ifo/reference/ifo_vintage.md)
+  returns the real-time vintages of the ifo business climate for Germany
+  and its sectors.
 
 ## ifo 0.2.5
 
