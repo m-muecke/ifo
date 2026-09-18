@@ -135,48 +135,55 @@ come from what firms anticipate rather than from what they already observe.
 
 ```{r}
 #| label: crosscorrelation
-xc <- activity |>
-  melt(
-    id.vars = "ip_growth",
-    measure.vars = c("situation", "expectation", "climate"),
-    variable.name = "component",
-    value.name = "ifo_value",
-    variable.factor = FALSE
-  ) |>
-  _[,
-    {
-      cc <- ccf(ifo_value, ip_growth, lag.max = 12L, plot = FALSE)
-      .(lag = as.integer(cc$lag), correlation = as.numeric(cc$acf))
-    },
-    by = component
-  ]
+cross_correlation <- function(dt) {
+  dt |>
+    melt(
+      id.vars = "ip_growth",
+      measure.vars = c("situation", "expectation", "climate"),
+      variable.name = "component",
+      value.name = "ifo_value",
+      variable.factor = FALSE
+    ) |>
+    _[,
+      {
+        cc <- ccf(ifo_value, ip_growth, lag.max = 12L, plot = FALSE)
+        .(lag = as.integer(cc$lag), correlation = as.numeric(cc$acf))
+      },
+      by = component
+    ]
+}
 
-ggplot(xc, aes(x = lag, y = correlation, color = component)) +
-  geom_line() +
-  geom_vline(xintercept = 0, linewidth = 0.3) +
-  labs(
-    title = "Cross-correlation with industrial-production growth",
-    subtitle = "Negative lags: the ifo component leads production growth",
-    x = "Lag (months)",
-    y = "Correlation",
-    caption = sprintf(
-      "Sources: ifo Business Survey and Deutsche Bundesbank, %s.",
-      format(max(activity$yearmonth), "%B %Y")
+plot_cross_correlation <- function(xc, subtitle) {
+  ggplot(xc, aes(x = lag, y = correlation, color = component)) +
+    geom_line() +
+    geom_vline(xintercept = 0, linewidth = 0.3) +
+    labs(
+      title = "Cross-correlation with industrial-production growth",
+      subtitle = subtitle,
+      x = "Lag (months)",
+      y = "Correlation",
+      caption = sprintf(
+        "Sources: ifo Business Survey and Deutsche Bundesbank, %s.",
+        format(max(activity$yearmonth), "%B %Y")
+      )
+    ) +
+    scale_color_manual(
+      values = c(climate = "darkred", expectation = "darkblue", situation = "darkgrey"),
+      labels = c(
+        climate = "Business Climate",
+        expectation = "Business Expectations",
+        situation = "Business Situation"
+      )
+    ) +
+    theme_ifo() +
+    theme(
+      axis.title = element_text(),
+      panel.grid.major.x = element_line(color = "grey85", linewidth = 0.2)
     )
-  ) +
-  scale_color_manual(
-    values = c(climate = "darkred", expectation = "darkblue", situation = "darkgrey"),
-    labels = c(
-      climate = "Business Climate",
-      expectation = "Business Expectations",
-      situation = "Business Situation"
-    )
-  ) +
-  theme_ifo() +
-  theme(
-    axis.title = element_text(),
-    panel.grid.major.x = element_line(color = "grey85", linewidth = 0.2)
-  )
+}
+
+xc <- cross_correlation(activity)
+plot_cross_correlation(xc, "Negative lags: the ifo component leads production growth")
 ```
 
 The lag at which each curve peaks orders the three components as the theory suggests:
@@ -192,7 +199,50 @@ The peak correlation occurs at lag
 `r xc[component == "situation", lag[which.max(correlation)]]` for the situation assessment.
 Because negative lags indicate a lead over production, only expectations peak ahead of
 production, and the lead is short: the correlation is nearly flat between lag -1 and lag 0.
-A formal test can determine whether this lead holds after accounting for the history of
+
+### Matching the transformation
+
+The short lead partly reflects how the two series are transformed.
+[Lehmann (2023)](https://link.springer.com/article/10.1007/s41549-022-00079-5) argues,
+following Abberger and Nierhaus (2007, *ifo Schnelldienst* 60(5), 25-30), that survey balances
+are stationary by construction and are naturally compared in levels with the cyclical component
+of activity. A growth rate is an asymmetric filter that shifts the turning points of production
+backwards in time, so comparing survey levels with production growth disguises the lead. The
+remedy is to apply the same transformation to the survey series, here the change over the same
+month of the previous year.
+
+```{r}
+#| label: crosscorrelation-diff
+diff12 <- function(x) x - shift(x, 12L)
+activity_diff <- activity[, .(
+  ip_growth,
+  situation = diff12(situation),
+  expectation = diff12(expectation),
+  climate = diff12(climate)
+)] |>
+  na.omit()
+
+xc_diff <- cross_correlation(activity_diff)
+plot_cross_correlation(xc_diff, "ifo components as twelve-month differences")
+```
+
+```{r}
+#| label: peak-lags-diff
+xc_diff[, .SD[which.max(correlation)], by = component]
+```
+
+With matched transformations, expectations peak at lag
+`r xc_diff[component == "expectation", lag[which.max(correlation)]]`, a lead of
+`r abs(xc_diff[component == "expectation", lag[which.max(correlation)]])` months instead of
+one. The situation assessment and the climate index peak at lag
+`r xc_diff[component == "situation", lag[which.max(correlation)]]` and
+`r xc_diff[component == "climate", lag[which.max(correlation)]]` with correlations of
+`r sprintf("%.2f", xc_diff[component == "situation", max(correlation)])` and
+`r sprintf("%.2f", xc_diff[component == "climate", max(correlation)])`, so they become
+coincident indicators that track production growth more closely than in levels.
+The remaining sections keep the survey series in levels, as Hüfner and Schröder do. The
+regressions there include several lags of each series, which absorbs part of the phase shift.
+A formal test can determine whether the lead holds after accounting for the history of
 production itself.
 
 ### Criterion 2: Granger causality
