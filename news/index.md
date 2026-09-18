@@ -4,17 +4,18 @@
 
 ### Breaking changes
 
+- [`ifo_business()`](https://m-muecke.github.io/ifo/reference/ifo_business.md)
+  sorts the long format output by `yearmonth`. Previously rows were
+  grouped by indicator and series.
 - `ifo_climate("export")` names the climate column `climate` instead of
   `ifo_climate`, matching `ifo_climate("import")`.
 
 ### New features and bug fixes
 
-- [`ifo_business()`](https://m-muecke.github.io/ifo/reference/ifo_business.md)
-  sorts the long format output by `yearmonth`.
 - `ifo_expectation("employment")` finds the current employment workbook
   after ifo changed its filename.
-- `ifo_expectation("export")` no longer returns rows without
-  observations.
+- [`ifo_expectation()`](https://m-muecke.github.io/ifo/reference/ifo_expectation.md)
+  no longer returns rows without observations.
 - New
   [`ifo_vintage()`](https://m-muecke.github.io/ifo/reference/ifo_vintage.md)
   returns the real-time vintages of the ifo business climate for Germany
