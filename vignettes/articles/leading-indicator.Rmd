@@ -229,12 +229,14 @@ plot_cross_correlation(xc_diff, "ifo components as twelve-month differences")
 ```{r}
 #| label: peak-lags-diff
 xc_diff[, .SD[which.max(correlation)], by = component]
+plateau <- xc_diff[component == "expectation"][correlation >= 0.95 * max(correlation), range(lag)]
 ```
 
 With matched transformations, expectations peak at lag
-`r xc_diff[component == "expectation", lag[which.max(correlation)]]`, a lead of
-`r abs(xc_diff[component == "expectation", lag[which.max(correlation)]])` months instead of
-one. The situation assessment and the climate index peak at lag
+`r xc_diff[component == "expectation", lag[which.max(correlation)]]`, and the correlation
+stays within five percent of that peak from lag `r plateau[1]` to lag `r plateau[2]`.
+The lead is a plateau of several months rather than the single month found in levels.
+The situation assessment and the climate index peak at lag
 `r xc_diff[component == "situation", lag[which.max(correlation)]]` and
 `r xc_diff[component == "climate", lag[which.max(correlation)]]` with correlations of
 `r sprintf("%.2f", xc_diff[component == "situation", max(correlation)])` and
