@@ -202,6 +202,9 @@ The [Granger causality](https://en.wikipedia.org/wiki/Granger_causality) test as
 values of the ifo index improve a forecast of production growth beyond production growth's own
 past. We also test the reverse direction: an indicator that merely reacts to production would
 be predicted by it. This tests predictive information, not an economic causal mechanism.
+We use three lags of each variable. The conclusion does not hinge on this choice: the Schwarz
+criterion prefers two lags and the Akaike criterion considerably more, and the test results
+are the same for any order between them.
 
 ```{r}
 #| label: granger
