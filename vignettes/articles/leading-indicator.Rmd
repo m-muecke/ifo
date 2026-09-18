@@ -25,10 +25,10 @@ Following [Fritsche and Stephan (2000)](https://www.diw.de/documents/publikation
 we ask whether the ifo index satisfies three criteria of a good leading indicator:
 
 1. **Co-movement.** The indicator should move with industrial production.
-2. **Predictive direction.** Past values of the indicator should help predict activity, while
-   past values of activity should not predict the indicator.
-3. **Forecast value.** The indicator should improve a forecast beyond what the activity series
-   predicts about itself.
+2. **Predictive content.** The relationship should be statistically significant and stable
+   over time, and the indicator should improve on a simple autoregressive model of activity.
+3. **Forecast value.** Including the indicator should improve out-of-sample forecasts relative
+   to a naive benchmark.
 
 We use the ifo Business Climate together with the German industrial production index.
 Both series are monthly, so no mixed-frequency modeling is needed.
@@ -191,16 +191,16 @@ The peak correlation occurs at lag
 `r xc[component == "climate", lag[which.max(correlation)]]` for the climate index, and
 `r xc[component == "situation", lag[which.max(correlation)]]` for the situation assessment.
 Because negative lags indicate a lead over production, only expectations provide a clear,
-though short, lead. A formal test can determine whether this predictive direction holds after
-accounting for the history of production itself.
+though short, lead. A formal test can determine whether this lead holds after accounting for
+the history of production itself.
 
 ### Criterion 2: Granger causality
 
 A leading indicator should carry information about the *future* of the reference series.
 The [Granger causality](https://en.wikipedia.org/wiki/Granger_causality) test asks whether past
 values of the ifo index improve a forecast of production growth beyond production growth's own
-past, and whether the reverse also holds. This tests predictive information, not an economic
-causal mechanism.
+past. We also test the reverse direction: an indicator that merely reacts to production would
+be predicted by it. This tests predictive information, not an economic causal mechanism.
 
 ```{r}
 #| label: granger
@@ -224,12 +224,13 @@ slightly stronger signal than the headline climate index.
 lmtest::grangertest(ip_growth ~ expectation, order = 3L, data = activity)
 ```
 
-### Criterion 3: forecast value
+### Criterion 2: in-sample fit
 
-Does the ifo index add anything beyond what production growth already says about itself?
-We compare an autoregressive benchmark that predicts production growth from its own three lags
-against the same model augmented with three lags of the ifo climate index (the specification
-underlying the Granger test above).
+The second criterion also asks the indicator to improve on a simple autoregressive model of
+activity. Does the ifo index add anything beyond what production growth already says about
+itself? We compare an autoregressive benchmark that predicts production growth from its own
+three lags against the same model augmented with three lags of the ifo climate index (the
+specification underlying the Granger test above).
 The comparison is in-sample: it measures fit, not out-of-sample forecast accuracy.
 
 ```{r}
@@ -269,15 +270,17 @@ The nested-model F test rejects the three climate coefficients being jointly zer
 anova(fit_ar, fit_ar_ifo)
 ```
 
-### An out-of-sample check
+### Criterion 3: forecast value
 
-In-sample fit does not guarantee a better forecast. We compare the Germany-wide climate,
-situation, and expectations balances under the same expanding-window design. We also include
-manufacturing expectations to test whether a more closely matched survey series improves the
-forecast, as suggested by Lehmann's review. For manufacturing expectations, we use the value
-first published for each month. This prevents later survey revisions from entering earlier
-forecasts. Starting with ten years of data, we re-estimate each model monthly and predict the
-next observation.
+In-sample fit does not guarantee a better forecast, so the third criterion asks whether the
+indicator improves out-of-sample forecasts. We switch from the index values used above to the
+balances: the vintage workbooks provide balances only, and Hüfner and Schröder also work with
+the expectations balance. We compare the Germany-wide climate, situation, and expectations
+balances in an expanding-window design. We also include manufacturing expectations to test
+whether a more closely matched survey series improves the forecast, as suggested by Lehmann's
+review. For manufacturing expectations, we use the value first published for each month. This
+prevents later survey revisions from entering earlier forecasts. Starting with ten years of
+data, we re-estimate each model monthly and predict the next observation.
 
 ```{r}
 #| label: rolling-forecast
@@ -400,7 +403,8 @@ evidence rests on a few extreme months is the next question.
 
 ### When do the survey indicators help?
 
-The average RMSE hides when the forecast gains occur. We accumulate the monthly difference in
+The second criterion also requires the relationship to be stable over time, and the average
+RMSE hides when the forecast gains occur. We accumulate the monthly difference in
 squared errors between the AR benchmark and each model with expectations. The line rises when
 the survey model produces the smaller error and falls when the benchmark does.
 
