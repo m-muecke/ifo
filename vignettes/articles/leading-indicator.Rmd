@@ -190,9 +190,10 @@ The peak correlation occurs at lag
 `r xc[component == "expectation", lag[which.max(correlation)]]` for expectations,
 `r xc[component == "climate", lag[which.max(correlation)]]` for the climate index, and
 `r xc[component == "situation", lag[which.max(correlation)]]` for the situation assessment.
-Because negative lags indicate a lead over production, only expectations provide a clear,
-though short, lead. A formal test can determine whether this lead holds after accounting for
-the history of production itself.
+Because negative lags indicate a lead over production, only expectations peak ahead of
+production, and the lead is short: the correlation is nearly flat between lag -1 and lag 0.
+A formal test can determine whether this lead holds after accounting for the history of
+production itself.
 
 ### Criterion 2: Granger causality
 
@@ -448,8 +449,9 @@ ggplot(forecast_gain, aes(x = yearmonth, y = cumulative_gain, color = model)) +
 ### Caveats
 
 **The pandemic has an outsized influence on the sample.** Most of the cumulative forecast gain
-appears in 2020 and 2021, and both models lose some of that advantage after 2022. The full-sample
-RMSE therefore does not show a stable forecasting advantage. A pre-2020 estimation or pandemic
+appears in 2020 and 2021. After 2022, Germany-wide expectations give back most of that
+advantage and manufacturing expectations about half of it. The full-sample RMSE therefore does
+not show a stable forecasting advantage. A pre-2020 estimation or pandemic
 indicators would provide a stricter sensitivity check.
 
 **Industrial production and the Germany-wide ifo series use their latest vintages.** Manufacturing
