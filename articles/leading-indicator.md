@@ -18,11 +18,11 @@ indicator:
 
 1.  **Co-movement.** The indicator should move with industrial
     production.
-2.  **Predictive direction.** Past values of the indicator should help
-    predict activity, while past values of activity should not predict
-    the indicator.
-3.  **Forecast value.** The indicator should improve a forecast beyond
-    what the activity series predicts about itself.
+2.  **Predictive content.** The relationship should be statistically
+    significant and stable over time, and the indicator should improve
+    on a simple autoregressive model of activity.
+3.  **Forecast value.** Including the indicator should improve
+    out-of-sample forecasts relative to a naive benchmark.
 
 We use the ifo Business Climate together with the German industrial
 production index. Both series are monthly, so no mixed-frequency
@@ -204,9 +204,10 @@ xc[, .SD[which.max(correlation)], by = component]
 
 The peak correlation occurs at lag -1 for expectations, 0 for the
 climate index, and 3 for the situation assessment. Because negative lags
-indicate a lead over production, only expectations provide a clear,
-though short, lead. A formal test can determine whether this predictive
-direction holds after accounting for the history of production itself.
+indicate a lead over production, only expectations peak ahead of
+production, and the lead is short: the correlation is nearly flat
+between lag -1 and lag 0. A formal test can determine whether this lead
+holds after accounting for the history of production itself.
 
 ### Criterion 2: Granger causality
 
@@ -214,9 +215,10 @@ A leading indicator should carry information about the *future* of the
 reference series. The [Granger
 causality](https://en.wikipedia.org/wiki/Granger_causality) test asks
 whether past values of the ifo index improve a forecast of production
-growth beyond production growth’s own past, and whether the reverse also
-holds. This tests predictive information, not an economic causal
-mechanism.
+growth beyond production growth’s own past. We also test the reverse
+direction: an indicator that merely reacts to production would be
+predicted by it. This tests predictive information, not an economic
+causal mechanism.
 
 ``` r
 
@@ -266,14 +268,16 @@ lmtest::grangertest(ip_growth ~ expectation, order = 3L, data = activity)
 #> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
-### Criterion 3: forecast value
+### Criterion 2: in-sample fit
 
-Does the ifo index add anything beyond what production growth already
-says about itself? We compare an autoregressive benchmark that predicts
-production growth from its own three lags against the same model
-augmented with three lags of the ifo climate index (the specification
-underlying the Granger test above). The comparison is in-sample: it
-measures fit, not out-of-sample forecast accuracy.
+The second criterion also asks the indicator to improve on a simple
+autoregressive model of activity. Does the ifo index add anything beyond
+what production growth already says about itself? We compare an
+autoregressive benchmark that predicts production growth from its own
+three lags against the same model augmented with three lags of the ifo
+climate index (the specification underlying the Granger test above). The
+comparison is in-sample: it measures fit, not out-of-sample forecast
+accuracy.
 
 ``` r
 
@@ -323,17 +327,20 @@ anova(fit_ar, fit_ar_ifo)
 #> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
-### An out-of-sample check
+### Criterion 3: forecast value
 
-In-sample fit does not guarantee a better forecast. We compare the
-Germany-wide climate, situation, and expectations balances under the
-same expanding-window design. We also include manufacturing expectations
-to test whether a more closely matched survey series improves the
-forecast, as suggested by Lehmann’s review. For manufacturing
-expectations, we use the value first published for each month. This
-prevents later survey revisions from entering earlier forecasts.
-Starting with ten years of data, we re-estimate each model monthly and
-predict the next observation.
+In-sample fit does not guarantee a better forecast, so the third
+criterion asks whether the indicator improves out-of-sample forecasts.
+We switch from the index values used above to the balances: the vintage
+workbooks provide balances only, and Hüfner and Schröder also work with
+the expectations balance. We compare the Germany-wide climate,
+situation, and expectations balances in an expanding-window design. We
+also include manufacturing expectations to test whether a more closely
+matched survey series improves the forecast, as suggested by Lehmann’s
+review. For manufacturing expectations, we use the value first published
+for each month. This prevents later survey revisions from entering
+earlier forecasts. Starting with ten years of data, we re-estimate each
+model monthly and predict the next observation.
 
 ``` r
 
@@ -469,10 +476,12 @@ on a few extreme months is the next question.
 
 ### When do the survey indicators help?
 
-The average RMSE hides when the forecast gains occur. We accumulate the
-monthly difference in squared errors between the AR benchmark and each
-model with expectations. The line rises when the survey model produces
-the smaller error and falls when the benchmark does.
+The second criterion also requires the relationship to be stable over
+time, and the average RMSE hides when the forecast gains occur. We
+accumulate the monthly difference in squared errors between the AR
+benchmark and each model with expectations. The line rises when the
+survey model produces the smaller error and falls when the benchmark
+does.
 
 ``` r
 
@@ -516,10 +525,12 @@ ggplot(forecast_gain, aes(x = yearmonth, y = cumulative_gain, color = model)) +
 ### Caveats
 
 **The pandemic has an outsized influence on the sample.** Most of the
-cumulative forecast gain appears in 2020 and 2021, and both models lose
-some of that advantage after 2022. The full-sample RMSE therefore does
-not show a stable forecasting advantage. A pre-2020 estimation or
-pandemic indicators would provide a stricter sensitivity check.
+cumulative forecast gain appears in 2020 and 2021. After 2022,
+Germany-wide expectations give back most of that advantage and
+manufacturing expectations about half of it. The full-sample RMSE
+therefore does not show a stable forecasting advantage. A pre-2020
+estimation or pandemic indicators would provide a stricter sensitivity
+check.
 
 **Industrial production and the Germany-wide ifo series use their latest
 vintages.** Manufacturing expectations use first-release values. The ifo

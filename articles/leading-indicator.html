@@ -91,12 +91,12 @@ criteria of a good leading indicator:</p>
 <strong>Co-movement.</strong> The indicator should move with
 industrial production.</li>
 <li>
-<strong>Predictive direction.</strong> Past values of the indicator
-should help predict activity, while past values of activity should not
-predict the indicator.</li>
+<strong>Predictive content.</strong> The relationship should be
+statistically significant and stable over time, and the indicator should
+improve on a simple autoregressive model of activity.</li>
 <li>
-<strong>Forecast value.</strong> The indicator should improve a
-forecast beyond what the activity series predicts about itself.</li>
+<strong>Forecast value.</strong> Including the indicator should
+improve out-of-sample forecasts relative to a naive benchmark.</li>
 </ol>
 <p>We use the ifo Business Climate together with the German industrial
 production index. Both series are monthly, so no mixed-frequency
@@ -253,10 +253,10 @@ theory suggests:</p>
 <span><span class="co">#&gt; 3:     climate     0   0.6199274</span></span></code></pre></div>
 <p>The peak correlation occurs at lag -1 for expectations, 0 for the
 climate index, and 3 for the situation assessment. Because negative lags
-indicate a lead over production, only expectations provide a clear,
-though short, lead. A formal test can determine whether this predictive
-direction holds after accounting for the history of production
-itself.</p>
+indicate a lead over production, only expectations peak ahead of
+production, and the lead is short: the correlation is nearly flat
+between lag -1 and lag 0. A formal test can determine whether this lead
+holds after accounting for the history of production itself.</p>
 </div>
 <div class="section level3">
 <h3 id="criterion-2-granger-causality">Criterion 2: Granger causality<a class="anchor" aria-label="anchor" href="#criterion-2-granger-causality"></a>
@@ -264,9 +264,10 @@ itself.</p>
 <p>A leading indicator should carry information about the
 <em>future</em> of the reference series. The <a href="https://en.wikipedia.org/wiki/Granger_causality" class="external-link">Granger
 causality</a> test asks whether past values of the ifo index improve a
-forecast of production growth beyond production growth’s own past, and
-whether the reverse also holds. This tests predictive information, not
-an economic causal mechanism.</p>
+forecast of production growth beyond production growth’s own past. We
+also test the reverse direction: an indicator that merely reacts to
+production would be predicted by it. This tests predictive information,
+not an economic causal mechanism.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pval</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">signif</a></span><span class="op">(</span><span class="va">x</span><span class="op">[[</span><span class="st">"Pr(&gt;F)"</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">2L</span><span class="op">]</span>, <span class="fl">2L</span><span class="op">)</span>, scientific <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
@@ -309,14 +310,16 @@ headline climate index.</p>
 <span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="criterion-3-forecast-value">Criterion 3: forecast value<a class="anchor" aria-label="anchor" href="#criterion-3-forecast-value"></a>
+<h3 id="criterion-2-in-sample-fit">Criterion 2: in-sample fit<a class="anchor" aria-label="anchor" href="#criterion-2-in-sample-fit"></a>
 </h3>
-<p>Does the ifo index add anything beyond what production growth already
-says about itself? We compare an autoregressive benchmark that predicts
-production growth from its own three lags against the same model
-augmented with three lags of the ifo climate index (the specification
-underlying the Granger test above). The comparison is in-sample: it
-measures fit, not out-of-sample forecast accuracy.</p>
+<p>The second criterion also asks the indicator to improve on a simple
+autoregressive model of activity. Does the ifo index add anything beyond
+what production growth already says about itself? We compare an
+autoregressive benchmark that predicts production growth from its own
+three lags against the same model augmented with three lags of the ifo
+climate index (the specification underlying the Granger test above). The
+comparison is in-sample: it measures fit, not out-of-sample forecast
+accuracy.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dt</span> <span class="op">&lt;-</span> <span class="va">activity</span> <span class="op">|&gt;</span></span>
 <span>  <span class="va">_</span><span class="op">[</span>, <span class="fu">.</span><span class="op">(</span></span>
@@ -360,17 +363,20 @@ is the same test used in the forward Granger comparison above:</p>
 <span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="an-out-of-sample-check">An out-of-sample check<a class="anchor" aria-label="anchor" href="#an-out-of-sample-check"></a>
+<h3 id="criterion-3-forecast-value">Criterion 3: forecast value<a class="anchor" aria-label="anchor" href="#criterion-3-forecast-value"></a>
 </h3>
-<p>In-sample fit does not guarantee a better forecast. We compare the
-Germany-wide climate, situation, and expectations balances under the
-same expanding-window design. We also include manufacturing expectations
-to test whether a more closely matched survey series improves the
-forecast, as suggested by Lehmann’s review. For manufacturing
-expectations, we use the value first published for each month. This
-prevents later survey revisions from entering earlier forecasts.
-Starting with ten years of data, we re-estimate each model monthly and
-predict the next observation.</p>
+<p>In-sample fit does not guarantee a better forecast, so the third
+criterion asks whether the indicator improves out-of-sample forecasts.
+We switch from the index values used above to the balances: the vintage
+workbooks provide balances only, and Hüfner and Schröder also work with
+the expectations balance. We compare the Germany-wide climate,
+situation, and expectations balances in an expanding-window design. We
+also include manufacturing expectations to test whether a more closely
+matched survey series improves the forecast, as suggested by Lehmann’s
+review. For manufacturing expectations, we use the value first published
+for each month. This prevents later survey revisions from entering
+earlier forecasts. Starting with ten years of data, we re-estimate each
+model monthly and predict the next observation.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">germany_components</span> <span class="op">&lt;-</span> <span class="va">survey_long</span> <span class="op">|&gt;</span></span>
 <span>  <span class="va">_</span><span class="op">[</span><span class="va">series</span> <span class="op">==</span> <span class="st">"balance"</span><span class="op">]</span> <span class="op">|&gt;</span></span>
@@ -497,10 +503,12 @@ on a few extreme months is the next question.</p>
 <div class="section level3">
 <h3 id="when-do-the-survey-indicators-help">When do the survey indicators help?<a class="anchor" aria-label="anchor" href="#when-do-the-survey-indicators-help"></a>
 </h3>
-<p>The average RMSE hides when the forecast gains occur. We accumulate
-the monthly difference in squared errors between the AR benchmark and
-each model with expectations. The line rises when the survey model
-produces the smaller error and falls when the benchmark does.</p>
+<p>The second criterion also requires the relationship to be stable over
+time, and the average RMSE hides when the forecast gains occur. We
+accumulate the monthly difference in squared errors between the AR
+benchmark and each model with expectations. The line rises when the
+survey model produces the smaller error and falls when the benchmark
+does.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">forecast_gain</span> <span class="op">&lt;-</span> <span class="va">predictions</span> <span class="op">|&gt;</span></span>
 <span>  <span class="va">_</span><span class="op">[</span>, <span class="fu">.</span><span class="op">(</span><span class="va">yearmonth</span>, <span class="va">model</span>, error <span class="op">=</span> <span class="op">(</span><span class="va">actual</span> <span class="op">-</span> <span class="va">predicted</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">]</span> <span class="op">|&gt;</span></span>
@@ -542,7 +550,8 @@ produces the smaller error and falls when the benchmark does.</p>
 </h3>
 <p><strong>The pandemic has an outsized influence on the
 sample.</strong> Most of the cumulative forecast gain appears in 2020
-and 2021, and both models lose some of that advantage after 2022. The
+and 2021. After 2022, Germany-wide expectations give back most of that
+advantage and manufacturing expectations about half of it. The
 full-sample RMSE therefore does not show a stable forecasting advantage.
 A pre-2020 estimation or pandemic indicators would provide a stricter
 sensitivity check.</p>
