@@ -2,7 +2,7 @@ test_that("ifo_url() returns expected result", {
   local_mocked_bindings(
     read_html = \(x) rvest::read_html(test_path("fixtures", "ifo-time-series.html"))
   )
-  expected <- "https://www.ifo.de/sites/default/files/secure/timeseries/gsk-e-202505.xlsx" # nolint
+  expected <- "https://www.ifo.de/sites/default/files/secure/timeseries/gsk-e-202608.xlsx" # nolint
   expect_identical(ifo_url("germany"), expected)
   expect_identical(ifo_url("sectors"), expected)
   types <- c(
@@ -15,7 +15,15 @@ test_that("ifo_url() returns expected result", {
     "export_climate",
     "import_climate",
     "world",
-    "euro"
+    "euro",
+    "vintage_germany",
+    "vintage_industry",
+    "vintage_manufacturing",
+    "vintage_services",
+    "vintage_trade",
+    "vintage_wholesale",
+    "vintage_retail",
+    "vintage_construction"
   )
   lapply(types, \(type) expect_length(ifo_url(type), 1L))
 })
@@ -23,8 +31,7 @@ test_that("ifo_url() returns expected result", {
 test_that("ifo_url() finds the renamed employment workbook", {
   html <- paste0(
     '<div class="paragraph--linkliste">',
-    '<a href="/sites/default/files/secure/timeseries/ifo-beschbaro-e-202608.xlsx" ',
-    'title="ifo Employment Barometer for Germany (August 2026)"></a>',
+    '<a href="/sites/default/files/secure/timeseries/ifo-beschbaro-e-202608.xlsx"></a>',
     "</div>"
   )
   local_mocked_bindings(read_html = \(x) rvest::read_html(charToRaw(html)))
