@@ -3,7 +3,7 @@
 Firms report their current situation and expectations before official
 statistics become available, so the ifo Business Climate may reveal
 changes in economic activity earlier. We test this claim by adapting the
-evaluation framework of [Schröder and Hüfner
+evaluation framework of [Hüfner and Schröder
 (2002)](https://ftp.zew.de/pub/zew-docs/dp/dp0256.pdf). This article
 revisits the main qualitative tests with current data rather than
 reproducing the original samples or forecast tables. [Lehmann
@@ -78,7 +78,7 @@ head(survey)
 German industrial production (producing sector excluding construction,
 calendar and seasonally adjusted, 2021 = 100) is a single Bundesbank
 series. We convert the level index into a **year-on-year growth rate**,
-the transformation used by Schröder and Hüfner as their measure of
+the transformation used by Hüfner and Schröder as their measure of
 economic activity.
 
 ``` r
@@ -137,7 +137,7 @@ To examine the lead-lag structure, we use the cross-correlation
 function. Negative lags describe the ifo index *leading* production
 growth. We separate the headline climate index into the assessment of
 the **current situation** and the forward-looking **expectations**.
-Schröder and Hüfner stress the expectations component, since a leading
+Hüfner and Schröder stress the expectations component, since a leading
 signal should come from what firms anticipate rather than from what they
 already observe.
 
