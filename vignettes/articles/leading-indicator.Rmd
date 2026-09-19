@@ -135,55 +135,48 @@ come from what firms anticipate rather than from what they already observe.
 
 ```{r}
 #| label: crosscorrelation
-cross_correlation <- function(dt) {
-  dt |>
-    melt(
-      id.vars = "ip_growth",
-      measure.vars = c("situation", "expectation", "climate"),
-      variable.name = "component",
-      value.name = "ifo_value",
-      variable.factor = FALSE
-    ) |>
-    _[,
-      {
-        cc <- ccf(ifo_value, ip_growth, lag.max = 12L, plot = FALSE)
-        .(lag = as.integer(cc$lag), correlation = as.numeric(cc$acf))
-      },
-      by = component
-    ]
-}
+xc <- activity |>
+  melt(
+    id.vars = "ip_growth",
+    measure.vars = c("situation", "expectation", "climate"),
+    variable.name = "component",
+    value.name = "ifo_value",
+    variable.factor = FALSE
+  ) |>
+  _[,
+    {
+      cc <- ccf(ifo_value, ip_growth, lag.max = 12L, plot = FALSE)
+      .(lag = as.integer(cc$lag), correlation = as.numeric(cc$acf))
+    },
+    by = component
+  ]
 
-plot_cross_correlation <- function(xc, subtitle) {
-  ggplot(xc, aes(x = lag, y = correlation, color = component)) +
-    geom_line() +
-    geom_vline(xintercept = 0, linewidth = 0.3) +
-    labs(
-      title = "Cross-correlation with industrial-production growth",
-      subtitle = subtitle,
-      x = "Lag (months)",
-      y = "Correlation",
-      caption = sprintf(
-        "Sources: ifo Business Survey and Deutsche Bundesbank, %s.",
-        format(max(activity$yearmonth), "%B %Y")
-      )
-    ) +
-    scale_color_manual(
-      values = c(climate = "darkred", expectation = "darkblue", situation = "darkgrey"),
-      labels = c(
-        climate = "Business Climate",
-        expectation = "Business Expectations",
-        situation = "Business Situation"
-      )
-    ) +
-    theme_ifo() +
-    theme(
-      axis.title = element_text(),
-      panel.grid.major.x = element_line(color = "grey85", linewidth = 0.2)
+ggplot(xc, aes(x = lag, y = correlation, color = component)) +
+  geom_line() +
+  geom_vline(xintercept = 0, linewidth = 0.3) +
+  labs(
+    title = "Cross-correlation with industrial-production growth",
+    subtitle = "Negative lags: the ifo component leads production growth",
+    x = "Lag (months)",
+    y = "Correlation",
+    caption = sprintf(
+      "Sources: ifo Business Survey and Deutsche Bundesbank, %s.",
+      format(max(activity$yearmonth), "%B %Y")
     )
-}
-
-xc <- cross_correlation(activity)
-plot_cross_correlation(xc, "Negative lags: the ifo component leads production growth")
+  ) +
+  scale_color_manual(
+    values = c(climate = "darkred", expectation = "darkblue", situation = "darkgrey"),
+    labels = c(
+      climate = "Business Climate",
+      expectation = "Business Expectations",
+      situation = "Business Situation"
+    )
+  ) +
+  theme_ifo() +
+  theme(
+    axis.title = element_text(),
+    panel.grid.major.x = element_line(color = "grey85", linewidth = 0.2)
+  )
 ```
 
 The lag at which each curve peaks orders the three components as the theory suggests:
@@ -199,51 +192,6 @@ The peak correlation occurs at lag
 `r xc[component == "situation", lag[which.max(correlation)]]` for the situation assessment.
 Because negative lags indicate a lead over production, only expectations peak ahead of
 production, and the lead is short: the correlation is nearly flat between lag -1 and lag 0.
-
-### Matching the transformation
-
-The short lead partly reflects how the two series are transformed.
-[Lehmann (2023)](https://link.springer.com/article/10.1007/s41549-022-00079-5) argues,
-following Abberger and Nierhaus (2007, *ifo Schnelldienst* 60(5), 25-30), that survey balances
-are stationary by construction and are naturally compared in levels with the cyclical component
-of activity. A growth rate is an asymmetric filter that shifts the turning points of production
-backwards in time, so comparing survey levels with production growth disguises the lead. The
-remedy is to apply the same transformation to the survey series, here the change over the same
-month of the previous year.
-
-```{r}
-#| label: crosscorrelation-diff
-diff12 <- function(x) x - shift(x, 12L)
-activity_diff <- activity[, .(
-  ip_growth,
-  situation = diff12(situation),
-  expectation = diff12(expectation),
-  climate = diff12(climate)
-)] |>
-  na.omit()
-
-xc_diff <- cross_correlation(activity_diff)
-plot_cross_correlation(xc_diff, "ifo components as twelve-month differences")
-```
-
-```{r}
-#| label: peak-lags-diff
-xc_diff[, .SD[which.max(correlation)], by = component]
-plateau <- xc_diff[component == "expectation"][correlation >= 0.95 * max(correlation), range(lag)]
-```
-
-With matched transformations, expectations peak at lag
-`r xc_diff[component == "expectation", lag[which.max(correlation)]]`, and the correlation
-stays within five percent of that peak from lag `r plateau[1]` to lag `r plateau[2]`.
-The lead is a plateau of several months rather than the single month found in levels.
-The situation assessment and the climate index peak at lag
-`r xc_diff[component == "situation", lag[which.max(correlation)]]` and
-`r xc_diff[component == "climate", lag[which.max(correlation)]]` with correlations of
-`r sprintf("%.2f", xc_diff[component == "situation", max(correlation)])` and
-`r sprintf("%.2f", xc_diff[component == "climate", max(correlation)])`, so they become
-coincident indicators that track production growth more closely than in levels.
-The remaining sections keep the survey series in levels, as Hüfner and Schröder do. The
-regressions there include several lags of each series, which absorbs part of the phase shift.
 A formal test can determine whether the lead holds after accounting for the history of
 production itself.
 
@@ -332,13 +280,17 @@ In-sample fit does not guarantee a better forecast, so the third criterion asks 
 indicator improves out-of-sample forecasts. We switch from the index values used above to the
 balances: the vintage workbooks provide balances only, and Hüfner and Schröder also work with
 the expectations balance. We compare the Germany-wide climate, situation, and expectations
-balances in an expanding-window design. Each survey series enters both in levels and as
-twelve-month differences, following the transformation argument above. We also include
-manufacturing expectations to test
+balances in an expanding-window design. We also include manufacturing expectations to test
 whether a more closely matched survey series improves the forecast, as suggested by Lehmann's
 review. For manufacturing expectations, we use the value first published for each month. This
-prevents later survey revisions from entering earlier forecasts. Starting with ten years of
-data, we re-estimate each model monthly and predict the next observation.
+prevents later survey revisions from entering earlier forecasts.
+
+The transformation of the survey series may also affect the comparison. Lehmann argues that
+survey indicators should either enter in levels when the target is a cyclical component or be
+transformed like the forecast target. Because our target is year-on-year production growth, we
+compare the Germany-wide climate and expectations balances in levels and as twelve-month
+differences. All specifications use the same sample. Starting with ten years of data, we
+re-estimate each model monthly and predict the next observation.
 
 ```{r}
 #| label: rolling-forecast
@@ -363,6 +315,7 @@ forecast_data <- mergelist(
   how = "inner"
 )
 
+diff12 <- function(x) x - shift(x, 12L)
 survey_variables <- setdiff(names(forecast_data), c("yearmonth", "ip_growth"))
 forecast_data[,
   paste0(survey_variables, "_diff") := lapply(.SD, diff12),
@@ -382,7 +335,9 @@ indicators <- c(
   "Germany expectations" = "de_expectation",
   "Manufacturing expectations" = "mfg_expectation"
 )
-specs <- CJ(model = names(indicators), transformation = c("levels", "differences"), sorted = FALSE)
+specs <- CJ(model = names(indicators), transformation = c("levels", "differences"), sorted = FALSE)[
+  transformation == "levels" | model %in% c("Germany climate", "Germany expectations")
+]
 specs[, variable := paste0(indicators[model], fifelse(transformation == "differences", "_diff", ""))]
 ar_terms <- paste0("ip_growth", lags)
 
@@ -441,13 +396,13 @@ improvement (`r improvement("Germany situation", "levels")`%). Manufacturing exp
 RMSE by `r improvement("Manufacturing expectations", "levels")`%, so the closer sectoral match
 appears to matter. Matching the transformation changes this picture. As twelve-month
 differences, the Germany-wide climate balance lowers RMSE by
-`r improvement("Germany climate", "differences")`%, on par with manufacturing expectations,
-whose gain is unchanged at `r improvement("Manufacturing expectations", "differences")`%.
+`r improvement("Germany climate", "differences")`%, on par with manufacturing expectations in
+levels at `r improvement("Manufacturing expectations", "levels")`%.
 Germany-wide expectations improve to `r improvement("Germany expectations", "differences")`%.
-The headline series is therefore not inferior to the sectoral one once both are transformed
-like the target. This remains a pseudo-out-of-sample exercise because industrial production
-and the Germany-wide balances use their latest vintages. The manufacturing series uses
-first-release values.
+The differenced headline series therefore produces a similar full-sample RMSE improvement to
+manufacturing expectations. This remains a pseudo-out-of-sample exercise because industrial
+production and the Germany-wide balances use their latest vintages. The manufacturing series
+uses first-release values.
 
 Are these gains statistically distinguishable from the benchmark? A
 [Diebold and Mariano (1995)](https://doi.org/10.1080/07350015.1995.10524599) test on the
@@ -490,12 +445,10 @@ In levels, only manufacturing expectations clear the 5% level
 (p = `r cw_p("Manufacturing expectations", "levels")`). Germany-wide expectations are borderline
 (p = `r cw_p("Germany expectations", "levels")`), and the climate and situation balances are
 clearly insignificant. As twelve-month differences, the Germany-wide climate balance clears the
-5% level (p = `r cw_p("Germany climate", "differences")`), the situation balance does too
-despite its small RMSE gain (p = `r cw_p("Germany situation", "differences")`), and
-expectations sit at the threshold (p = `r cw_p("Germany expectations", "differences")`). The
-evidence for added predictive content is therefore not confined to the sectoral series. The
-headline balances carry it as well, provided they are transformed like the target. Whether that
-evidence rests on a few extreme months is the next question.
+5% level (p = `r cw_p("Germany climate", "differences")`), and expectations sit at the threshold
+(p = `r cw_p("Germany expectations", "differences")`). The transformation materially changes
+the ranking: evidence for added predictive content is not confined to manufacturing
+expectations. Whether that evidence rests on a few extreme months is the next question.
 
 ### When do the survey indicators help?
 
