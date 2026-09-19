@@ -255,7 +255,7 @@ theory suggests:</p>
 climate index, and 3 for the situation assessment. Because negative lags
 indicate a lead over production, only expectations peak ahead of
 production, and the lead is short: the correlation is nearly flat
-between lag -1 and lag 0. A formal test can determine whether this lead
+between lag -1 and lag 0. A formal test can determine whether the lead
 holds after accounting for the history of production itself.</p>
 </div>
 <div class="section level3">
@@ -267,7 +267,10 @@ causality</a> test asks whether past values of the ifo index improve a
 forecast of production growth beyond production growth’s own past. We
 also test the reverse direction: an indicator that merely reacts to
 production would be predicted by it. This tests predictive information,
-not an economic causal mechanism.</p>
+not an economic causal mechanism. We use three lags of each variable.
+The conclusion does not hinge on this choice: the Schwarz criterion
+prefers two lags and the Akaike criterion considerably more, and the
+test results are the same for any order between them.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pval</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">signif</a></span><span class="op">(</span><span class="va">x</span><span class="op">[[</span><span class="st">"Pr(&gt;F)"</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">2L</span><span class="op">]</span>, <span class="fl">2L</span><span class="op">)</span>, scientific <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
@@ -375,8 +378,15 @@ also include manufacturing expectations to test whether a more closely
 matched survey series improves the forecast, as suggested by Lehmann’s
 review. For manufacturing expectations, we use the value first published
 for each month. This prevents later survey revisions from entering
-earlier forecasts. Starting with ten years of data, we re-estimate each
-model monthly and predict the next observation.</p>
+earlier forecasts.</p>
+<p>The transformation of the survey series may also affect the
+comparison. Lehmann argues that survey indicators should either enter in
+levels when the target is a cyclical component or be transformed like
+the forecast target. Because our target is year-on-year production
+growth, we compare the Germany-wide climate and expectations balances in
+levels and as twelve-month differences. All specifications use the same
+sample. Starting with ten years of data, we re-estimate each model
+monthly and predict the next observation.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">germany_components</span> <span class="op">&lt;-</span> <span class="va">survey_long</span> <span class="op">|&gt;</span></span>
 <span>  <span class="va">_</span><span class="op">[</span><span class="va">series</span> <span class="op">==</span> <span class="st">"balance"</span><span class="op">]</span> <span class="op">|&gt;</span></span>
@@ -399,25 +409,33 @@ model monthly and predict the next observation.</p>
 <span>  how <span class="op">=</span> <span class="st">"inner"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
+<span><span class="va">diff12</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/shift.html" class="external-link">shift</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">12L</span><span class="op">)</span></span>
+<span><span class="va">survey_variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sets.html" class="external-link">setdiff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">forecast_data</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"yearmonth"</span>, <span class="st">"ip_growth"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">forecast_data</span><span class="op">[</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">survey_variables</span>, <span class="st">"_diff"</span><span class="op">)</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="va">diff12</span><span class="op">)</span>,</span>
+<span>  .SDcols <span class="op">=</span> <span class="va">survey_variables</span></span>
+<span><span class="op">]</span></span>
 <span><span class="va">lag_variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sets.html" class="external-link">setdiff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">forecast_data</span><span class="op">)</span>, <span class="st">"yearmonth"</span><span class="op">)</span></span>
 <span><span class="va">lags</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span></span>
 <span><span class="va">lag_columns</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="va">lag_variables</span>, each <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">lags</span><span class="op">)</span><span class="op">)</span>, <span class="va">lags</span><span class="op">)</span></span>
 <span><span class="va">forecast_data</span><span class="op">[</span>, <span class="op">(</span><span class="va">lag_columns</span><span class="op">)</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/shift.html" class="external-link">shift</a></span><span class="op">(</span><span class="va">.SD</span>, <span class="va">lags</span><span class="op">)</span>, .SDcols <span class="op">=</span> <span class="va">lag_variables</span><span class="op">]</span></span>
-<span></span>
-<span><span class="va">models</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>  <span class="st">"AR(3)"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"ip_growth"</span>, <span class="va">lags</span><span class="op">)</span>,</span>
-<span>  <span class="st">"Germany climate"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"ip_growth"</span>, <span class="va">lags</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"de_climate"</span>, <span class="va">lags</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>  <span class="st">"Germany situation"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"ip_growth"</span>, <span class="va">lags</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"de_situation"</span>, <span class="va">lags</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>  <span class="st">"Germany expectations"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"ip_growth"</span>, <span class="va">lags</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"de_expectation"</span>, <span class="va">lags</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>  <span class="st">"Manufacturing expectations"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"ip_growth"</span>, <span class="va">lags</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"mfg_expectation"</span>, <span class="va">lags</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">required</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ip_growth"</span>, <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">models</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">forecast_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html" class="external-link">na.omit</a></span><span class="op">(</span><span class="va">forecast_data</span>, cols <span class="op">=</span> <span class="va">required</span><span class="op">)</span></span>
+<span><span class="va">forecast_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html" class="external-link">na.omit</a></span><span class="op">(</span><span class="va">forecast_data</span><span class="op">)</span></span>
 <span><span class="va">initial_window</span> <span class="op">&lt;-</span> <span class="fl">120L</span></span>
 <span><span class="va">forecast_months</span> <span class="op">&lt;-</span> <span class="va">initial_window</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">forecast_data</span><span class="op">)</span> <span class="op">-</span> <span class="va">initial_window</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">roll_forecast</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">predictors</span>, <span class="va">model</span><span class="op">)</span> <span class="op">{</span></span>
+<span><span class="va">indicators</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"Germany climate"</span> <span class="op">=</span> <span class="st">"de_climate"</span>,</span>
+<span>  <span class="st">"Germany situation"</span> <span class="op">=</span> <span class="st">"de_situation"</span>,</span>
+<span>  <span class="st">"Germany expectations"</span> <span class="op">=</span> <span class="st">"de_expectation"</span>,</span>
+<span>  <span class="st">"Manufacturing expectations"</span> <span class="op">=</span> <span class="st">"mfg_expectation"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">specs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/J.html" class="external-link">CJ</a></span><span class="op">(</span>model <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">indicators</span><span class="op">)</span>, transformation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"levels"</span>, <span class="st">"differences"</span><span class="op">)</span>, sorted <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">[</span></span>
+<span>  <span class="va">transformation</span> <span class="op">==</span> <span class="st">"levels"</span> <span class="op">|</span> <span class="va">model</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Germany climate"</span>, <span class="st">"Germany expectations"</span><span class="op">)</span></span>
+<span><span class="op">]</span></span>
+<span><span class="va">specs</span><span class="op">[</span>, <span class="va">variable</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">indicators</span><span class="op">[</span><span class="va">model</span><span class="op">]</span>, <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/fifelse.html" class="external-link">fifelse</a></span><span class="op">(</span><span class="va">transformation</span> <span class="op">==</span> <span class="st">"differences"</span>, <span class="st">"_diff"</span>, <span class="st">""</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">ar_terms</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"ip_growth"</span>, <span class="va">lags</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">roll_forecast</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">predictors</span>, <span class="va">model</span>, <span class="va">transformation</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">formula</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/delete.response.html" class="external-link">reformulate</a></span><span class="op">(</span><span class="va">predictors</span>, response <span class="op">=</span> <span class="st">"ip_growth"</span><span class="op">)</span></span>
 <span>  <span class="va">predicted</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">vapply</a></span><span class="op">(</span></span>
 <span>    <span class="va">forecast_months</span>,</span>
@@ -429,36 +447,61 @@ model monthly and predict the next observation.</p>
 <span>  <span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table</a></span><span class="op">(</span></span>
 <span>    <span class="va">model</span>,</span>
+<span>    <span class="va">transformation</span>,</span>
 <span>    yearmonth <span class="op">=</span> <span class="va">forecast_data</span><span class="op">$</span><span class="va">yearmonth</span><span class="op">[</span><span class="va">forecast_months</span><span class="op">]</span>,</span>
 <span>    actual <span class="op">=</span> <span class="va">forecast_data</span><span class="op">$</span><span class="va">ip_growth</span><span class="op">[</span><span class="va">forecast_months</span><span class="op">]</span>,</span>
 <span>    <span class="va">predicted</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
-<span><span class="va">predictions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/rbindlist.html" class="external-link">rbindlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/funprog.html" class="external-link">Map</a></span><span class="op">(</span><span class="va">roll_forecast</span>, predictors <span class="op">=</span> <span class="va">models</span>, model <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">models</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">predictions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/rbindlist.html" class="external-link">rbindlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu">roll_forecast</span><span class="op">(</span><span class="va">ar_terms</span>, <span class="st">"AR(3)"</span>, <span class="st">"levels"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/funprog.html" class="external-link">Map</a></span><span class="op">(</span></span>
+<span>    <span class="kw">function</span><span class="op">(</span><span class="va">variable</span>, <span class="va">model</span>, <span class="va">transformation</span><span class="op">)</span> <span class="op">{</span></span>
+<span>      <span class="fu">roll_forecast</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">ar_terms</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">variable</span>, <span class="va">lags</span><span class="op">)</span><span class="op">)</span>, <span class="va">model</span>, <span class="va">transformation</span><span class="op">)</span></span>
+<span>    <span class="op">}</span>,</span>
+<span>    <span class="va">specs</span><span class="op">$</span><span class="va">variable</span>,</span>
+<span>    <span class="va">specs</span><span class="op">$</span><span class="va">model</span>,</span>
+<span>    <span class="va">specs</span><span class="op">$</span><span class="va">transformation</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">forecast_scores</span> <span class="op">&lt;-</span> <span class="va">predictions</span> <span class="op">|&gt;</span></span>
-<span>  <span class="va">_</span><span class="op">[</span>, <span class="fu">.</span><span class="op">(</span>months <span class="op">=</span> <span class="va">.N</span>, rmse <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">actual</span> <span class="op">-</span> <span class="va">predicted</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, by <span class="op">=</span> <span class="va">model</span><span class="op">]</span> <span class="op">|&gt;</span></span>
+<span>  <span class="va">_</span><span class="op">[</span>,</span>
+<span>    <span class="fu">.</span><span class="op">(</span>months <span class="op">=</span> <span class="va">.N</span>, rmse <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">actual</span> <span class="op">-</span> <span class="va">predicted</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    by <span class="op">=</span> <span class="fu">.</span><span class="op">(</span><span class="va">model</span>, <span class="va">transformation</span><span class="op">)</span></span>
+<span>  <span class="op">]</span> <span class="op">|&gt;</span></span>
 <span>  <span class="va">_</span><span class="op">[</span>, <span class="va">improvement_over_ar</span> <span class="op">:=</span> <span class="fl">100</span> <span class="op">*</span> <span class="op">(</span><span class="va">rmse</span><span class="op">[</span><span class="va">model</span> <span class="op">==</span> <span class="st">"AR(3)"</span><span class="op">]</span> <span class="op">-</span> <span class="va">rmse</span><span class="op">)</span> <span class="op">/</span> <span class="va">rmse</span><span class="op">[</span><span class="va">model</span> <span class="op">==</span> <span class="st">"AR(3)"</span><span class="op">]</span><span class="op">]</span> <span class="op">|&gt;</span></span>
 <span>  <span class="va">_</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/assign.html" class="external-link">let</a></span><span class="op">(</span>rmse <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">rmse</span>, <span class="fl">2L</span><span class="op">)</span>, improvement_over_ar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">improvement_over_ar</span>, <span class="fl">1L</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">improvement</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">which_model</span>, <span class="va">which_transformation</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">forecast_scores</span><span class="op">[</span></span>
+<span>    <span class="va">model</span> <span class="op">==</span> <span class="va">which_model</span> <span class="op">&amp;</span> <span class="va">transformation</span> <span class="op">==</span> <span class="va">which_transformation</span>,</span>
+<span>    <span class="va">improvement_over_ar</span></span>
+<span>  <span class="op">]</span></span>
+<span><span class="op">}</span></span>
 <span><span class="va">forecast_scores</span><span class="op">[</span><span class="op">]</span></span>
-<span><span class="co">#&gt;                         model months  rmse improvement_over_ar</span></span>
-<span><span class="co">#&gt;                        &lt;char&gt;  &lt;int&gt; &lt;num&gt;               &lt;num&gt;</span></span>
-<span><span class="co">#&gt; 1:                      AR(3)    129  4.61                 0.0</span></span>
-<span><span class="co">#&gt; 2:            Germany climate    129  4.58                 0.7</span></span>
-<span><span class="co">#&gt; 3:          Germany situation    129  4.63                -0.5</span></span>
-<span><span class="co">#&gt; 4:       Germany expectations    129  4.57                 1.0</span></span>
-<span><span class="co">#&gt; 5: Manufacturing expectations    129  4.36                 5.4</span></span></code></pre></div>
-<p>Across 129 forecasts, Germany-wide expectations lower RMSE by 1%
-relative to the AR benchmark, slightly more than the climate balance at
-0.7%. The situation balance raises RMSE by 0.5%. Manufacturing
-expectations lower it by 5.4%. The forecast ranking therefore agrees
-with the lead-lag analysis, although the differences between the
-Germany-wide components are small. The closer sectoral match appears to
-matter, but industrial production is broader than manufacturing alone.
-This remains a pseudo-out-of-sample exercise because industrial
-production and the Germany-wide balances use their latest vintages. The
-manufacturing series uses first-release values.</p>
+<span><span class="co">#&gt;                         model transformation months  rmse improvement_over_ar</span></span>
+<span><span class="co">#&gt;                        &lt;char&gt;         &lt;char&gt;  &lt;int&gt; &lt;num&gt;               &lt;num&gt;</span></span>
+<span><span class="co">#&gt; 1:                      AR(3)         levels    117  4.83                 0.0</span></span>
+<span><span class="co">#&gt; 2:            Germany climate         levels    117  4.81                 0.4</span></span>
+<span><span class="co">#&gt; 3:            Germany climate    differences    117  4.56                 5.6</span></span>
+<span><span class="co">#&gt; 4:          Germany situation         levels    117  4.88                -1.0</span></span>
+<span><span class="co">#&gt; 5:       Germany expectations         levels    117  4.79                 0.7</span></span>
+<span><span class="co">#&gt; 6:       Germany expectations    differences    117  4.68                 3.0</span></span>
+<span><span class="co">#&gt; 7: Manufacturing expectations         levels    117  4.58                 5.2</span></span></code></pre></div>
+<p>Across 117 forecasts, the survey series in levels repeat the ranking
+from the lead-lag analysis. Germany-wide expectations lower RMSE by 0.7%
+relative to the AR benchmark and the climate balance by 0.4%, while the
+situation balance offers no improvement (-1%). Manufacturing
+expectations lower RMSE by 5.2%, so the closer sectoral match appears to
+matter. Matching the transformation changes this picture. As
+twelve-month differences, the Germany-wide climate balance lowers RMSE
+by 5.6%, on par with manufacturing expectations in levels at 5.2%.
+Germany-wide expectations improve to 3%. The differenced headline series
+therefore produces a similar full-sample RMSE improvement to
+manufacturing expectations. This remains a pseudo-out-of-sample exercise
+because industrial production and the Germany-wide balances use their
+latest vintages. The manufacturing series uses first-release values.</p>
 <p>Are these gains statistically distinguishable from the benchmark? A
 <a href="https://doi.org/10.1080/07350015.1995.10524599" class="external-link">Diebold and
 Mariano (1995)</a> test on the squared-error differentials would be
@@ -471,7 +514,7 @@ approximately standard normal, and the test is one-sided: does the
 survey model improve on the benchmark?</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cw_scores</span> <span class="op">&lt;-</span> <span class="va">predictions</span> <span class="op">|&gt;</span></span>
-<span>  <span class="va">_</span><span class="op">[</span>, <span class="fu">.</span><span class="op">(</span><span class="va">yearmonth</span>, <span class="va">model</span>, <span class="va">actual</span>, <span class="va">predicted</span><span class="op">)</span><span class="op">]</span> <span class="op">|&gt;</span></span>
+<span>  <span class="va">_</span><span class="op">[</span>, <span class="fu">.</span><span class="op">(</span><span class="va">yearmonth</span>, <span class="va">model</span>, <span class="va">transformation</span>, <span class="va">actual</span>, <span class="va">predicted</span><span class="op">)</span><span class="op">]</span> <span class="op">|&gt;</span></span>
 <span>  <span class="va">_</span><span class="op">[</span>, <span class="va">benchmark</span> <span class="op">:=</span> <span class="va">predicted</span><span class="op">[</span><span class="va">model</span> <span class="op">==</span> <span class="st">"AR(3)"</span><span class="op">]</span>, by <span class="op">=</span> <span class="va">yearmonth</span><span class="op">]</span> <span class="op">|&gt;</span></span>
 <span>  <span class="va">_</span><span class="op">[</span></span>
 <span>    <span class="va">model</span> <span class="op">!=</span> <span class="st">"AR(3)"</span>,</span>
@@ -480,25 +523,37 @@ survey model improve on the benchmark?</p>
 <span>      <span class="va">cw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">f</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">var</a></span><span class="op">(</span><span class="va">f</span><span class="op">)</span> <span class="op">/</span> <span class="va">.N</span><span class="op">)</span></span>
 <span>      <span class="fu">.</span><span class="op">(</span>cw_statistic <span class="op">=</span> <span class="va">cw</span>, p_value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">pnorm</a></span><span class="op">(</span><span class="op">-</span><span class="va">cw</span><span class="op">)</span><span class="op">)</span></span>
 <span>    <span class="op">}</span>,</span>
-<span>    by <span class="op">=</span> <span class="va">model</span></span>
+<span>    by <span class="op">=</span> <span class="fu">.</span><span class="op">(</span><span class="va">model</span>, <span class="va">transformation</span><span class="op">)</span></span>
 <span>  <span class="op">]</span></span>
+<span><span class="va">cw_p</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">which_model</span>, <span class="va">which_transformation</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">cw_scores</span><span class="op">[</span></span>
+<span>    <span class="va">model</span> <span class="op">==</span> <span class="va">which_model</span> <span class="op">&amp;</span> <span class="va">transformation</span> <span class="op">==</span> <span class="va">which_transformation</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"%.2f"</span>, <span class="va">p_value</span><span class="op">)</span></span>
+<span>  <span class="op">]</span></span>
+<span><span class="op">}</span></span>
 <span><span class="va">cw_scores</span><span class="op">[</span>, <span class="fu">.</span><span class="op">(</span></span>
 <span>  <span class="va">model</span>,</span>
+<span>  <span class="va">transformation</span>,</span>
 <span>  cw_statistic <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">cw_statistic</span>, <span class="fl">2L</span><span class="op">)</span>,</span>
 <span>  p_value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">p_value</span>, <span class="fl">2L</span><span class="op">)</span></span>
 <span><span class="op">)</span><span class="op">]</span></span>
-<span><span class="co">#&gt;                         model cw_statistic p_value</span></span>
-<span><span class="co">#&gt;                        &lt;char&gt;        &lt;num&gt;   &lt;num&gt;</span></span>
-<span><span class="co">#&gt; 1:            Germany climate         1.00    0.16</span></span>
-<span><span class="co">#&gt; 2:          Germany situation         0.62    0.27</span></span>
-<span><span class="co">#&gt; 3:       Germany expectations         1.28    0.10</span></span>
-<span><span class="co">#&gt; 4: Manufacturing expectations         1.97    0.02</span></span></code></pre></div>
-<p>Only manufacturing expectations clear the 5% level (p = 0.02).
-Germany-wide expectations are borderline (p = 0.10), and the climate and
-situation balances are clearly insignificant. The evidence for added
-predictive content is therefore concentrated in the survey series that
-matches the reference variable most closely. Whether that evidence rests
-on a few extreme months is the next question.</p>
+<span><span class="co">#&gt;                         model transformation cw_statistic p_value</span></span>
+<span><span class="co">#&gt;                        &lt;char&gt;         &lt;char&gt;        &lt;num&gt;   &lt;num&gt;</span></span>
+<span><span class="co">#&gt; 1:            Germany climate         levels         0.98    0.16</span></span>
+<span><span class="co">#&gt; 2:            Germany climate    differences         2.07    0.02</span></span>
+<span><span class="co">#&gt; 3:          Germany situation         levels         0.55    0.29</span></span>
+<span><span class="co">#&gt; 4:       Germany expectations         levels         1.26    0.10</span></span>
+<span><span class="co">#&gt; 5:       Germany expectations    differences         1.68    0.05</span></span>
+<span><span class="co">#&gt; 6: Manufacturing expectations         levels         1.90    0.03</span></span></code></pre></div>
+<p>In levels, only manufacturing expectations clear the 5% level (p =
+0.03). Germany-wide expectations are borderline (p = 0.10), and the
+climate and situation balances are clearly insignificant. As
+twelve-month differences, the Germany-wide climate balance clears the 5%
+level (p = 0.02), and expectations sit at the threshold (p = 0.05). The
+transformation materially changes the ranking: evidence for added
+predictive content is not confined to manufacturing expectations.
+Whether that evidence rests on a few extreme months is the next
+question.</p>
 </div>
 <div class="section level3">
 <h3 id="when-do-the-survey-indicators-help">When do the survey indicators help?<a class="anchor" aria-label="anchor" href="#when-do-the-survey-indicators-help"></a>
@@ -506,18 +561,23 @@ on a few extreme months is the next question.</p>
 <p>The second criterion also requires the relationship to be stable over
 time, and the average RMSE hides when the forecast gains occur. We
 accumulate the monthly difference in squared errors between the AR
-benchmark and each model with expectations. The line rises when the
-survey model produces the smaller error and falls when the benchmark
-does.</p>
+benchmark and the three survey models with the largest gains. The line
+rises when the survey model produces the smaller error and falls when
+the benchmark does.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">forecast_gain</span> <span class="op">&lt;-</span> <span class="va">predictions</span> <span class="op">|&gt;</span></span>
-<span>  <span class="va">_</span><span class="op">[</span>, <span class="fu">.</span><span class="op">(</span><span class="va">yearmonth</span>, <span class="va">model</span>, error <span class="op">=</span> <span class="op">(</span><span class="va">actual</span> <span class="op">-</span> <span class="va">predicted</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">]</span> <span class="op">|&gt;</span></span>
+<code class="sourceCode R"><span><span class="va">shown</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/data.table.html" class="external-link">data.table</a></span><span class="op">(</span></span>
+<span>  model <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Germany expectations"</span>, <span class="st">"Manufacturing expectations"</span>, <span class="st">"Germany climate"</span><span class="op">)</span>,</span>
+<span>  transformation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"levels"</span>, <span class="st">"levels"</span>, <span class="st">"differences"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">forecast_gain</span> <span class="op">&lt;-</span> <span class="va">predictions</span> <span class="op">|&gt;</span></span>
+<span>  <span class="va">_</span><span class="op">[</span>, <span class="fu">.</span><span class="op">(</span><span class="va">yearmonth</span>, <span class="va">model</span>, <span class="va">transformation</span>, error <span class="op">=</span> <span class="op">(</span><span class="va">actual</span> <span class="op">-</span> <span class="va">predicted</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">]</span> <span class="op">|&gt;</span></span>
 <span>  <span class="va">_</span><span class="op">[</span>, <span class="va">benchmark_error</span> <span class="op">:=</span> <span class="va">error</span><span class="op">[</span><span class="va">model</span> <span class="op">==</span> <span class="st">"AR(3)"</span><span class="op">]</span>, by <span class="op">=</span> <span class="va">yearmonth</span><span class="op">]</span> <span class="op">|&gt;</span></span>
-<span>  <span class="va">_</span><span class="op">[</span><span class="va">model</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Germany expectations"</span>, <span class="st">"Manufacturing expectations"</span><span class="op">)</span><span class="op">]</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/setorder.html" class="external-link">setorder</a></span><span class="op">(</span><span class="va">model</span>, <span class="va">yearmonth</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="va">_</span><span class="op">[</span>, <span class="fu">.</span><span class="op">(</span><span class="va">yearmonth</span>, cumulative_gain <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html" class="external-link">cumsum</a></span><span class="op">(</span><span class="va">benchmark_error</span> <span class="op">-</span> <span class="va">error</span><span class="op">)</span><span class="op">)</span>, by <span class="op">=</span> <span class="va">model</span><span class="op">]</span></span>
+<span>  <span class="va">_</span><span class="op">[</span><span class="va">shown</span>, on <span class="op">=</span> <span class="fu">.</span><span class="op">(</span><span class="va">model</span>, <span class="va">transformation</span><span class="op">)</span><span class="op">]</span> <span class="op">|&gt;</span></span>
+<span>  <span class="va">_</span><span class="op">[</span>, <span class="va">label</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">model</span>, <span class="st">" ("</span>, <span class="va">transformation</span>, <span class="st">")"</span><span class="op">)</span><span class="op">]</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/setorder.html" class="external-link">setorder</a></span><span class="op">(</span><span class="va">label</span>, <span class="va">yearmonth</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="va">_</span><span class="op">[</span>, <span class="fu">.</span><span class="op">(</span><span class="va">yearmonth</span>, cumulative_gain <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html" class="external-link">cumsum</a></span><span class="op">(</span><span class="va">benchmark_error</span> <span class="op">-</span> <span class="va">error</span><span class="op">)</span><span class="op">)</span>, by <span class="op">=</span> <span class="va">label</span><span class="op">]</span></span>
 <span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">forecast_gain</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">yearmonth</span>, y <span class="op">=</span> <span class="va">cumulative_gain</span>, color <span class="op">=</span> <span class="va">model</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">forecast_gain</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">yearmonth</span>, y <span class="op">=</span> <span class="va">cumulative_gain</span>, color <span class="op">=</span> <span class="va">label</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html" class="external-link">annotate</a></span><span class="op">(</span></span>
 <span>    <span class="st">"rect"</span>,</span>
 <span>    xmin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2020-01-01"</span><span class="op">)</span>,</span>
@@ -539,7 +599,11 @@ does.</p>
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span></span>
-<span>    values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Germany expectations"</span> <span class="op">=</span> <span class="st">"darkred"</span>, <span class="st">"Manufacturing expectations"</span> <span class="op">=</span> <span class="st">"darkblue"</span><span class="op">)</span></span>
+<span>    values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>      <span class="st">"Germany expectations (levels)"</span> <span class="op">=</span> <span class="st">"darkred"</span>,</span>
+<span>      <span class="st">"Manufacturing expectations (levels)"</span> <span class="op">=</span> <span class="st">"darkblue"</span>,</span>
+<span>      <span class="st">"Germany climate (differences)"</span> <span class="op">=</span> <span class="st">"darkgrey"</span></span>
+<span>    <span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_ifo</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>axis.title.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -551,10 +615,10 @@ does.</p>
 <p><strong>The pandemic has an outsized influence on the
 sample.</strong> Most of the cumulative forecast gain appears in 2020
 and 2021. After 2022, Germany-wide expectations give back most of that
-advantage and manufacturing expectations about half of it. The
-full-sample RMSE therefore does not show a stable forecasting advantage.
-A pre-2020 estimation or pandemic indicators would provide a stricter
-sensitivity check.</p>
+advantage, while manufacturing expectations and the differenced climate
+balance keep about half of theirs. The full-sample RMSE therefore does
+not show a stable forecasting advantage. A pre-2020 estimation or
+pandemic indicators would provide a stricter sensitivity check.</p>
 <p><strong>Industrial production and the Germany-wide ifo series use
 their latest vintages.</strong> Manufacturing expectations use
 first-release values. The ifo survey appears during its reference month,

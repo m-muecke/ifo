@@ -206,7 +206,7 @@ The peak correlation occurs at lag -1 for expectations, 0 for the
 climate index, and 3 for the situation assessment. Because negative lags
 indicate a lead over production, only expectations peak ahead of
 production, and the lead is short: the correlation is nearly flat
-between lag -1 and lag 0. A formal test can determine whether this lead
+between lag -1 and lag 0. A formal test can determine whether the lead
 holds after accounting for the history of production itself.
 
 ### Criterion 2: Granger causality
@@ -218,7 +218,10 @@ whether past values of the ifo index improve a forecast of production
 growth beyond production growth’s own past. We also test the reverse
 direction: an indicator that merely reacts to production would be
 predicted by it. This tests predictive information, not an economic
-causal mechanism.
+causal mechanism. We use three lags of each variable. The conclusion
+does not hinge on this choice: the Schwarz criterion prefers two lags
+and the Akaike criterion considerably more, and the test results are the
+same for any order between them.
 
 ``` r
 
@@ -339,8 +342,16 @@ also include manufacturing expectations to test whether a more closely
 matched survey series improves the forecast, as suggested by Lehmann’s
 review. For manufacturing expectations, we use the value first published
 for each month. This prevents later survey revisions from entering
-earlier forecasts. Starting with ten years of data, we re-estimate each
-model monthly and predict the next observation.
+earlier forecasts.
+
+The transformation of the survey series may also affect the comparison.
+Lehmann argues that survey indicators should either enter in levels when
+the target is a cyclical component or be transformed like the forecast
+target. Because our target is year-on-year production growth, we compare
+the Germany-wide climate and expectations balances in levels and as
+twelve-month differences. All specifications use the same sample.
+Starting with ten years of data, we re-estimate each model monthly and
+predict the next observation.
 
 ``` r
 
@@ -365,25 +376,33 @@ forecast_data <- mergelist(
   how = "inner"
 )
 
+diff12 <- function(x) x - shift(x, 12L)
+survey_variables <- setdiff(names(forecast_data), c("yearmonth", "ip_growth"))
+forecast_data[,
+  paste0(survey_variables, "_diff") := lapply(.SD, diff12),
+  .SDcols = survey_variables
+]
 lag_variables <- setdiff(names(forecast_data), "yearmonth")
 lags <- 1:3
 lag_columns <- paste0(rep(lag_variables, each = length(lags)), lags)
 forecast_data[, (lag_columns) := shift(.SD, lags), .SDcols = lag_variables]
-
-models <- list(
-  "AR(3)" = paste0("ip_growth", lags),
-  "Germany climate" = c(paste0("ip_growth", lags), paste0("de_climate", lags)),
-  "Germany situation" = c(paste0("ip_growth", lags), paste0("de_situation", lags)),
-  "Germany expectations" = c(paste0("ip_growth", lags), paste0("de_expectation", lags)),
-  "Manufacturing expectations" = c(paste0("ip_growth", lags), paste0("mfg_expectation", lags))
-)
-
-required <- c("ip_growth", unique(unlist(models)))
-forecast_data <- na.omit(forecast_data, cols = required)
+forecast_data <- na.omit(forecast_data)
 initial_window <- 120L
 forecast_months <- initial_window + seq_len(nrow(forecast_data) - initial_window)
 
-roll_forecast <- function(predictors, model) {
+indicators <- c(
+  "Germany climate" = "de_climate",
+  "Germany situation" = "de_situation",
+  "Germany expectations" = "de_expectation",
+  "Manufacturing expectations" = "mfg_expectation"
+)
+specs <- CJ(model = names(indicators), transformation = c("levels", "differences"), sorted = FALSE)[
+  transformation == "levels" | model %in% c("Germany climate", "Germany expectations")
+]
+specs[, variable := paste0(indicators[model], fifelse(transformation == "differences", "_diff", ""))]
+ar_terms <- paste0("ip_growth", lags)
+
+roll_forecast <- function(predictors, model, transformation) {
   formula <- reformulate(predictors, response = "ip_growth")
   predicted <- vapply(
     forecast_months,
@@ -395,38 +414,63 @@ roll_forecast <- function(predictors, model) {
   )
   data.table(
     model,
+    transformation,
     yearmonth = forecast_data$yearmonth[forecast_months],
     actual = forecast_data$ip_growth[forecast_months],
     predicted
   )
 }
 
-predictions <- rbindlist(Map(roll_forecast, predictors = models, model = names(models)))
+predictions <- rbindlist(c(
+  list(roll_forecast(ar_terms, "AR(3)", "levels")),
+  Map(
+    function(variable, model, transformation) {
+      roll_forecast(c(ar_terms, paste0(variable, lags)), model, transformation)
+    },
+    specs$variable,
+    specs$model,
+    specs$transformation
+  )
+))
 
 forecast_scores <- predictions |>
-  _[, .(months = .N, rmse = sqrt(mean((actual - predicted)^2))), by = model] |>
+  _[,
+    .(months = .N, rmse = sqrt(mean((actual - predicted)^2))),
+    by = .(model, transformation)
+  ] |>
   _[, improvement_over_ar := 100 * (rmse[model == "AR(3)"] - rmse) / rmse[model == "AR(3)"]] |>
   _[, let(rmse = round(rmse, 2L), improvement_over_ar = round(improvement_over_ar, 1L))]
+improvement <- function(which_model, which_transformation) {
+  forecast_scores[
+    model == which_model & transformation == which_transformation,
+    improvement_over_ar
+  ]
+}
 forecast_scores[]
-#>                         model months  rmse improvement_over_ar
-#>                        <char>  <int> <num>               <num>
-#> 1:                      AR(3)    129  4.61                 0.0
-#> 2:            Germany climate    129  4.58                 0.7
-#> 3:          Germany situation    129  4.63                -0.5
-#> 4:       Germany expectations    129  4.57                 1.0
-#> 5: Manufacturing expectations    129  4.36                 5.4
+#>                         model transformation months  rmse improvement_over_ar
+#>                        <char>         <char>  <int> <num>               <num>
+#> 1:                      AR(3)         levels    117  4.83                 0.0
+#> 2:            Germany climate         levels    117  4.81                 0.4
+#> 3:            Germany climate    differences    117  4.56                 5.6
+#> 4:          Germany situation         levels    117  4.88                -1.0
+#> 5:       Germany expectations         levels    117  4.79                 0.7
+#> 6:       Germany expectations    differences    117  4.68                 3.0
+#> 7: Manufacturing expectations         levels    117  4.58                 5.2
 ```
 
-Across 129 forecasts, Germany-wide expectations lower RMSE by 1%
-relative to the AR benchmark, slightly more than the climate balance at
-0.7%. The situation balance raises RMSE by 0.5%. Manufacturing
-expectations lower it by 5.4%. The forecast ranking therefore agrees
-with the lead-lag analysis, although the differences between the
-Germany-wide components are small. The closer sectoral match appears to
-matter, but industrial production is broader than manufacturing alone.
-This remains a pseudo-out-of-sample exercise because industrial
-production and the Germany-wide balances use their latest vintages. The
-manufacturing series uses first-release values.
+Across 117 forecasts, the survey series in levels repeat the ranking
+from the lead-lag analysis. Germany-wide expectations lower RMSE by 0.7%
+relative to the AR benchmark and the climate balance by 0.4%, while the
+situation balance offers no improvement (-1%). Manufacturing
+expectations lower RMSE by 5.2%, so the closer sectoral match appears to
+matter. Matching the transformation changes this picture. As
+twelve-month differences, the Germany-wide climate balance lowers RMSE
+by 5.6%, on par with manufacturing expectations in levels at 5.2%.
+Germany-wide expectations improve to 3%. The differenced headline series
+therefore produces a similar full-sample RMSE improvement to
+manufacturing expectations. This remains a pseudo-out-of-sample exercise
+because industrial production and the Germany-wide balances use their
+latest vintages. The manufacturing series uses first-release values.
 
 Are these gains statistically distinguishable from the benchmark? A
 [Diebold and Mariano
@@ -443,7 +487,7 @@ benchmark?
 ``` r
 
 cw_scores <- predictions |>
-  _[, .(yearmonth, model, actual, predicted)] |>
+  _[, .(yearmonth, model, transformation, actual, predicted)] |>
   _[, benchmark := predicted[model == "AR(3)"], by = yearmonth] |>
   _[
     model != "AR(3)",
@@ -452,47 +496,64 @@ cw_scores <- predictions |>
       cw <- mean(f) / sqrt(var(f) / .N)
       .(cw_statistic = cw, p_value = pnorm(-cw))
     },
-    by = model
+    by = .(model, transformation)
   ]
+cw_p <- function(which_model, which_transformation) {
+  cw_scores[
+    model == which_model & transformation == which_transformation,
+    sprintf("%.2f", p_value)
+  ]
+}
 cw_scores[, .(
   model,
+  transformation,
   cw_statistic = round(cw_statistic, 2L),
   p_value = round(p_value, 2L)
 )]
-#>                         model cw_statistic p_value
-#>                        <char>        <num>   <num>
-#> 1:            Germany climate         1.00    0.16
-#> 2:          Germany situation         0.62    0.27
-#> 3:       Germany expectations         1.28    0.10
-#> 4: Manufacturing expectations         1.97    0.02
+#>                         model transformation cw_statistic p_value
+#>                        <char>         <char>        <num>   <num>
+#> 1:            Germany climate         levels         0.98    0.16
+#> 2:            Germany climate    differences         2.07    0.02
+#> 3:          Germany situation         levels         0.55    0.29
+#> 4:       Germany expectations         levels         1.26    0.10
+#> 5:       Germany expectations    differences         1.68    0.05
+#> 6: Manufacturing expectations         levels         1.90    0.03
 ```
 
-Only manufacturing expectations clear the 5% level (p = 0.02).
-Germany-wide expectations are borderline (p = 0.10), and the climate and
-situation balances are clearly insignificant. The evidence for added
-predictive content is therefore concentrated in the survey series that
-matches the reference variable most closely. Whether that evidence rests
-on a few extreme months is the next question.
+In levels, only manufacturing expectations clear the 5% level (p =
+0.03). Germany-wide expectations are borderline (p = 0.10), and the
+climate and situation balances are clearly insignificant. As
+twelve-month differences, the Germany-wide climate balance clears the 5%
+level (p = 0.02), and expectations sit at the threshold (p = 0.05). The
+transformation materially changes the ranking: evidence for added
+predictive content is not confined to manufacturing expectations.
+Whether that evidence rests on a few extreme months is the next
+question.
 
 ### When do the survey indicators help?
 
 The second criterion also requires the relationship to be stable over
 time, and the average RMSE hides when the forecast gains occur. We
 accumulate the monthly difference in squared errors between the AR
-benchmark and each model with expectations. The line rises when the
-survey model produces the smaller error and falls when the benchmark
-does.
+benchmark and the three survey models with the largest gains. The line
+rises when the survey model produces the smaller error and falls when
+the benchmark does.
 
 ``` r
 
+shown <- data.table(
+  model = c("Germany expectations", "Manufacturing expectations", "Germany climate"),
+  transformation = c("levels", "levels", "differences")
+)
 forecast_gain <- predictions |>
-  _[, .(yearmonth, model, error = (actual - predicted)^2)] |>
+  _[, .(yearmonth, model, transformation, error = (actual - predicted)^2)] |>
   _[, benchmark_error := error[model == "AR(3)"], by = yearmonth] |>
-  _[model %in% c("Germany expectations", "Manufacturing expectations")] |>
-  setorder(model, yearmonth) |>
-  _[, .(yearmonth, cumulative_gain = cumsum(benchmark_error - error)), by = model]
+  _[shown, on = .(model, transformation)] |>
+  _[, label := paste0(model, " (", transformation, ")")] |>
+  setorder(label, yearmonth) |>
+  _[, .(yearmonth, cumulative_gain = cumsum(benchmark_error - error)), by = label]
 
-ggplot(forecast_gain, aes(x = yearmonth, y = cumulative_gain, color = model)) +
+ggplot(forecast_gain, aes(x = yearmonth, y = cumulative_gain, color = label)) +
   annotate(
     "rect",
     xmin = as.Date("2020-01-01"),
@@ -514,7 +575,11 @@ ggplot(forecast_gain, aes(x = yearmonth, y = cumulative_gain, color = model)) +
     )
   ) +
   scale_color_manual(
-    values = c("Germany expectations" = "darkred", "Manufacturing expectations" = "darkblue")
+    values = c(
+      "Germany expectations (levels)" = "darkred",
+      "Manufacturing expectations (levels)" = "darkblue",
+      "Germany climate (differences)" = "darkgrey"
+    )
   ) +
   theme_ifo() +
   theme(axis.title.y = element_text())
@@ -526,11 +591,11 @@ ggplot(forecast_gain, aes(x = yearmonth, y = cumulative_gain, color = model)) +
 
 **The pandemic has an outsized influence on the sample.** Most of the
 cumulative forecast gain appears in 2020 and 2021. After 2022,
-Germany-wide expectations give back most of that advantage and
-manufacturing expectations about half of it. The full-sample RMSE
-therefore does not show a stable forecasting advantage. A pre-2020
-estimation or pandemic indicators would provide a stricter sensitivity
-check.
+Germany-wide expectations give back most of that advantage, while
+manufacturing expectations and the differenced climate balance keep
+about half of theirs. The full-sample RMSE therefore does not show a
+stable forecasting advantage. A pre-2020 estimation or pandemic
+indicators would provide a stricter sensitivity check.
 
 **Industrial production and the Germany-wide ifo series use their latest
 vintages.** Manufacturing expectations use first-release values. The ifo
