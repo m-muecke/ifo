@@ -57,24 +57,14 @@ ifo_business <- function(
     },
     sectors = {
       sheet <- 2L
-      col_types <- c("text", rep("numeric", 24L))
-      col_names <- "yearmonth"
       indicator <- c("climate", "situation", "expectation")
-      nms <- as.character(outer(
-        paste(indicator, "industry", sep = "_"),
-        c("index", "balance"),
-        paste,
-        sep = "_"
-      ))
-      col_names <- c(col_names, nms)
-      nms <- as.character(outer(
-        indicator,
-        c("manufacturing", "services", "trade", "wholesale", "retail", "construction"),
-        paste,
-        sep = "_"
-      ))
-      nms <- paste0(nms, "_balance")
-      col_names <- c(col_names, nms)
+      sectors <- c("manufacturing", "services", "trade", "wholesale", "retail", "construction")
+      col_names <- c(
+        "yearmonth",
+        outer(indicator, c("industry_index", "industry_balance"), paste, sep = "_"),
+        outer(indicator, paste0(sectors, "_balance"), paste, sep = "_")
+      )
+      col_types <- c("text", rep("numeric", length(col_names) - 1L))
     },
     {
       col_names <- c("yearmonth", "climate", "situation", "expectation")
