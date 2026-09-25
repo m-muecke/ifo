@@ -125,27 +125,23 @@ ifo_business <- function(
 #' }
 ifo_expectation <- function(type = c("export", "employment")) {
   type <- match.arg(type)
-  tab <- switch(
+  col_names <- switch(
     type,
-    export = ifo_download(
-      type = "export",
-      skip = 9L,
-      col_names = c("yearmonth", "expectation"),
-      col_types = c("date", "numeric")
-    ),
-    employment = ifo_download(
-      type = "employment",
-      skip = 9L,
-      col_names = c(
-        "yearmonth",
-        "expectation",
-        "manufacturing",
-        "construction",
-        "trade",
-        "service_sector"
-      ),
-      col_types = c("date", rep("numeric", 5L))
+    export = c("yearmonth", "expectation"),
+    employment = c(
+      "yearmonth",
+      "expectation",
+      "manufacturing",
+      "construction",
+      "trade",
+      "service_sector"
     )
+  )
+  tab <- ifo_download(
+    type = type,
+    skip = 9L,
+    col_names = col_names,
+    col_types = c("date", rep("numeric", length(col_names) - 1L))
   )
   has_value <- tab[, rowSums(!is.na(.SD)) > 0L, .SDcols = !"yearmonth"]
   tab <- tab[has_value]
