@@ -323,7 +323,7 @@ parse_monthname <- function(x) {
 ifo_url <- function(type) {
   pattern <- switch(
     type,
-    germany = "gsk",
+    germany = ,
     sectors = "gsk",
     eastern = "ostd",
     saxony = "sachsen",
