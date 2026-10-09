@@ -92,7 +92,7 @@ activity <- survey[ip, on = "yearmonth", nomatch = 0L]
 
 The production series reaches back to 1991, but the ifo index for
 Germany as a whole starts in January 2005, so the overlapping sample
-runs from January 2005 to July 2026 (259 months).
+runs from January 2005 to August 2026 (260 months).
 
 ### Criterion 1: co-movement
 
@@ -130,7 +130,7 @@ and the contemporaneous correlation is moderate rather than tight:
 ``` r
 
 cor(activity$climate, activity$ip_growth)
-#> [1] 0.6201196
+#> [1] 0.6189264
 ```
 
 To examine the lead-lag structure, we use the cross-correlation
@@ -197,9 +197,9 @@ theory suggests:
 xc[, .SD[which.max(correlation)], by = component]
 #>      component   lag correlation
 #>         <char> <int>       <num>
-#> 1:   situation     3   0.5684285
-#> 2: expectation    -1   0.6120248
-#> 3:     climate     0   0.6201196
+#> 1:   situation     3   0.5681193
+#> 2: expectation    -1   0.6110754
+#> 3:     climate     0   0.6189264
 ```
 
 The peak correlation occurs at lag -1 for expectations, 0 for the
@@ -235,8 +235,8 @@ forward
 #> Model 1: ip_growth ~ Lags(ip_growth, 1:3) + Lags(climate, 1:3)
 #> Model 2: ip_growth ~ Lags(ip_growth, 1:3)
 #>   Res.Df Df      F    Pr(>F)    
-#> 1    249                        
-#> 2    252 -3 7.3495 9.713e-05 ***
+#> 1    250                        
+#> 2    253 -3 7.4123 8.925e-05 ***
 #> ---
 #> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 reverse
@@ -244,13 +244,13 @@ reverse
 #> 
 #> Model 1: climate ~ Lags(climate, 1:3) + Lags(ip_growth, 1:3)
 #> Model 2: climate ~ Lags(climate, 1:3)
-#>   Res.Df Df     F Pr(>F)
-#> 1    249                
-#> 2    252 -3 0.359 0.7827
+#>   Res.Df Df      F Pr(>F)
+#> 1    250                 
+#> 2    253 -3 0.3662 0.7775
 ```
 
 The predictive relationship is one-directional. Lags of the ifo climate
-improve the production model (p = 0.000097), while lags of production do
+improve the production model (p = 0.000089), while lags of production do
 not improve the climate model (p = 0.78).
 
 Consistent with the cross-correlation, the forward-looking expectations
@@ -265,8 +265,8 @@ lmtest::grangertest(ip_growth ~ expectation, order = 3L, data = activity)
 #> Model 1: ip_growth ~ Lags(ip_growth, 1:3) + Lags(expectation, 1:3)
 #> Model 2: ip_growth ~ Lags(ip_growth, 1:3)
 #>   Res.Df Df      F    Pr(>F)    
-#> 1    249                        
-#> 2    252 -3 8.3246 2.689e-05 ***
+#> 1    250                        
+#> 2    253 -3 8.3292 2.668e-05 ***
 #> ---
 #> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -307,13 +307,13 @@ data.table(
 )
 #>          model    adj_r2 rmse_in_sample
 #>         <char>     <num>          <num>
-#> 1:       AR(3) 0.7486296       3.443976
-#> 2: AR(3) + ifo 0.7662952       3.300930
+#> 1:       AR(3) 0.7479700       3.442022
+#> 2: AR(3) + ifo 0.7657791       3.298452
 ```
 
-Adding the climate index raises adjusted R² from 0.749 to 0.766 and
+Adding the climate index raises adjusted R² from 0.748 to 0.766 and
 lowers in-sample RMSE from 3.44 to 3.30. The nested-model F test rejects
-the three climate coefficients being jointly zero (p = 0.000097). This
+the three climate coefficients being jointly zero (p = 0.000089). This
 is the same test used in the forward Granger comparison above:
 
 ``` r
@@ -324,8 +324,8 @@ anova(fit_ar, fit_ar_ifo)
 #> Model 1: ip_growth ~ g1 + g2 + g3
 #> Model 2: ip_growth ~ g1 + g2 + g3 + c1 + c2 + c3
 #>   Res.Df    RSS Df Sum of Sq      F    Pr(>F)    
-#> 1    252 3036.4                                  
-#> 2    249 2789.4  3       247 7.3495 9.713e-05 ***
+#> 1    253 3044.8                                  
+#> 2    250 2796.1  3    248.71 7.4123 8.925e-05 ***
 #> ---
 #> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
