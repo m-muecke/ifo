@@ -316,7 +316,7 @@ ifo_url <- function(type) {
     eastern = "ostd",
     saxony = "sachsen",
     export = "export",
-    employment = "beschbaro",
+    employment = "ifo Employment Barometer",
     export_climate = "exklima",
     import_climate = "imklima",
     vintage_germany = "vintage/Germany-",
@@ -329,15 +329,16 @@ ifo_url <- function(type) {
     vintage_construction = "vintage/Construction-",
     type
   )
-  urls <- read_html("https://www.ifo.de/en/ifo-time-series") |>
+  links <- read_html("https://www.ifo.de/en/ifo-time-series") |>
     html_elements(".paragraph--linkliste") |>
-    html_elements("a") |>
-    html_attr("href")
+    html_elements("a")
+  urls <- html_attr(links, "href")
+  titles <- html_attr(links, "title")
 
   if (length(urls) == 0L) {
     stop("Found no timeseries urls.", call. = FALSE)
   }
-  url <- grep(pattern, urls, value = TRUE, fixed = TRUE)
+  url <- urls[grepl(pattern, paste(urls, titles), fixed = TRUE)]
   if (length(url) == 0L) {
     stop("No ifo data found for type: ", type, call. = FALSE)
   }
