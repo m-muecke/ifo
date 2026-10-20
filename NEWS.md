@@ -1,4 +1,4 @@
-# ifo (development version)
+# ifo 0.3.1
 
 * `ifo_expectation("employment")` works again after ifo renamed the employment workbook. The workbook is now found by its link title, which has stayed stable across filename changes.
 
