@@ -250,6 +250,8 @@ ifo_vintage <- function(
   sheets <- c(climate = "Climate", situation = "Situation", expectation = "Expectations")
   tab <- rbindlist(
     lapply(sheets, \(sheet) setDT(readxl::read_xlsx(path, sheet = sheet))),
+    use.names = TRUE,
+    fill = TRUE,
     idcol = "indicator"
   )
   setnames(tab, "Date", "yearmonth")
