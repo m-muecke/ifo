@@ -1,6 +1,8 @@
 # Changelog
 
-## ifo (development version)
+## ifo 0.3.1
+
+CRAN release: 2026-10-20
 
 - `ifo_expectation("employment")` works again after ifo renamed the
   employment workbook. The workbook is now found by its link title,
