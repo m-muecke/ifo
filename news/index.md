@@ -1,5 +1,7 @@
 # Changelog
 
+## ifo (development version)
+
 ## ifo 0.3.1
 
 CRAN release: 2026-10-20
