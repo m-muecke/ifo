@@ -2,6 +2,10 @@
 
 ## ifo (development version)
 
+- `ifo_climate("import")` and `ifo_climate("export")` work again after
+  ifo moved both workbooks to generic download links. The workbooks are
+  now found by their link text.
+
 ## ifo 0.3.1
 
 CRAN release: 2026-10-20

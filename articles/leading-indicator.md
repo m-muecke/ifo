@@ -130,7 +130,7 @@ and the contemporaneous correlation is moderate rather than tight:
 ``` r
 
 cor(activity$climate, activity$ip_growth)
-#> [1] 0.6189264
+#> [1] 0.6192757
 ```
 
 To examine the lead-lag structure, we use the cross-correlation
@@ -197,9 +197,9 @@ theory suggests:
 xc[, .SD[which.max(correlation)], by = component]
 #>      component   lag correlation
 #>         <char> <int>       <num>
-#> 1:   situation     3   0.5681193
-#> 2: expectation    -1   0.6110754
-#> 3:     climate     0   0.6189264
+#> 1:   situation     3   0.5681800
+#> 2: expectation    -1   0.6118295
+#> 3:     climate     0   0.6192757
 ```
 
 The peak correlation occurs at lag -1 for expectations, 0 for the
@@ -236,7 +236,7 @@ forward
 #> Model 2: ip_growth ~ Lags(ip_growth, 1:3)
 #>   Res.Df Df      F    Pr(>F)    
 #> 1    250                        
-#> 2    253 -3 7.4123 8.925e-05 ***
+#> 2    253 -3 7.5172 7.771e-05 ***
 #> ---
 #> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 reverse
@@ -246,11 +246,11 @@ reverse
 #> Model 2: climate ~ Lags(climate, 1:3)
 #>   Res.Df Df      F Pr(>F)
 #> 1    250                 
-#> 2    253 -3 0.3662 0.7775
+#> 2    253 -3 0.3561 0.7847
 ```
 
 The predictive relationship is one-directional. Lags of the ifo climate
-improve the production model (p = 0.000089), while lags of production do
+improve the production model (p = 0.000078), while lags of production do
 not improve the climate model (p = 0.78).
 
 Consistent with the cross-correlation, the forward-looking expectations
@@ -266,7 +266,7 @@ lmtest::grangertest(ip_growth ~ expectation, order = 3L, data = activity)
 #> Model 2: ip_growth ~ Lags(ip_growth, 1:3)
 #>   Res.Df Df      F    Pr(>F)    
 #> 1    250                        
-#> 2    253 -3 8.3292 2.668e-05 ***
+#> 2    253 -3 8.4518 2.271e-05 ***
 #> ---
 #> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -308,12 +308,12 @@ data.table(
 #>          model    adj_r2 rmse_in_sample
 #>         <char>     <num>          <num>
 #> 1:       AR(3) 0.7479700       3.442022
-#> 2: AR(3) + ifo 0.7657791       3.298452
+#> 2: AR(3) + ifo 0.7660495       3.296547
 ```
 
 Adding the climate index raises adjusted R² from 0.748 to 0.766 and
 lowers in-sample RMSE from 3.44 to 3.30. The nested-model F test rejects
-the three climate coefficients being jointly zero (p = 0.000089). This
+the three climate coefficients being jointly zero (p = 0.000078). This
 is the same test used in the forward Granger comparison above:
 
 ``` r
@@ -325,7 +325,7 @@ anova(fit_ar, fit_ar_ifo)
 #> Model 2: ip_growth ~ g1 + g2 + g3 + c1 + c2 + c3
 #>   Res.Df    RSS Df Sum of Sq      F    Pr(>F)    
 #> 1    253 3044.8                                  
-#> 2    250 2796.1  3    248.71 7.4123 8.925e-05 ***
+#> 2    250 2792.9  3    251.94 7.5172 7.771e-05 ***
 #> ---
 #> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -450,22 +450,22 @@ forecast_scores[]
 #>                         model transformation months  rmse improvement_over_ar
 #>                        <char>         <char>  <int> <num>               <num>
 #> 1:                      AR(3)         levels    117  4.83                 0.0
-#> 2:            Germany climate         levels    117  4.81                 0.5
-#> 3:            Germany climate    differences    117  4.56                 5.6
+#> 2:            Germany climate         levels    117  4.80                 0.5
+#> 3:            Germany climate    differences    117  4.56                 5.5
 #> 4:          Germany situation         levels    117  4.88                -1.0
-#> 5:       Germany expectations         levels    117  4.79                 0.8
+#> 5:       Germany expectations         levels    117  4.79                 0.9
 #> 6:       Germany expectations    differences    117  4.68                 3.0
 #> 7: Manufacturing expectations         levels    117  4.58                 5.2
 ```
 
 Across 117 forecasts, the survey series in levels repeat the ranking
-from the lead-lag analysis. Germany-wide expectations lower RMSE by 0.8%
+from the lead-lag analysis. Germany-wide expectations lower RMSE by 0.9%
 relative to the AR benchmark and the climate balance by 0.5%, while the
 situation balance offers no improvement (-1%). Manufacturing
 expectations lower RMSE by 5.2%, so the closer sectoral match appears to
 matter. Matching the transformation changes this picture. As
 twelve-month differences, the Germany-wide climate balance lowers RMSE
-by 5.6%, on par with manufacturing expectations in levels at 5.2%.
+by 5.5%, on par with manufacturing expectations in levels at 5.2%.
 Germany-wide expectations improve to 3%. The differenced headline series
 therefore produces a similar full-sample RMSE improvement to
 manufacturing expectations. This remains a pseudo-out-of-sample exercise
@@ -512,10 +512,10 @@ cw_scores[, .(
 )]
 #>                         model transformation cw_statistic p_value
 #>                        <char>         <char>        <num>   <num>
-#> 1:            Germany climate         levels         0.99    0.16
-#> 2:            Germany climate    differences         2.07    0.02
-#> 3:          Germany situation         levels         0.54    0.29
-#> 4:       Germany expectations         levels         1.27    0.10
+#> 1:            Germany climate         levels         0.98    0.16
+#> 2:            Germany climate    differences         2.05    0.02
+#> 3:          Germany situation         levels         0.53    0.30
+#> 4:       Germany expectations         levels         1.28    0.10
 #> 5:       Germany expectations    differences         1.68    0.05
 #> 6: Manufacturing expectations         levels         1.90    0.03
 ```
