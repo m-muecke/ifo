@@ -317,8 +317,8 @@ ifo_url <- function(type) {
     saxony = "sachsen",
     export = "export",
     employment = "ifo Employment Barometer",
-    export_climate = "exklima",
-    import_climate = "imklima",
+    export_climate = "ifo Export Climate",
+    import_climate = "ifo Import Climate",
     vintage_germany = "vintage/Germany-",
     vintage_industry = "vintage/Industry_and_Trade-",
     vintage_manufacturing = "vintage/Manufacturing-",
@@ -333,17 +333,17 @@ ifo_url <- function(type) {
     html_elements(".paragraph--linkliste") |>
     html_elements("a")
   urls <- html_attr(links, "href")
-  titles <- html_attr(links, "title")
+  labels <- paste(urls, html_attr(links, "title"), html_text2(links))
 
   if (length(urls) == 0L) {
     stop("Found no timeseries urls.", call. = FALSE)
   }
-  url <- urls[grepl(pattern, paste(urls, titles), fixed = TRUE)]
+  url <- urls[grepl(pattern, labels, fixed = TRUE)]
   if (length(url) == 0L) {
     stop("No ifo data found for type: ", type, call. = FALSE)
   }
   if (length(url) > 1L) {
     stop("Found multiple ifo data urls for type: ", type, call. = FALSE)
   }
-  paste0("https://www.ifo.de", url)
+  url_absolute(url, "https://www.ifo.de")
 }

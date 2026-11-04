@@ -45,6 +45,21 @@ test_that("ifo_url() finds the employment workbook by its title", {
   }
 })
 
+test_that("ifo_url() finds the climate workbooks by their link text", {
+  html <- paste0(
+    '<div class="paragraph--linkliste">',
+    '<a href="https://www.ifo.de/en/media/59084/download" title="Download">',
+    "<span>ifo Export Climate September 2026</span></a>",
+    '<a href="https://www.ifo.de/en/media/59043/download" title="Download">',
+    "<span>ifo Import Climate September 2026</span></a>",
+    "</div>"
+  )
+  local_mocked_bindings(read_html = \(x) rvest::read_html(charToRaw(html)))
+
+  expect_identical(ifo_url("export_climate"), "https://www.ifo.de/en/media/59084/download")
+  expect_identical(ifo_url("import_climate"), "https://www.ifo.de/en/media/59043/download")
+})
+
 test_that("ifo_url() finds the vintage workbooks", {
   files <- c(
     germany = "Germany",

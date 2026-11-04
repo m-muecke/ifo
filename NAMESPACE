@@ -8,5 +8,7 @@ import(data.table)
 importFrom(rvest,
   html_attr,
   html_elements,
-  read_html
+  html_text2,
+  read_html,
+  url_absolute
 )
