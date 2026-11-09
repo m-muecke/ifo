@@ -14,10 +14,10 @@ Depends:
 Imports:
     curl,
     data.table (>= 1.16.0),
-    readxl,
+    readxl (>= 1.0.0),
     rvest (>= 1.0.0)
 Suggests:
-    ggplot2,
+    ggplot2 (>= 3.4.0),
     knitr,
     testthat (>= 3.3.0)
 Config/Needs/website: bbk, knitr, lmtest, rmarkdown
