@@ -1,4 +1,4 @@
-# ifo (development version)
+# ifo 0.3.2
 
 * `ifo_climate("import")` and `ifo_climate("export")` work again after ifo moved both workbooks to generic download links. The workbooks are now found by their link text.
 
